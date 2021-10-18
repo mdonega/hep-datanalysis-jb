@@ -1,0 +1,58 @@
+Traceback (most recent call last):
+  File "/Users/mauro/opt/anaconda3/envs/jupyter-book/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/Users/mauro/opt/anaconda3/envs/jupyter-book/lib/python3.9/site-packages/nbclient/client.py", line 1112, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/mauro/opt/anaconda3/envs/jupyter-book/lib/python3.9/site-packages/nbclient/util.py", line 74, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/Users/mauro/opt/anaconda3/envs/jupyter-book/lib/python3.9/site-packages/nbclient/util.py", line 53, in just_run
+    return loop.run_until_complete(coro)
+  File "/Users/mauro/opt/anaconda3/envs/jupyter-book/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/Users/mauro/opt/anaconda3/envs/jupyter-book/lib/python3.9/site-packages/nbclient/client.py", line 553, in async_execute
+    await self.async_execute_cell(
+  File "/Users/mauro/opt/anaconda3/envs/jupyter-book/lib/python3.9/site-packages/nbclient/client.py", line 857, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/Users/mauro/opt/anaconda3/envs/jupyter-book/lib/python3.9/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Gaussian mu = 0, sigma = 1
+max = norm.pdf(0)
+halfMax = max/2.
+
+# Constant array at helfMax
+f=np.empty(10000)
+f.fill(halfMax)
+
+fig, ax = plt.subplots()
+x= np.arange(-5,5,0.001) 
+ax.set_xlabel('x')
+ax.set_ylabel('pdf(x)')
+ax.plot(x, norm.pdf(x),'b') # Gaussian
+
+# Find the intersection between the gaussian and the constant 
+# by finding where the sign of the difference of the two functions changes
+idx = np.argwhere(np.diff(np.sign(norm.pdf(x) - f))).flatten() ax.plot(x, f,'g') 
+
+plt.plot(x[idx], f[idx], 'ro')
+ax.set_ylim(0,0.5)
+plt.show()
+
+print ("Half Maximum = ", halfMax)
+print ("Intersections: ", x[idx])
+print ("FWHM = ", x[idx[1]]-x[idx[0]])
+
+
+------------------
+
+[0;36m  File [0;32m"<ipython-input-11-998e9b47d215>"[0;36m, line [0;32m20[0m
+[0;31m    idx = np.argwhere(np.diff(np.sign(norm.pdf(x) - f))).flatten() ax.plot(x, f,'g')[0m
+[0m                                                                   ^[0m
+[0;31mSyntaxError[0m[0;31m:[0m invalid syntax
+
+SyntaxError: invalid syntax (<ipython-input-11-998e9b47d215>, line 20)
+

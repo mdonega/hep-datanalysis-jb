@@ -1,0 +1,2259 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confidence Intervals {#ChapterConfidenceLimits} &#8212; Statistical Methods and Data Analysis Techniques</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Multivariate Analysis Methods {#ChapterMVA}" href="mva.html" />
+    <link rel="prev" title="Hypotheses Testing {#ChapterHypothesisTesting}" href="hypothesisTesting.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Statistical Methods and Data Analysis Techniques</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="preface.html">
+   Preface
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="probability.html">
+   Probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="probabilityDistributions.html">
+   Probability Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="errors.html">
+   Measurements uncertainties {#ch:errors}
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="monteCarlo.html">
+   Monte Carlo methods {#sec:MC}
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inference.html">
+   Statistical inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="likelihood.html">
+   Parameter Estimation - Likelihood  {#ChapterParameterEstimations}
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="leastSquares.html">
+   Parameter Estimation - Least Squares {#sec:chi2}
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hypothesisTesting.html">
+   Hypotheses Testing {#ChapterHypothesisTesting}
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Confidence Intervals {#ChapterConfidenceLimits}
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="mva.html">
+   Multivariate Analysis Methods {#ChapterMVA}
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="unfolding.html">
+   Unfolding {#ch:Unfolding}
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/confidenceIntervals.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#confidence-belt-neyman-frequentist-construction-sec-neyman">
+   Confidence belt - Neyman/Frequentist construction {#sec:Neyman}
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#use-the-likelihood-or-the-chi-2-to-set-confidence-intervals">
+   Use the likelihood or the
+   <span class="math notranslate nohighlight">
+    \(\chi^2\)
+   </span>
+   to set confidence intervals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#limits-near-boundaries-sec-classicalgaus">
+   Limits near boundaries {#sec:classicalGaus}
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#feldman-cousins-sec-fc">
+   Feldman-Cousins {#sec:FC}
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-flip-flop-problem-flipflop">
+     The flip-flop problem {#flipflop}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#poisson-with-background">
+     Poisson with background
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gaussian-with-boundary-at-the-origin">
+     Gaussian with boundary at the origin
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#neutrino-oscillations">
+     Neutrino oscillations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#other-examples">
+     Other examples
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#underfluctuations-and-significance">
+     Underfluctuations and significance
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lep-test-statistic-l-s-b-l-b">
+   LEP test statistic:
+   <span class="math notranslate nohighlight">
+    \(L_{s+b}/L_b\)
+   </span>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nuisance-parameters">
+     Nuisance parameters
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-issue-of-sensitivity-and-the-cls-procedure">
+   The issue of sensitivity and the CLs procedure
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lhc-test-statistics-2-ln-lambda-mu">
+   LHC test statistics:
+   <span class="math notranslate nohighlight">
+    \(-2\ln(\lambda(\mu))\)
+   </span>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#profile-likelihood-ratio">
+     Profile likelihood ratio
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#discovery-test-statistics">
+     Discovery test statistics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#asymptotic-formulas">
+     Asymptotic Formulas
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#asimov-dataset-sec-asimov">
+     Asimov dataset {#sec:Asimov}
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#upper-limits-test-statistic">
+     Upper limits test statistic
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#combining-measurements">
+   Combining measurements
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discovery-significance-s-sqrt-b">
+   Discovery significance:
+   <span class="math notranslate nohighlight">
+    \(S/\sqrt{B}\)
+   </span>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples-from-the-search-of-the-higgs-at-the-lhc">
+   Examples from the search of the Higgs at the LHC
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#best-fit-signal-strength">
+     Best fit signal strength
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#extracting-other-parameters">
+     Extracting other parameters
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayesian-approach-to-upper-limits">
+   Bayesian approach to upper limits
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#look-elsewhere-effect-sec-lee">
+   Look-Elsewhere Effect {#sec:LEE}
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="confidence-intervals-chapterconfidencelimits">
+<h1>Confidence Intervals {#ChapterConfidenceLimits}<a class="headerlink" href="#confidence-intervals-chapterconfidencelimits" title="Permalink to this headline">¶</a></h1>
+<p>We have seen in previous chapters how to estimate the parameters of a
+p.d.f. fitting them from data (“point estimation”) and how to get their
+uncertainties as the covariance matrix. If the estimator is gaussian
+distributed then the uncertainty is just given in terms of the “standard
+deviation”.<br />
+<br />
+<strong>Example</strong> A certain manufacturer produces silicon wafers with
+thickness of <span class="math notranslate nohighlight">\(500~\mu m \pm 5 \mu m\)</span>. Assuming that the production
+process gives gaussian distributed thicknesses, we can read the
+uncertainty as a way to communicate that 68% of the wafers will have a
+thickness between <span class="math notranslate nohighlight">\(495 \mu m\)</span> and <span class="math notranslate nohighlight">\(505 \mu m\)</span>. If you say that the
+thickness of the sensor is between <span class="math notranslate nohighlight">\(495 \mu m\)</span> and <span class="math notranslate nohighlight">\(505 \mu m\)</span> you are
+correct 68% of the times: you’re making a 68% confidence level (CL)
+statement. The larger the CL you choose (95%, 99%,…), the wider the
+interval is going to be(490-510<span class="math notranslate nohighlight">\(\mu m\)</span>, 485-515<span class="math notranslate nohighlight">\(\mu m\)</span>,…).<br />
+<br />
+In the general case, when the distribution of the estimator is not
+gaussian, the statistical uncertainty is reported as <strong>confidence
+intervals</strong> at a given <strong>confidence level</strong>.<br />
+The choice of the interval you quote is matter of choice:</p>
+<ul class="simple">
+<li><p>symmetric intervals <span class="math notranslate nohighlight">\(\mu - x_- = \mu + x_+\)</span></p></li>
+<li><p>shortest interval <span class="math notranslate nohighlight">\(min_{|x_- - x_+|} (x_-,x_+)\)</span></p></li>
+<li><p>central <span class="math notranslate nohighlight">\(\int_{-\infty}^{x_-} P(x)dx = \int_{x_+}^{+\infty} P(x)dx\)</span></p></li>
+<li><p>…</p></li>
+</ul>
+<p>In the gaussian case all the intervals above coincide; for a generic
+distribution, that is not necessarily the case (see
+Fig. <a class="reference external" href="#fig:asymIntervals">1.1</a>{reference-type=”ref”
+reference=”fig:asymIntervals”}).</p>
+<p><img alt="[[fig:asymIntervals]]{#fig:asymIntervalslabel=&quot;fig:asymIntervals&quot;}Example of intervals on an asymmetricp.d.f." src="Section9Bilder/asymIntervals.png" />{#fig:asymIntervals
+width=”80%”}</p>
+<div class="section" id="confidence-belt-neyman-frequentist-construction-sec-neyman">
+<h2>Confidence belt - Neyman/Frequentist construction {#sec:Neyman}<a class="headerlink" href="#confidence-belt-neyman-frequentist-construction-sec-neyman" title="Permalink to this headline">¶</a></h2>
+<p>The general way to communicate the statistical uncertainty on a
+measurement is to give a confidence interval. In this section we will
+describe the frequentist/classical construction given by Neyman in
+1937.<br />
+Before going to the formal construction let’s take a look at an example
+to show a common pitfall.<br />
+<br />
+<strong>Example</strong> The weight of an empty dish is measured to be
+<span class="math notranslate nohighlight">\(25.30 \pm 0.14\)</span> g. A sample of powder is placed on the dish, and the
+combined weight measured as <span class="math notranslate nohighlight">\(25.50 \pm 0.14\)</span> g. By subtraction and error
+propagation the weight of the powder is <span class="math notranslate nohighlight">\(0.20 \pm 0.20\)</span> g. This is a
+perfectly sensible results. However, look at what happens to the
+probabilities. The naive statement now says that there is a 32% chance
+of the weight being more than <span class="math notranslate nohighlight">\(1~\sigma\)</span> away from the mean, which is
+evenly split, making a 16% chance that the weight is negative
+! [&#64;Barlow]<br />
+<br />
+The general issue addressed by the construction of the confidence belt
+is how to turn the knowledge from a measurement <span class="math notranslate nohighlight">\(x\pm \sigma\)</span> into a
+statement about the value X of the random variable.<br />
+<br />
+Suppose you have a set of measurements <span class="math notranslate nohighlight">\(\{x_1,\ldots,x_n\}\)</span> and you use
+them to compute the observed value of an estimator
+<span class="math notranslate nohighlight">\(\hat{\theta}(x_1,\ldots,x_n) = \hat{\theta}_{obs}\)</span>. Suppose also that
+given any “true value” of <span class="math notranslate nohighlight">\(\theta\)</span> you are able to compute the pdf of
+<span class="math notranslate nohighlight">\(\hat{\theta}\)</span>: <span class="math notranslate nohighlight">\(g(\hat{\theta},\theta)\)</span>. From the p.d.f.
+<span class="math notranslate nohighlight">\(g(\hat{\theta},\theta)\)</span> (see Fig. <a class="reference external" href="#fig:pdf">1.2</a>{reference-type=”ref”
+reference=”fig:pdf”}) we can determine two values <span class="math notranslate nohighlight">\(u_\alpha\)</span> and
+<span class="math notranslate nohighlight">\(v_\beta\)</span> such that there is a probability <span class="math notranslate nohighlight">\(\alpha\)</span> to observe
+<span class="math notranslate nohighlight">\(\hat{\theta} \geq u_\alpha\)</span> and <span class="math notranslate nohighlight">\(\hat{\theta} \leq v_\beta\)</span>.</p>
+<p><img alt="[[fig:pdf]]{#fig:pdf label=&quot;fig:pdf&quot;}Example of. " src="Section9Bilder/pdf.png" />{#fig:pdf
+width=”60%”}</p>
+<p>The values of <span class="math notranslate nohighlight">\(u_\alpha\)</span>, <span class="math notranslate nohighlight">\(v_\beta\)</span> depends on the true value of
+<span class="math notranslate nohighlight">\(\theta\)</span> and, because we know the p.d.f. <span class="math notranslate nohighlight">\(g(\hat{\theta},\theta)\)</span>, we
+can compute them inverting: $<span class="math notranslate nohighlight">\(\label{eq:alpha}
+\alpha = P(\hat{\theta} \geq u_\alpha(\theta)) = \int_{u_\alpha(\theta)}^\infty g(\hat{\theta},\theta) d\hat{\theta}\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(\label{eq:beta}
+\beta = P(\hat{\theta} \leq v_\beta(\theta)) = \int_{-\infty}^{v_\beta(\theta)}g(\hat{\theta},\theta) d\hat{\theta}\)</span>$
+We can now “build horizontally” the plot in
+Fig. <a class="reference external" href="#fig:belt">1.3</a>{reference-type=”ref” reference=”fig:belt”}.</p>
+<p><img alt="[[fig:belt]]{#fig:belt label=&quot;fig:belt&quot;}Example of how to built&quot;horizontally&quot; a confidence belt." src="Section9Bilder/belt.png" />{#fig:belt
+width=”60%”}</p>
+<p>For each value of <span class="math notranslate nohighlight">\(\theta\)</span> on the y-axis you compute the boundaries
+<span class="math notranslate nohighlight">\(u_\alpha\)</span>, <span class="math notranslate nohighlight">\(v_\beta\)</span>. By scanning the whole y-axis you obtain two
+curves <span class="math notranslate nohighlight">\(u_\alpha(\theta)\)</span> and <span class="math notranslate nohighlight">\(v_\beta(\theta)\)</span>. The region in between
+the two curves is called <strong>confidence belt</strong>. By construction, for any
+value of <span class="math notranslate nohighlight">\(\theta\)</span> the probability for the estimator to be inside the
+belt is
+<span class="math notranslate nohighlight">\(P(v_\beta(\theta) \leq \hat{\theta} \leq u_\alpha(\theta)) &lt; 1 -\alpha - \beta\)</span>.<br />
+Now we can “read the plot vertically” (see
+Fig. <a class="reference external" href="#fig:readthebelt">1.4</a>{reference-type=”ref”
+reference=”fig:readthebelt”}): take your data and compute the observed
+value <span class="math notranslate nohighlight">\(\hat{\theta}_{obs}\)</span>. Now take that value and read off the plot on
+the y-axis <span class="math notranslate nohighlight">\(a(\hat{\theta})\)</span> and <span class="math notranslate nohighlight">\(b(\hat{\theta})\)</span>. The interval <span class="math notranslate nohighlight">\([a,b]\)</span>
+is the <strong>confidence interval</strong> at a <strong>confidence level</strong>
+<span class="math notranslate nohighlight">\(1-\alpha - \beta\)</span>. Note that you’re making a statement about <em>the
+interval you choose, not on the value of <span class="math notranslate nohighlight">\(\theta\)</span></em>.\</p>
+<p><img alt="[[fig:readthebelt]]{#fig:readthebelt label=&quot;fig:readthebelt&quot;}Exampleof how to read &quot;vertically&quot; a confidencebelt." src="Section9Bilder/readthebelt.png" />{#fig:readthebelt width=”60%”}</p>
+<p>Formally you need to require that the two functions <span class="math notranslate nohighlight">\(u_\alpha(\theta)\)</span>
+and <span class="math notranslate nohighlight">\(v_\beta(\theta)\)</span> are monotonically increasing (which is generally
+the case for well behaved estimators) and so you can invert them:
+$<span class="math notranslate nohighlight">\(a(\hat{\theta}) = u^{-1}_\alpha(\hat{\theta}) \qquad ; \qquad  b(\hat{\theta}) = v^{-1}_\beta(\hat{\theta})\)</span><span class="math notranslate nohighlight">\(
+If that is the case then you can translate the inequalities
+\)</span><span class="math notranslate nohighlight">\(\hat{\theta} \geq u_\alpha(\theta) \qquad ; \qquad \hat{\theta} \leq v_\beta(\theta)\)</span><span class="math notranslate nohighlight">\(
+into
+\)</span><span class="math notranslate nohighlight">\(a(\hat{\theta}) \geq \theta \qquad ; \qquad b(\hat{\theta}) \leq \theta .\)</span><span class="math notranslate nohighlight">\(
+So the Eq. [\[eq:alpha\]](#eq:alpha){reference-type=&quot;ref&quot;
+reference=&quot;eq:alpha&quot;} and [\[eq:beta\]](#eq:beta){reference-type=&quot;ref&quot;
+reference=&quot;eq:beta&quot;} become
+\)</span><span class="math notranslate nohighlight">\(P(a(\hat{\theta}) \geq \theta) = \alpha \qquad ; \qquad P(b(\hat{\theta})\leq \theta) = \beta\)</span><span class="math notranslate nohighlight">\(
+which proves that
+\)</span>P(a(\hat{\theta}) \leq \theta \leq b(\hat{\theta})) = 1-\alpha-\beta<span class="math notranslate nohighlight">\(.\
+\
+The confidence level is also called **coverage probability**[^1]
+because, from a frequentist point of view, if the experiment were to be
+repeated many times, the interval \)</span>[a,b]<span class="math notranslate nohighlight">\( would cover the true (unknown)
+value \)</span>\theta_{true}<span class="math notranslate nohighlight">\(, \)</span>1-\alpha-\beta<span class="math notranslate nohighlight">\( of the times.\
+The confidence interval \)</span>[a,b]<span class="math notranslate nohighlight">\( is typically expressed by reporting the
+result of a measurement as \)</span>\hat{\theta}_{-c}^{+d}<span class="math notranslate nohighlight">\( where
+\)</span>c = \hat{\theta}-a<span class="math notranslate nohighlight">\( and \)</span>d = b-\hat{\theta}$. These values for a
+central confidence level of 68% are also the one used to represent
+graphically the error bars.<br />
+The case we have just treated is the so called “two-sided” confidence
+interval. There are however cases where we might be interested in giving
+only a one sided interval:</p>
+<ul class="simple">
+<li><p>lower limit <span class="math notranslate nohighlight">\(a \leq \theta\)</span> with coverage probability <span class="math notranslate nohighlight">\(1-\alpha\)</span></p></li>
+<li><p>upper limit <span class="math notranslate nohighlight">\(\theta \leq b\)</span> with coverage probability <span class="math notranslate nohighlight">\(1-\beta\)</span></p></li>
+</ul>
+<p>The value <span class="math notranslate nohighlight">\(a\)</span> is the value of <span class="math notranslate nohighlight">\(\theta\)</span> for which a fraction <span class="math notranslate nohighlight">\(\alpha\)</span> of
+the measurements would be higher than the observed one (and similarly
+for <span class="math notranslate nohighlight">\(b\)</span>). To get the value of <span class="math notranslate nohighlight">\(a\)</span> (<span class="math notranslate nohighlight">\(b\)</span>) we have to solve (typically
+numerically) the equation for a (<span class="math notranslate nohighlight">\(b\)</span>):
+$<span class="math notranslate nohighlight">\(\alpha  = \int_{\hat{\theta}_{obs}}^\infty g(\hat{\theta},a) d\hat{\theta}\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(\beta  = \int_{-\infty}^{\hat{\theta}_{obs}}g(\hat{\theta},b) d\hat{\theta}\)</span><span class="math notranslate nohighlight">\(
+**Example** Let's take as an example a gaussian distributed estimator
+with mean \)</span>\theta<span class="math notranslate nohighlight">\( (true value unknown) and standard deviation
+\)</span>\sigma_{\hat{\theta}}<span class="math notranslate nohighlight">\( (known; if unknown you can estimate it from data
+getting \)</span>\hat{\sigma}<em>\theta<span class="math notranslate nohighlight">\( and move from the gaussian to the
+Student's \)</span>t-<span class="math notranslate nohighlight">\(distribution). The gaussian estimator is very common
+thanks to the central limit theorem (where any estimator that is a sum
+of random variables is approximately gaussian in the large sample
+limit). The integrals in
+Eq. [\[eq:alpha\]](#eq:alpha){reference-type=&quot;ref&quot; reference=&quot;eq:alpha&quot;}
+and [\[eq:beta\]](#eq:beta){reference-type=&quot;ref&quot; reference=&quot;eq:beta&quot;}
+become the well known cumulative functions of the gaussian:
+\)</span><span class="math notranslate nohighlight">\(G(\hat{\theta},\theta,\sigma_{\hat{\theta}}) = \int_{-\infty}^{\hat{\theta}} \frac{1}{\sqrt{2 \pi \sigma_{\hat{\theta}}^2}} exp\left( \frac{-(\hat{\theta}' - \theta)^2}{2\sigma_{\hat{\theta}^2}} \right) d\hat{\theta}'\)</span><span class="math notranslate nohighlight">\(
+and the general case exposed above, simplifies considerably. We need to
+solve for \)</span>a<span class="math notranslate nohighlight">\( and \)</span>b<span class="math notranslate nohighlight">\( the equations:
+\)</span><span class="math notranslate nohighlight">\(\alpha = 1-G(\hat{\theta}_{obs},a,\sigma_{\hat{\theta}}) = 1 - \Phi\left( \frac{\hat{\theta}_{obs} - a}{\sigma_{\hat{\theta}}}\right)\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(\beta = G(\hat{\theta}_{obs},b,\sigma_{\hat{\theta}}) = \Phi\left( \frac{\hat{\theta}_{obs} - b}{\sigma_{\hat{\theta}}}\right)\)</span><span class="math notranslate nohighlight">\(
+that can be easily done by using the quantile of the gaussian
+\)</span>\Phi^{-1}<span class="math notranslate nohighlight">\( (the inverse function of \)</span>\Phi<span class="math notranslate nohighlight">\():
+\)</span><span class="math notranslate nohighlight">\(a = \hat{\theta}_{obs} - \sigma_{\hat{\theta}} \Phi^{-1}(1-\alpha)\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(\label{eq:upperLimit}
+b = \hat{\theta}_{obs} + \sigma_{\hat{\theta}} \Phi^{-1}(1-\beta)\)</span><span class="math notranslate nohighlight">\(
+where we used \)</span>\Phi^{-1}(\beta) = -\Phi^{-1}(1-\beta)<span class="math notranslate nohighlight">\(. Thus, the
+general curve for \)</span>u</em>\alpha(\theta)<span class="math notranslate nohighlight">\( and \)</span>v_\beta(\theta)<span class="math notranslate nohighlight">\( become linear
+function.\
+\
+**Example** Another very frequent case is when the estimator is a
+Poisson variable \)</span>n<span class="math notranslate nohighlight">\(. Suppose you have performed a measurement and you
+found \)</span>\hat{\nu}<em>{obs} = n</em>{obs}<span class="math notranslate nohighlight">\( and from this you want to build the
+confidence interval for the mean \)</span>\nu<span class="math notranslate nohighlight">\( (see
+Fig. [1.5](#fig:poisson9evts){reference-type=&quot;ref&quot;
+reference=&quot;fig:poisson9evts&quot;}). The procedure is the same as for the
+general case shown above, but here we are dealing with a discrete
+variable. This means that in general, once \)</span>\alpha<span class="math notranslate nohighlight">\( and \)</span>\beta<span class="math notranslate nohighlight">\( are
+fixed, because \)</span>\hat{\nu}<span class="math notranslate nohighlight">\( can only take discrete values, the
+Eq. [\[eq:alpha\]](#eq:alpha){reference-type=&quot;ref&quot;
+reference=&quot;eq:alpha&quot;}, [\[eq:beta\]](#eq:beta){reference-type=&quot;ref&quot;
+reference=&quot;eq:beta&quot;} only holds for particular values of \)</span>\nu<span class="math notranslate nohighlight">\( (and in
+general because of rounding we will give conservative intervals). Using
+the Poisson p.d.f. we have these equations to solve numerically:
+\)</span><span class="math notranslate nohighlight">\(\alpha = \sum_{n=n_{obs}}^\infty f(n;a) = 1 - \sum_{n=0}^{n_{obs}-1}f(n;a) = 1 - \sum_{n=0}^{n_{obs}-1}\frac{a^n}{n!}e^{-a}\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(\beta  = \sum_{n=0}^{n=n_{obs}}f(n;b) = \sum_{n=0}^{n_{obs}} \frac{b^n}{n!}e^{-b}\)</span>$</p>
+<p><img alt="[[fig:poisson9evts]]{#fig:poisson9evts label=&quot;fig:poisson9evts&quot;}Herewe observed 9 radioactive decays and we constructed the 90% symmetric CL, i.e." src="Section9Bilder/poisson9evts.png" />{#fig:poisson9evts
+width=”60%”}</p>
+<p><br />
+<br />
+<strong>Upper limit when <span class="math notranslate nohighlight">\(n_{obs} = 0\)</span>:</strong> Again from the formulas in the
+previous example, you can compute what is the upper limit on the
+frequency of a rare event in case you don’t observe any. At
+<span class="math notranslate nohighlight">\(1-\beta = 95\)</span>% CL you get <span class="math notranslate nohighlight">\(b=2.996\)</span>, typically rounded to 3. This is
+why anytime you see a paper with zero observed events the quoted upper
+limit is 3.<br />
+<br />
+<strong>Error bars on empty bins:</strong> From the formulas in the example above we
+can see that the upper limit <span class="math notranslate nohighlight">\(b\)</span> when <span class="math notranslate nohighlight">\(n_{obs} = 0\)</span> becomes
+<span class="math notranslate nohighlight">\(\beta=e^{-b}\)</span>. If we set the central confidence level at
+<span class="math notranslate nohighlight">\(1-\beta=0.6827\)</span> we find <span class="math notranslate nohighlight">\(b=-\log(0.3173/2) \sim 1.8\)</span>. This is the
+reason of the error bar at 1.8 when we observe zero events in a counting
+experiment. (In <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> you can get the correct Poisson error bars using
+the method <code class="docutils literal notranslate"><span class="pre">TH1::SetBinErrorOption(TH1::kPoisson)</span></code>).<br />
+<br />
+When the p.d.f. of the estimator is not a gaussian, and approximating it
+to a gaussian would lead to biases or under/over coverage of the
+confidence interval, one can always extract the p.d.f. of the estimator
+tossing toy experiments and compute the confidence belt numerically. In
+some specific cases one can also try to transform the estimator such
+that the transformed variable is gaussian distributed.<br />
+<br />
+<strong>Example</strong> Consider, as an example for which the p.d.f. of the
+estimator is not gaussian, the correlation coefficient <span class="math notranslate nohighlight">\(\rho\)</span> of a
+two-dimensional gaussian and the estimator <span class="math notranslate nohighlight">\(r\)</span> as
+$<span class="math notranslate nohighlight">\(r=\frac{\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})}{\left( \sum_{j=1}^n(x_j-\bar{x})^2\cdot\sum_{k=1}^{n}(y_k-\bar{y})  \right)^{1/2}}\)</span>$
+The distribution for this estimator is shown in
+Fig. <a class="reference external" href="#fig:corrEst">1.6</a>{reference-type=”ref” reference=”fig:corrEst”}
+and it only approaches a gaussian distribution in the large sample
+limit.</p>
+<p><img alt="[[fig:corrEst]]{#fig:corrEst label=&quot;fig:corrEst&quot;}Distribution of thecorrelation estimator for a sample of size n=20 and different values of." src="Section9Bilder/corrEst.png" />{#fig:corrEst width=”60%”}</p>
+<p>For this specific case, Fisher showed that the transformed estimator
+$<span class="math notranslate nohighlight">\(z=\tanh^{-1} r = \frac{1}{2} \log\frac{1+r}{1-r}\)</span><span class="math notranslate nohighlight">\( reaches the
+gaussian limit much more quickly. You can use this transformation for an
+estimator \)</span>\zeta<span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(\zeta = \tanh^{-1} \rho = \frac{1}{2} \log\frac{1+\rho}{1-\rho}\)</span><span class="math notranslate nohighlight">\( The
+expectation value and the variance for \)</span>z<span class="math notranslate nohighlight">\( are approximately given by:
+\)</span><span class="math notranslate nohighlight">\(&lt;z&gt; = \frac{1}{2}\log\frac{1+\rho}{1-\rho}   + \frac{\rho}{2(n-1)} \qquad ; \qquad V[z] =  \frac{1}{n-3}\)</span><span class="math notranslate nohighlight">\(
+Assuming that the sample is large enough such that you can neglect the
+bias \)</span>\frac{\rho}{2(n-1)}<span class="math notranslate nohighlight">\(, you can use these to determine the
+confidence interval \)</span>[a,b] = [z-\hat{\sigma}_z,z+\hat{\sigma}_z]<span class="math notranslate nohighlight">\( such
+that the lower limit \)</span>a<span class="math notranslate nohighlight">\( for \)</span>\zeta<span class="math notranslate nohighlight">\( is at confidence level \)</span>1-\alpha<span class="math notranslate nohighlight">\(
+and the upper limit \)</span>b<span class="math notranslate nohighlight">\( is at \)</span>1-\beta<span class="math notranslate nohighlight">\( confidence level. From \)</span>[a,b]<span class="math notranslate nohighlight">\(
+on \)</span>\zeta<span class="math notranslate nohighlight">\( you can go back to the interval \)</span>[A,B]<span class="math notranslate nohighlight">\( on \)</span>\rho<span class="math notranslate nohighlight">\( simply
+inverting \)</span>\zeta = \tanh^{-1} \rho<span class="math notranslate nohighlight">\(
+(\)</span>[A = \tanh \alpha, B = \tanh\beta]$).\</p>
+</div>
+<div class="section" id="use-the-likelihood-or-the-chi-2-to-set-confidence-intervals">
+<h2>Use the likelihood or the <span class="math notranslate nohighlight">\(\chi^2\)</span> to set confidence intervals<a class="headerlink" href="#use-the-likelihood-or-the-chi-2-to-set-confidence-intervals" title="Permalink to this headline">¶</a></h2>
+<p>In the large sample limit approximation it is easy to extract confidence
+intervals using the likelihood method or equivalently the <span class="math notranslate nohighlight">\(\chi^2\)</span>
+method (<span class="math notranslate nohighlight">\(L=\exp(-\chi^2/2)\)</span>).<br />
+In the gaussian case, as we have already seen when estimating the
+uncertainty on the likelihood estimator, we can get the estimated
+<span class="math notranslate nohighlight">\(\hat{\sigma}_{\hat{\theta}}\)</span> for <span class="math notranslate nohighlight">\(\sigma_{\hat{\theta}}\)</span> from:
+$<span class="math notranslate nohighlight">\(\log ~L(\hat{\theta} \pm N \sigma_{\hat{\theta}}) = \log L_{max} - \frac{N^2}{2}\)</span><span class="math notranslate nohighlight">\(
+and again as we have already seen, this amounts to move by 0.5 from the
+maximum value. Even if the likelihood is not gaussian the central
+confidence interval \)</span>[a,b] = [\hat{\theta}-c, \hat{\theta}+d]<span class="math notranslate nohighlight">\( can still
+be approximated by:
+\)</span><span class="math notranslate nohighlight">\(\text{\color{blue}{LIKELIHOOD}}~:~\log ~L(\hat{\theta}^{+d}_{-c}) = \log L_{max} - \frac{N^2}{2} \qquad \; \qquad {\color{blue}{\chi^2}}~:~\chi^2(\hat{\theta}^{+d}_{-c}) = \chi^2_{min} + N^2\)</span><span class="math notranslate nohighlight">\(
+for the likelihood and the \)</span>\chi^2<span class="math notranslate nohighlight">\( methods respectively, where
+\)</span>N=\Phi^{-1}(1-\gamma/2)<span class="math notranslate nohighlight">\( is the quantile of the standard gaussian
+distribution corresponding to the desired confidence level. The \)</span>\chi^2<span class="math notranslate nohighlight">\(
+prescription is just the likelihood one where we use \)</span>\log L=-\chi^2/2<span class="math notranslate nohighlight">\(.
+This is by far the most used method to report the statistical
+uncertainties, but it has to be remembered that it exact *only* for
+gaussian likelihood or in the large sample limit and for all other cases
+it is only an approximation !\
+**Example** Consider the lifetime measurement of an unstable particle.
+We can extract the value of the lifetime by fitting the exponential
+distribution of the proper decay time of a large number of particles, as
+in
+Sec. [\[ChapterParameterEstimations\]](#ChapterParameterEstimations){reference-type=&quot;ref&quot;
+reference=&quot;ChapterParameterEstimations&quot;}. The ML estimator comes out to
+be just the average \)</span>\hat{\tau}=\frac{1}{n}\sum_{i=1}^{n}t_i<span class="math notranslate nohighlight">\(. For a
+small statistics as in Fig. [1.7](#fig:lifetime){reference-type=&quot;ref&quot;
+reference=&quot;fig:lifetime&quot;}, where we only have 5 measurements, the
+likelihood is non parabolic and it is preferable to report the
+asymmetric values given by \)</span>\log L_{max} - \frac{1}{2}<span class="math notranslate nohighlight">\(: i.e.
+\)</span>[\hat{\tau} - \Delta\hat{\tau}<em>-, \hat{\tau} + \Delta\hat{\tau}</em>+]$.</p>
+<p><img alt="[[fig:lifetime]]{#fig:lifetime label=&quot;fig:lifetime&quot;} Non-paraboliclog-Likelihood scan of a lifetime measurement done on a small statisticssample." src="Section9Bilder/maxLikelihoodLifetime.png" />{#fig:lifetime
+width=”60%”}</p>
+<p><br />
+The same method can be applied to find confidence intervals in several
+dimensions (a.k.a. confidence regions). What in one dimension was an
+interval in n-dimensions becomes a region bounded by an hyper-ellipsoid
+defined by constant values of <span class="math notranslate nohighlight">\(Q(\vec{\hat{\theta}},\vec{\theta})\)</span>.<br />
+As already seen in Sec. <a class="reference external" href="#sec:chi2">[sec:chi2]</a>{reference-type=”ref”
+reference=”sec:chi2”} if <span class="math notranslate nohighlight">\(\vec{\hat{\theta}}\)</span> is described by a
+n-dimensional gausssian p.d.f. <span class="math notranslate nohighlight">\(g(\vec{\hat{\theta}}, \vec{\theta})\)</span>
+,then <span class="math notranslate nohighlight">\(Q(\vec{\hat{\theta}}, \vec{\theta})\)</span> is distributed according to
+a <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution with n degrees of freedom. We can then compute
+the probability to have the estimate <span class="math notranslate nohighlight">\(\vec{\hat{\theta}}\)</span> near the true
+value (and viceversa) as
+$<span class="math notranslate nohighlight">\(P(Q(\vec{\theta},\vec{\hat{\theta}}) &lt; Q_\gamma) = \int_0^{Q_\gamma} f(z;n)dz = 1-\gamma\)</span><span class="math notranslate nohighlight">\(
+where \)</span>f(z;n)<span class="math notranslate nohighlight">\( is the \)</span>\chi^2<span class="math notranslate nohighlight">\( distribution with n degrees of freedom.
+Inverting using the quantile of the \)</span>\chi^2<span class="math notranslate nohighlight">\( distribution we get:
+\)</span><span class="math notranslate nohighlight">\(Q_\gamma = F^{-1}(1-\gamma;n)\)</span><span class="math notranslate nohighlight">\( The region defined by the
+\)</span>Q(\vec{\theta},\vec{\hat{\theta}}) &lt; Q_\gamma<span class="math notranslate nohighlight">\( is called *confidence
+region* with confidence level \)</span>1-\gamma<span class="math notranslate nohighlight">\(. In the case of a gaussian
+likelihood, the confidence region can be constructed by finding the
+region of the space such that:
+\)</span><span class="math notranslate nohighlight">\(\log L(\vec{\theta}) = \log L_{max} - \frac{Q_\gamma}{2}\)</span><span class="math notranslate nohighlight">\( Typical
+values of the quantiles of the \)</span>\chi^2<span class="math notranslate nohighlight">\( distribution are listed in
+Fig. [1.8](#fig:quantiles){reference-type=&quot;ref&quot;
+reference=&quot;fig:quantiles&quot;}. Note that for increasing number of
+dimensions the confidence level, at a fixed quantile \)</span>Q_\gamma$
+decreases.</p>
+<p><img alt="[[fig:quantiles]]{#fig:quantiles label=&quot;fig:quantiles&quot;} The jointp.d.f. and the likelihood function in a two dimensionalcase." src="Section9Bilder/quantiles.png" />{#fig:quantiles width=”80%”}</p>
+</div>
+<div class="section" id="limits-near-boundaries-sec-classicalgaus">
+<h2>Limits near boundaries {#sec:classicalGaus}<a class="headerlink" href="#limits-near-boundaries-sec-classicalgaus" title="Permalink to this headline">¶</a></h2>
+<p>When performing searches, very often we are faced with the problem of
+looking for a new effect at the boundaries of the phase space. Suppose
+we want to measure the neutrino mass; because of the oscillation
+phenomenon we know neutrinos are not (all of them) massless. Still their
+mass is very small, i.e. near the boundary m = 0.<br />
+Depending on the resolution of the measurement, we typically face two
+situations<a class="footnote-reference brackets" href="#id9" id="id1">2</a>:</p>
+<ul class="simple">
+<li><p>the data yields a value significantly different from zero; we will
+then quote the measured value with an uncertainty</p></li>
+<li><p>the data yields a value compatible with zero; we will then proceed
+to quote an upper limit on the value of the parameter at a given CL.</p></li>
+</ul>
+<p>The problem gets trickier when the estimator takes values in a
+physically forbiddend region. To get the idea: suppose you measure a
+mass as <span class="math notranslate nohighlight">\(m^2 = E^2 - p^2\)</span>. Depending on the uncertainties on energy and
+momentum you can obtain negative values for the mass. From the purely
+statistical point of view you can proceed as before using
+Eq. <a class="reference external" href="#eq:upperLimit">[eq:upperLimit]</a>{reference-type=”ref”
+reference=”eq:upperLimit”}. The upper limit <span class="math notranslate nohighlight">\(\theta_{up}\)</span> at <span class="math notranslate nohighlight">\(1-\beta\)</span>
+CL is given by:
+$<span class="math notranslate nohighlight">\(\theta_{up} = \hat{\theta}_{obs} + \sigma_{\hat{\theta}}\Phi^{-1} (1-\beta)\)</span><span class="math notranslate nohighlight">\(
+The interval \)</span>(-\infty, \theta_{up})<span class="math notranslate nohighlight">\( will contain the true value of
+\)</span>\theta<span class="math notranslate nohighlight">\( with a probability of 95%.\
+Now, take as an example a measurement giving \)</span>\theta_{obs} = -2.0<span class="math notranslate nohighlight">\( with
+a standard deviation \)</span>\hat{\sigma}=1<span class="math notranslate nohighlight">\(: the upper limit is
+\)</span>\theta_{up} = -0.355<span class="math notranslate nohighlight">\( at 95% CL. We are setting a negative upper limit
+on a mass! Having a negative upper limit has to happen 5% of the times
+when using a 95%CL. We just got one of the 5%. The annoying point is
+that, because we knew from the beginning that the mass has to be
+positive, the experiment does not bring any new piece of information. In
+such a case we should still quote the value we found such that, when
+combined with more experiments, we will contribute to the measurement of
+the correct value. If you encounter a very asymmetric likelihood, you
+should in general publish the scan of the likelihood on the parameter
+you are estimating.\
+A naive approach to avoid the negative upper limit is to shift the
+negative estimate to the boundary (\)</span>\hat{\theta}=0<span class="math notranslate nohighlight">\( in this case):
+\)</span><span class="math notranslate nohighlight">\(\theta_{up}=max(\hat{\theta}_{obs},0) + \sigma_{\hat{\theta}}\Phi^{-1} (1-\beta).\)</span><span class="math notranslate nohighlight">\(
+In this case, if the limit is positive you will quote the same value
+given by the classical construction, while for negative values you will
+end up with an unwanted coverage larger than the quoted \)</span>1-\beta<span class="math notranslate nohighlight">\(.\
+\
+The most natural way to include boundaries in the computation of limits
+is to use the Bayes theorem:
+\)</span><span class="math notranslate nohighlight">\(p(\theta|x) = \frac{L(x|\theta)\pi(\theta)}{\int L(x|\theta')\pi(\theta')d\theta'}\)</span><span class="math notranslate nohighlight">\(
+where \)</span>L(x|\theta)<span class="math notranslate nohighlight">\( is the likelihood to observe a value \)</span>x<span class="math notranslate nohighlight">\( given the
+parameter \)</span>\theta<span class="math notranslate nohighlight">\( and \)</span>\pi(\theta)<span class="math notranslate nohighlight">\( is the prior on \)</span>\theta<span class="math notranslate nohighlight">\(. The most
+probable value of the posterior \)</span>p(\theta|x)<span class="math notranslate nohighlight">\( coincides with the ML
+estimator if the prior is flat (the denominator only contributes as a
+normalization constant). To set limits (without considering boundaries
+for the moment), we can use the expression for the posterior and find
+numerically the interval \)</span>[a,b]<span class="math notranslate nohighlight">\( such that:
+\)</span><span class="math notranslate nohighlight">\(\alpha = \int_{-\infty}^{a}p(\theta|x)d\theta \qquad \beta =\int_{b}^{+\infty}p(\theta|x)d\theta\)</span><span class="math notranslate nohighlight">\(
+where \)</span>\alpha<span class="math notranslate nohighlight">\( and \)</span>\beta<span class="math notranslate nohighlight">\( define the CL.\
+Using the Bayes theorem, the inclusion of boundaries is trivial: we just
+need to write them in the prior. In the example of a mass limited to
+positive values, we can write the prior to be zero for negative masses
+and flat above: \)</span><span class="math notranslate nohighlight">\(\pi(\theta) = \left\{
+            \begin{array}{rll}
+                0 &amp; \mbox{if} &amp; \theta \le 0 \\
+                1 &amp; \mbox{if} &amp; \theta &gt;  0
+            \end{array}\right.\)</span><span class="math notranslate nohighlight">\( The upper limit on the mass will be
+found as before by solving numerically for \)</span>\theta_{up}<span class="math notranslate nohighlight">\( the integral on
+the posterior:
+\)</span><span class="math notranslate nohighlight">\(1-\beta = \int_{-\infty}^{\theta_{up}} p(\theta|x) = \frac{\int_{-\infty}^{\theta_{up}}L(x|\theta)\pi(\theta)d\theta }{\int_{-\infty}^{+\infty}L(x|\theta)\pi(\theta)d\theta }{}\)</span>$
+This method is clearly affected by the issues on the encoding of
+ignorance in the prior (i.e. the choice of a flat prior):</p>
+<ul class="simple">
+<li><p>using a flat prior assumes that the probability for the parameter
+<span class="math notranslate nohighlight">\(\theta\)</span> is the same everywhere in the physically allowed phase
+space; applied to the neutrino mass example, this would mean that
+the probability is the same in the range <span class="math notranslate nohighlight">\([0,1]\)</span>eV as in
+<span class="math notranslate nohighlight">\([10^{10}, 10^{10}+1]\)</span>eV.</p></li>
+<li><p>a flat prior won’t remain flat under a non-trivial transformation of
+the parameter <span class="math notranslate nohighlight">\(\theta\)</span>.</p></li>
+</ul>
+<p>With the Bayes approach, you don’t need anymore to go for the “build
+horizontally / read vertically” classical construction. You just need to
+compute the integrals above. For the example of the neutrino mass: the
+denominator is an integral on the full phase space <span class="math notranslate nohighlight">\((0,+\infty)\)</span>, while
+the numerator runs on <span class="math notranslate nohighlight">\((0, \theta_{up})\)</span>. For large values of
+<span class="math notranslate nohighlight">\(x = \theta_{obs}\)</span> the bayesian limit approaches the classical one: the
+likelihood you are integrating is far from the boundary and the tail
+below zero is negligible. The closer you get to the boundary the larger
+is the area of the likelihood leaking in the unphysical region. Still,
+the upper limit will never cross zero because it is extracted from the
+ratio of two integrals where the numerator is by construction always a
+fraction of the denominator.<br />
+Fig. <a class="reference external" href="#fig:comparison">1.9</a>{reference-type=”ref”
+reference=”fig:comparison”} shows the comparison of the different
+methods discussed so far: the classical construction; the “shifted”
+classical construction where the upper limit if forced to be flat for
+<span class="math notranslate nohighlight">\(\hat{\theta}&lt;0\)</span>; and the bayesian approach where the upper limit on
+<span class="math notranslate nohighlight">\(\theta\)</span> never falls below zero.</p>
+<p><img alt="[[fig:comparison]]{#fig:comparison label=&quot;fig:comparison&quot;}Comparisonof the upper limits obtained with the classical construction, the&quot;shifted&quot; classical construction and the bayesianapproach." src="Section9Bilder/comparison.png" />{#fig:comparison width=”60%”}</p>
+<p><br />
+<br />
+Another frequent case is when we try to set an upper limit on a rare
+signal with a counting experiment. Here the boundary is given by the
+number of events that has to be greater or equal than zero. Let’s start
+from the simpler situation where we don’t set any constraint (or
+equivalently we are far away from the boundary) and compute the upper
+limit following the classical construction. We observe <span class="math notranslate nohighlight">\(n\)</span> events some
+of which come from signal <span class="math notranslate nohighlight">\(n_s\)</span> and some others from background <span class="math notranslate nohighlight">\(n_b\)</span>:
+<span class="math notranslate nohighlight">\(n = n_s+n_b\)</span>. The number of events follow a Poisson distribution with
+an expected number of events <span class="math notranslate nohighlight">\(\nu_s\)</span> for signal and <span class="math notranslate nohighlight">\(\nu_b\)</span> for
+background (suppose we know the expected number of background events
+with negligible uncertainty). We want to get the upper limit on the
+number of signal events in the sample. The ML estimator for the number
+of signal events is simply <span class="math notranslate nohighlight">\(\hat{\nu}_s = n - \nu_b\)</span>. The confidence
+interval can be extracted as usual by solving (numerically) the
+equation:
+$<span class="math notranslate nohighlight">\(\beta = P(\hat{\nu}_s\leq\hat{\nu}_s^{obs}| \nu^{up}) = \sum_{n\leq \hat{\nu}_{obs}}\frac{(\nu_s^{up} + \nu_b)^n e^{(\nu_s^{up} + \nu_b)}}{n!}\)</span>$
+The results for some values of observed events and expected backgrounds
+are shown in Fig. <a class="reference external" href="#fig:poissonLim">1.10</a>{reference-type=”ref”
+reference=”fig:poissonLim”}.</p>
+<p><img alt="[[fig:poissonLim]]{#fig:poissonLim label=&quot;fig:poissonLim&quot;}Upperlimit on the number of signal events as a function of the expectednumber of background events  for different observed." src="Section9Bilder/poissonLim.png" />{#fig:poissonLim width=”60%”}</p>
+<p>Before moving to the Bayesian solution to setting the upper limit, let’s
+see where the classical one ends into troubles. Suppose you have a small
+number of expected signal events and large background. In this situation
+the number of observed events will be dominated by the background and we
+can find cases where the number of observed events is smaller than the
+expected number of background events (e.g. <span class="math notranslate nohighlight">\(\nu_b\)</span> = 8, <span class="math notranslate nohighlight">\(n\)</span> = 1). By
+reading off the limit from
+Fig. <a class="reference external" href="#fig:poissonLim">1.10</a>{reference-type=”ref”
+reference=”fig:poissonLim”} we find a negative number of signal events.
+As we have already seen for the example of the neutrino mass measurement
+this is not wrong. We are setting an upper limit at 95% CL and we got
+one large downward fluctuations which should happen in 5% of the cases.
+Nevertheless from a physics content the result is not particularly
+interesting (we knew before setting up the experiment that the number of
+events has to be greater than or equal to zero).<br />
+Using the bayesian approach the posterior can be written as:
+$<span class="math notranslate nohighlight">\(p(\nu_s|n_{obs}) = \frac{L(n_{obs}|\nu_s)\pi(\nu_s)}{\int L(n_{obs}|\nu_s')\pi(\nu_s')d\nu_s'}\)</span><span class="math notranslate nohighlight">\(
+To include the boundary \)</span>\nu_s&gt;0<span class="math notranslate nohighlight">\( we can simply define the prior as:
+\)</span><span class="math notranslate nohighlight">\(\pi(\nu_s) = \left\{
+            \begin{array}{rll}
+                0 &amp; \mbox{if} &amp; \nu_s \le 0 \\
+                1 &amp; \mbox{if} &amp; \nu_s &gt;  0
+            \end{array}\right.\)</span><span class="math notranslate nohighlight">\( To compute the upper limit we just need
+to plug this prior in the posterior expression
+\)</span><span class="math notranslate nohighlight">\(1-\beta = \frac{\int_{0}^{\nu_s^{up}}L(n_{obs}|\nu_s)d\nu_s }{\int_{0}^{+\infty}L(n_{obs}|\nu_s)d\nu_s}\)</span><span class="math notranslate nohighlight">\(
+and solve numerically for \)</span>\nu_s^{up}$. The equivalent of
+Fig. <a class="reference external" href="#fig:poissonLim">1.10</a>{reference-type=”ref”
+reference=”fig:poissonLim”} using a bayesian approach is shown in
+Fig. <a class="reference external" href="#fig:poissonLimBayes">1.11</a>{reference-type=”ref”
+reference=”fig:poissonLimBayes”}</p>
+<p><img alt="[[fig:poissonLimBayes]]{#fig:poissonLimBayeslabel=&quot;fig:poissonLimBayes&quot;}Bayesian upper limit on the number of signalevents as a function of the expected number of background events for different observed." src="Section9Bilder/poissonLimBayes.png" />{#fig:poissonLimBayes
+width=”60%”}</p>
+<p>The bayesian limit is always greater or equal than the classical one. As
+expected the bayesian approaches the classical limit when we move to the
+region where the number of observed events is much larger than the
+number of expected background events. The fact that the two limits
+precisely coincide for <span class="math notranslate nohighlight">\(n_{bkg}=0\)</span> is a pure coincidence since the
+Bayesian limit depends on the particular choice of the prior.</p>
+</div>
+<div class="section" id="feldman-cousins-sec-fc">
+<h2>Feldman-Cousins {#sec:FC}<a class="headerlink" href="#feldman-cousins-sec-fc" title="Permalink to this headline">¶</a></h2>
+<p>The Feldman-Cousins (FC) prescription of the confidence intervals solves
+two complications related to the classical Neyman construction: the so
+called “flip-flop” problem and the problem of obtaining unphysical (or
+empty set) interval using the Neyman construction. Their solution
+provides, in a purely frequentist manner, intervals which are never
+unphysical, nor empty and unifies the set of classical confidence
+intervals for setting upper limits and quoting two-sided confidence
+intervals. However, it still suffers from an apparent paradox when the
+number of observed events is lower than the background only expectations
+(background underfluctuations). <em>In this section we will follow closely
+the paper in Ref.</em> [&#64;FeldmanCousins].</p>
+<div class="section" id="the-flip-flop-problem-flipflop">
+<h3>The flip-flop problem {#flipflop}<a class="headerlink" href="#the-flip-flop-problem-flipflop" title="Permalink to this headline">¶</a></h3>
+<p>The flip-flop problem arises when one decides, <em>based on the results of
+the experiment</em>, whether to publish an upper limit or a central
+confidence interval. This is a very common (and sensible) attitude.
+Typically the reasoning goes as: if I see that a result is below
+3<span class="math notranslate nohighlight">\(\sigma\)</span> I publish an upper limit, if the result has a significance of
+more than 3<span class="math notranslate nohighlight">\(\sigma\)</span> then I publish a central confidence interval. The
+typical sentence in papers is: “the data are compatible with the
+background expectations (or no excess is observed above the expected
+background) <em>hence</em> we set an upper limit on…”. As seen in the
+previous section, one can even decide that in case of a boundary, e.g. a
+mass which has to be positive, to use the maximum between the measured
+value and zero <span class="math notranslate nohighlight">\(\max(m,0)\)</span> and quote the CL corresponding to zero. These
+choices has an impact on the coverage of the reported confidence
+intervals.<br />
+To better understand the flip-flop problem we start by looking at the
+confidence belt at 90% CL of Fig. <a class="reference external" href="#fig:CI90">1.12</a>{reference-type=”ref”
+reference=”fig:CI90”}(left). Here we are considering a gaussian
+observable with <span class="math notranslate nohighlight">\(\sigma=1\)</span>; the <span class="math notranslate nohighlight">\(x\)</span>-axis is the measured mean <span class="math notranslate nohighlight">\(x\)</span>, while
+the <span class="math notranslate nohighlight">\(y\)</span>-axis is the unknown mean <span class="math notranslate nohighlight">\(\mu\)</span>. By construction the coverage is
+90%, i.e. reading the plot vertically for a measured <span class="math notranslate nohighlight">\(x\)</span>, we have
+<span class="math notranslate nohighlight">\(P(\mu \in [\mu_1,\mu_2]) =90\%\)</span>. The corresponding plot for the upper
+limit at 90%, again using the classical construction, is shown in the
+Fig. <a class="reference external" href="#fig:CI90">1.12</a>{reference-type=”ref” reference=”fig:CI90”}
+(right).</p>
+<p><img alt="[[fig:CI90]]{#fig:CI90 label=&quot;fig:CI90&quot;}(left) 90% CL confidencebelt; (right) 90% CM upper limit." src="Section9Bilder/FC1.png" />{#fig:CI90
+width=”100%”}</p>
+<p>If you decide decide a posteriori (i.e. based on the result of the
+measurement) whether to publish a central confidence interval, an upper
+limit or the truncated <span class="math notranslate nohighlight">\(\max(x,0)\)</span> limit, you will get a confidence
+region such as the one reported in
+Fig. <a class="reference external" href="#fig:CLoverlapped">1.14</a>{reference-type=”ref”
+reference=”fig:CLoverlapped”}.</p>
+<p><img alt="[[fig:CLoverlapped]]{#fig:CLoverlapped label=&quot;fig:CLoverlapped&quot;}&quot;Aposteriori&quot; confidence interval (left): if the result x is more than (i.e. x  3) publish the central confidence interval; if theresult x is less than  (i.e. x  3) publish an upper limit;if the results is negative use max(meas,0) and quote the CLcorresponding to 0. The interval doesn't have the correct coverage(right)." src="Section9Bilder/FC2.png" />{#fig:CLoverlapped
+width=”50%”}<img alt="[[fig:CLoverlapped]]{#fig:CLoverlappedlabel=&quot;fig:CLoverlapped&quot;}&quot;A posteriori&quot; confidence interval (left): ifthe result x is more than  (i.e. x  3) publish the centralconfidence interval; if the result x is less than  (i.e. x 3) publish an upper limit; if the results is negative use max(meas,0)and quote the CL corresponding to 0. The interval doesn't have thecorrect coverage(right)." src="Section9Bilder/flipflop.png" />{#fig:CLoverlapped
+width=”50%”}</p>
+<p>This region does not guarantee the 90% coverage. It’s not “built
+horizontally” following the classical construction; it’s a patchwork of
+confidence intervals. Take for example the case of <span class="math notranslate nohighlight">\(\mu=2\)</span> (see
+Fig. <a class="reference external" href="#fig:CLoverlapped">1.14</a>{reference-type=”ref”
+reference=”fig:CLoverlapped”} right). The interval starts with the lower
+limit at <span class="math notranslate nohighlight">\(2-1.28\)</span> on the boundary of the 90% upper limit and ends at
+<span class="math notranslate nohighlight">\(2+1.64\)</span> on the <span class="math notranslate nohighlight">\(90\%\)</span> central interval, giving a coverage of only
+<span class="math notranslate nohighlight">\(1-0.1-0.05 = 85\%\)</span>. In other cases, like at <span class="math notranslate nohighlight">\(\mu=1\)</span> the region
+over-covers as shown in the same figure, the confidence region
+overcovers. We will see in the following how the FC prescription allows
+to unify these intervals and avoid the problem.<br />
+Typically the flip-flop problem only comes if you publish a confidence
+interval for a well established signal, but with more data the signal
+disappears and you are forced to set a limit. While potentially this
+could be a very serious issue, in reality it only happens very rarely
+because the experimental sensitivity typically grows with additional
+data.</p>
+</div>
+<div class="section" id="poisson-with-background">
+<h3>Poisson with background<a class="headerlink" href="#poisson-with-background" title="Permalink to this headline">¶</a></h3>
+<p>To understand the FC prescription we will use the example of a counting
+experiment. The measured number of events is <span class="math notranslate nohighlight">\(n\)</span>, the number of expected
+background events is <span class="math notranslate nohighlight">\(b\)</span> (set to <span class="math notranslate nohighlight">\(b=3\)</span> in this example) and we want to
+build the confidence interval for the mean <span class="math notranslate nohighlight">\(\mu\)</span>:
+$<span class="math notranslate nohighlight">\(P(n|\mu) = \frac{(\mu+b)^n}{n!}e^{-(\mu+b)}\)</span><span class="math notranslate nohighlight">\( Let's start from the
+classical construction of the upper limit (UL) as seen in
+Sec. [1.1](#sec:Neyman){reference-type=&quot;ref&quot; reference=&quot;sec:Neyman&quot;}
+(see Fig. [1.15](#fig:singleDouble){reference-type=&quot;ref&quot;
+reference=&quot;fig:singleDouble&quot;}). We build horizontally the UL curve
+scanning the \)</span>y<span class="math notranslate nohighlight">\(-axis (the unknown signal mean) \)</span>\mu<span class="math notranslate nohighlight">\( and for each value
+of \)</span>\mu<span class="math notranslate nohighlight">\( we find the value of the limit solving numerically for \)</span>\mu<span class="math notranslate nohighlight">\(
+the equation \)</span>0.1=\sum_0^{n_{obs-1}}P(n|\mu+b)<span class="math notranslate nohighlight">\(. See
+Fig. [1.5](#fig:poisson9evts){reference-type=&quot;ref&quot;
+reference=&quot;fig:poisson9evts&quot;} for a graphical reminder of the procedure.
+Following the same procedure we can built the confidence interval for
+the central interval at \)</span>CL=90%<span class="math notranslate nohighlight">\(. In this case the lower and upper
+limits are computed solving numerically for \)</span>c<span class="math notranslate nohighlight">\( in
+\)</span>0.05=\sum_0^{n_{obs-1}}P(n|c+b)<span class="math notranslate nohighlight">\( and for \)</span>a<span class="math notranslate nohighlight">\( in
+\)</span>0.05=\sum_{n_{obs}}^\infty P(n|a+b)<span class="math notranslate nohighlight">\(. When \)</span>n=0<span class="math notranslate nohighlight">\( we get an empty set.
+For both the upper and central limits, n = 0 has no solution (in the
+example b = 3). This is counter-intuitive: if one measures no events,
+clearly the most likely value of \)</span>\mu$ is zero. Why should one rule out
+the most likely scenario? Let’s see how this issue is addressed using
+the FC prescription.</p>
+<p><img alt="[[fig:singleDouble]]{#fig:singleDouble label=&quot;fig:singleDouble&quot;}90%CL upper limit (left) and confidence interval (right) following theclassical construction. for the case with expected background." src="Section9Bilder/singleDouble.png" />{#fig:singleDouble width=”100%”}</p>
+<p><br />
+The FC uses the classical Neyman construction, but using a different
+<em>ordering principle</em>. Every time a confidence region is defined, we use
+(often without even noticing) the concept of ordering principle. An
+ordering principle is needed to specify which values of the measured <span class="math notranslate nohighlight">\(x\)</span>
+to include in the acceptance region. When building an upper limit we
+start from the smallest values of <span class="math notranslate nohighlight">\(x\)</span>, for a central limit we start from
+the value of <span class="math notranslate nohighlight">\(x\)</span> closest to the central value, etc… There are
+infinite ordering principles. The FC ordering uses an ordering principle
+based on a likelihood ratio.<br />
+To understand the idea let’s take the example where we want to build
+horizontally the interval for <span class="math notranslate nohighlight">\(\mu=0.5\)</span> (remember we set the number of
+background events <span class="math notranslate nohighlight">\(b=3\)</span>). The Poisson probability to obtain <span class="math notranslate nohighlight">\(0\)</span> events,
+when the expected number of events is <span class="math notranslate nohighlight">\(\mu = 0.5\)</span> is 0.03. Let’s compare
+this low value with the one we obtain using as <span class="math notranslate nohighlight">\(\mu\)</span> the most probable
+<span class="math notranslate nohighlight">\(\mu_{best}\)</span>. <span class="math notranslate nohighlight">\(\mu_{best}\)</span> is defined as the value of the mean signal
+<span class="math notranslate nohighlight">\(\mu\)</span> which maximizes <span class="math notranslate nohighlight">\(P(n|\mu)\)</span> when we require <span class="math notranslate nohighlight">\(\mu_{best}\)</span> to be
+physically allowed (i.e. <span class="math notranslate nohighlight">\(\mu_{best}&gt;0\)</span>). This simply means (remembering
+the ML estimator for a signal in presence of background)
+<span class="math notranslate nohighlight">\(\mu_{best} = max(0,n-b)\)</span>. The probability to obtain <span class="math notranslate nohighlight">\(0\)</span> events when the
+expected number of events is <span class="math notranslate nohighlight">\(\mu_{best} = 0\)</span> is 0.05. So, while
+<span class="math notranslate nohighlight">\(P(n,\mu=0.05)=0.03\)</span> is quite low on an absolute scale, it is very much
+comparable with <span class="math notranslate nohighlight">\(P(n,\mu_{best}=0)=0.05\)</span> of the most probable value
+<span class="math notranslate nohighlight">\(\mu_{best}\)</span>.<br />
+Following this observation the ordering principle is defined on the
+likelihood ratio: $<span class="math notranslate nohighlight">\(R(\mu) = \frac{P(n|\mu)}{P(n|\mu_{best})}\)</span><span class="math notranslate nohighlight">\( where
+\)</span>R<span class="math notranslate nohighlight">\( is called *rank*. The effect of this ordering principle is to
+increase the rank of the values with low probability if they are close
+to \)</span>\mu_{best}<span class="math notranslate nohighlight">\(. The interval is then built by including values of \)</span>n<span class="math notranslate nohighlight">\(
+in decreasing order of \)</span>R<span class="math notranslate nohighlight">\( until the sum of \)</span>P(n|\mu)=1-CL<span class="math notranslate nohighlight">\( i.e. matches
+the CL we want. Due to the discreteness of \)</span>n<span class="math notranslate nohighlight">\(, the acceptance region
+can contain more summed probability than required by the CL, i.e. we
+could end up over-covering. Notice that while in the typical orderings
+different values of \)</span>\mu<span class="math notranslate nohighlight">\( do not talk to each other, here \)</span>\mu_{best}<span class="math notranslate nohighlight">\(
+influence the &quot;weight&quot; of all the other values (their order).\
+Let's compute the interval for the numerical example used above
+(expected number of background events is \)</span>b=3<span class="math notranslate nohighlight">\(, we measure \)</span>n<span class="math notranslate nohighlight">\( events
+and we want to build the confidence interval for \)</span>\mu=0.5$).</p>
+<p><img alt="[[fig:tabFC]]{#fig:tabFC label=&quot;fig:tabFC&quot;}Confidence intervalconstruction for  and background." src="Section9Bilder/tableFC.png" />{#fig:tabFC width=”100%”}</p>
+<p>For each value of <span class="math notranslate nohighlight">\(n\)</span> we first compute <span class="math notranslate nohighlight">\(\mu_{best}\)</span> the best (physical)
+value of the estimator given n (see table in
+Fig. <a class="reference external" href="#fig:tabFC">1.16</a>{reference-type=”ref” reference=”fig:tabFC”}). We
+get <span class="math notranslate nohighlight">\(\mu_{best} = max(0,n-b)\)</span>: <span class="math notranslate nohighlight">\(n=0 \to \mu_{best}=0\)</span>,
+<span class="math notranslate nohighlight">\(n=1 \to \mu_{best}=0\)</span>, <span class="math notranslate nohighlight">\(n=2 \to \mu_{best}=0\)</span>, <span class="math notranslate nohighlight">\(n=3 \to \mu_{best}=0\)</span>,
+<span class="math notranslate nohighlight">\(n=4 \to \mu_{best}=1\)</span>, <span class="math notranslate nohighlight">\(n=5 \to \mu_{best}=2\)</span>,…. For each <span class="math notranslate nohighlight">\(n\)</span> we
+also compute <span class="math notranslate nohighlight">\(P(n|\mu=0.05)\)</span> and <span class="math notranslate nohighlight">\(P(n|\mu_{best})\)</span> and the rank
+<span class="math notranslate nohighlight">\(R=P(n|\mu=0.05)/P(n|\mu_{best})\)</span>. Now we can complete the confidence
+interval. We add the probabilities <span class="math notranslate nohighlight">\(P(n|\mu=0.05)\)</span> in decreasing order
+of the rank <span class="math notranslate nohighlight">\(R\)</span> until we match the desired CL: $<span class="math notranslate nohighlight">\(\begin{aligned}
+P(4|\mu=0.05) &amp; + P(3|\mu=0.05)  + P(2|\mu=0.05)  + P(5|\mu=0.05)  + P(1|\mu=0.05)  + \\
+              &amp; P(0|\mu=0.05)  + P(6|\mu=0.05) = \\
+0.189         &amp; + 0.216          + 0.185         + 0.132          + 0.106          + 0.030          + 0.077          = 0.935\end{aligned}\)</span><span class="math notranslate nohighlight">\(
+We intentionally stay on the conservative side and add passed 0.9. The
+alternative would be to stop at \)</span>R=6<span class="math notranslate nohighlight">\( which is \)</span>0.858 &lt; 0.9<span class="math notranslate nohighlight">\(, hence
+under-covering. Repeating the procedure scanning the values of \)</span>\mu<span class="math notranslate nohighlight">\( on
+the \)</span>y$-axis we obtain the complete confidence belt.<br />
+The resulting FC confidence interval is compared with the classical one
+in Fig. <a class="reference external" href="#fig:compFC">1.17</a>{reference-type=”ref”
+reference=”fig:compFC”}.</p>
+<p><img alt="[[fig:compFC]]{#fig:compFC label=&quot;fig:compFC&quot;}Comparison of the FCconfidence interval with the classicalone." src="Section9Bilder/compFC.png" />{#fig:compFC width=”100%”}</p>
+<p>At large <span class="math notranslate nohighlight">\(n\)</span> the FC and the classical construction gives approximately
+the same confidence interval: we are far away from the physical boundary
+and so the background is effectively subtracted without constraint. For
+small values of <span class="math notranslate nohighlight">\(n\)</span> , the confidence interval automatically becomes
+upper limits on <span class="math notranslate nohighlight">\(\mu\)</span>; i.e. the lower endpoint is 0 for <span class="math notranslate nohighlight">\(n \leq 4\)</span> in
+this case. Thus, flip-flopping between the plots in
+Fig.<a class="reference external" href="#fig:singleDouble">1.15</a>{reference-type=”ref”
+reference=”fig:singleDouble”} is replaced by one coherent set of
+confidence interval, (and no interval is the empty set).</p>
+</div>
+<div class="section" id="gaussian-with-boundary-at-the-origin">
+<h3>Gaussian with boundary at the origin<a class="headerlink" href="#gaussian-with-boundary-at-the-origin" title="Permalink to this headline">¶</a></h3>
+<p>As another example we can build the FC confidence interval for a
+gaussian distribution with a boundary <span class="math notranslate nohighlight">\(\mu&gt;0\)</span> and compare it with what
+we have already encountered in
+Sec. <a class="reference external" href="#sec:classicalGaus">1.3</a>{reference-type=”ref”
+reference=”sec:classicalGaus”} (e.g. the physical boundary imposed on
+the mass being positive).<br />
+Consider as p.d.f. a gaussian with <span class="math notranslate nohighlight">\(\sigma =1\)</span>:
+$<span class="math notranslate nohighlight">\(P(x|\mu) = \frac{1}{\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2}}\)</span><span class="math notranslate nohighlight">\( As we did
+with the Poisson variable we find \)</span>\mu_{best}<span class="math notranslate nohighlight">\( as the value that
+maximizes \)</span>P(x|\mu)<span class="math notranslate nohighlight">\( and force it to be positive, i.e. we take
+\)</span>\max(0,\mu_{best})<span class="math notranslate nohighlight">\(. The expression for \)</span>P(x|\mu_{best})<span class="math notranslate nohighlight">\( becomes:
+\)</span><span class="math notranslate nohighlight">\(P(x|\mu_{best}) = \left\{
+            \begin{array}{rll}
+                1/\sqrt{2\pi} &amp; \mbox{if} &amp; x \geq 0 \\
+                \exp(-x^2/2)/\sqrt{2\pi} &amp; \mbox{if} &amp; x&lt;0
+            \end{array}\right.\)</span><span class="math notranslate nohighlight">\( if \)</span>x&gt;0<span class="math notranslate nohighlight">\( then \)</span>\mu_{best} = x<span class="math notranslate nohighlight">\(, while
+if \)</span>x&lt;0<span class="math notranslate nohighlight">\( we have \)</span>\mu_{best} = 0$ (see
+Fig. <a class="reference external" href="#fig:xgt0st0">1.18</a>{reference-type=”ref”
+reference=”fig:xgt0st0”}).</p>
+<p><img alt="[[fig:xgt0st0]]{#fig:xgt0st0 label=&quot;fig:xgt0st0&quot;} is thevalue that maximizes" src="Section9Bilder/xgt0st0.png" />{#fig:xgt0st0 width=”100%”}</p>
+<p><br />
+The likelihood ratio is then:
+$<span class="math notranslate nohighlight">\(R(x) = \frac{P(x|\mu)}{P(x|\mu_{best})} =
+             \left\{
+             \begin{array}{rll}
+                   \exp(-(x-\mu)^2/2) &amp; \mbox{if} &amp; x \geq 0 \\
+                   \exp(x\mu-\mu^2/2) &amp; \mbox{if} &amp; x&lt;0
+             \end{array}\right.\)</span><span class="math notranslate nohighlight">\( With this we can now add to the
+acceptance region values of x ordering them by their rank. If \)</span>x<span class="math notranslate nohighlight">\( is far
+from the boundary, the rank is just \)</span>P(x|\mu)$ and we get to the usual
+ordering. If instead it is close to the boundary the rank develops a
+tail to the left as shown in Fig. <a class="reference external" href="#fig:rank">1.19</a>{reference-type=”ref”
+reference=”fig:rank”} that will modify the ordering.</p>
+<p><img alt="[[fig:rank]]{#fig:rank label=&quot;fig:rank&quot;}The rank isasymmetric." src="Section9Bilder/rank.png" />{#fig:rank width=”50%”}</p>
+<p><br />
+For a given value of <span class="math notranslate nohighlight">\(\mu\)</span>, one finds the interval <span class="math notranslate nohighlight">\([x_1,x_2]\)</span> such that
+<span class="math notranslate nohighlight">\(\int_{x_1}^{x_2} P(x|\mu)dx = \alpha\)</span> and <span class="math notranslate nohighlight">\(R(x_1) = R(x_2)\)</span> (see
+Fig. <a class="reference external" href="#fig:rank2">1.21</a>{reference-type=”ref” reference=”fig:rank2”}).
+The condition that the rank at the two extremes coincides guarantees
+that the order we used to pick the values of <span class="math notranslate nohighlight">\(x\)</span> is correct. If the rank
+was higher (or lower) at one extreme, it would mean that those values of
+<span class="math notranslate nohighlight">\(x\)</span> should have (have not) be used for the interval.</p>
+<p><img alt="[[fig:rank2]]{#fig:rank2 label=&quot;fig:rank2&quot;}Classical construction inblue, FC in red (left). Classical construction in blue, FC in black(right). " src="Section9Bilder/rank2.png" />{#fig:rank2 width=”55%”}
+<img alt="[[fig:rank2]]{#fig:rank2 label=&quot;fig:rank2&quot;}Classical construction inblue, FC in red (left). Classical construction in blue, FC in black(right). " src="Section9Bilder/rank3.png" />{#fig:rank2 width=”39%”}</p>
+<p><br />
+As expected, far away from the boundary the two intervals coincide.
+Below <span class="math notranslate nohighlight">\(x=1.28\)</span>, the lower endpoint of the FC confidence intervals is
+zero, so that there is automatically a transition from two-sided
+confidence intervals to an upper confidence limit given by <span class="math notranslate nohighlight">\(\mu_2\)</span>. The
+point of this transition is fixed by the calculation of the acceptance
+interval for <span class="math notranslate nohighlight">\(\mu=0\)</span> the solution has <span class="math notranslate nohighlight">\(x_1 =-\infty\)</span>, and so
+<span class="math notranslate nohighlight">\(\int_{x_1}^{x_2} P(x|\mu)dx = \alpha\)</span> is satisfied by <span class="math notranslate nohighlight">\(x_2 =1.28\)</span> when
+<span class="math notranslate nohighlight">\(\alpha=90\)</span>%.</p>
+</div>
+<div class="section" id="neutrino-oscillations">
+<h3>Neutrino oscillations<a class="headerlink" href="#neutrino-oscillations" title="Permalink to this headline">¶</a></h3>
+<p>The study of neutrino oscillations was the initial reason to develop
+this methodology. The physics needed to follow the argument is rather
+simple. Neutrino oscillations originate from the difference between
+neutrino mass and flavor eigenstates. Considering only two flavors
+<span class="math notranslate nohighlight">\(\nu_e, \mu_\mu\)</span> we can write the flavor eigenstates as a linear
+combination of the mass eigenstates: $<span class="math notranslate nohighlight">\(\begin{aligned}
+|\nu_e  \rangle &amp;=&amp;   |\nu_1\rangle \cos \theta + |\nu_2\rangle \sin \theta \\
+|\nu_\mu\rangle &amp;=&amp; - |\nu_1\rangle \sin \theta + |\nu_1\rangle \cos \theta \end{aligned}\)</span><span class="math notranslate nohighlight">\(
+Studying this two-states quantum mechanical system we obtain that the
+probability of a \)</span>\nu_\mu<span class="math notranslate nohighlight">\( to oscillate to \)</span>\nu_e<span class="math notranslate nohighlight">\( is :
+\)</span><span class="math notranslate nohighlight">\(P(\nu_\mu \to \nu_e) = \sin^2(2\theta)\sin^2\left(\frac{1.27 \Delta m^2 L}{E}\right)\)</span><span class="math notranslate nohighlight">\(
+where \)</span>\Delta m = |m_1^2 - m_2^2|<span class="math notranslate nohighlight">\( in \)</span>eV^2<span class="math notranslate nohighlight">\(, L is the distance in km
+between the creation and the detection points and E is the energy of the
+neutrino in MeV. The experimental data are used to measure the
+oscillations parameters \)</span>\Delta m^2<span class="math notranslate nohighlight">\( and \)</span>\sin^2 2\theta<span class="math notranslate nohighlight">\(. The results
+are usually presented in a 2D plane \)</span>(\Delta m^2,\sin^2 2\theta)<span class="math notranslate nohighlight">\( where
+the excluded values (rejection region) of the parameters are on the
+right of the boundary (see
+Fig. [1.22](#fig:exclPlot){reference-type=&quot;ref&quot;
+reference=&quot;fig:exclPlot&quot;}).\
+Ignoring the physics behind, just think of this problem as a fit of the
+data (number of events) to a function of two variables
+\)</span>f(x,y) = P(\Delta m^2, \sin^2 2\theta)<span class="math notranslate nohighlight">\(.\
+The computation of the excluded region has the complications seen above:
+the parameter \)</span>\sin^2 2\theta<span class="math notranslate nohighlight">\( is bounded in \)</span>[0,1]<span class="math notranslate nohighlight">\( and the expected
+number of oscillation events is extremely small on a potentially large
+background.\
+The neutrino data and the expected background are collected in
+histograms in bins of energy as \)</span>N={n_i}<span class="math notranslate nohighlight">\( and \)</span>B={b_i}<span class="math notranslate nohighlight">\(
+respectively. The signal contribution (i.e. the expected number of
+events coming from oscillations) is collected as a histogram in bins of
+energy \)</span>T={\mu_i|\sin^2(2\theta), \Delta m^2}<span class="math notranslate nohighlight">\(.\
+To find the upper limits on the oscillation parameters we can use the FC
+construction. To build the exclusion region (this time is in 2D!) we fix
+a point in the \)</span>(\Delta m^2,\sin^2 2\theta)<span class="math notranslate nohighlight">\( plane (typically the plane
+is finely binned and instead of a point we approximate one region in the
+plane with the averaged values of the parameters in that region) and
+compute the rank of the measured values using as ordering principle the
+likelihood ratio:
+\)</span><span class="math notranslate nohighlight">\(R = \frac{P(N|T(\sin^2(2\theta), \Delta m^2))}{P(N|T(\sin^2(2\theta_{best}), \Delta m_{best}^2))}\)</span><span class="math notranslate nohighlight">\(
+where \)</span>\sin^2(2\theta_{best}), \Delta m_{best}^2<span class="math notranslate nohighlight">\( are the values giving
+the highest probability \)</span>P(N|T)<span class="math notranslate nohighlight">\( in the physically allowed range of the
+parameters. This is equivalent to compute for each bin in the 2D plane:
+\)</span><span class="math notranslate nohighlight">\(R = \Delta \chi^2 = 2\sum_i \left( \mu_i -\mu_{best} + n_i\ln\left(\frac{\mu_{best} + b_i}{\mu_i + b_i}\right) \right)\)</span><span class="math notranslate nohighlight">\(\
+Fig. [1.22](#fig:exclPlot){reference-type=&quot;ref&quot;
+reference=&quot;fig:exclPlot&quot;} shows the exclusion region on the 2D plane
+obtained with a toy study. Neutrinos are created uniformly at a distance
+between 600m and 1000m from the detector with a flat energy spectrum
+between 10 and 60 GeV. The background flux from \)</span>\nu_\mu<span class="math notranslate nohighlight">\( misidentified
+as \)</span>\mu_e<span class="math notranslate nohighlight">\( is set to 500 events flat in the energy range. The total
+\)</span>\nu_\mu<span class="math notranslate nohighlight">\( flux is such that we get 100 events for an oscillation
+probability \)</span>P(\nu_\mu\to\nu_e)=0.01<span class="math notranslate nohighlight">\(. For each toy experiment we
+compute \)</span>\Delta\chi^2<span class="math notranslate nohighlight">\(. For each bin in the
+\)</span>(\Delta m^2,\sin^2 2\theta)<span class="math notranslate nohighlight">\( plane the we need to find
+\)</span>\Delta \chi^2_c<span class="math notranslate nohighlight">\( such that \)</span>\alpha<span class="math notranslate nohighlight">\( (1-CL) of the simulated experiments
+have \)</span>\Delta\chi^2 &lt; \Delta\chi^2_c<span class="math notranslate nohighlight">\(. To get the exclusion limit from
+data (the histogram \)</span>N<span class="math notranslate nohighlight">\() we compute the \)</span>\Delta \chi^2<span class="math notranslate nohighlight">\( for each bin of
+the \)</span>(\Delta m^2,\sin^2 2\theta)<span class="math notranslate nohighlight">\( plane and compare it with the
+\)</span>\Delta \chi_c^2<span class="math notranslate nohighlight">\( found above. The boundary is given by:
+\)</span><span class="math notranslate nohighlight">\(\Delta \chi^2 (N|\sin^2(2\theta),\Delta m^2) &lt; \Delta \chi^2_c(\sin2(2\theta),\Delta m^22)\)</span>$</p>
+<p><img alt="[[fig:exclPlot]]{#fig:exclPlot label=&quot;fig:exclPlot&quot;}Confidenceregion for an example of the toy model in which .The 90% confidence region is the area to the right of the curve. Inother words the null hypothesis H is no oscillations and with thedata at hand I can exclude at 90% CL the region of parameters to theright of the curve." src="Section9Bilder/exclPlot.png" />{#fig:exclPlot
+width=”55%”}</p>
+</div>
+<div class="section" id="other-examples">
+<h3>Other examples<a class="headerlink" href="#other-examples" title="Permalink to this headline">¶</a></h3>
+<p>The Feldman-Cousins construction was used in CMS [&#64;Hig12045] for the
+determination of the intervals on the Higgs measured signal strength
+(<span class="math notranslate nohighlight">\(\hat{\mu} = \sigma/\sigma_M\)</span> ratio of the measured cross section to
+the Standard Model expectation). In
+Fig. <a class="reference external" href="#fig:CMS1">1.23</a>{reference-type=”ref” reference=”fig:CMS1”} the
+intervals obtained without limiting <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> to be positive and the
+one imposing <span class="math notranslate nohighlight">\(\hat{\mu}&gt;0\)</span> obtained with the FC prescription. In
+Fig. <a class="reference external" href="#fig:CMS2">1.24</a>{reference-type=”ref” reference=”fig:CMS2”} the
+signal strength is fitted on the plane of the different production
+mechanisms gluon-gluon-fusion-plus-ttH and VBF-plus-VH.</p>
+<p><img alt="[[fig:CMS1]]{#fig:CMS1 label=&quot;fig:CMS1&quot;}(left) Values of for the combination (solid vertical line)and for contributing channels (points). The horizontal bars indicate the uncertainties on the  values for individualchannels; they include both statistical and systematic uncertainties.(right) The same intervals imposing the signal strength to be positiveand computed using the Feldman-Cousinsconstruction." src="Section9Bilder/higgsFC.png" />{#fig:CMS1 width=”100%”}</p>
+<p><img alt="[[fig:CMS2]]{#fig:CMS2 label=&quot;fig:CMS2&quot;}(left) (Left plot) The 68%CL intervals for signal strength in the gluon-gluon-fusion-plus-ttH andin VBF-plus-VH production mechanisms:  and, respectively. The different colors show the resultsobtained by combining data from each of the five analyzed decay modes: (green),  (blue), (red),  (violet), (cyan). The crosses indicate the best-fit values. The diamond at(1,1) indicates the expected values for the SM Higgs boson. (right) Thesame intervals imposing the signal strength to be positive and computedusing the Feldman-Cousinsconstruction." src="Section9Bilder/higgsFC2.png" />{#fig:CMS2 width=”100%”}</p>
+</div>
+<div class="section" id="underfluctuations-and-significance">
+<h3>Underfluctuations and significance<a class="headerlink" href="#underfluctuations-and-significance" title="Permalink to this headline">¶</a></h3>
+<p>The FC prescription, while giving a frequentist solution to several
+problems, it stumbles on a problem with eperiments having large
+background underfluctuations. Suppose you have two experiments:</p>
+<ul class="simple">
+<li><p>a super optimized experiment expects no background events and
+observes zero events in a given data taking period</p></li>
+<li><p>a less optimized experiment expects 10 background events and
+observes five events in a given data taking period</p></li>
+</ul>
+<p>Using the FC prescription the upper limit on a signal at 90% CL for the
+first one is 2.44, while the second is 1.85. The worse experiment,
+clearly observing a lucky underfluctuation, obtains a better limit. This
+is not a desirable feature of the method. Quoting the authors: “The
+origin of these concerns lies in the natural tendency to want to
+interpret these results as the probability <span class="math notranslate nohighlight">\(P(\mu|x_0)\)</span> of a hypothesis
+given data, rather than what they are really related to, namely the
+probability <span class="math notranslate nohighlight">\(P(x_0|\mu)\)</span> of obtaining data given a hypothesis. It is the
+former that a scientist may want to know in order to make a decision,
+but the latter which classical confidence intervals relate to. […]
+scientists may make Bayesian inferences of <span class="math notranslate nohighlight">\(P(\mu|x_0)\)</span> based on
+experimental results combined with their personal, subjective prior
+probability distribution function. It is thus incumbent on the
+experimenter to provide information that will assist in this
+assessment.” The suggested way is to provide, together with the limit,
+also the <em>sensitivity</em> of the experiment, defined as “the average upper
+limit that would be obtained by an ensemble of experiments with the
+expected background and no true signal”. This extra information allows
+the reader to better understand if the value of a tight limit is just an
+artifact coming from an under-fluctuation of the background. When a
+significant portion of the upper limit curve is below the sensitivity of
+the experiment, the authors suggest to show both the sensitivity curve
+and the upper limit.</p>
+<p><img alt="[[fig:exclPlotsensitivity]]{#fig:exclPlotsensitivitylabel=&quot;fig:exclPlotsensitivity&quot;}Confidence region for an example of thetoy model in which  together with the sensitivityof theexperiment." src="Section9Bilder/exclPlotsensitivity.png" />{#fig:exclPlotsensitivity
+width=”55%”}</p>
+</div>
+</div>
+<div class="section" id="lep-test-statistic-l-s-b-l-b">
+<h2>LEP test statistic: <span class="math notranslate nohighlight">\(L_{s+b}/L_b\)</span><a class="headerlink" href="#lep-test-statistic-l-s-b-l-b" title="Permalink to this headline">¶</a></h2>
+<p>To understand the test statistics <span class="math notranslate nohighlight">\(L_{s+b}/L_b\)</span> we will use as an
+example the search for the SM Higgs at LEP.
+Fig. <a class="reference external" href="#fig:LEPtight">1.27</a>{reference-type=”ref”
+reference=”fig:LEPtight”} shows the Higgs candidate invariant mass
+distribution in data together with the histograms of the expected
+background and the expected signal at a mass of 115 GeV. The invariant
+mass is the discriminating variable used to extract the Higgs signal
+from background. We assume that, for each bin in invariant mass, we know
+what is the expected number of signal and background events. It is
+important to notice the difference between the <em>invariant mass</em> of a
+Higgs candidate <span class="math notranslate nohighlight">\(m_H^{rec}\)</span>, which is the invariant mass computed from
+the reconstructed decay products and the <em>test mass</em> <span class="math notranslate nohighlight">\(m_H\)</span> which is the
+value of the mass at which we build the signal model we want to test.<br />
+The typical search for Higgs boson is a combination of the analyses of
+different Higgs production (at LEP mostly Higgsstrahlung and vector
+boson fusion) and decay modes (predominantly <span class="math notranslate nohighlight">\(H\to b\bar{b}\)</span> and
+<span class="math notranslate nohighlight">\(H\to\tau^+\tau^-\)</span>). The (extended) likelihood used for each
+production/decay mode is:
+$<span class="math notranslate nohighlight">\(L_{s+b} = \frac{(s(m_H)+b)^n}{n!}e^{-(s(m_H)+b)} \prod_{j=1}^{n_{bins}}\frac{s(m_H)S(x_j,m_H)+bB(x_j)}{s(m_H)+b}\)</span><span class="math notranslate nohighlight">\(
+which, for the background only hypothesis reduces to:
+\)</span><span class="math notranslate nohighlight">\(L_{b} = \frac{b^n}{n!}e^{-b}\prod_{j=1}^{n_{bins}}B(x_j).\)</span><span class="math notranslate nohighlight">\( Here \)</span>s<span class="math notranslate nohighlight">\(
+is the number of expected signal events (which is a function of the test
+mass \)</span>m_H<span class="math notranslate nohighlight">\(), \)</span>b<span class="math notranslate nohighlight">\( the number of expected background events, \)</span>n<span class="math notranslate nohighlight">\( the
+number of observed events, \)</span>x_j<span class="math notranslate nohighlight">\( the value of the invariant mass
+\)</span>m_H^{rec}<span class="math notranslate nohighlight">\( (our discriminating variable) and \)</span>S(x_j,m_H)<span class="math notranslate nohighlight">\(, \)</span>B(x_j)<span class="math notranslate nohighlight">\( the
+signal (function of the test mass) and background pdf computed at \)</span>x_j$
+(i.e. the signal and background shapes).</p>
+<p><img alt="[[fig:LEPtight]]{#fig:LEPtightlabel=&quot;fig:LEPtight&quot;}(left)Reconstructed invariant mass spectrum for theHiggs search at LEP; (right) Data (dots), signal (yellow histogram) andbackground (dashed histogram) as a function of . In bothcases the signal histogram is built for a test mass of115 GeV." src="Section9Bilder/LEPtight.png" />{#fig:LEPtight width=”40%”}
+<img alt="[[fig:LEPtight]]{#fig:LEPtightlabel=&quot;fig:LEPtight&quot;}(left)Reconstructed invariant mass spectrum for theHiggs search at LEP; (right) Data (dots), signal (yellow histogram) andbackground (dashed histogram) as a function of . In bothcases the signal histogram is built for a test mass of115 GeV." src="Section9Bilder/ln1pSoverB.png" />{#fig:LEPtight
+width=”39%”}</p>
+<p>The complete likelihood for the signal+background hypothesis is the
+product of the likelihoods of each production/decay: $<span class="math notranslate nohighlight">\(\label{eq:Lsb}
+L_{s+b} = \prod_{k=1}^{N}\frac{(s_k(m_H)+b_k)^{n_k}}{n_k!}e^{-(s_k(m_H)+b_k)}\prod_{j=1}^{n^k_{bins}}\frac{s_k(m_H)S_k(x_{jk}; m_H)+b_kB_k(x_{jk})}{s_k(m_H)+b_k}\)</span><span class="math notranslate nohighlight">\(
+where the index \)</span>k<span class="math notranslate nohighlight">\( runs over the \)</span>N<span class="math notranslate nohighlight">\( production/decay modes analysed.
+The likelihood for the background only is trivially obtained again
+setting \)</span>s<span class="math notranslate nohighlight">\( to zero.\
+The discovery test statistics used at LEP is based on the likelihood
+ratio: \)</span><span class="math notranslate nohighlight">\(Q = \frac{L_{s+b}}{L_b}.\)</span><span class="math notranslate nohighlight">\( For the same numerical reasons
+already encountered for the likelihood, instead of Q, the logarithm of Q
+is used[^3]: \)</span><span class="math notranslate nohighlight">\(\label{eq:qLEP}
+q = -2 \ln Q = -2\ln\left(\frac{L_{s+b}}{L_b}\right).\)</span><span class="math notranslate nohighlight">\( Computing \)</span>q<span class="math notranslate nohighlight">\(
+explicitly with Eq. [\[eq:Lsb\]](#eq:Lsb){reference-type=&quot;ref&quot;
+reference=&quot;eq:Lsb&quot;} we obtain:
+\)</span><span class="math notranslate nohighlight">\(q = -2\ln Q(m_H) = 2\sum_{k=1}^{N}\left[ s_k(m_H) - \sum_{j=1}^{n^k_{bins}} \ln \left( 1+\frac{s_k(m_H)S_k(x_{jk}, m_H)}{b_k B_k(x_{jk})}\right)\right]\)</span><span class="math notranslate nohighlight">\(
+This expression shows that each bin contributes to the likelihood with a
+weight \)</span>\ln(1+S/B)<span class="math notranslate nohighlight">\( to the final test statistics. Because of this, a
+typical way to present the results is to plot the data as a function of
+\)</span>\ln(1+s/b)<span class="math notranslate nohighlight">\( as in Fig. [1.27](#fig:LEPtight){reference-type=&quot;ref&quot;
+reference=&quot;fig:LEPtight&quot;}. The region at large values of \)</span>\ln(1+s/b)<span class="math notranslate nohighlight">\(
+has the highest sensitivity to the signal.\
+The test statistic \)</span>-2\ln(Q)<span class="math notranslate nohighlight">\( is used to test for the presence of signal
+in data. The intuition goes as: compute the test statistics on the
+collected data and compare it with the &quot;typical&quot; test statistic values
+under the signal+background or background only hypotheses (see
+Fig. [1.28](#fig:Q115){reference-type=&quot;ref&quot; reference=&quot;fig:Q115&quot;}). The
+&quot;typical&quot; values are obtained as the median of the pdf of the test
+statistic for the signal+background and the background only hypothesis.
+The pdfs are build from toy Monte Carlo samples. From the model in
+Eq. [\[eq:Lsb\]](#eq:Lsb){reference-type=&quot;ref&quot; reference=&quot;eq:Lsb&quot;} we
+generate several toy datasets and for each of them we compute the test
+statistics \)</span>-2\ln(Q)<span class="math notranslate nohighlight">\(. The blue and brown pdfs in
+Fig. [1.28](#fig:Q115){reference-type=&quot;ref&quot; reference=&quot;fig:Q115&quot;} are
+the normalized histograms of the test statistics under the two
+hypothesis. To have a good estimation of the means, the histograms have
+to be well populated which means tossing a large number of toy
+experiments. This procedure is unfortunately very computing expensive.
+We will see later, when discussing the test statistics used at the LHC,
+how this problem can be mitigated. We can see from
+Fig. [1.28](#fig:Q115){reference-type=&quot;ref&quot; reference=&quot;fig:Q115&quot;} that
+the pdf for the background only hypothesis clusters at large \)</span>-2\ln(Q)<span class="math notranslate nohighlight">\(
+values, while the signal+background at low values. The observed is
+somewhere in the middle and we will see in the next section how to use
+this value to set a limit on the Higgs boson production. Note that the
+values of the test statistic is a function of the test mass \)</span>m_H<span class="math notranslate nohighlight">\(, in
+this plot the chosen value is \)</span>m_H=115<span class="math notranslate nohighlight">\( GeV. Scanning the value of the
+test mass we obtain Fig. [1.30](#fig:bigLEP){reference-type=&quot;ref&quot;
+reference=&quot;fig:bigLEP&quot;}-top. Here the median of the signal+background
+and the background-only hypotheses together with the observed value are
+plotted as curves (dashed brown and blue, and continuous black
+respectively) as a function of the test mass. The green(yellow) band
+covers the 68%(95%) area around the median of the background only
+hypothesis. These bands are a very common way to convey the statistical
+uncertainty of the background: presence of signal would appear in this
+plot as a deviation of the observed (black curve) from the expected for
+background only (dashed-blue); in absence of signal, the observed would
+be contained within the uncertainty bands. In
+Fig. [1.30](#fig:bigLEP){reference-type=&quot;ref&quot;
+reference=&quot;fig:bigLEP&quot;}-bottom the same curves are plotted separately
+for each of the four LEP experiments (ALEPH, DELPHI, L3, OPAL). We see
+that for all experiments but ALEPH the observed fluctuates around the
+expected background only curve. ALEPH shows a signal-like fluctuation
+around 115 GeV.\
+To better characterize data fluctuations we can compute the already
+encountered \)</span>p<span class="math notranslate nohighlight">\(-value as the integral \)</span><span class="math notranslate nohighlight">\(\label{eq:pValueLEP}
+\int_{-\infty}^{-2\ln(Q_{obs})=q_{obs}}pdf(q|bkg)dq.\)</span><span class="math notranslate nohighlight">\( The smaller the
+\)</span>p<span class="math notranslate nohighlight">\(-value (the further out in the tail the \)</span>q_{0,obs}<span class="math notranslate nohighlight">\( lies), the
+poorest the agreement with the background only hypothesis.
+Conventionally if the \)</span>p<span class="math notranslate nohighlight">\(-value is below \)</span>p = 2.87 \cdot 10^{-7}<span class="math notranslate nohighlight">\(,
+corresponding to a 5\)</span>\sigma<span class="math notranslate nohighlight">\( gaussian probability tail, we talk about
+&quot;discovery&quot;. Fig. [1.31](#fig:pValues){reference-type=&quot;ref&quot;
+reference=&quot;fig:pValues&quot;} shows the \)</span>p<span class="math notranslate nohighlight">\(-value for the four LEP
+experiments combined and the separately for each of them. The ALEPH
+fluctuation observed in Fig. [1.30](#fig:bigLEP){reference-type=&quot;ref&quot;
+reference=&quot;fig:bigLEP&quot;} corresponds to a \)</span>p<span class="math notranslate nohighlight">\(-value of \)</span>\sim3~10^{-3}<span class="math notranslate nohighlight">\(
+(i.e. \)</span>\sim3\sigma<span class="math notranslate nohighlight">\(), all other experiments are compatible with the
+background only hypothesis at that mass. The combined \)</span>p<span class="math notranslate nohighlight">\(-value shows a
+\)</span>\sim2\sigma$ fluctuation around 95 GeV and a smaller one at around 115
+GeV.\</p>
+<p><img alt="[[fig:Q115]]{#fig:Q115 label=&quot;fig:Q115&quot;}Distribution of the teststatistic  for the signal+background hypothesis in brown andbackground only hypothesis in blue. The value of the test statisticcomputed on data (observed) is represented by the vertical blackline." src="Section9Bilder/Q115.png" />{#fig:Q115 width=”40%”}</p>
+<p><img alt="[[fig:bigLEP]]{#fig:bigLEP label=&quot;fig:bigLEP&quot;}(top) Test statisticsas a function of the test mass for the combined LEP experiments. Theinsert is Fig. 1.28{reference-type=&quot;ref&quot;reference=&quot;fig:Q115&quot;} rotated and placed at the test mass of 115 GeV.(bottom)Test statistics as a function of the test mass for the singleLEP experiments." src="Section9Bilder/bigLEP.png" />{#fig:bigLEP
+width=”60%”} <img alt="[[fig:bigLEP]]{#fig:bigLEP label=&quot;fig:bigLEP&quot;}(top)Test statistics as a function of the test mass for the combined LEPexperiments. The insert is Fig. 1.28{reference-type=&quot;ref&quot;reference=&quot;fig:Q115&quot;} rotated and placed at the test mass of 115 GeV.(bottom)Test statistics as a function of the test mass for the singleLEP experiments." src="Section9Bilder/ADLO.png" />{#fig:bigLEP
+width=”50%”}</p>
+<p><img alt="[[fig:pValues]]{#fig:pValues label=&quot;fig:pValues&quot;}p-values as afunction of the test mass for the combined (left) and single (right) LEPexperiments." src="Section9Bilder/pValues.png" />{#fig:pValues width=”100%”}</p>
+<div class="section" id="nuisance-parameters">
+<h3>Nuisance parameters<a class="headerlink" href="#nuisance-parameters" title="Permalink to this headline">¶</a></h3>
+<p>So far we have not considered any uncertainty on the signal and
+background models. <em>Systematic</em> uncertainties can arise from several
+sources and can affect both the signal (e.g. energy scale affecting the
+position of the signal, energy resolution affecting its width, etc…)
+and the background (the shape could come from some control region or
+sidebands, etc…). To include this uncertainties, we add more
+parameters to the model. These parameters are called <em>nuisance
+parameters</em><a class="footnote-reference brackets" href="#id10" id="id2">4</a>: <span class="math notranslate nohighlight">\(\vec{\nu}\)</span>. For instance we can add an uncertainty
+<span class="math notranslate nohighlight">\(\delta m\)</span> on the mass position of the signal <span class="math notranslate nohighlight">\(m_0\)</span>. The effect of these
+uncertainties is to widen the test statistics pdfs. The reason for this
+is rather intuitive, we are reducing the information in the model by
+including uncertainties on the parameters, and so the separation power
+between signal+background and background-only is reduced. The <span class="math notranslate nohighlight">\(p\)</span>-values
+will become a function also of these extra parameters, e.g.:
+$<span class="math notranslate nohighlight">\(\int_{-\infty}^{q_{obs}}\mbox{pdf}(q|m_0)dq \qquad\to\qquad\int_{-\infty}^{q_{obs}}\mbox{pdf}(q|m_0, \delta m)dq.\)</span><span class="math notranslate nohighlight">\(
+Ideally we would like any statement we make based on the pdf of the test
+statistics to be valid for any value of the nuisances. This turns out to
+be very restrictive when the values of the nuisance are disfavored by
+the data. At LEP a *&quot;hybrid frequentist-bayesian&quot;* procedure was
+followed to take into account nuisance parameters. Suppose you have a
+prior \)</span>\pi(\nu)<span class="math notranslate nohighlight">\( describing the degree of belief on where the nuisance
+parameter \)</span>\nu<span class="math notranslate nohighlight">\( lies. From the example above, the uncertainty on the
+mass scale could be constrained by calibration measurements to be
+gaussian distributed. Using the prior we can marginalize the likelihood:
+\)</span><span class="math notranslate nohighlight">\(L_{\mbox{marginalized}} (x) = \int L(x|\nu) \pi(\nu) d\nu\)</span><span class="math notranslate nohighlight">\( and then
+proceed using this new likelihood to perform any frequentist test
+(\)</span>p<span class="math notranslate nohighlight">\(-value, intervals, etc\...). The marginalization is usually done
+with Monte Carlo techniques, sampling the distribution \)</span>\pi(\nu)<span class="math notranslate nohighlight">\( and
+computing the likelihood at the sampled value \)</span>\nu<span class="math notranslate nohighlight">\(.\
+The Neyman-Pearson lemma says that the likelihood ratio \)</span>L_{s+b}/L_b$
+for simple hypotheses is the optimal test statistics. The inclusion of
+nuisance parameters in the model changes the problem from the test of a
+simple hypothesis to a composite one, so strictly speaking the
+Neyman-Pearson lemma is not applicable. Nevertheless, when the nuisance
+parameters are well constrained, we can effectively consider the
+hypothesis to be simple and the likelihood ratio to be close to optimal.</p>
+</div>
+</div>
+<div class="section" id="the-issue-of-sensitivity-and-the-cls-procedure">
+<h2>The issue of sensitivity and the CLs procedure<a class="headerlink" href="#the-issue-of-sensitivity-and-the-cls-procedure" title="Permalink to this headline">¶</a></h2>
+<p>In absence of a clear signal observation (conventionally corresponding
+to a significance of <span class="math notranslate nohighlight">\(3\sigma\)</span>) we can still use our data to provide
+useful information about the largest signal we can exclude<a class="footnote-reference brackets" href="#id11" id="id3">5</a>. We have
+already encountered the concept of upper limit in
+Sec. <a class="reference external" href="#sec:Neyman">1.1</a>{reference-type=”ref” reference=”sec:Neyman”}.
+Let’s apply it to the Standard Model Higgs boson search at LEP. The
+search results were presented in terms of lower limits on the mass. The
+procedure to set the limit is straightforward. Look again at
+Fig. <a class="reference external" href="#fig:Q115">1.28</a>{reference-type=”ref” reference=”fig:Q115”}. In
+the previous section we used the observed value of the test statistics
+to define the <span class="math notranslate nohighlight">\(p\)</span>-value <span class="math notranslate nohighlight">\(p_b\)</span> on the pdf of the background only
+hypothesis (yellow area). This gave us the probability of the background
+to over-fluctuate to mimic a signal. Now we use the observed value of
+the test statistics to define the <span class="math notranslate nohighlight">\(p\)</span>-value <span class="math notranslate nohighlight">\(p_{s+b}\)</span> on the pdf of the
+signal+background hypothesis (green area). This will give us the
+probability for the signal+background to under-fluctuate to mimic
+absence of signal. When <span class="math notranslate nohighlight">\(p_{s+b} = 0.05\)</span> we can exclude the presence of
+signal at the 95% CL. To set a limit on the mass of the SM Higgs boson
+we scan the values of the test mass until we find <span class="math notranslate nohighlight">\(p_{s+b} = 0.05\)</span><a class="footnote-reference brackets" href="#id12" id="id4">6</a>.<br />
+In Fig. <a class="reference external" href="#fig:Qxx">1.32</a>{reference-type=”ref” reference=”fig:Qxx”} we
+show the pdf of the test statistics for different test mass values. The
+central plot is again Fig. <a class="reference external" href="#fig:Q115">1.28</a>{reference-type=”ref”
+reference=”fig:Q115”}, the left one is computed at 110 GeV and the right
+one at 120 GeV. The lower the mass the larger the separation power
+between the signal+background and the background only hypothesis and
+this translates, for a given dataset, to lower and lower values of
+<span class="math notranslate nohighlight">\(p_{s+b}\)</span>. We can read this as “given the expected SM-Higgs and the
+SM-backgrounds, it’s easier to exclude low mass values than high ones”.
+Going to high masses we see that the overlap between the two pdfs
+increases. The physical meaning of this is that we are not able anymore
+to separate the two hypothesis (in this case, we’re are reaching the
+kinematic limit of LEP to produce SM Higgs bosons).</p>
+<p><img alt="[[fig:Qxx]]{#fig:Qxx label=&quot;fig:Qxx&quot;}The pdf of the test statisticsfor different test mass values." src="Section9Bilder/Qxx.png" />{#fig:Qxx
+width=”100%”}</p>
+<p>This situation is rather dangerous. Let’s take a deeper look at the
+meaning of the <span class="math notranslate nohighlight">\(p\)</span>-values in
+Fig. <a class="reference external" href="#fig:pValuefluctuations">1.33</a>{reference-type=”ref”
+reference=”fig:pValuefluctuations”} to understand why. The left plot
+focuses on the background only hypothesis: the right tail of the
+distribution contains experiments where the background under-fluctuates
+(i.e. we are lacking events also for the background only hypothesis),
+while the left tail instead contains the experiments where the backgroud
+over-fluctuates mimicking a signal. The right plot instead focuses on
+the signal+background hypothesis: the left tail contains experiments
+where the signal+background over-fluctuates, while in the right tail
+there are the under-fluctuations that mimic absence of signal.</p>
+<p><img alt="[[fig:pValuefluctuations]]{#fig:pValuefluctuationslabel=&quot;fig:pValuefluctuations&quot;}Signal and background under/overfluctuations." src="Section9Bilder/pValuefluctuations.png" />{#fig:pValuefluctuations
+width=”100%”}</p>
+<p>Let’s contrast this picture with
+Fig. <a class="reference external" href="#fig:noSep">1.34</a>{reference-type=”ref” reference=”fig:noSep”}. In
+this case the two pdfs largely overlaps providing very small separation
+power. Here is where the situation becomes dangerous. Suppose we are
+setting a 95% CL on a signal and the test mass used for
+Fig. <a class="reference external" href="#fig:noSep">1.34</a>{reference-type=”ref” reference=”fig:noSep”} is
+the one providing <span class="math notranslate nohighlight">\(p_{s+b} = 0.05\)</span>. In this case we can exclude the
+presence of a signal with such a mass at 95% CL, but we are also sitting
+on the right tail of the background. <em>The background itself has an
+under-fluctuation!</em> From the point of view of a signal search, it
+doesn’t make any sense. We are excluding the signal+background and the
+background-only hypotheses at the same CL. A situation like that could
+arise when trying to exclude a Higgs boson of 1 TeV at LEP where the
+kinematic reach is just above 100 GeV. While that is kinematically
+obvious, it is worth noticing that the procedure for limits settings
+detailed so far does not prevent to incur in such kind of troubles.\</p>
+<p><img alt="[[fig:noSep]]{#fig:noSep label=&quot;fig:noSep&quot;} Poor separationpower." src="Section9Bilder/noSep.png" />{#fig:noSep width=”50%”}</p>
+<p>The root of the problem is that there is not enough information used in
+the limit setting procedure and we risk a “spurious exclusion”. A way to
+overcome this issue is to include somehow the information coming from
+<span class="math notranslate nohighlight">\(p_b\)</span>. This is what the “CLs” procedure does. To illustrate the “CLs”
+procedure we will follow the notation of the original paper
+Ref. [&#64;CLsRead]. The <span class="math notranslate nohighlight">\(p_{s+b}\)</span> is renamed “confidence level”<a class="footnote-reference brackets" href="#id13" id="id5">7</a>. The
+confidence level of the signal+background hypothesis is then the
+integral <span class="math notranslate nohighlight">\(CL_{s+b} = P(Q&gt;Q_{obs}|s+b)\)</span> calculated on the p.d.f. for
+signal+background hypothesis. Small values of <span class="math notranslate nohighlight">\(CL_{s+b}\)</span> correspond to a
+poor compatibility with the signal+background hypothesis and so favor
+the background only hypothesis and viceversa. The <span class="math notranslate nohighlight">\(CL_s\)</span> procedure<a class="footnote-reference brackets" href="#id14" id="id6">8</a>
+“corrects” the <span class="math notranslate nohighlight">\(CL_{s+b}\)</span> dividing it by <span class="math notranslate nohighlight">\(CL_b\)</span>, defined as
+<span class="math notranslate nohighlight">\(CL_b = 1 - P(Q&lt;Q_{obs}|b)\)</span>: $<span class="math notranslate nohighlight">\(\label{eq:CLs}
+CL_s = \frac{CL_{s+b}}{CL_b} = \frac{p_{s+b}}{1-p_b}\)</span><span class="math notranslate nohighlight">\( Remember that
+despite the misleading name, this is not a confidence level ! It's not
+even a \)</span>p<span class="math notranslate nohighlight">\(-value, it's a ratio of p-values. Nevertheless we will say
+that a signal is excluded at the confidence level CL if \)</span>1-CL_s\ge CL$.<br />
+The false exclusion rate is now reduced:</p>
+<ul class="simple">
+<li><p>in case of a clear separation between the two hypothesis <span class="math notranslate nohighlight">\(p_b\to 0\)</span>
+and <span class="math notranslate nohighlight">\(CL_s \to CL_{s+b}\)</span>, so we recover the standard p-value
+definition;</p></li>
+<li><p>in case of poor separation <span class="math notranslate nohighlight">\(p_b \to 1\)</span> and <span class="math notranslate nohighlight">\(CL_s \to 1\)</span>, preventing
+spurious exclusions.</p></li>
+</ul>
+<p>The results of the CLs procedure applied to the Higgs search at LEP are
+shown in Fig. <a class="reference external" href="#fig:LEPCLs">1.35</a>{reference-type=”ref”
+reference=”fig:LEPCLs”}. This is the famous plot excluding Higgs masses
+below 114.4 GeV [&#64;MarumiLEP].</p>
+<p><img alt="[[fig:LEPCLs]]{#fig:LEPCLs label=&quot;fig:LEPCLs&quot;} LEP exclusion plotfor the Standard Model Higgssearch." src="Section9Bilder/LEPCLs.png" />{#fig:LEPCLs width=”50%”}</p>
+<p>The CLs will deviate from the standard <span class="math notranslate nohighlight">\(p\)</span>-value the smaller the
+separation power of the test. The price to pay for this is that the
+limits obtained with the <span class="math notranslate nohighlight">\(CL_s\)</span> procedure will by construction
+“over-cover” resulting in conservative limits (you exclude less phase
+space). This is clearly not a desirable feature for a frequentist-based
+approach, but because “it works” it has been adopted as the standard way
+to set the limits at colliders. Opponents to this rather arbitrary
+procedure advocates the use of a Bayesian approach, which on the other
+hand raises the usual issues about setting a prior on the parameter
+under test.<br />
+For simplicity the CLs procedure has been detailed here using the LEP
+test statistics <span class="math notranslate nohighlight">\(L_{s+b}/L_b\)</span>, but it can be applied precisely in the
+same way to the LHC test statistics that we will encounter in the next
+section.</p>
+</div>
+<div class="section" id="lhc-test-statistics-2-ln-lambda-mu">
+<h2>LHC test statistics: <span class="math notranslate nohighlight">\(-2\ln(\lambda(\mu))\)</span><a class="headerlink" href="#lhc-test-statistics-2-ln-lambda-mu" title="Permalink to this headline">¶</a></h2>
+<p>In this section we describe the LHC test statistics and review the large
+sample approximations (Wald’s theorem and asymptotic formulas). We will
+develop the main concepts step by step using the discovery test
+statistic <span class="math notranslate nohighlight">\(q_0\)</span>. Then we will develop the test statistic for upper
+limits and give some examples. <em>In this section we will follow closely
+the paper in Ref.</em> [&#64;asymptotic].</p>
+<div class="section" id="profile-likelihood-ratio">
+<h3>Profile likelihood ratio<a class="headerlink" href="#profile-likelihood-ratio" title="Permalink to this headline">¶</a></h3>
+<p>Throughout this section we will use a concrete example to keep a uniform
+notation and help visualizing the results. For this “prototype
+experiment”, let’s assume that the data are represented by a histogram
+<span class="math notranslate nohighlight">\(\textbf{n} = (n_1,\dots, n_N)\)</span> in only one variable <span class="math notranslate nohighlight">\(x\)</span>. For example x
+could be the candidate invariant mass (the generalization to several
+variables is trivial). The expected number of events in each bin of the
+histogram depends on our expectations of the signal and background:
+$<span class="math notranslate nohighlight">\(E[n_i]=\mu s_i + b_i\)</span>$ where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(s_i\)</span> is the number of signal events expected in bin <span class="math notranslate nohighlight">\(i\)</span>:
+<span class="math notranslate nohighlight">\(s_i = s_{tot} \int_{bin_i} f_s(x|\theta_s) dx\)</span>. The distribution
+<span class="math notranslate nohighlight">\(f_s\)</span> is the p.d.f. of the variable <span class="math notranslate nohighlight">\(x\)</span> for the signal, <span class="math notranslate nohighlight">\(\theta_s\)</span>
+are the parameters characterising the shape of the signal and
+<span class="math notranslate nohighlight">\(s_{tot}\)</span> is the total mean number of expected signal events;</p></li>
+<li><p><span class="math notranslate nohighlight">\(b_i\)</span> is the number of background events expected in bin <span class="math notranslate nohighlight">\(i\)</span>:
+<span class="math notranslate nohighlight">\(b_i = b_{tot} \int_{bin_i} f_b(x|\theta_b)dx\)</span>. The distribution
+<span class="math notranslate nohighlight">\(f_b\)</span> is the p.d.f. of the variable <span class="math notranslate nohighlight">\(x\)</span> for the background,
+<span class="math notranslate nohighlight">\(\theta_b\)</span> are the parameters characterising the shape of the
+background and <span class="math notranslate nohighlight">\(b_{tot}\)</span> is the total mean number of expected
+background events.</p></li>
+<li><p>the parameter <span class="math notranslate nohighlight">\(\mu\)</span> is the <em>signal strength</em> that we have already
+encountered and which allows to go in a continuous way from the
+background only hypothesis <span class="math notranslate nohighlight">\(\mu=0\)</span> to the nominal signal+background
+hypothesis <span class="math notranslate nohighlight">\(\mu=1\)</span></p></li>
+</ul>
+<p>We group all parameters, but the signal strength <span class="math notranslate nohighlight">\(\mu\)</span> our parameter of
+interest, in a vector <span class="math notranslate nohighlight">\(\vec{\theta}=(\theta_s,\theta_b,s_{tot},b_{tot})\)</span>
+of nuisance parameters.<br />
+<br />
+<strong>Example</strong> You want to extract the fraction of signal events in a data
+sample <span class="math notranslate nohighlight">\(D\)</span>. The statistical model used is:
+$<span class="math notranslate nohighlight">\(L(D|f_{sig}) = f_{sig}~\mbox{Gauss}(m;m_0,\sigma) + (1-f_{sig})~e^{-\alpha m}\)</span><span class="math notranslate nohighlight">\(
+where the observable \)</span>m<span class="math notranslate nohighlight">\( is the invariant mass of the candidates,
+\)</span>f_{sig}<span class="math notranslate nohighlight">\( is the fraction of signal events, \)</span>m_0<span class="math notranslate nohighlight">\( is the position of the
+resonance, \)</span>\sigma<span class="math notranslate nohighlight">\( is the width of the resonance and \)</span>\alpha<span class="math notranslate nohighlight">\( is the
+slope of the background. The parameter of interest is \)</span>f_{sig}<span class="math notranslate nohighlight">\(, all the
+other parameters of the model are
+\)</span>\vec{\theta}={m_0,~\sigma,~\alpha}<span class="math notranslate nohighlight">\(.\
+\
+Typically in a measurement, together with the main dataset, we use
+several other samples to help constraining the parameters of the model
+(e.g. the background in the signal region can be constrained by the
+measurement of the number of events in a control sample). These
+constraints are usually collected in auxiliary histograms
+\)</span>\textbf{m} = (m_1, \ldots, m_M)<span class="math notranslate nohighlight">\(: \)</span><span class="math notranslate nohighlight">\(E[m_i] = u_i(\theta)\)</span><span class="math notranslate nohighlight">\( where the
+\)</span>u_i<span class="math notranslate nohighlight">\( are quantities that depend on \)</span>\theta<span class="math notranslate nohighlight">\( and model e.g. the shape of
+the background. With this we can build the complete likelihood used to
+model the data:
+\)</span><span class="math notranslate nohighlight">\(L(\mu,\theta) = \prod_{j=1}^{N} \frac{(\mu s_j + b_j)^{n_j}}{n_j!} e^{-(\mu s_j + b_j)} \prod_{k=1}^{M} \frac{u_k^{m_k}}{m_k!} e^{-u_k}.\)</span><span class="math notranslate nohighlight">\(\
+The test statistic developed at the LHC is based on a **profile
+likelihood ratio** defined by: \)</span><span class="math notranslate nohighlight">\(\label{eq:LR}
+\lambda(\mu) = \frac{L(\mu,\hat{\hat{\theta}})}{L(\hat{\mu},\hat{\theta})}\)</span>$
+where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span> is the value we are testing</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{\hat{\theta}}\)</span> is the best fit of the nuisance parameters once
+we fixed the <span class="math notranslate nohighlight">\(\mu\)</span> we want to test (i.e. conditional to the test
+value <span class="math notranslate nohighlight">\(\mu\)</span> in the likelihood). We say in this case that the
+parameters <span class="math notranslate nohighlight">\(\theta\)</span> are <em>profiled</em>. The value of
+<span class="math notranslate nohighlight">\(\hat{\hat{\theta}}\)</span> is a function of <span class="math notranslate nohighlight">\(\mu\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{\mu}\)</span> and <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> are the best fit values of <span class="math notranslate nohighlight">\(\mu\)</span> and
+<span class="math notranslate nohighlight">\(\theta\)</span> (the parameter of interest and the nuisances) when both are
+left floating in the likelihood. In other words <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> and
+<span class="math notranslate nohighlight">\(\hat{\theta}\)</span> are the values that maximize the likelihood.</p></li>
+</ul>
+<p>The denominator of this ratio is just a likelihood function, the
+numerator is called “profile likelihood” and the ratio is called
+“profile likelihood ratio”. The fitted value <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> is allowed to
+take any positive or negative (unphysical) values (provided that
+<span class="math notranslate nohighlight">\(\mu s_i + b_i\)</span> in the Poisson remains positive) even in the case where
+the search targets a positive signal. This assumption, rather arbitrary
+at this point, will be needed in the following to model <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> as a
+gaussian distributed variable, that will allow write the test statistics
+in an analytical closed form.<br />
+The values taken by the profile likelihood ratio <span class="math notranslate nohighlight">\(\lambda(\mu)\)</span> are in
+the interval <span class="math notranslate nohighlight">\([0,1]\)</span>. The ratio will get to unity the closer the test
+value of <span class="math notranslate nohighlight">\(\mu\)</span> is to the value of <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> preferred by the data. On
+the contrary it will approach zero for test values of <span class="math notranslate nohighlight">\(\mu\)</span> very
+different from <span class="math notranslate nohighlight">\(\hat{\mu}\)</span>.<br />
+As already noticed for the LEP test statistics, the inclusion of
+nuisance parameters changes the hypothesis under test from simple to
+composite. Generally, however, the nuisance parameters are well
+constrained and the likelihood ratio test is close to optimal. The
+inclusion of the nuisance parameters should give enough flexibility to
+the likelihood to be able to model the “true” unknown values of the
+parameters. Ideally, when making statements based on a test statistics
+(e.g. when setting a limit on <span class="math notranslate nohighlight">\(\mu\)</span> at <span class="math notranslate nohighlight">\(1-\alpha\)</span> level) we would like
+it to be correct for all values of the nuisances. In general it is not
+possible to cover all values of the nuisances and as consequence the
+coverage is not guaranteed. Nevertheless the choice of a profile
+likelihood ratio allows to have the correct coverage at least in a
+“trajectory” given by <span class="math notranslate nohighlight">\((\mu, \hat{\hat{\theta}})\)</span> [&#64;Cranmer].\</p>
+</div>
+<div class="section" id="discovery-test-statistics">
+<h3>Discovery test statistics<a class="headerlink" href="#discovery-test-statistics" title="Permalink to this headline">¶</a></h3>
+<p>From the definition in Eq. <a class="reference external" href="#eq:LR">[eq:LR]</a>{reference-type=”ref”
+reference=”eq:LR”} we can build several test statistics. Instead of
+listing all of them, let’s learn how to use one and come back later to
+some of the other cases. We will start from the <strong>discovery test
+statistics</strong> for a positive signal; this is the typical case for
+searches at the LHC. We want to test for <span class="math notranslate nohighlight">\(\mu=0\)</span> which correspond to the
+background only hypothesis. Rejecting the background only hypothesis
+corresponds to acknowledge the presence of something else in data which
+is not described correctly: a signal. The discovery test statistics for
+positive signals is defined as: $<span class="math notranslate nohighlight">\(\label{eq:discovery}
+        q_0 = \left\{
+            \begin{array}{rll}
+                -2 \ln \lambda(0) &amp; \mbox{if} &amp; \hat{\mu} \ge 0 \\
+                0                 &amp; \mbox{if} &amp; \hat{\mu} &lt; 0 
+            \end{array}\right.\)</span><span class="math notranslate nohighlight">\( where \)</span>\lambda(0)<span class="math notranslate nohighlight">\( is the is the
+profile likelihood ratio for \)</span>\mu = 0<span class="math notranslate nohighlight">\( as defined in
+Eq.[\[eq:LR\]](#eq:LR){reference-type=&quot;ref&quot; reference=&quot;eq:LR&quot;}. With
+this definition, large values of \)</span>q_0<span class="math notranslate nohighlight">\( correspond to increasing
+incompatibility between the data and the background only hypothesis.
+Remember that \)</span>\mu<span class="math notranslate nohighlight">\( is the value you are testing, in this case \)</span>\mu=0<span class="math notranslate nohighlight">\(,
+while \)</span>\hat{\mu}<span class="math notranslate nohighlight">\( is the value you fit from data (the so called &quot;best
+fit&quot;). The idea to have different definitions for positive and negative
+values of \)</span>\hat{\mu}<span class="math notranslate nohighlight">\( has a simple explanation. If the measured value
+\)</span>\hat{\mu}<span class="math notranslate nohighlight">\( is negative, it means that we are observing fewer events
+than what we would expect from the background only hypothesis. In
+absence of signal, that should happen 50% of the times: for large enough
+statistics allowing for a gaussian description, 50% of the times the
+background fluctuates up, 50% it fluctuates down. Under-fluctuations of
+the background are of no interest for the search of an excess of events
+in data. To discover a new signal we are only interested in upper
+fluctuations of data with little compatibility with the background only
+model, i.e. \)</span>\hat{\mu} \ge 0<span class="math notranslate nohighlight">\(.\
+To quantify the level of disagreement between the background only
+hypothesis and the observed value of the test statistics, we can compute
+the \)</span>p<span class="math notranslate nohighlight">\(-value \)</span><span class="math notranslate nohighlight">\(p=\int_{q_{0,obs}}^\infty f(q_0|0) dq_0\)</span><span class="math notranslate nohighlight">\( \)</span>f(q_0|0)<span class="math notranslate nohighlight">\(
+denotes the pdf of the statistic \)</span>q_0<span class="math notranslate nohighlight">\( under assumption of the
+background-only (\)</span>\mu = 0<span class="math notranslate nohighlight">\() hypothesis (see
+Fig. [1.36](#fig:MeasuredPValue){reference-type=&quot;ref&quot;
+reference=&quot;fig:MeasuredPValue&quot;}). Note that the extremes of the
+\)</span>p$-value integral are different from the LEP case in
+Eq. <a class="reference external" href="#eq:pValueLEP">[eq:pValueLEP]</a>{reference-type=”ref”
+reference=”eq:pValueLEP”} because of the different test statistics
+definition.</p>
+<p><img alt="[[fig:MeasuredPValue]]{#fig:MeasuredPValuelabel=&quot;fig:MeasuredPValue&quot;}Example of a measured p-value when having theobserved test statistics . Good compatibility with corresponds to a  which is on the left side (i.e. has a largep-value), whereas a  on the far right indicates badcompatibility." src="Section9Bilder/MeasuredPValue.pdf" />{#fig:MeasuredPValue
+width=”40%”}</p>
+<p><br />
+In order to compute the integral we need to know <span class="math notranslate nohighlight">\(f(q_0|0)\)</span>. The brute
+force way to build the p.d.f. for the test statistics <span class="math notranslate nohighlight">\(q_0\)</span> is through
+toy experiments. Each toy experiment is created by generating random
+data on the background only model; to be representative of the
+luminosity in the data set we are analysing, the number of events in
+each toy has to match the one of the measured data sample. For each toy
+we then compute the test statistics and fill a histogram. The number of
+toy experiments to be generated depends on the significance we are
+trying to estimate. Because the <span class="math notranslate nohighlight">\(p\)</span>-value is computed by integrating the
+histogram above <span class="math notranslate nohighlight">\(q_{0,obs}\)</span>, we will need to properly populate the tail
+of the distribution above <span class="math notranslate nohighlight">\(q_{0,obs}\)</span>. To quantify a deviation
+corresponding to a discovery (<span class="math notranslate nohighlight">\(2.87 \cdot 10^{-7}\)</span>) we will need to
+generate a number of toy experiments significantly larger than
+<span class="math notranslate nohighlight">\(1/(2.87 \cdot 10^{-7})\)</span><br />
+<br />
+<strong>Example</strong> Suppose you want to estimate the <span class="math notranslate nohighlight">\(p\)</span>-value for the measured
+test statistics <span class="math notranslate nohighlight">\(q_{0,obs}\)</span> where the signal appears in the distribution
+of the invariant mass as gaussian bump on an exponentially falling
+background. The procedure is depicted in
+Fig. <a class="reference external" href="#fig:toys">1.37</a>{reference-type=”ref” reference=”fig:toys”}. From
+the exponential distribution describing the background we generate
+random events following e.g. the “hit or miss” method shown in
+Sec. <a class="reference external" href="#sec:MC">[sec:MC]</a>{reference-type=”ref” reference=”sec:MC”}. The
+number of events to be generated has to be same as the one
+experimentally collected (i.e. representing the same integrated
+luminosity). We repeat the data generation a large number of times, we
+compute the test statistics for each “toy experiment” and fill a
+histogram with those values. The observed <span class="math notranslate nohighlight">\(p\)</span>-value is simply the
+integral of the histogram from <span class="math notranslate nohighlight">\(q_{0,obs}\)</span> to infinity.</p>
+<p><img alt="[[fig:toys]]{#fig:toys label=&quot;fig:toys&quot;}Cartoon showing how toextract the -value from a toy study. The pdf  isapproximated by the histogram normalized to unitarea." src="Section9Bilder/toys.png" />{#fig:toys width=”100%”}</p>
+</div>
+<div class="section" id="asymptotic-formulas">
+<h3>Asymptotic Formulas<a class="headerlink" href="#asymptotic-formulas" title="Permalink to this headline">¶</a></h3>
+<p>So far we have seen how to build the test statistics <span class="math notranslate nohighlight">\(f(q_0|0)\)</span> tossing
+toy experiments and how CPU expensive that is. In recent years Cowan at
+al. in Ref. [&#64;asymptotic] have used results proved by Wilks and Wald in
+the early ’40s to overcome this problem and find an analytic formula to
+describe the generic pdf <span class="math notranslate nohighlight">\(f(q_\mu|\mu')\)</span>.<br />
+The Wald’s theorem basically states that in the limit of a sufficiently
+large data sample we can approximate the test statistics
+<span class="math notranslate nohighlight">\(-2\ln\lambda(\mu)\)</span> (see Eq. <a class="reference external" href="#eq:LR">[eq:LR]</a>{reference-type=”ref”
+reference=”eq:LR”}) as: $<span class="math notranslate nohighlight">\(\label{eq:wald}
+-2\ln\lambda(\mu) = \frac{(\mu-\hat{\mu})^2}{\sigma^2} + o\left( \frac{1}{\sqrt{N}}\right)\)</span><span class="math notranslate nohighlight">\(
+where \)</span>\mu<span class="math notranslate nohighlight">\( is the value we are testing, \)</span>\hat{\mu}<span class="math notranslate nohighlight">\( is the estimator of
+\)</span>\mu<span class="math notranslate nohighlight">\( and the width \)</span>\sigma<span class="math notranslate nohighlight">\( can be extracted from the second derivative
+of the likelihood (Fisher information) as
+\)</span><span class="math notranslate nohighlight">\(V^{-1}_{ij} = -E\left[ \frac{\partial^2 \ln L}{\partial \theta_i \partial \theta_j} \right]\)</span><span class="math notranslate nohighlight">\(
+or using the Asimov dataset that we will describe in the next section.\
+The importance of Wald's theorem is that, for large enough statistics,
+the estimator \)</span>\hat{\mu}<span class="math notranslate nohighlight">\( is gaussian distributed around \)</span>\mu’<span class="math notranslate nohighlight">\( (the
+true value of the parameter \)</span>\mu<span class="math notranslate nohighlight">\( - unknown in data, only nature knows
+it, or known in a Monte Carlo sample, you decided its value) and that
+all the parameters of the gaussian distribution can be computed. The
+&quot;large enough&quot; sample limitation is needed to be able to neglect the
+term \)</span>o\left( \frac{1}{\sqrt{N}}\right)<span class="math notranslate nohighlight">\(, but we will see later that the
+approximation is valid for relatively low number of events.\
+Neglecting the term \)</span>o(1\sqrt{N})<span class="math notranslate nohighlight">\( the test statistics
+\)</span>t_{\mu} = -2\ln \lambda({\mu})<span class="math notranslate nohighlight">\( is distributed as a &quot;non-central
+\)</span>\chi^2<span class="math notranslate nohighlight">\(&quot; distribution for one degree of freedom.
+\)</span><span class="math notranslate nohighlight">\(f(t_\mu|\Lambda) = \frac{1}{2\sqrt{t_\mu}}\frac{1}{\sqrt{2\pi}}\left[ \exp \left( -\frac{1}{2} (\sqrt{t_\mu} + \sqrt{\Lambda})^2 \right) + \exp\left( -\frac{1}{2} (\sqrt{t_\mu} - \sqrt{\Lambda})^2 \right) \right]\)</span><span class="math notranslate nohighlight">\(
+with the non-centrality parameter \)</span>\Lambda<span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(\Lambda = \frac{(\mu-\mu')^2}{\sigma^2}\)</span><span class="math notranslate nohighlight">\( The Wilks' theorem is a
+special case of the Wald's theorem for \)</span>\mu’=\mu<span class="math notranslate nohighlight">\(, \)</span>\Lambda = 0<span class="math notranslate nohighlight">\(. In
+that case \)</span>-2\ln\lambda(\mu)<span class="math notranslate nohighlight">\( approaches a \)</span>\chi^2<span class="math notranslate nohighlight">\( distribution for one
+degree of freedom.\
+\
+We can now apply these results to the discovery test statistics. In the
+approximation of large test statistics
+[\[eq:wald\]](#eq:wald){reference-type=&quot;ref&quot; reference=&quot;eq:wald&quot;}:
+\)</span><span class="math notranslate nohighlight">\(\label{eq:waldDiscovery}
+        q_0 = \left\{
+            \begin{array}{rll}
+                -2 \ln \lambda(0) &amp; \mbox{if} &amp; \hat{\mu} \ge 0 \\
+                0                 &amp; \mbox{if} &amp; \hat{\mu} &lt; 0 
+            \end{array}\right.
+\qquad \Rightarrow \qquad
+        q_0 = \left\{
+            \begin{array}{rll}
+                \hat{\mu}^2/\sigma^2 &amp; \mbox{if} &amp; \hat{\mu} \ge 0 \\
+                0                    &amp; \mbox{if} &amp; \hat{\mu} &lt; 0 
+            \end{array}\right.\)</span><span class="math notranslate nohighlight">\( where the estimator \)</span>\hat{\mu}<span class="math notranslate nohighlight">\( is
+gaussian distributed around the mean \)</span>\mu’<span class="math notranslate nohighlight">\(. The pdf for the test
+statistics for a generic \)</span>\mu’<span class="math notranslate nohighlight">\( becomes:
+\)</span><span class="math notranslate nohighlight">\(\label{eq:asymptoticDiscoveryGen}
+f(q_0|\mu') = \left( 1-\Phi\left(\frac{\mu'}{\sigma} \right)\right)\delta(q_0) + \frac{1}{2}\frac{1}{\sqrt{2\pi}}\frac{1}{\sqrt{q_0}} \exp\left[-\frac{1}{2}\left(\sqrt{q_0} - \frac{\mu'}{\sigma} \right)^2\right]\)</span><span class="math notranslate nohighlight">\(
+The special case where \)</span>\mu’=0<span class="math notranslate nohighlight">\( , i.e. in the hypothesis of background
+only, this equation simplifies to \)</span><span class="math notranslate nohighlight">\(\label{eq:asymptoticDiscovery}
+f(q_0|0) = \frac{1}{2}\delta(q_0) + \frac{1}{2}\frac{1}{\sqrt{2\pi}}\frac{1}{\sqrt{q_0}} e^{-\frac{q_0}{2}}\)</span><span class="math notranslate nohighlight">\(
+Compare this formula to the bottom left plot in
+Fig. [1.37](#fig:toys){reference-type=&quot;ref&quot; reference=&quot;fig:toys&quot;}. The
+delta function describes the first bin of the histogram; this comes from
+our choice to set the test statistics to zero when \)</span>\hat{\mu}&lt;0<span class="math notranslate nohighlight">\(. The
+coefficient 1/2 of the delta function reflects the 50% probability of
+the background to fluctuated below zero. The exponentially falling part
+instead describes the tail of distribution for \)</span>\hat{\mu}&gt;0<span class="math notranslate nohighlight">\(.\
+To get to the \)</span>p<span class="math notranslate nohighlight">\(-value using toys, we had to integrate the histogram
+above the observed value of the test statistics. In the approximation of
+large sample, using Wald's theorem, this corresponds to the integral of
+Eq. [\[eq:asymptoticDiscovery\]](#eq:asymptoticDiscovery){reference-type=&quot;ref&quot;
+reference=&quot;eq:asymptoticDiscovery&quot;} above the observed value of the test
+statistics. The simple form of the pdf gives an even simpler expression
+for the cumulative of
+Eq. [\[eq:asymptoticDiscoveryGen\]](#eq:asymptoticDiscoveryGen){reference-type=&quot;ref&quot;
+reference=&quot;eq:asymptoticDiscoveryGen&quot;}
+\)</span><span class="math notranslate nohighlight">\(F(q_0|\mu') = \Phi\left( \sqrt{q_0} - \frac{\mu'}{\sigma} \right)\)</span><span class="math notranslate nohighlight">\(
+which, for \)</span>\mu’=0<span class="math notranslate nohighlight">\( as in
+Eq. [\[eq:asymptoticDiscovery\]](#eq:asymptoticDiscovery){reference-type=&quot;ref&quot;
+reference=&quot;eq:asymptoticDiscovery&quot;}, becomes:
+\)</span><span class="math notranslate nohighlight">\(F(q_0|0) = \Phi\left( \sqrt{q_0} \right).\)</span><span class="math notranslate nohighlight">\( The \)</span>p<span class="math notranslate nohighlight">\(-value can them be
+simply computed as \)</span><span class="math notranslate nohighlight">\(p_0 = 1-F(q_0|0)\)</span><span class="math notranslate nohighlight">\( obtaining for the significance
+\)</span><span class="math notranslate nohighlight">\(Z_0 = \Phi^{-1}(1-p_0) = \sqrt{q_0}.\)</span><span class="math notranslate nohighlight">\( The signal significance is
+simply the square root of the observed test statistics! To fully
+appreciate this result, think about the evaluation of the significance
+for a \)</span>5\sigma<span class="math notranslate nohighlight">\( signal: using toys you need to produce \)</span>o(10^8)<span class="math notranslate nohighlight">\( data
+samples to populate the high tail of \)</span>f(q_0|0)<span class="math notranslate nohighlight">\( to compute the integral
+above \)</span>q_0^{obs}<span class="math notranslate nohighlight">\( (and then convert it to a significance); with the
+asymptotic to get you just take the square root of \)</span>q_0^{obs}<span class="math notranslate nohighlight">\(: if
+\)</span>q_0^{obs} = 25<span class="math notranslate nohighlight">\( you have a \)</span>5\sigma<span class="math notranslate nohighlight">\( deviation!\
+\
+**Example** Fig. [1.38](#fig:muHff){reference-type=&quot;ref&quot;
+reference=&quot;fig:muHff&quot;} shows the scan of the test statistics as a
+function of \)</span>\mu<span class="math notranslate nohighlight">\(. The minimum is obtained when \)</span>\hat{\mu} = \mu<span class="math notranslate nohighlight">\( and it
+is zero by construction of the likelihood ratio. The intercept at
+\)</span>\mu=0<span class="math notranslate nohighlight">\( i.e. \)</span>q_0^{obs} = -2\ln(\lambda(0))<span class="math notranslate nohighlight">\( is the square of the
+significance. This means that we can read off the vertical axis the
+significance of the signal as \)</span>\sqrt{14.25} = 3.8\sigma$.<br />
+\</p>
+<p><img alt="[[fig:muHff]]{#fig:muHff label=&quot;fig:muHff&quot;}Observation of the Higgscoupling to fermions." src="Section9Bilder/muHff.png" />{#fig:muHff width=”50%”}</p>
+<p><strong>Example</strong> Fig. <a class="reference external" href="#fig:pvalueHgg">1.39</a>{reference-type=”ref”
+reference=”fig:pvalueHgg”} shows results of the <span class="math notranslate nohighlight">\(H\to\gamma\gamma\)</span>
+search at CMS using the <span class="math notranslate nohighlight">\(p\)</span>-value computed at each test mass hypothesis.
+The black continuous line is the observed <span class="math notranslate nohighlight">\(p\)</span>-value, that is computed on
+the asymptotic pdf for <span class="math notranslate nohighlight">\(f(q_0|0)\)</span> using the measured <span class="math notranslate nohighlight">\(q_0^{obs}\)</span>, the
+dashed black line represent the expected <span class="math notranslate nohighlight">\(p\)</span>-value for the Standard
+Model signal (<span class="math notranslate nohighlight">\(\mu=1\)</span>). The other curves represent the observe and
+expected <span class="math notranslate nohighlight">\(p\)</span>-values for different datasets collected by CMS at the LHC
+with different centre of mass energies (<span class="math notranslate nohighlight">\(\sqrt{s}=7\)</span> TeV and
+<span class="math notranslate nohighlight">\(\sqrt{s}=8\)</span> TeV).<br />
+\</p>
+<p><img alt="[[fig:pvalueHgg]]{#fig:pvalueHgg label=&quot;fig:pvalueHgg&quot;}Expected(dashed) and observed (continuous) -values for the CMS search. The red curves are computed on the first datacollected in 2011, the blue ones for the data collected in 2012 and theblack curves on the two data setcombined." src="Section9Bilder/Hggpvalue.png" />{#fig:pvalueHgg width=”60%”}</p>
+</div>
+<div class="section" id="asimov-dataset-sec-asimov">
+<h3>Asimov dataset {#sec:Asimov}<a class="headerlink" href="#asimov-dataset-sec-asimov" title="Permalink to this headline">¶</a></h3>
+<p>There are cases where you want to have the estimation of the <em>expected</em>
+significance of a signal. Typically this happens during the design phase
+of an experiment or, after a measurement, when you want to compare the
+observed and expected significances. To do this you need to have access
+to two pdfs: <span class="math notranslate nohighlight">\(f(q_0|0)\)</span>, the distribution of the test statistics in the
+background only hypothesis and <span class="math notranslate nohighlight">\(f(q_0|1)\)</span>, the distribution of the test
+statistics in the signal+background hypothesis. In the latter case
+<span class="math notranslate nohighlight">\(\mu=1\)</span> indicates the expected value of the signal strength. A sketch of
+these two functions is shown in
+Fig. <a class="reference external" href="#fig:expectedSignificance">1.40</a>{reference-type=”ref”
+reference=”fig:expectedSignificance”}.</p>
+<p><img alt="[[fig:expectedSignificance]]{#fig:expectedSignificancelabel=&quot;fig:expectedSignificance&quot;}Discovery statistics distribution underthe background only  and signal + background ." src="Section9Bilder/expectedSignificance.png" />{#fig:expectedSignificance
+width=”50%”}</p>
+<p>We have already encountered above the pdf <span class="math notranslate nohighlight">\(f(q_0|0)\)</span>: the most probable
+value of the test statistic is zero and the large tail corresponds to
+signal-like fluctuation of the background only hypothesis. The pdf
+<span class="math notranslate nohighlight">\(f(q_0|1)\)</span> instead clusters at high values of <span class="math notranslate nohighlight">\(q_0\)</span>. We can understand
+this from the definition of the likelihood ratio
+<span class="math notranslate nohighlight">\(\lambda(0) = L(0, \hat{\hat{\theta}})/L(\hat{\mu},\hat{\theta})\)</span>. Here
+<span class="math notranslate nohighlight">\(\hat{\mu} = 1\)</span> by construction, so the ratio <span class="math notranslate nohighlight">\(\lambda(0)\)</span> will cluster
+around small values of the test statistics and consequently
+<span class="math notranslate nohighlight">\(-2\ln(\lambda(0))\)</span> will cluster at large ones.<br />
+To compute the expected significance of a signal, we compute the
+<span class="math notranslate nohighlight">\(p\)</span>-value as the integral from the median of the <span class="math notranslate nohighlight">\(f(q_0|1)\)</span> distribution
+to infinity. We use the median as the “most representative” value for
+the expected signal+background.<br />
+To compute the median value of the test statistics we first need the pdf
+from toys or the asymptotic formulas. Can we produce a single dataset
+such that if we compute the test statistics on it we get the median
+value of the pdf ? This is the idea behind the “Asimov<a class="footnote-reference brackets" href="#id15" id="id7">9</a>” dataset.
+This can be thought as “the perfect average” of the experiments outcome.
+To understand how to build this dataset, we can use the prototype
+analysis:
+$<span class="math notranslate nohighlight">\(L(\mu,\theta) = \prod_{j=1}^{N} \frac{(\mu s_j + b_j)^{n_j}}{n_j!} e^{-(\mu s_j + b_j)} \prod_{k=1}^{M} \frac{u_k^{m_k}}{m_k!} e^{-u_k}\)</span><span class="math notranslate nohighlight">\(
+From here we can find the ML estimator for the parameters as
+\)</span><span class="math notranslate nohighlight">\(\frac{\partial \ln L}{\partial \theta_j} = \sum_{i=1}^{N} \left( \frac{n_i}{\nu_i}-1  \right) \frac{\partial \nu_i}{\partial \theta_i} + \sum_{i=1}^{M}\left( \frac{m_i}{u_i} -1 \right) \frac{\partial u_i}{\partial \theta_j} = 0\)</span><span class="math notranslate nohighlight">\(
+and define the Asimov dataset bin by bin as: \)</span><span class="math notranslate nohighlight">\(\begin{aligned}
+n_{i,A} &amp;=&amp; E[n_i] = \nu_i = \mu' s_i(\theta) + b_i(\theta)\\
+m_{i,A} &amp;=&amp; E[m_i] = u_i(\theta).\end{aligned}\)</span><span class="math notranslate nohighlight">\( Each bin of the Asimov
+dataset has by construction the number of entries equal to the expected
+value, with the correct statistical uncertainty. The only difference
+with respect to a toy data set is that there are no statistical
+fluctuation associated to the entries per bin.\
+On the Asimov dataset we can compute the Asimov likelihood and use it to
+compute the likelihood ratio:
+\)</span><span class="math notranslate nohighlight">\(\lambda_A(\mu) = \frac{L_A(\mu, \hat{\hat{\theta}})}{L_A(\hat{\mu},\hat{\theta})} \sim \frac{L_A(\mu, \hat{\hat{\theta}})}{L_A(\mu',\theta)}\)</span><span class="math notranslate nohighlight">\(
+where by construction of the Asimov, \)</span>\hat{\mu}=\mu’<span class="math notranslate nohighlight">\( and the nuisance
+parameters \)</span>\hat{\theta}=\theta<span class="math notranslate nohighlight">\(.\
+The Asimov can also be used to obtain the width \)</span>\sigma<span class="math notranslate nohighlight">\( for the
+approximate formula in Eq. [\[eq:wald\]](#eq:wald){reference-type=&quot;ref&quot;
+reference=&quot;eq:wald&quot;}:
+\)</span><span class="math notranslate nohighlight">\(q_\mu = -2\ln\lambda(\mu) = \frac{(\mu-\hat{\mu})^2}{\sigma^2} + o\left( \frac{1}{\sqrt{N}}\right)  \qquad\Rightarrow\qquad q_{\mu,A}  = -2\ln\lambda_A(\mu) \sim \frac{(\mu -\mu')^2}{\sigma^2}.\)</span><span class="math notranslate nohighlight">\(
+From here we can extract
+\)</span><span class="math notranslate nohighlight">\(\sigma_A^2 = \frac{(\mu - \mu')^2}{q_{\mu,A}}\)</span><span class="math notranslate nohighlight">\( Finally, it's easy to
+verify that the test statistic computed on the Asimov dataset coincides
+with the median of the distribution \)</span>f(q_\mu|\mu’)<span class="math notranslate nohighlight">\(:
+\)</span><span class="math notranslate nohighlight">\(\mbox{med}[q_0] = q_0(\mbox{med}[\hat{\mu}]) = \frac{\mu'}{\sigma} = -2\ln \lambda_A(0)\)</span><span class="math notranslate nohighlight">\(
+where the first equality comes from the fact that the median of the
+\)</span>q_0<span class="math notranslate nohighlight">\( is the value of \)</span>q_0<span class="math notranslate nohighlight">\( computed at the median value of \)</span>\hat{\mu}<span class="math notranslate nohighlight">\(,
+the second equality comes by construction of the Asimov dataset
+\)</span>\mbox{med}[\hat{\mu}] = \mu’<span class="math notranslate nohighlight">\(, \)</span>q_0(\mu’) = (0-\mu’)^2/\sigma^2<span class="math notranslate nohighlight">\( and
+the last one comes from the Wald's theorem in
+Eq. [\[eq:waldDiscovery\]](#eq:waldDiscovery){reference-type=&quot;ref&quot;
+reference=&quot;eq:waldDiscovery&quot;}. The expected significance
+\)</span>Z_0 = \sqrt{q_0}<span class="math notranslate nohighlight">\( computed on the Asimov dataset is then simply
+\)</span>\mbox{med}[Z_0] = \sqrt{-2\ln\lambda_A(0)}$.</p>
+</div>
+<div class="section" id="upper-limits-test-statistic">
+<h3>Upper limits test statistic<a class="headerlink" href="#upper-limits-test-statistic" title="Permalink to this headline">¶</a></h3>
+<p>To set an upper limit we can define the following test statistics:
+$<span class="math notranslate nohighlight">\(q_\mu = \left\{
+            \begin{array}{rll}
+                -2 \ln \lambda(\mu) &amp; \mbox{if} &amp; \hat{\mu} \le \mu \\
+                0                 &amp; \mbox{if} &amp; \hat{\mu} &gt; \mu 
+            \end{array}\right.\)</span><span class="math notranslate nohighlight">\( Here we are using the same profile
+likelihood ratio as for the discovery test statistics, but this time we
+test for a generic \)</span>\mu<span class="math notranslate nohighlight">\(. Notice that that is not the only difference in
+the definition. The \)</span>\le<span class="math notranslate nohighlight">\( and \)</span>&gt;<span class="math notranslate nohighlight">\( signs are swapped with respect to
+Eq. [\[eq:discovery\]](#eq:discovery){reference-type=&quot;ref&quot;
+reference=&quot;eq:discovery&quot;}. The reason for this is that, given that we
+are only considering cases where signal is associated to an excess of
+events above the background, we can only exclude an hypothesised value
+of \)</span>\mu<span class="math notranslate nohighlight">\( if the observed \)</span>\hat{\mu}<span class="math notranslate nohighlight">\( fluctuates below that. Vice versa,
+we cannot exclude a value of \)</span>\mu<span class="math notranslate nohighlight">\( if the observed \)</span>\hat{\mu}<span class="math notranslate nohighlight">\( is
+measured above the tested value \)</span>\mu<span class="math notranslate nohighlight">\( and so we set the test statistics
+to zero.\
+As we have already done for the discovery test statistics we can define
+a \)</span>p<span class="math notranslate nohighlight">\(-value as: \)</span><span class="math notranslate nohighlight">\(p_\mu = \int_{q_{\mu,obs}}^\infty f(q_\mu|\mu)dq_\mu\)</span><span class="math notranslate nohighlight">\(
+How do we set a upper limit with this test statistics? Suppose you want
+to set an upper limit at 95% CL. You need to scan the values of \)</span>\mu<span class="math notranslate nohighlight">\(
+until you find the largest value of \)</span>\mu<span class="math notranslate nohighlight">\( such that the \)</span>p<span class="math notranslate nohighlight">\(-value is
+equal to 0.05. Practically you will also need to guess what is the range
+of \)</span>\mu<span class="math notranslate nohighlight">\( values to scan and what step to use in the scan.\
+ To set the expected upper limit on the signal strength of a signal you
+need first to get the pdf for \)</span>f(q_\mu|\mu’)<span class="math notranslate nohighlight">\(. Analogous to what we have
+seen with the discovery test statistics the distributions for \)</span>\mu’=\mu<span class="math notranslate nohighlight">\(
+and \)</span>\mu’\neq\mu<span class="math notranslate nohighlight">\( are as shown in
+Fig. [1.41](#fig:expectedUpperLimit){reference-type=&quot;ref&quot;
+reference=&quot;fig:expectedUpperLimit&quot;}. In particular we will need the pdf
+\)</span>f(q_\mu|0)<span class="math notranslate nohighlight">\( describing the test statistics in absence of signal, from
+which we extract the median value, and then scan the values of \)</span>\mu<span class="math notranslate nohighlight">\(
+(same procedure used for the observed) until you find the largest value
+of \)</span>\mu<span class="math notranslate nohighlight">\( such that the \)</span>p<span class="math notranslate nohighlight">\(-value is equal to the desired \)</span>\alpha$=1-CL.</p>
+<p><img alt="[[fig:expectedUpperLimit]]{#fig:expectedUpperLimitlabel=&quot;fig:expectedUpperLimit&quot;} Sketch of the pdf for ." src="Section9Bilder/expectedUpperLimit.png" />{#fig:expectedUpperLimit
+width=”50%”}</p>
+<p><br />
+Very often when displaying the expected upper limits we also show the
+1<span class="math notranslate nohighlight">\(\sigma\)</span> and 2<span class="math notranslate nohighlight">\(\sigma\)</span> uncertainty bands around the expected median. To
+do this, from the median value (i.e. 50% quantile) of the distribution
+giving the desired <span class="math notranslate nohighlight">\(\alpha\)</span> = 1-CL, i.e. med<span class="math notranslate nohighlight">\([q_\mu|0]\)</span>, we can quote
+the “median<span class="math notranslate nohighlight">\(\pm 1 \sigma\)</span>” (16%, 84% quantiles), and the
+“median<span class="math notranslate nohighlight">\(\pm 2 \sigma\)</span>” (5%, 95% quantiles), as shown in
+Fig. <a class="reference external" href="#fig:expectedBands">1.42</a>{reference-type=”ref”
+reference=”fig:expectedBands”}.</p>
+<p><img alt="[[fig:expectedBands]]{#fig:expectedBandslabel=&quot;fig:expectedBands&quot;}Median (50% quantile) and median (15.87% quantile)." src="Section9Bilder/expectedBands.png" />{#fig:expectedBands
+width=”110%”}</p>
+<p>The observed limits together with the expected one and its respective
+uncertainty bands are shown as a function of the test mass in
+Fig. <a class="reference external" href="#fig:exclusionLimit">1.43</a>{reference-type=”ref”
+reference=”fig:exclusionLimit”}.</p>
+<p><img alt="[[fig:exclusionLimit]]{#fig:exclusionLimitlabel=&quot;fig:exclusionLimit&quot;} Describe the red line as SMlimit." src="Section9Bilder/exclusionLimit.png" />{#fig:exclusionLimit
+width=”80%”}</p>
+<p>Using Wald’s theorem the asymptotic formula for the test statistic
+becomes: $<span class="math notranslate nohighlight">\(q_\mu = \left\{
+            \begin{array}{rll}
+                -2 \ln \lambda(\mu) &amp; \mbox{if} &amp; \hat{\mu} \le \mu \\
+                0                 &amp; \mbox{if} &amp; \hat{\mu} &gt; \mu 
+            \end{array}\right.
+         \qquad \Rightarrow \qquad
+        q_\mu = \left\{
+            \begin{array}{rll}
+                \frac{(\mu-\hat{\mu})^2}{\sigma^2}&amp; \mbox{if} &amp; \hat{\mu} \le \mu \\
+                0                 &amp; \mbox{if} &amp; \hat{\mu} &gt; \mu 
+            \end{array}\right.\)</span><span class="math notranslate nohighlight">\( where \)</span>\hat{\mu}<span class="math notranslate nohighlight">\( is, as for the
+discovery test statistics, gaussian distributed around \)</span>\mu’<span class="math notranslate nohighlight">\( with
+standard deviation \)</span>\sigma<span class="math notranslate nohighlight">\(. From this expression, it is possible to
+compute the closed form expression for \)</span>f(q_\mu|\mu’)<span class="math notranslate nohighlight">\(:
+\)</span><span class="math notranslate nohighlight">\(f(q_\mu|\mu') = \Phi\left(\frac{\mu' - \mu}{\sigma} \right)\delta(q_\mu) + \frac{1}{2}\frac{1}{\sqrt{2\pi}}\frac{1}{\sqrt{q_\mu}} \exp\left[-\frac{1}{2}\left(\sqrt{q_\mu} - \frac{\mu-\mu'}{\sigma} \right)^2\right]\)</span><span class="math notranslate nohighlight">\(
+which, for the special case where \)</span>\mu = \mu’<span class="math notranslate nohighlight">\(, becomes:
+\)</span><span class="math notranslate nohighlight">\(f(q_\mu|\mu) = \frac{1}{2}\delta(q_\mu) + \frac{1}{2}\frac{1}{\sqrt{2\pi}}\frac{1}{\sqrt{q_\mu}} e^{-\frac{q_\mu}{2}}\)</span><span class="math notranslate nohighlight">\(
+Using the cumulative distribution
+\)</span>F(q_\mu|\mu’) = \Phi\left(\sqrt{q_\mu}-\frac{\mu - \mu’}{\sigma}\right)<span class="math notranslate nohighlight">\(
+we get \)</span>p_\mu = 1-F(q_\mu|\mu’) = 1 - \Phi(\sqrt{q_\mu})<span class="math notranslate nohighlight">\(, which, as for
+the discovery test statistic, gives:
+\)</span><span class="math notranslate nohighlight">\(Z_\mu = \Phi^{-1}(1-p_\mu)=\sqrt{q_\mu}\)</span><span class="math notranslate nohighlight">\( The upper limit at
+\)</span>(1-\alpha)<span class="math notranslate nohighlight">\( CL on \)</span>\mu<span class="math notranslate nohighlight">\( is the largest value of \)</span>\mu<span class="math notranslate nohighlight">\( such that
+\)</span>p_\mu\leq \alpha<span class="math notranslate nohighlight">\(. With the asymptotic formulas we just need to set
+\)</span>p_\mu = \alpha<span class="math notranslate nohighlight">\( and solve
+\)</span>\mu_{up} = \hat{\mu} + \sigma\Phi^{-1}(1-\alpha)$.<br />
+\</p>
+</div>
+</div>
+<div class="section" id="combining-measurements">
+<h2>Combining measurements<a class="headerlink" href="#combining-measurements" title="Permalink to this headline">¶</a></h2>
+<p>As we have already seen in
+Sec. <a class="reference external" href="#sec:likelihood">[sec:likelihood]</a>{reference-type=”ref”
+reference=”sec:likelihood”}, the results of different measurements of a
+given parameter <span class="math notranslate nohighlight">\(\mu\)</span> can easily be combined by multiplying their
+likelihoods: $<span class="math notranslate nohighlight">\(L(\mu,\vec{\theta}) = \prod_i L_i(\mu, \vec{\theta}_i)\)</span><span class="math notranslate nohighlight">\(
+where the subscript \)</span>i<span class="math notranslate nohighlight">\( stands for the different experiments (e.g.
+ATLAS, CMS) or different processes (e.g. \)</span>H\to \gamma\gamma<span class="math notranslate nohighlight">\(, \)</span>H\to ZZ$,
+etc…).<br />
+Whenever different measurements are combined we need to pay attention at
+the possible correlations between the nuisances among the different
+experiments/channels. Typically the nuisances are chosen to be:</p>
+<ul class="simple">
+<li><p>uncorrelated: we use different parameters in the likelihoods of the
+different experiments to describe the nuisance</p></li>
+<li><p>fully correlated: we use the same parameter in all the likelihoods
+to describe the nuisance</p></li>
+<li><p>fully anticorrelated: we use again one parameter but we flip its
+sign.</p></li>
+</ul>
+<p>To compute the expected significance for the combination the easiest
+approach is to use the Asimov dataset:
+$<span class="math notranslate nohighlight">\(\lambda_A(\mu) = \prod_i \lambda_{A,i}(\mu) \qquad \mbox{where}\qquad \lambda_{A,i}(\mu) = \frac{L_{A,i}(\mu, \hat{\hat{\theta}})}{L_{A,i}(\hat{\mu},\hat{\theta})} = \frac{L_{A,i}(\mu, \hat{\hat{\theta}})}{L_{A,i}(\hat{\mu'},\hat{\theta})}.\)</span><span class="math notranslate nohighlight">\(
+where the last equality comes from the properties of the Asimov dataset
+(\)</span>\hat{\mu}<span class="math notranslate nohighlight">\( converges by construction to \)</span>\mu’$).</p>
+</div>
+<div class="section" id="discovery-significance-s-sqrt-b">
+<h2>Discovery significance: <span class="math notranslate nohighlight">\(S/\sqrt{B}\)</span><a class="headerlink" href="#discovery-significance-s-sqrt-b" title="Permalink to this headline">¶</a></h2>
+<p>Consider a counting experiment where you observe <span class="math notranslate nohighlight">\(n\)</span> events, the
+expected number of background events is <span class="math notranslate nohighlight">\(b\)</span> and the expected number of
+events in case of signal is <span class="math notranslate nohighlight">\(s+b\)</span>. To simplify let’s first consider the
+case of large statistics such that the we can approximate the Poisson
+distribution with a Gaussian <span class="math notranslate nohighlight">\(G(x|\mu, \sigma)\)</span> with <span class="math notranslate nohighlight">\(\mu = s+b\)</span> and
+<span class="math notranslate nohighlight">\(\sigma = \sqrt{s+b}\)</span> (the fact that the n is a discrete variable, wile
+x is continuous is irrelevant in this context).<br />
+The significance to reject the background hypothesis can be quantified
+as the <span class="math notranslate nohighlight">\(p\)</span>-value associated to the observation of <span class="math notranslate nohighlight">\(x\)</span> events
+Prob<span class="math notranslate nohighlight">\((x&gt;x_{obs} | s = 0)\)</span> which, for a gaussian, is simply
+<span class="math notranslate nohighlight">\(p_0 = 1-\Phi((x_{obs}-b)/\sqrt{b})\)</span>. The significance is then
+<span class="math notranslate nohighlight">\(Z_0 = \Phi^{-1}(1-p_0) = (x_{obs} - b)/\sqrt(b)\)</span>.<br />
+The median significance to for a signal <span class="math notranslate nohighlight">\(s\neq0\)</span> can be computed in the
+same way replacing <span class="math notranslate nohighlight">\(x_{obs}\)</span> with the median signal plus background i.e.
+<span class="math notranslate nohighlight">\(s+b\)</span>:
+$<span class="math notranslate nohighlight">\(\mbox{median}[Z_0 | s+b] = \frac{s+b-b}{\sqrt{b}} = \frac{s}{\sqrt{b}}\)</span><span class="math notranslate nohighlight">\(
+giving the famous formula for the the signal significance. This is the
+typical quantity we try to maximize when optimizing a selection in a
+search.\
+This formula is only valid in the limit of large statistics. For the
+most general case we need to go back to the Poisson distribution:
+\)</span><span class="math notranslate nohighlight">\(L(n|s+b) = \mbox{Poisson}(n|s+b) = \frac{(s+b)^n e^{-(s+b)}}{n!}\)</span><span class="math notranslate nohighlight">\( or
+taking the logarithm \)</span><span class="math notranslate nohighlight">\(\ln L(n|s+b) = n\ln(s+b) -(s+b) -\ln n!\)</span><span class="math notranslate nohighlight">\(
+Recalling that the ML estimator for \)</span>s<span class="math notranslate nohighlight">\( is simply \)</span>\hat{s} = n-b<span class="math notranslate nohighlight">\(, we
+can build the test statistic: \)</span><span class="math notranslate nohighlight">\(q_0 = \left\{
+            \begin{array}{lll}
+                -2 \ln \lambda(0)   = -2\ln \frac{L(n|0+\hat{b})}{L(n|\hat{s}+\hat{b})}  = 2( n \ln \frac{n}{b} + b -n) &amp; \mbox{if} &amp; n &gt; b \\
+                0                 &amp; \mbox{if} &amp; n \leq b 
+            \end{array}\right.\)</span><span class="math notranslate nohighlight">\( Now we can use Wald's theorem and
+rewrite the significance to reject the background only hypothesis as:
+\)</span><span class="math notranslate nohighlight">\(Z_0 \sim \left\{
+            \begin{array}{lll}
+                \sqrt{q_0} = \sqrt{2( n \ln \frac{n}{b} + b -n)} &amp; \mbox{if} &amp; n &gt; b \\
+                0                 &amp; \mbox{if} &amp; n \leq b 
+            \end{array}\right.\)</span><span class="math notranslate nohighlight">\( The median significance from the
+expected signal plus background \)</span>s+b<span class="math notranslate nohighlight">\( is:
+\)</span><span class="math notranslate nohighlight">\(\mbox{median}[Z_0 | s+b] = \sqrt{2( (s+b) \ln (s/b +1) -s)}.\)</span><span class="math notranslate nohighlight">\( This
+formula can be considered as a generalization of \)</span>s/\sqrt{b}<span class="math notranslate nohighlight">\(. If we
+expand this result to the second order in the limit of \)</span>s &lt;&lt; b<span class="math notranslate nohighlight">\( we get
+back to \)</span>s/\sqrt{b}<span class="math notranslate nohighlight">\(. This is an important condition to keep in mind
+when using \)</span>s/\sqrt{b}<span class="math notranslate nohighlight">\(. If \)</span>s<span class="math notranslate nohighlight">\( and \)</span>b<span class="math notranslate nohighlight">\( are both large, then the
+\)</span>p<span class="math notranslate nohighlight">\(-value goes to zero! The \)</span>p<span class="math notranslate nohighlight">\(-value is the probability to observe a
+fluctuation as large or larger than the one observed, if both \)</span>s<span class="math notranslate nohighlight">\( and
+\)</span>b$ are large that probability is vanishingly small.</p>
+</div>
+<div class="section" id="examples-from-the-search-of-the-higgs-at-the-lhc">
+<h2>Examples from the search of the Higgs at the LHC<a class="headerlink" href="#examples-from-the-search-of-the-higgs-at-the-lhc" title="Permalink to this headline">¶</a></h2>
+<p>In this section we will walk through some results from search for the
+Higgs boson at the LHC, taking the <span class="math notranslate nohighlight">\(H\to \gamma\gamma\)</span> as the
+conceptually easy example of a search of a “bump” on top of a falling
+background. All plots are taken from the public CMS results [&#64;CMShiggs].</p>
+<div class="section" id="best-fit-signal-strength">
+<h3>Best fit signal strength<a class="headerlink" href="#best-fit-signal-strength" title="Permalink to this headline">¶</a></h3>
+<p>The plot in Fig. <a class="reference external" href="#fig:bestfitmuhat">1.44</a>{reference-type=”ref”
+reference=”fig:bestfitmuhat”} shows the best fit of the signal strength
+modifier <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> as a function of the test mass <span class="math notranslate nohighlight">\(m_H\)</span>. The value
+obtained fluctuates around <span class="math notranslate nohighlight">\(\hat{\mu}\sim 0\)</span> everywhere in but in the
+region around 125 GeV where the excess was observed in the exclusion
+limits (Fig. <a class="reference external" href="#fig:exclusionLimit">1.43</a>{reference-type=”ref”
+reference=”fig:exclusionLimit”}) and in the <span class="math notranslate nohighlight">\(p\)</span>-value plot in
+Fig. <a class="reference external" href="#fig:pvalueHgg">1.39</a>{reference-type=”ref”
+reference=”fig:pvalueHgg”}. In that region, the signal strength steeply
+raise to a value compatible with the Standard Model expectation of
+<span class="math notranslate nohighlight">\(\mu=1\)</span>. The green band represent the uncertainty on <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> defined
+on the likelihood ratio as
+<span class="math notranslate nohighlight">\(-2\ln \lambda(\mu) = -2 \ln L(\mu) / L(\hat{\mu}) &lt;1\)</span> which is
+equivalent to the familiar 68% uncertainty band on a fitted parameter in
+a maximum likelihood fit <span class="math notranslate nohighlight">\(\ln L(\mu) &gt; \ln L(\hat{\mu}) - 1/2\)</span>.</p>
+<p><img alt="[[fig:bestfitmuhat]]{#fig:bestfitmuhat label=&quot;fig:bestfitmuhat&quot;}Best fit of the signal strength  as a function of the testmass ." src="Section9Bilder/bestfitmuhat.png" />{#fig:bestfitmuhat
+width=”60%”}</p>
+</div>
+<div class="section" id="extracting-other-parameters">
+<h3>Extracting other parameters<a class="headerlink" href="#extracting-other-parameters" title="Permalink to this headline">¶</a></h3>
+<p>Up to now we have considered only the case where the parameter of
+interested in our likelihood was the signal strength. Given that all
+parameters in the likelihood are treated in the same way, we can use the
+same techniques to extract information about any other parameter. To
+study the properties of the Higgs boson, we rewrite the signal “<span class="math notranslate nohighlight">\(s\)</span>” as
+a function of the parameter we are interested in, let’s call it “<span class="math notranslate nohighlight">\(a\)</span>”,
+and plug <span class="math notranslate nohighlight">\(s(a)\)</span> in the likelihood. Then all we need to do is to rewrite
+the test statistics as:
+$<span class="math notranslate nohighlight">\(q(a) = -2 \ln \frac{L(\mbox{data}|s(a)+b, \hat{\theta}_a)}{L(\mbox{data}|s(\hat{a})+b, \hat{\theta})}.\)</span><span class="math notranslate nohighlight">\(
+As in the previous definition of the test statistics, the profile
+likelihood at the numerator is maximized fixing \)</span>a<span class="math notranslate nohighlight">\( and floating
+\)</span>\hat{\theta}_a<span class="math notranslate nohighlight">\(, the value of the nuisance parameters once \)</span>a<span class="math notranslate nohighlight">\( is fixed
+(i.e. the nuisances are profiled as before), and, at the denominator,
+the likelihood is maximized against both \)</span>a<span class="math notranslate nohighlight">\( and \)</span>\theta<span class="math notranslate nohighlight">\(. As before the
+68% and 95% CL interval on \)</span>a<span class="math notranslate nohighlight">\( is evaluated from \)</span>q(a) = 1~(4)<span class="math notranslate nohighlight">\( with all
+other unconstrained parameters treated as nuisance parameters.\
+The same idea can be used to scan simultaneously two parameters of
+interest \)</span>a<span class="math notranslate nohighlight">\( and \)</span>b<span class="math notranslate nohighlight">\(. In this case the 68% and 95% CL interval becomes a
+2D region such that \)</span>q(a,b) = 2.3~(6)$. It is important to remember that
+the boundaries of the 2D confidence regions projected on either
+parameter axis are not necessarily identical to the 1D confidence
+interval for that parameter, because of the possible correlations
+between the two (I’m integrating on all the other variables I’m not
+considering). Examples of 1D and 2D parameter scans are shown in
+Fig. <a class="reference external" href="#fig:scans1D2D">1.45</a>{reference-type=”ref”
+reference=”fig:scans1D2D”}. All the properties of the Higgs boson are
+extracted from data using this procedure.</p>
+<p><img alt="[[fig:scans1D2D]]{#fig:scans1D2D label=&quot;fig:scans1D2D&quot;} Examples ofparameters scans in 1D (left: ) and 2D (right:)." src="Section9Bilder/scans1D2D.png" />{#fig:scans1D2D width=”90%”}</p>
+</div>
+</div>
+<div class="section" id="bayesian-approach-to-upper-limits">
+<h2>Bayesian approach to upper limits<a class="headerlink" href="#bayesian-approach-to-upper-limits" title="Permalink to this headline">¶</a></h2>
+<p>The standard prescription to present the LHC results is based on the
+frequentist paradigma. Nevertheless it is interesting to see how to
+extract the same results using the bayesian statistics.<a class="footnote-reference brackets" href="#id16" id="id8">10</a> Using Bayes
+theorem we can write the posterior for the signal strength as:
+$<span class="math notranslate nohighlight">\(f(\mu) = f(\mu|\mbox{data}) = \int\frac{1}{N}L(\mbox{data}|\mu,\vec{\theta})\pi(\vec{\theta})d\vec{\theta}\)</span><span class="math notranslate nohighlight">\(
+where \)</span>\pi<span class="math notranslate nohighlight">\( is the prior function describing the nuisance parameters and
+N is a normalization factor to have \)</span>\int f(\mu)d\mu<span class="math notranslate nohighlight">\( =1\
+The prior presents the usual issues, and it is usually chosen to be flat
+in the parameter of interest \)</span>\mu<span class="math notranslate nohighlight">\( (assume &quot;total ignorance&quot;). To find
+the upper limit on \)</span>\mu<span class="math notranslate nohighlight">\( at the \)</span>1-\alpha<span class="math notranslate nohighlight">\( CL (credible level) we need
+to solve numerically for \)</span>\mu_{1-\alpha}<span class="math notranslate nohighlight">\( in
+\)</span><span class="math notranslate nohighlight">\(\int_0^{\mu_{1-\alpha}} f(\mu) d\mu = 1-\alpha\)</span><span class="math notranslate nohighlight">\( see
+Fig. [1.46](#fig:bayesHiggs){reference-type=&quot;ref&quot;
+reference=&quot;fig:bayesHiggs&quot;}. In general \)</span>\mu<span class="math notranslate nohighlight">\( is a function of the test
+mass \)</span>\mu = \mu(m_H)$ and to obtain the exclusion plot as in
+Fig. <a class="reference external" href="#fig:exclusionLimit">1.43</a>{reference-type=”ref”
+reference=”fig:exclusionLimit”}, we will need to compute this integral
+for each value of the test mass.</p>
+<p><img alt="[[fig:bayesHiggs]]{#fig:bayesHiggs label=&quot;fig:bayesHiggs&quot;}" src="Section9Bilder/bayesHiggs.png" />{#fig:bayesHiggs width=”60%”}</p>
+</div>
+<div class="section" id="look-elsewhere-effect-sec-lee">
+<h2>Look-Elsewhere Effect {#sec:LEE}<a class="headerlink" href="#look-elsewhere-effect-sec-lee" title="Permalink to this headline">¶</a></h2>
+<p>Before formalizing the Look-Elsewhere Effect (LEE) for a HEP search,
+let’s consider this easy example:<br />
+<br />
+<strong>Example</strong> In a city the average number of accidents per day is
+<span class="math notranslate nohighlight">\(7\pm 1\)</span>. When looking at the number of accidents with full moon, the
+number is 10 which is <span class="math notranslate nohighlight">\(3\sigma\)</span> from the average. Is this sufficient to
+claim that full moon has an influences on the number of incidents? To
+answer this question we need to consider the fact that this result was
+obtained looking at the statistics of this one city. To have a better
+understanding of the phenomenon we would need to verify it on a larger
+number of cities. If we repeat the observation on 100 cities, then you
+would expect that at least one shows a <span class="math notranslate nohighlight">\(3\sigma\)</span> deviation. The question
+becomes how many cities above 3<span class="math notranslate nohighlight">\(\sigma\)</span> should I observe to convince
+myself of a supernatural influence of the full moon on the drivers
+capabilities ?<br />
+<br />
+Back to HEP: consider the search for a resonance in an invariant mass
+distribution. In case you know that the resonance is expected at
+<span class="math notranslate nohighlight">\(m = m_0\)</span> (e.g. because you have a theoretical prediction about its
+position) you can build the discovery test statistics for this fixed
+mass hypothesis:
+$<span class="math notranslate nohighlight">\(t_{\mbox{local}} = -2 \ln \frac{L(0)}{L(\hat{\mu}, m_0)}.\)</span><span class="math notranslate nohighlight">\( Notice
+that there is no reference to the mass position \)</span>m_0<span class="math notranslate nohighlight">\( at the numerator
+because we're considering the case where there is no signal (and so no
+need to worry about its position). To measure the level of compatibility
+of your data with the background only hypothesis you can compute the
+\)</span>p<span class="math notranslate nohighlight">\(-value:
+\)</span><span class="math notranslate nohighlight">\(p_{\mbox{local}}=\int_{t_{\mbox{local}}}^\infty f(t_{\mbox{local}} | 0) dt_{\mbox{local}}\)</span><span class="math notranslate nohighlight">\(
+This is what generally goes under the name of &quot;local&quot; \)</span>p<span class="math notranslate nohighlight">\(-value (often
+indicated with \)</span>p_0<span class="math notranslate nohighlight">\().\
+If instead you don't know where the peak will appear (a much more
+frequent situation) the \)</span>p<span class="math notranslate nohighlight">\(-value we are interested in is the one which
+tells the probability to observe a fluctuation *anywhere* in the
+experimentally accessible mass range. The goal is to take care of the
+trivial fact that with a large enough dataset and a large enough number
+of bins, we are bound to find a deviation from the background only
+hypothesis somewhere because of statistical fluctuations. To take this
+into account the position of the resonance \)</span>m_0<span class="math notranslate nohighlight">\( is replaced by an
+adjustable parameter in the likelihood:
+\)</span><span class="math notranslate nohighlight">\(t_{\mbox{global}} = -2 \ln \frac{L(0)}{L(\hat{\mu}, \hat{m})}\)</span><span class="math notranslate nohighlight">\( the
+denominator is allowed to fit the strength parameter (\)</span>\hat{\mu}<span class="math notranslate nohighlight">\()
+anywhere (\)</span>\hat{m}<span class="math notranslate nohighlight">\(). The corresponding \)</span>p<span class="math notranslate nohighlight">\(-value is:
+\)</span><span class="math notranslate nohighlight">\(p_{\mbox{global}}=\int_{t_{\mbox{global}}}^\infty f(t_{\mbox{global}} | 0) dt_{\mbox{global}}.\)</span><span class="math notranslate nohighlight">\(
+In order to compute this integral, as usual, we need to find the p.d.f.
+\)</span>f(t_{\mbox{global}} | 0)<span class="math notranslate nohighlight">\(. To do this we can proceed brute force
+tossing toy experiments. This is a particularly computing intensive
+approach, since we need to scan both the signal strength and the bump
+position. To overcome this issue it would be tempting to use the
+asymptotic formulas based on Wald's theorem we discussed in the previous
+sections. Unfortunately the Wald's theorem only works under some
+&quot;regularity conditions&quot; which require to have the same parameter of
+interest appearing both in the null and the alternative hypotheses. In
+our case the alternative hypothesis (denominator) has both the position
+\)</span>m_0<span class="math notranslate nohighlight">\( of the excess and its signal strength \)</span>\mu<span class="math notranslate nohighlight">\(, while the null
+hypothesis (numerator) has only the signal strength \)</span>\mu = 0<span class="math notranslate nohighlight">\( because
+the position of the possible excess is not defined in absence of a
+signal.\
+A solution to this problem has been developed in Ref. [&#64;LEE]. The main
+idea behind the method is to first compute the \)</span>p_{local}<span class="math notranslate nohighlight">\( as if the
+position of the mass was known and then apply a correction factor to
+bring it to \)</span><em>{global}<span class="math notranslate nohighlight">\(:
+\)</span><span class="math notranslate nohighlight">\(p_{global} \sim p_{local}+ \langle N(t_{local}) \rangle\)</span><span class="math notranslate nohighlight">\( The factor
+\)</span>\langle N(t</em>{local}) \rangle<span class="math notranslate nohighlight">\( is the mean number of times the
+statistics \)</span>-2\ln L<span class="math notranslate nohighlight">\( cross the \)</span>t_{local}$ threshold from below (slang:
+“up-crossings”). To understand what this is, let’s take the example of
+the original paper in Fig. <a class="reference external" href="#fig:LEE">1.47</a>{reference-type=”ref”
+reference=”fig:LEE”}.</p>
+<p><img alt="[[fig:LEE]]{#fig:LEE label=&quot;fig:LEE&quot;} (top) An examplepseudo-experiment with background only. The solid line shows the bestsignal fit, while the dotted line shows the background fit. (bottom) Thelikelihood ratio test statistic . The dotted line marks thereference level  with the up-crossings marked by the darkdots. [&#64;LEE]" src="Section9Bilder/LEE.png" />{#fig:LEE width=”60%”}</p>
+<p>The top part of the figure shows a mass spectrum generated on the
+background only hypothesis. Around 25 there is a hint of an excess,
+while around 50 and 70 there is an hint of a deficit. The test
+statistics will be larger the larger the discrepancy of the data from
+the background only model (the denominator will get the value preferred
+by the data, while the numerator will adjust the background shape
+forcing the signal strength to zero). This behavior is clearly visible
+in the bottom part of the figure, where the three hints of discrepancy
+manifests themselves as bumps in the test statistics. The procedure
+would now consist in generating toy experiments and for each of them
+count how often the <span class="math notranslate nohighlight">\(t_{global}\)</span> test statistics up-cross the value of
+<span class="math notranslate nohighlight">\(t_{local}\)</span> we observe in data and average this number on the total
+number of toy-experiments. Up to this point the procedure suffers from
+the same limitation as the brute force approach to generate
+toy-experiments to populate the p.d.f. for <span class="math notranslate nohighlight">\(t_{global}\)</span>: if we have a
+large fluctuation in data (remember we’re thinking about a discovery)
+then <span class="math notranslate nohighlight">\(t_{local}\)</span> is going to be very high and only very few toys will
+up-cross that high threshold (hence the need of generating a large
+number of toy experiments). The idea of the paper is that one can
+compute <span class="math notranslate nohighlight">\(\langle N(t_{local}) \rangle\)</span> for a small value of <span class="math notranslate nohighlight">\(t_{local}\)</span>
+and then estimate what <span class="math notranslate nohighlight">\(\langle N(t_{local}) \rangle\)</span> would be at any
+other value of <span class="math notranslate nohighlight">\(t_{local}\)</span> by:
+$<span class="math notranslate nohighlight">\(\langle N(t_{local}) \rangle = \langle N(t_{local_0}) \rangle e^{-\frac{(t_{local} - t_{local_0})}{2}}\)</span><span class="math notranslate nohighlight">\(
+The advantage of this formula is that you can compute
+\)</span>\langle N(t_{local}) \rangle$ with a very small number of
+toy-experiments and then propagate the result.<br />
+The example treated in this section refers to the most common case of
+the search of a resonance appearing as an excess in a mass distribution.
+The same ideas obviously can be applied to any other search where
+instead of a bump in a mass spectrum the deviation from the background
+only hypothesis appears in another variable or in a more general case in
+a set of variables (e.g. search for an excess where you don’t know
+neither the position nor the width).</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>R. Barlow [&#64;Barlow], ” A guide to the use of statistical methods in
+the physical sciences”. Ch. 7</p></li>
+<li><p>Gary J. Feldman and Robert D. Cousins, “Unified approach to the
+classical statistical analysis of small signals.” <em>Phys. Rev. D</em>,
+57:3873–3889, Apr 1998</p></li>
+<li><p>A. L. Read, “Modified frequentist analysis in search results (CLs
+method)”, CERN Yellow Report 2000-005</p></li>
+<li><p>Cowan, Cranmer, Gross, Vitells, “Asymptotic formulae for
+likelihood-based tests of new physics”, EPJC 71 (2011) 1554,
+physics/1007.1727</p></li>
+<li><p>Gross and Vitells, “Trial factors for the look elsewhere effect in
+high energy physics”, EPJC 70:525-530,2010, physics/1005.1891</p></li>
+</ul>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id9"><span class="brackets"><a class="fn-backref" href="#id1">2</a></span></dt>
+<dd><p>Deciding how to quote the result of a measurement after seeing the
+results is called “flip-flop” and will be addressed using the
+Feldman-Cousins construction in the
+<a class="reference external" href="#flipflop">1.4.1</a>{reference-type=”ref” reference=”flipflop”}.</p>
+</dd>
+<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id2">4</a></span></dt>
+<dd><p>The CMS <span class="math notranslate nohighlight">\(H\to\gamma\gamma\)</span> analysis has o(50) nuisance parameters</p>
+</dd>
+<dt class="label" id="id11"><span class="brackets"><a class="fn-backref" href="#id3">5</a></span></dt>
+<dd><p>The larger the expected signal the easier is to exclude it.</p>
+</dd>
+<dt class="label" id="id12"><span class="brackets"><a class="fn-backref" href="#id4">6</a></span></dt>
+<dd><p>Here we assuming that the searched for signal is the Standard
+Model Higgs boson, i.e. its production cross section/couplings/etc.
+are the ones predicted by the Standard Model.</p>
+</dd>
+<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id5">7</a></span></dt>
+<dd><p>This typically generate some confusion, the CL is a parameter set
+by hand and not a function of the data!</p>
+</dd>
+<dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id6">8</a></span></dt>
+<dd><p>The idea stemmed from the frequentist approach of Zech to the
+problem of setting limits for a counting experiment in presence of
+background [&#64;Zech].</p>
+</dd>
+<dt class="label" id="id15"><span class="brackets"><a class="fn-backref" href="#id7">9</a></span></dt>
+<dd><p>The name comes from the short story “Franchise” from I. Asimov,
+where in the far future of 2008 the U.S.A. elections were to be
+replaced by the choice of a single citizen chosen by a computer
+which would represent the perfect average of the whole population</p>
+</dd>
+<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id8">10</a></span></dt>
+<dd><p>The initial Higgs results were indeed verified using both
+approaches.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="hypothesisTesting.html" title="previous page">Hypotheses Testing {#ChapterHypothesisTesting}</a>
+    <a class='right-next' id="next-link" href="mva.html" title="next page">Multivariate Analysis Methods {#ChapterMVA}</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Mauro Donega<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

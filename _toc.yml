@@ -1,0 +1,15 @@
+format: jb-article
+root: preface
+sections:
+- file: introduction
+- file: probability.ipynb
+- file: probabilityDistributions.ipynb
+- file: errors
+- file: monteCarlo
+- file: inference
+- file: likelihood
+- file: leastSquares
+- file: hypothesisTesting
+- file: confidenceIntervals
+- file: mva
+- file: unfolding

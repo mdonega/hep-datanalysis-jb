@@ -1,0 +1,1125 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multivariate Analysis Methods {#ChapterMVA} &#8212; Statistical Methods and Data Analysis Techniques</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Unfolding {#ch:Unfolding}" href="unfolding.html" />
+    <link rel="prev" title="Confidence Intervals {#ChapterConfidenceLimits}" href="confidenceIntervals.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Statistical Methods and Data Analysis Techniques</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="preface.html">
+   Preface
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="probability.html">
+   Probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="probabilityDistributions.html">
+   Probability Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="errors.html">
+   Measurements uncertainties {#ch:errors}
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="monteCarlo.html">
+   Monte Carlo methods {#sec:MC}
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inference.html">
+   Statistical inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="likelihood.html">
+   Parameter Estimation - Likelihood  {#ChapterParameterEstimations}
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="leastSquares.html">
+   Parameter Estimation - Least Squares {#sec:chi2}
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hypothesisTesting.html">
+   Hypotheses Testing {#ChapterHypothesisTesting}
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="confidenceIntervals.html">
+   Confidence Intervals {#ChapterConfidenceLimits}
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Multivariate Analysis Methods {#ChapterMVA}
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="unfolding.html">
+   Unfolding {#ch:Unfolding}
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/mva.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definitions">
+   Definitions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#build-the-decision-boundary">
+   Build the decision boundary
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#histogramming">
+     Histogramming
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#kernel-density-estimators-kde-and-k-nearest-neighbors-knn">
+     Kernel Density Estimators (KDE) and K-Nearest Neighbors (KNN)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#training-bias-and-variance">
+     Training, bias and variance
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#curse-of-dimensionality-and-learning-algorithms">
+     Curse of dimensionality and learning algorithms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fisher-discriminant">
+   Fisher discriminant
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#decision-trees">
+   Decision trees
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#classification">
+     Classification
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regression">
+     Regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stabilizing-the-decision-trees">
+     Stabilizing the decision trees
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#bagging">
+       Bagging
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#boosting">
+       Boosting
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comments-on-bdt">
+     Comments on BDT
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#artificial-neural-networks-sectionnn">
+   Artificial Neural Networks {#SectionNN}
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mva-examples">
+   MVA examples
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="multivariate-analysis-methods-chaptermva">
+<h1>Multivariate Analysis Methods {#ChapterMVA}<a class="headerlink" href="#multivariate-analysis-methods-chaptermva" title="Permalink to this headline">¶</a></h1>
+<p>In this chapter we will describe some multi-variate analysis (MVA)
+methods that are very frequently used in particle physics. To put things
+in context the methods we will discuss belongs to the much wider area of
+Artificial Intelligence (AI). AI studies the systems that perceive the
+environment. Within this huge field, machine learning (ML) is the
+technology of getting computers to act without being explicitly
+programmed to do so. Typically we then distinguish supervised learning
+from unsupervised learning. In supervised learning you instruct an
+algorithm by examples: data are presented to the algorithm with a tag
+and the algorithm learns how to associate data to the different tags by
+analysing their characteristics. In unsupervised learning (a.k.a.
+clustering algorithms) the algorithm will discover by itself the
+different tags (populations) in data by looking at their
+characteristics.<br />
+In today’s HEP, supervised learning is by far the most used type of
+learning. These algorithms are used to solve two classes of problems:
+classification and regression. In a classification problem the goal is
+to subdivide the elements of a dataset into a discrete set of classes
+depending on their characteristics. Typical examples are
+signal/background separation or particle identification: photon/jets,
+etc… A regression problem is conceptually identical but the classes
+instead of belonging to a discrete set are represented by a continuum.
+Most commonly is used to improve energy measurements resolution. The
+reconstructed energy of a jet is affected by several detector effects
+which depend on the position of the jet in the detector, its shape, the
+reconstructed energy, etc… The regression algorithm assigns the jet
+to a continuous value, its “regressed energy”. It does it by looking at
+the examples he has been trained on and recognizing which (true) energy
+is closer to the case at hand.<br />
+The key point of these algorithms is that they learn from a training set
+of data and then they use the acquired knowledge to take decisions on
+data they have never seen before.<br />
+MVA techniques are coded in several packages. The most used in HEP is
+<code class="docutils literal notranslate"><span class="pre">TMVA</span></code> [&#64;TMVA] that comes with <code class="docutils literal notranslate"><span class="pre">ROOT</span></code>. Other packages often used are
+<code class="docutils literal notranslate"><span class="pre">scikit</span></code> [&#64;scikit] in python and <code class="docutils literal notranslate"><span class="pre">R</span></code> [&#64;R].</p>
+<div class="section" id="definitions">
+<h2>Definitions<a class="headerlink" href="#definitions" title="Permalink to this headline">¶</a></h2>
+<p>In this section we will set the language that we will use to study the
+MVAs. We will build on the concept of test statistics developed in the
+previous chapters and so we conveniently use the language of statistics
+(we could have chosen to use the ML - computer science language, it’s
+just a different naming, the concepts are the same).<br />
+Let’s take as a working example a classification problem with only two
+classes (we will address the regression case later). In the language of
+statistics, implementing a classifier means to choose a decision
+boundary that allows to separate the two classes. To do so we
+characterize each event with a number of variables
+<span class="math notranslate nohighlight">\(\vec{x} = (x_1,x_2, \ldots, x_n)\)</span> and define the decision boundary as a
+hyper-surface in this <span class="math notranslate nohighlight">\(n\)</span>-dimensional space <span class="math notranslate nohighlight">\(y(\vec{x})=c\)</span>. The function
+<span class="math notranslate nohighlight">\(y(\vec{x})\)</span> is our test statistic which compresses the full information
+contained in the <span class="math notranslate nohighlight">\(n\)</span> variables into one number.<br />
+<br />
+<strong>Example</strong>  As an example imagine you have to separate tracks into muon
+and electron candidates. The variables <span class="math notranslate nohighlight">\(\vec{x}\)</span> could be <span class="math notranslate nohighlight">\(p_T\)</span>, <span class="math notranslate nohighlight">\(\eta\)</span>,
+<span class="math notranslate nohighlight">\(\phi\)</span>, some PID on the track, number of hits in the muon chamber,
+presence of an electromagnetic cluster in the same direction of the
+track, etc… The muon candidates will preferentially populate a
+certain region of this multidimensional space (e.g. large number of hits
+in the muon chambers) while the electrons a different one (energy
+deposits in the electromagnetic calorimeter). Formally the distribution
+of <span class="math notranslate nohighlight">\(\vec{x}\)</span> will follow some n-dimensional joint p.d.f. depending on
+the hypothesis (muon/electron): pdf<span class="math notranslate nohighlight">\((\vec{x}|H_i), \; i= \mu, e\)</span>.<br />
+<br />
+The choice of the boundary depends on several factors. It depends on the
+variables you choose (physics driven), on the type of classifier you
+want to use, on computational issues (CPU, memory) and typically it
+boils down to finding a compromise between performance and complexity of
+the classifier.<br />
+<br />
+<strong>Example</strong>  Looking at
+Fig. <a class="reference external" href="#fig:decisionBoundary">1.1</a>{reference-type=”ref”
+reference=”fig:decisionBoundary”} we have two variables and two classes
+“red” and “blue” distributed according to different pdfs. The different
+pictures show different choices of decision boundary: (left) just a cut
+on each of the variables , (middle) a linear combination of the two
+variables (right) a non linear combination of the two
+variables [&#64;CowanMVA].<br />
+\</p>
+<p><img alt="Different choices of decisionboundary.[[fig:decisionBoundary]]{#fig:decisionBoundarylabel=&quot;fig:decisionBoundary&quot;}" src="Section10Bilder/decisionBoundary.png" />{#fig:decisionBoundary
+width=”100%”}</p>
+</div>
+<div class="section" id="build-the-decision-boundary">
+<h2>Build the decision boundary<a class="headerlink" href="#build-the-decision-boundary" title="Permalink to this headline">¶</a></h2>
+<p>For the present discussion on classification, signal and background are
+any two generic classes (photons/jets, jets/b-jets, cats/dogs), for
+simplicity we will keep calling them signal and background throughout
+this section.<br />
+We’ve seen in
+Sec.<a class="reference external" href="#SectionNeymanPearson">[SectionNeymanPearson]</a>{reference-type=”ref”
+reference=”SectionNeymanPearson”} that the optimal way to set the
+decision boundary having the highest background rejection for a given
+signal efficiency for a simple hypothesis is to use the likelihood
+ratio: $<span class="math notranslate nohighlight">\(\label{eq:LRNP}
+ y(\vec{x}) = \frac{p(\vec{x}|s)}{p(\vec{x}|b)}.\)</span>$ Unfortunately, in any
+non trivial practical case, we don’t have an analytic expressions for
+the pdf of the two classes and typically we recur to Monte Carlo
+techniques to model the pdfs. In this section we will see a few methods
+to build the pdf from Monte Carlo and see why in practice they are not
+used for problems with a large number of dimensions.</p>
+<div class="section" id="histogramming">
+<h3>Histogramming<a class="headerlink" href="#histogramming" title="Permalink to this headline">¶</a></h3>
+<p>The easiest way to build the pdf for signal and background from a Monte
+Carlo sample is to fill two <span class="math notranslate nohighlight">\(n-\)</span>dimensional histograms. This method has
+the advantage of being trivial to implement, and being computationally
+very light: the information is binned into the histogram once and then
+the original dataset can be discarded. The drawback of this approach is
+the generic problem of all histograms: need to choose a proper binning
+(not to coarse, not too fine) and the unavoidable discontinuities at the
+bin boundaries.</p>
+</div>
+<div class="section" id="kernel-density-estimators-kde-and-k-nearest-neighbors-knn">
+<h3>Kernel Density Estimators (KDE) and K-Nearest Neighbors (KNN)<a class="headerlink" href="#kernel-density-estimators-kde-and-k-nearest-neighbors-knn" title="Permalink to this headline">¶</a></h3>
+<p>With these methods we build the decision boundary “event-by-event”
+judging if an event of the n-dimensional space of the variables is to be
+assigned to the signal region or to the background region. Intuitively,
+given a point <span class="math notranslate nohighlight">\(\vec{x}\)</span> in the n-dimensional space of the variables we
+count how many signal and background events are present in a local
+region around <span class="math notranslate nohighlight">\(\vec{x}\)</span> and then we apply a simple majority vote: that
+portion of the space is assigned to signal or background depending on
+which of the two has the largest population. The use of the concept of
+locality requires the definition of a metric in the <span class="math notranslate nohighlight">\(n\)</span>-dimensional
+space. The choice of the metric requires special consideration because
+the different dimensions might have different units and scales
+(<span class="math notranslate nohighlight">\(E\in[10,500]\)</span> GeV, <span class="math notranslate nohighlight">\(\eta\in[-2.5,2.5]\)</span>, <span class="math notranslate nohighlight">\(PID\in[0,10]\)</span> MeV/cm,
+etc…). Often the variables are rescaled or remapped to have
+comparable numerical values in all dimensions.<br />
+Both Kernel Density Estimators (KDE) and K-Nearest Neighbors (KNN) are
+built around the estimator: $<span class="math notranslate nohighlight">\(p(\vec{x}) = \frac{K}{NV}\)</span><span class="math notranslate nohighlight">\( where
+\)</span>\vec{x}<span class="math notranslate nohighlight">\( is the point of the space we're sampling, N is the total
+number of events in the sample and \)</span>K<span class="math notranslate nohighlight">\( is the number of events in the
+hyper-volume \)</span>V$.<br />
+To optimize the classifier performance you can:</p>
+<ul class="simple">
+<li><p>fix <span class="math notranslate nohighlight">\(K\)</span> and determine <span class="math notranslate nohighlight">\(V\)</span> <span class="math notranslate nohighlight">\(\to\)</span> KNN</p></li>
+<li><p>fix <span class="math notranslate nohighlight">\(V\)</span> and determine <span class="math notranslate nohighlight">\(K\)</span> <span class="math notranslate nohighlight">\(\to\)</span> KDE</p></li>
+</ul>
+<p>For the KNN you fix the number of events <span class="math notranslate nohighlight">\(K\)</span> (a.k.a. smoothing
+parameter) you want to have in your region of the space and you increase
+the volume <span class="math notranslate nohighlight">\(V\)</span> until it contains such number. Then you perform the
+majority vote: you count how many events are of type signal, how many
+are of type background and the class that has the largest number defines
+whether that portion of space is to be assigned to signal or
+background.<br />
+For the KDE you fix the hyper-volume <span class="math notranslate nohighlight">\(V\)</span> and change the number of events
+K. The “shape” for the hyper-volume <span class="math notranslate nohighlight">\(V\)</span> is typically chosen to be a
+gaussian in <span class="math notranslate nohighlight">\(n-\)</span>dimensions. This allows to have a smooth function for
+the model. (An hyper-cube would do but it would introduce
+discontinuities at the edges). In practice you place a gaussian kernel
+of standard deviation <span class="math notranslate nohighlight">\(h\)</span> centred about each data point, then for a
+given <span class="math notranslate nohighlight">\(\vec{x}\)</span> you add up the contribution from all the gaussians and
+you normalize (divide by N):
+$<span class="math notranslate nohighlight">\(p(\vec{x}) =\frac{1}{N}\sum_{i=1}^{N} \frac{1}{\sqrt{2\pi h^2}}\exp\left(\frac{-|\vec{x} - \vec{x_i}|^2}{2h^2}\right)\)</span>$</p>
+</div>
+<div class="section" id="training-bias-and-variance">
+<h3>Training, bias and variance<a class="headerlink" href="#training-bias-and-variance" title="Permalink to this headline">¶</a></h3>
+<p>The classification methods shown so far use a dataset with labelled data
+(signal or background) to build the decision boundary. We will then use
+this boundary to classify new data. This procedure is called “supervised
+learning”; the building of the boundary is called <strong>training</strong> step
+while the use of the boundary is usually called <strong>application</strong> (or
+simply classification) step. The important point to notice is that the
+classifier is tuned on a sample of labelled data representative of the
+parent distribution of the classes, but it will be applied on new data
+coming from a separate sampling. Clearly, even if the training sample
+and the new data come from a sampling of the same distribution, they
+will be affected by statistical fluctuations. The training phase can
+reduce the mis-classification rate to zero on the training sample
+itself, but it will have poor performance when applied to new data.<br />
+The training has to be optimized minimizing two competing effects, the
+“bias-variance” tradeoff:</p>
+<ul class="simple">
+<li><p><em>bias</em> (mis-classification): the fraction of signal events ending up
+in the background region (or viceversa)</p></li>
+<li><p><em>variance</em> (over-training) limitation in the generalization of the
+classifier to different data samples</p></li>
+</ul>
+<p>In general all methods have one or more parameters that can be tuned to
+find the optimal classifier. The KNN and the KDE methods have a
+“smoothing parameter”: <span class="math notranslate nohighlight">\(K\)</span> for the KNN method and <span class="math notranslate nohighlight">\(h\)</span> for the KDE. By
+tuning this parameter we can optimize our classifier. Having a large
+value of the smoothing parameter will produce well populated regions,
+reducing the statistical fluctuation, but generally increasing the bias;
+viceversa you can reduce the value of the smoothing parameter bringing
+to zero the bias but increasing the variance, i.e. making the training
+very sensitive to the specific sample used for training and limiting its
+generalization.</p>
+</div>
+<div class="section" id="curse-of-dimensionality-and-learning-algorithms">
+<h3>Curse of dimensionality and learning algorithms<a class="headerlink" href="#curse-of-dimensionality-and-learning-algorithms" title="Permalink to this headline">¶</a></h3>
+<p>All methods described above (histogramming, KDE and KNN) become
+unmanageable when using a large number of input variables (dimensions).
+This problem goes under the name of “the curse of dimensionality”. To
+understand the issue, suppose your data are uniformly distributed in a
+<span class="math notranslate nohighlight">\(D\)</span>-dimensional unit cube. The methods above will all try to catch a
+fraction <span class="math notranslate nohighlight">\(r\)</span> of events in a small portion of space. Let’s suppose this
+portion of space has the shape of a hyper-cube with side <span class="math notranslate nohighlight">\(s\)</span> (its volume
+being <span class="math notranslate nohighlight">\(s^D\)</span>).<br />
+The fraction of the volume taken by this cube is <span class="math notranslate nohighlight">\(r = s^D /1\)</span> (the total
+space is a unit cube) and its side is simply <span class="math notranslate nohighlight">\(s = r^{1/D}\)</span>. If you want
+a sampling fraction <span class="math notranslate nohighlight">\(r=0.001\)</span> (one per mill of the whole space) you will
+need different sizes <span class="math notranslate nohighlight">\(s\)</span> depending on the number of dimensions. For
+<span class="math notranslate nohighlight">\(D=1\)</span> <span class="math notranslate nohighlight">\(s = 0.001\)</span>, for <span class="math notranslate nohighlight">\(D=3\)</span> <span class="math notranslate nohighlight">\(s = 0.1\)</span> which is 10% of the whole space,
+for <span class="math notranslate nohighlight">\(D=30\)</span> <span class="math notranslate nohighlight">\(s=0.8\)</span> which is 80% of the whole space. To properly build
+the estimator, you will need to have a very large training set to
+adequately populate all corners of the <span class="math notranslate nohighlight">\(D\)</span>-dimensional space<br />
+Learning algorithms will provide better ways to sample the space.</p>
+</div>
+</div>
+<div class="section" id="fisher-discriminant">
+<h2>Fisher discriminant<a class="headerlink" href="#fisher-discriminant" title="Permalink to this headline">¶</a></h2>
+<p>The Fisher discriminant approximates the likelihood ratio in
+Eq. <a class="reference external" href="#eq:LRNP">[eq:LRNP]</a>{reference-type=”ref” reference=”eq:LRNP”}
+with a linear combination of the input dataset.
+$<span class="math notranslate nohighlight">\(y(\vec{x}) = \frac{p(\vec{x}|s)}{p(\vec{x}|b)} = \sum_{i=1}^N w_ix_i = \vec{w}^T\vec{x}\)</span><span class="math notranslate nohighlight">\(
+The decision boundary will be a constant in the one dimensional case, a
+straight line in a 2-dimensional case and in general a \)</span>n-1<span class="math notranslate nohighlight">\( hyperplane
+in an \)</span>n<span class="math notranslate nohighlight">\(-dimensional problem.\
+In the case of a Fisher discriminant the training phase consists in
+finding the best set of weights \)</span>\vec{w}<span class="math notranslate nohighlight">\( which maximize the signal to
+background (Fisher) separation. The separation is defined as:
+\)</span><span class="math notranslate nohighlight">\(J(\vec{w}) = \frac{(\tau_s - \tau_b)^2}{\Sigma_s^2 + \Sigma_b^2}\)</span><span class="math notranslate nohighlight">\(
+where \)</span>\tau_s, \tau_b<span class="math notranslate nohighlight">\( and \)</span>\Sigma_s, \Sigma_b$ are the mean and width
+(covariance) of the signal and background (see
+Fig. <a class="reference external" href="#fig:Fisher1">1.2</a>{reference-type=”ref” reference=”fig:Fisher1”}).</p>
+<p><img alt="Example to fix the notation in a mono-dimensionalcase.[[fig:Fisher1]]{#fig:Fisher1label=&quot;fig:Fisher1&quot;}" src="Section10Bilder/Fisher1.png" />{#fig:Fisher1
+width=”60%”}</p>
+<p>The training translates into writing the means and the covariance
+matrices as a linear combination of the variables and then find the
+weights that maximize the separation <span class="math notranslate nohighlight">\(J(\vec{w})\)</span>. It is useful to
+notice that the numerator of <span class="math notranslate nohighlight">\(J\)</span> is the separation between the classes
+(the distance between the means) and the denominator is the separation
+within each class (the spread of the variables).<br />
+The means and covariances can be written as: $<span class="math notranslate nohighlight">\(\begin{aligned}
+(\mu_k)_i &amp;=&amp; \int x_i p(\vec{x}|H_k) d\vec{x} \\
+(V_k)_{ij} &amp;=&amp; \int (x-\mu_k)_i(x-\mu_k)_j p(\vec{x}|H_k) d\vec{x}\end{aligned}\)</span><span class="math notranslate nohighlight">\(
+where k = &quot;signal&quot; or &quot;background&quot; and \)</span>i,j=1,…,n<span class="math notranslate nohighlight">\( are the components
+of \)</span>\vec{x}<span class="math notranslate nohighlight">\(. From this we can compute the mean and variance of
+\)</span>y(\vec{x})<span class="math notranslate nohighlight">\( \)</span><span class="math notranslate nohighlight">\(\begin{aligned}
+\mu_k &amp;=&amp; \int y(\vec{x}) p(\vec{x}|H_k) d\vec{x} = \vec{w}^T \vec{\mu}_k\\
+\Sigma_k^2 &amp;=&amp; \int (y(\vec{x})-\tau_k)^2  p(\vec{x}|H_k) d\vec{x} = \vec{w}^T V_k \vec{w}\end{aligned}\)</span><span class="math notranslate nohighlight">\(
+The numerator of \)</span>J(\vec{w})<span class="math notranslate nohighlight">\(, i.e. the separation between classes, then
+becomes \)</span><span class="math notranslate nohighlight">\(\begin{aligned}
+        (\tau_s - \tau_b)^2 &amp;=&amp; \sum_{i,j=1}^N  w_i w_j (\mu_s-\mu_b)_i(\mu_s-\mu_b)_j\\
+                           &amp;=&amp; \sum_{i,j=1}^N w_i w_j B_{ij} = \vec{w}^TB\vec{w}\end{aligned}\)</span><span class="math notranslate nohighlight">\(
+and the denominator
+\)</span><span class="math notranslate nohighlight">\(\Sigma_s^2 + \Sigma_b^2 = \sum_{i,j}^N w_i w_j (V_s + V_b)_{ij} = \vec{w}^T W \vec{w}.\)</span><span class="math notranslate nohighlight">\(
+At this point we just need to maximize the ratio
+\)</span><span class="math notranslate nohighlight">\(J(\vec{w}) = \frac{\vec{w}^TB\vec{w}}{\vec{w}^T W \vec{w}}\)</span><span class="math notranslate nohighlight">\( by
+solving \)</span>\partial J  / \partial w_i = 0<span class="math notranslate nohighlight">\(. With the obtained weights we
+can then build the Fisher discriminant \)</span>y(\vec{x}) = \vec{w}^T \vec{x}$.</p>
+<p><img alt="Example in 2-dimensions (i.e. 2 variables). Signal is represented byorange circles, background with blue ones. The red straight linerepresents the Fisher discriminant which would be a linear combinationof the variables  and . The orange and blue distributionsvisually show the separation between the projections of the twopopulations.[[fig:Fisher2]]{#fig:Fisher2label=&quot;fig:Fisher2&quot;}" src="Section10Bilder/Fisher2.png" />{#fig:Fisher2
+width=”40%”}</p>
+<p>The Fisher discriminant provides a linear decision boundary (see
+Fig. <a class="reference external" href="#fig:Fisher2">1.3</a>{reference-type=”ref” reference=”fig:Fisher2”}).
+If the classes you want to separate show some particular non linear
+structure like the one in Fig. <a class="reference external" href="#fig:Fisher3">1.4</a>{reference-type=”ref”
+reference=”fig:Fisher3”} then you can still use a Fisher discriminant
+after a suitable remapping of the variables. Very often the non linear
+structure (especially in a multidimensional space) is not evident and
+for this you can use other MVA tools like BDT and ANN (see next
+chapters).</p>
+<p><img alt="The two classes show a clear symmetry: remapping them allows to stilluse a linear discriminant.[[fig:Fisher3]]{#fig:Fisher3label=&quot;fig:Fisher3&quot;}" src="Section10Bilder/Fisher3.png" />{#fig:Fisher3
+width=”80%”}</p>
+</div>
+<div class="section" id="decision-trees">
+<h2>Decision trees<a class="headerlink" href="#decision-trees" title="Permalink to this headline">¶</a></h2>
+<p>Because of the importance gained in recent years we will describe in
+some detail how to apply decision trees to solve classification and
+regression problems.</p>
+<div class="section" id="classification">
+<h3>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h3>
+<p>A decision tree is a (binary) tree used to partition the variables’
+space into rectangles and then by majority vote assign each rectangle to
+a class. To understand how it works we take the example in
+Fig. <a class="reference external" href="#fig:BDT1">1.5</a>{reference-type=”ref” reference=”fig:BDT1”}.</p>
+<p><img alt="Classification example.[[fig:BDT1]]{#fig:BDT1label=&quot;fig:BDT1&quot;}" src="Section10Bilder/BDT1.png" />{#fig:BDT1 width=”100%”}</p>
+<p>Let’s consider a two dimensional space (<span class="math notranslate nohighlight">\(x^1\)</span>, <span class="math notranslate nohighlight">\(x^2\)</span>) and consider the
+usual two classes “signal” and “background” here shown in red and blue
+respectively as in Fig. <a class="reference external" href="#fig:BDT1">1.5</a>{reference-type=”ref”
+reference=”fig:BDT1”}-(a). In this example the variables can assume
+continuous values, but in reality can be any discrete or even non
+numerical value (an example can be a loose/tight selection criterion).
+To grow a decision tree means to place cuts (binary choices of the type
+pass/fail) to reach the minimal signal/background misclassification at
+each step.<br />
+The first step is to decide which variable to cut on: we choose the
+variable that provides the greatest increase in the separation between
+the two classes in the two daughters node relative to the parent. To
+quantify the separation we typically use as a metric the “Gini index”
+defined as
+$<span class="math notranslate nohighlight">\(\mbox{Gini}=P(1-P) \qquad \mbox{with} \qquad P=\frac{\sum_{\mbox{signal}}w_i}{\sum_{\mbox{signal}}w_i + \sum_{\mbox{background}}w_i}\)</span><span class="math notranslate nohighlight">\(
+where the \)</span>w_i<span class="math notranslate nohighlight">\( are the number of signal/background events in each node
+(or in weights in case of weighted events). The minimal
+misclassification (maximal separation) is reached when \)</span>P=0<span class="math notranslate nohighlight">\( or \)</span>P=1<span class="math notranslate nohighlight">\(
+(selecting all signal events is equivalent to select all background
+events), while you get maximal misclassification (random guess, minimal
+separation) when \)</span>P=0.5<span class="math notranslate nohighlight">\(. Applied to the example in
+Fig. [1.5](#fig:BDT1){reference-type=&quot;ref&quot; reference=&quot;fig:BDT1&quot;} we will
+scan the two dimensions and look for the cut that maximizes the
+separation. In this case we select the variable \)</span>x^2<span class="math notranslate nohighlight">\( and a cut value of
+1.5 (b). We then repeat the procedure and scan again the two dimensions
+to find the cut that minimizes the misclassification, this time it lead
+a value of 2.0 on \)</span>x^1<span class="math notranslate nohighlight">\(. Every time we repeat the procedure we have to
+choose both the dimension and the value of the cut. It can happen as in
+(d) that the same dimension is selected twice in a raw this time cutting
+at 1.5. The example then continues with (e) select \)</span>x^1<span class="math notranslate nohighlight">\( and cut at 2.1
+and (f) again selecting \)</span>x^1$ and cutting at 1.6. The procedure will
+continue until we reach a minimum number of points in each of the
+rectangles. As we will see later in this section the minimum number of
+points gives a handle to limit the over-training. From the set of
+rectangles in Fig. <a class="reference external" href="#fig:BDT1">1.5</a>{reference-type=”ref”
+reference=”fig:BDT1”} we can build a binary decision tree as in
+Fig. <a class="reference external" href="#fig:BDT2">1.6</a>{reference-type=”ref” reference=”fig:BDT2”}</p>
+<p><img alt="Decision tree corresponding to the classification example inFig. 1.5{reference-type=&quot;ref&quot;reference=&quot;fig:BDT1&quot;}.[[fig:BDT2]]{#fig:BDT2label=&quot;fig:BDT2&quot;}" src="Section10Bilder/BDT2.png" />{#fig:BDT2 width=”50%”}</p>
+<p>The last layer of the binary tree are called “leaves” (pictured as a
+circle) and they contain a certain number of signal and background
+events. In Fig. <a class="reference external" href="#fig:BDT2">1.6</a>{reference-type=”ref”
+reference=”fig:BDT2”} they are shown as colored numbers: red for signal
+and blue for background. Now we have to choose how to assign each leaf
+to either signal or background. We do this by a majority vote. The class
+with the largest population defines if that leaf (or rectangle in the
+previous schematics) is associated with one class or the other. Again in
+the same figure the leaves are colored in red and blue according to the
+chosen class. The procedure is equivalent to writing a piece-wise
+constant function over the plane.<br />
+The described procedure is generally called “training”: we use labelled
+data (i.e. we know what is signal and what is background, as we would
+have with a Monte Carlo sample) and we build the tree. This is the point
+where the algorithm learns how to classify the data. Once this is done,
+we can apply the decision tree to a new dataset (never seen before by
+the algorithm) and use it to classify new elements. For example a point
+<span class="math notranslate nohighlight">\((1.7, 1.8)\)</span> in the previous case, would be classified as signal because
+it will land in the leaf/rectangle with signal=3 and background=1.\</p>
+</div>
+<div class="section" id="regression">
+<h3>Regression<a class="headerlink" href="#regression" title="Permalink to this headline">¶</a></h3>
+<p>A regression problem is conceptually equivalent to a classification one
+but the target variable, instead of being discrete is represented by a
+continuous value. In the example in
+Fig. <a class="reference external" href="#fig:BDTregr1">1.7</a>{reference-type=”ref”
+reference=”fig:BDTregr1”}-(a) we consider a training sample on the
+<span class="math notranslate nohighlight">\(\mathbb{R}\)</span> plane <span class="math notranslate nohighlight">\((x,y)\)</span>.</p>
+<p><img alt="Regression example.[[fig:BDTregr1]]{#fig:BDTregr1label=&quot;fig:BDTregr1&quot;}" src="Section10Bilder/BDTregr1.png" />{#fig:BDTregr1
+width=”100%”}</p>
+<p>The idea is again the same as the one used for the classification: given
+a set of variables assign the correct category. Here the only difference
+is that the category are defined on a continuous sample. In this example
+the variable is <span class="math notranslate nohighlight">\(x\)</span> while <span class="math notranslate nohighlight">\(y\)</span> represent the continuous category
+(target). The strategy remains to set cuts such that the obtained
+partitions contain elements with similar characteristics (in
+classification we were grouping signal or background events here we
+group events with similar values of <span class="math notranslate nohighlight">\(y\)</span>). The first cut is placed at
+<span class="math notranslate nohighlight">\(x=2.5\)</span> (b) (intuitively, the left points are on average below the right
+ones). The we continue setting the cuts values at <span class="math notranslate nohighlight">\(x=2.0\)</span> (c), <span class="math notranslate nohighlight">\(x=3.0\)</span>
+(d), <span class="math notranslate nohighlight">\(x=1.0\)</span> (e), <span class="math notranslate nohighlight">\(x=4.1\)</span> (f). The procedure stops when we reach a
+minimum number of points in each of the regions. As in the
+classification case the minimum number of points gives an handle to
+limit the over-training. The sequence of cuts is in practice encoded in
+a binary tree as shown in Fig. <a class="reference external" href="#fig:BDTregr2">1.8</a>{reference-type=”ref”
+reference=”fig:BDTregr2”}. Once the regions/leaves are defined we can
+fit a simple model in each of them. By far the most used fit model is a
+simple constant ending up as in the classification case with a
+piece-wise constant function over the variables’ space. The values shown
+in the leaves of Fig. <a class="reference external" href="#fig:BDTregr2">1.8</a>{reference-type=”ref”
+reference=”fig:BDTregr2”} represent the results of the fit to a constant
+shown as red lines in (g). The model used to fit the points in the final
+leaves can be more involved than a simple constant. If you know that the
+the points in the leaves will be distributed according to some
+principle, you can try to fit them with a parametric description of that
+distribution. The advantage of using a more complex model instead of a
+simple constant is that you will extract more information from the data
+(e.g. instead of just getting the mean value in a region you can extract
+also the width of the distribution or other parameters). To apply the
+regression tree we just need to take the particular point in the
+variables’ space we want to regress and, as in the case of the
+classifier, pass it through the decision tree to obtain the regressed
+value.</p>
+<p><img alt="Decision tree corresponding to the regression example inFig. 1.7{reference-type=&quot;ref&quot;reference=&quot;fig:BDTregr1&quot;}.[[fig:BDTregr2]]{#fig:BDTregr2label=&quot;fig:BDTregr2&quot;}" src="Section10Bilder/BDTregr2.png" />{#fig:BDTregr2
+width=”50%”}</p>
+</div>
+<div class="section" id="stabilizing-the-decision-trees">
+<h3>Stabilizing the decision trees<a class="headerlink" href="#stabilizing-the-decision-trees" title="Permalink to this headline">¶</a></h3>
+<p>Decision trees as described in the previous sections, cannot be used
+because are too sensitive to the particular statistical fluctuations of
+the training sample or in other words they have large variance. The
+situation changes when we apply aggregation techniques to stabilize the
+algorithm. The two most commonly used in HEP are “bagging” and
+“boosting”. In the following we will see how they work when applied to
+decision trees, but the aggregation methods are completely general and
+can be applied to any classification/regression MVA.</p>
+<div class="section" id="bagging">
+<h4>Bagging<a class="headerlink" href="#bagging" title="Permalink to this headline">¶</a></h4>
+<p>Bagging stands for Bootstrapping AGGregation. The intuition is to use a
+resampling technique, the bootstrapping, shown in
+Sec. <a class="reference external" href="#sec:resampling">[sec:resampling]</a>{reference-type=”ref”
+reference=”sec:resampling”} to smooth out the statistical fluctuations
+of the specific training sample. We will see how it works by using as an
+example the regression problem in
+Fig. <a class="reference external" href="#fig:bagging1">1.9</a>{reference-type=”ref”
+reference=”fig:bagging1”}.</p>
+<p><img alt="Decision tree example for bagging.[[fig:bagging1]]{#fig:bagging1label=&quot;fig:bagging1&quot;}" src="Section10Bilder/bagging1.png" />{#fig:bagging1
+width=”80%”}</p>
+<p>Suppose the red curve represents the truth mapping between the
+variables’ space and <span class="math notranslate nohighlight">\(y\)</span>; <span class="math notranslate nohighlight">\(y = f(x)\)</span>. The training sample, represented
+by the grey dots is just one sampling from the truth distribution. The
+Bagging technique takes N datasets independently drawn with repetition
+from the initial training sample, for each it builds a tree and it
+aggregates the resulting trees (computes the average response on the
+different trees). $<span class="math notranslate nohighlight">\(\begin{aligned}
+       &amp;D^1 = &amp;\{ (x_1^{(1)},y_1^{(1)}), (x_2^{(1)},y_2^{(1)}), \ldots, (x_n^{(1)},y_n^{(1)})  \}\\
+       &amp;D^2= &amp;\{ (x_1^{(2)},y_1^{(2)}), (x_2^{(2)},y_2^{(2)}), \ldots, (x_n^{(2)},y_n^{(2)})  \}\\
+       &amp;\ldots&amp; \\
+       &amp;D^N = &amp;\{ (x_1^{(N)},y_1^{(N)}), (x_2^{(N)},y_2^{(N)}), \ldots, (x_n^{(N)},y_n^{(N)})  \}\end{aligned}\)</span><span class="math notranslate nohighlight">\(
+For each of the resampled datasets \)</span>D^i<span class="math notranslate nohighlight">\(, given a value of \)</span>x<span class="math notranslate nohighlight">\( we will
+get a regressed value of \)</span>y(i)<span class="math notranslate nohighlight">\(. Suppose that the estimator of \)</span>Y<span class="math notranslate nohighlight">\( is
+unbiased: \)</span>E[Y] = y = f(x)<span class="math notranslate nohighlight">\(, the variance (square distance from the true
+value) is \)</span>E[(Y-y)^2] = \sigma^2(Y)<span class="math notranslate nohighlight">\(. If we define
+\)</span>Z =  \frac{1}{N}\sum_{i=1}^Ny(i)<span class="math notranslate nohighlight">\(, its expectation value is
+\)</span>E[Z] = \frac{1}{N}\sum_{i=1}^N y = y<span class="math notranslate nohighlight">\( and its variance is
+\)</span>E[(Z-y)^2] = E[(Z-E[Z])^2] = \sigma^2(Z) = \sigma^2(\frac{1}{N}\sum_{i=1}^Ny(i)) = \left( \frac{1}{N} \right)^2 \sigma^2 (\sum_{i=1}^Ny(i)) = \frac{1}{N}\sigma^2(y)<span class="math notranslate nohighlight">\(.
+The larger the number of resampling the smaller the variance.\
+The same technique can be applied to classification problems. The only
+difference is that the classes instead of being defined in a continuous
+dataset are defined on a discrete one \)</span>c_i , , , i=1, \ldots, n$ and
+so the numerical average over the different trees becomes a majority
+vote.</p>
+</div>
+<div class="section" id="boosting">
+<h4>Boosting<a class="headerlink" href="#boosting" title="Permalink to this headline">¶</a></h4>
+<p>The intuition behind the boosting aggregation technique is to train
+several trees sequentially, each learning from the errors of the
+previous ones [&#64;ihler]. Let’s take as an example the classification
+problem in Fig. <a class="reference external" href="#fig:boost1">1.10</a>{reference-type=”ref”
+reference=”fig:boost1”}.</p>
+<p><img alt="Decision tree example for boosting.[[fig:boost1]]{#fig:boost1label=&quot;fig:boost1&quot;}" src="Section10Bilder/boosting1.png" />{#fig:boost1
+width=”100%”}</p>
+<p>We have two variables <span class="math notranslate nohighlight">\((x^1, x^2)\)</span> and two classes: signal in red and
+background in blue (see Fig. <a class="reference external" href="#fig:boost1">1.10</a>{reference-type=”ref”
+reference=”fig:boost1”} (a)). We assign a numerical value to signal and
+background (e.g. s = +1; b = -1), the reason for this will become clear
+when we will discuss the details of the boosting algorithm. In (b) we
+have trained a single level decision tree (which just corresponds to a
+single cut on the <span class="math notranslate nohighlight">\(x^2\)</span> variable). The tree assigns the points above the
+cut to signal and the ones below to background. It correctly classifies
+4 signal events while it mis-classifies one background event as signal
+and it correctly classifies 5 background events but it mis-classifies 3
+signal events as background. The idea here is to focus on the
+misclassified events, so we grow a second tree but this time we apply a
+weight to the events. We increase the weight of the misclassified and
+reduce the weight to the correctly classified as shown in (c); the
+larger/smaller events’ weights are pictured with larger/smaller fonts.
+Then we train a new tree like in (d). This time because of the different
+weights it will obviously differ from the previous one and it will find
+it to be more discriminating to set a cut on the <span class="math notranslate nohighlight">\(x^1\)</span> variable. This
+tree correctly classifies all the signal events below the cuts,
+correctly classifies six background events and mis-classifies 3 events
+above the cut. Repeating the procedure we increase the weights of the
+misclassified events and decrease the ones of the events we classified
+correctly as in (e). Then we train a new tree as in (f) and again repeat
+the procedure.<br />
+As a last step (see Fig. <a class="reference external" href="#fig:boost2">1.11</a>{reference-type=”ref”
+reference=”fig:boost2”}) we sum the trees we obtained with some weights
+which we will derive below. The regions that sum to a positive value
+will be assigned to signal while the ones obtaining a negative value to
+background. The results is that the final classifier is more complex and
+performant than any of the intermediate ones.</p>
+<p><img alt="Composition of the different trees.[[fig:boost2]]{#fig:boost2label=&quot;fig:boost2&quot;}" src="Section10Bilder/boosting2.png" />{#fig:boost2
+width=”100%”}</p>
+<p><br />
+Back on how to set the weights. There are several different algorithms
+to compute the boost weights: AdaBoost, GradientBoost, etc… Here we
+will describe the adaptive boost (AdaBoost). The algorithm is described
+by the pseudo-code in Fig. <a class="reference external" href="#fig:boost3">1.12</a>{reference-type=”ref”
+reference=”fig:boost3”}.</p>
+<p><img alt="AdaBoost pseudo-code.[[fig:boost3]]{#fig:boost3label=&quot;fig:boost3&quot;}" src="Section10Bilder/boosting3.png" />{#fig:boost3
+width=”100%”}</p>
+<p>The algorithm starts from a uniform set of weights and it evolves them
+based on the mis-classifications. It starts by training a classifier (in
+our case a decision tree, but it could be any) based on the training
+sample (X,Y) and the initial set of weights (w). Then it applies the
+classifier to the dataset (X) obtaining a prediction <span class="math notranslate nohighlight">\(\hat{Y}\)</span>. At this
+point it checks how many errors it made. It does it by producing a
+vector of mistakes (Y==<span class="math notranslate nohighlight">\(\hat{Y}\)</span> is a vector with “1” where the
+predicted class is correct and “0” when wrong) and taking the scalar
+product with the vector of weights. The result is a number “e” which
+represents the error rate. With this it computes <span class="math notranslate nohighlight">\(\alpha(i)\)</span> which is a
+smooth decreasing function of the error rate, for an error rate greater
+than 50% <span class="math notranslate nohighlight">\(\alpha\)</span> is negative, while it is positive for error rates
+below 50%). With this coefficient it computes a new vector of weights by
+multiplying the original one by
+<span class="math notranslate nohighlight">\(w_j \to w_j \exp(-\alpha_i\cdot(Y_j\cdot\hat{Y}_j)\)</span>. At the very
+beginning, we assigned a numerical value of “+1” to the signal and “-1”
+to the background. Because of this <span class="math notranslate nohighlight">\(Y\cdot\hat{Y}\)</span> is a vector of “+1”
+and “-1”. If the predicted and the true class coincide they will have
+equal signs and so the product will give a “+1”, while if the prediction
+does not match the true value the signs will be opposite and the product
+give a “-1”. When multiplied by <span class="math notranslate nohighlight">\(\alpha_i\)</span>, the weight of the correct
+matches will be decreased, the weight of the wrong ones increased.
+Finally the vector of weights is normalized. This procedure will be
+repeated Nboost times which is a parameter that can be optimized to get
+the best performance from the classifier. The final classifier is the
+weighted sum of all the prediction.\</p>
+</div>
+</div>
+<div class="section" id="comments-on-bdt">
+<h3>Comments on BDT<a class="headerlink" href="#comments-on-bdt" title="Permalink to this headline">¶</a></h3>
+<p>When using any MVA technique is extremely important to check for
+over/under-traning. Overtraining happens when the complexity of the
+classifier allows it to learn about the specific statistical fluctuation
+(noise) of the training dataset. This can be due to a traning sample too
+small for the number of variables used or a poorly chosen set of
+parameters in the algorithm training. The result of overtraining is to
+obtain an artificially good result in the classification/regression
+because the algorithms learns too many irrelevant detail of the traning
+sample at hand. Fig. <a class="reference external" href="#fig:overtraining">1.13</a>{reference-type=”ref”
+reference=”fig:overtraining”} shows a classifier trained using different
+parameters on the same dataset.</p>
+<p><img alt="Examples of a learning algorithm trained in differentways.[[fig:overtraining]]{#fig:overtraininglabel=&quot;fig:overtraining&quot;} [&#64;CowanMVA]" src="Section10Bilder/overtraining.pdf" />{#fig:overtraining
+width=”100%”}</p>
+<p>The figure on the left shows an example of overtraning. The algorithm is
+able to get a perfect separation between the two classes on the traning
+sample but it will have poor performance on a different dataset that
+will unavoidably have different statistical fluctuations. The middle
+figure shows another case of poor traning (under-training), where the
+algorithm complexity was not allowed to grow sufficiently. The non
+linearities of the training dataset are not model by the algorithm. The
+right picture shows an algorithm correctly trained.<br />
+A common way to check for over/under training is to split the training
+sample in two. On the first segment of data the “training-set”, we train
+the algorithm, on the second one the “test-set” (which is statistically
+independent from the former) we test its performance. A properly trained
+algorithm will show small bias and variance on both the training and the
+test samples.<br />
+An important characteristics of BDTs is that adding correlated variables
+will have little or no effect on the performance of the algorithm. The
+reason for this is that the best variable to cut on will be chosen at
+each step (based for instance on the Gini-index): any useless variable
+will just never be used.</p>
+</div>
+</div>
+<div class="section" id="artificial-neural-networks-sectionnn">
+<h2>Artificial Neural Networks {#SectionNN}<a class="headerlink" href="#artificial-neural-networks-sectionnn" title="Permalink to this headline">¶</a></h2>
+<p>Artificial Neural networks (ANN or NN for short) had a large expansions
+in the ’80s ’90s. Then the interest in these algorithms diminished, but
+they are now back as the state of the art technology in machine learning
+(especially for classification problems) due to the enormous growth in
+power of modern computers (in particular through the use of GPUs). In
+HEP, BDT are presently dominating the scene, but it is conceivable,
+following the machine learning expansion, a return to neural networks in
+the near future.<br />
+As the name suggests, neural networks were initially inspired by the
+goal of producing artificial systems to simulate the functioning of a
+brain. In reality the structure of an artificial neural network is only
+loosely inspired by nature. The modelling of a basic unit (a neuron) is
+shown in Fig. <a class="reference external" href="#fig:neuron">1.14</a>{reference-type=”ref”
+reference=”fig:neuron”}.</p>
+<p><img alt="Sketch of a brain cell, the neuron.[[fig:neuron]]{#fig:neuronlabel=&quot;fig:neuron&quot;} [&#64;neuron]" src="Section10Bilder/neuron.png" />{#fig:neuron
+width=”50%”}</p>
+<p>A neuron receives signals through the dendrites (input wires), process
+them in the body of the cell (the computational unit) and outputs a
+signal through the axion. The axion is then connected to one of more
+other neurons building a network. This basic idea is replicated through
+software in a neural network [&#64;Ng].<br />
+We will model a neuron as in
+Fig. <a class="reference external" href="#fig:logisticUnit">1.15</a>{reference-type=”ref”
+reference=”fig:logisticUnit”}. A number of inputs are fed to a
+computational unit which provides an output.</p>
+<p><img alt="Representation of a computationalunit.[[fig:logisticUnit]]{#fig:logisticUnitlabel=&quot;fig:logisticUnit&quot;}" src="Section10Bilder/logisticunit.png" />{#fig:logisticUnit
+width=”50%”}</p>
+<p>On the left are the inputs (in this case <span class="math notranslate nohighlight">\((x_1, x_2, x_3\)</span>)), in the
+centre the computational unit and on the right the output which is a
+function of the inputs. Conventionally the first input is <span class="math notranslate nohighlight">\(x_1\)</span> is fixed
+to “1” and it is called the bias neuron (this will simplify the
+vectorization of the method). The vector <span class="math notranslate nohighlight">\(\theta\)</span> contains all the
+parameters describing the neural network (called “weights”). The output
+function (also called activation function) is typically given by a
+sigmoid (but any well behaved turn-on function would do):
+$<span class="math notranslate nohighlight">\(g(z) = \frac{1}{1+e^{-z}}\)</span><span class="math notranslate nohighlight">\( where
+\)</span>z = \theta_{1,1}~x_1 + \theta_{1,2}~x_2 + \theta_{1,3}~x_3$ This simple
+neural network with just 1 layer is called single layer perceptron.<br />
+More complex networks can be put together as the one in
+Fig. <a class="reference external" href="#fig:NN">1.16</a>{reference-type=”ref” reference=”fig:NN”}.</p>
+<p><img alt="Example of a neural network with one hidden layer.[[fig:NN]]{#fig:NNlabel=&quot;fig:NN&quot;}" src="Section10Bilder/NN.png" />{#fig:NN width=”80%”}</p>
+<p>The first layer is called the input layer (Layer 1), the last layer is
+the output layer (Layer 3) and the layer in the midlle (which generally
+might be more than one) is called hidden layer. The <span class="math notranslate nohighlight">\(a_i^{(j)}\)</span> is the
+activation unit <span class="math notranslate nohighlight">\(i\)</span> in layer <span class="math notranslate nohighlight">\(j\)</span>. We can translate this schematics into
+its corresponding mathematical expression: $<span class="math notranslate nohighlight">\(\begin{aligned}
+a_1^{(2)} &amp; = &amp; g\left(\theta_{1,0}^{(1)}~x_0 + \theta_{1,1}^{(1)}~x_1 + \theta_{1,2}^{(1)}~x_2 + \theta_{1,3}^{(1)}~x_3\right)\\
+a_2^{(2)} &amp; = &amp; g\left(\theta_{2,0}^{(1)}~x_0 + \theta_{2,1}^{(1)}~x_1 + \theta_{2,2}^{(1)}~x_2 + \theta_{2,3}^{(1)}~x_3\right)\\
+a_3^{(2)} &amp; = &amp; g\left(\theta_{3,0}^{(1)}~x_0 + \theta_{3,1}^{(1)}~x_1 + \theta_{3,2}^{(1)}~x_2 + \theta_{3,3}^{(1)}~x_3\right)\\\end{aligned}\)</span><span class="math notranslate nohighlight">\(
+where \)</span>x_0  = 1<span class="math notranslate nohighlight">\( a bias neuron.\
+Similarly, the output layer can be written as:
+\)</span><span class="math notranslate nohighlight">\(h_\theta(x) = a_1^{(3)} =  g\left(\theta_{1,0}^{(2)}~a_0^{2} + \theta_{1,1}^{(2)}~a_1^{2} + \theta_{1,2}^{(2)}~a_2^{2} + \theta_{1,3}^{(2)}~a_3^{2}\right)\\\)</span><span class="math notranslate nohighlight">\(
+where \)</span>a_0^{2} = 1<span class="math notranslate nohighlight">\( is again a bias neuron. The process of going from
+the input to the output layer, performing all the computations is called
+**forward propagation**.\
+It is worth noting that each of the nodes of the neural network only
+performs a *simple action* on the inputs; the complexity of the final
+result is given by the composition of all the simple actions, i.e. by
+the network architechture. Another important point is that at each
+hidden layer, it's the network itself which will decide what the inputs
+\)</span>a_i^{(j)}<span class="math notranslate nohighlight">\( will be. The assignment of the weights is obtained by the
+traning step.\
+The optimization of the weights \)</span>\theta<span class="math notranslate nohighlight">\( of the neural network is done
+by minimizing a cost function based on the error between the predicted
+classification and the true one. You can think of it as:
+\)</span><span class="math notranslate nohighlight">\(\mbox{cost}(i) \sim (h_\theta(x^{(i)}) - y^{(i)}) ^2\)</span><span class="math notranslate nohighlight">\( basically how
+close is the classification \)</span>h_\theta(x^{(i)})<span class="math notranslate nohighlight">\( to the true value
+\)</span>y^{(i)}$.<br />
+The actual definition of the cost function and the algorithm to
+efficiently solve the minimization problem is beyond the scope of this
+notes (see [&#64;Ng]). The most used algorithm is called “back-propagation”
+and generally speaking it finds the optimal weights by minimizing the
+classification error at each layer, starting from the output layer and
+proceding backwards to the first hidden layer.</p>
+</div>
+<div class="section" id="mva-examples">
+<h2>MVA examples<a class="headerlink" href="#mva-examples" title="Permalink to this headline">¶</a></h2>
+<p><strong>MiniBooNE</strong> [&#64;miniboone] was the first experiment that published an
+analysis based on a BDT selection. The experiment searches for neutrino
+oscillation and need to separate events generated by electrons, muons or
+neutral pions. The identification process is based on Cerenkov radiation
+in a tank with its inner surface covered with photomultiplier (PMT). The
+classifier is based on a BDT and the chosen inputs are the number of
+photomultiplier hits, the energy of the candidate and the radius of the
+reconstructed Cerenkov rings. Notice that in this case, instead of using
+as input variables the output of the PMTs, the information is
+pre-processed and “high-level” variables are instead used.</p>
+<p><img alt="Events from MiniBooNe: (left) an electron candidate, (middle) a muoncandidate, (right) a candidate.[[fig:miniboone]]{#fig:miniboonelabel=&quot;fig:miniboone&quot;}" src="Section10Bilder/miniboone.png" />{#fig:miniboone
+width=”100%”}</p>
+<p><br />
+Another example of a classifier based on a BDT is the <strong>photon
+identification</strong> in the CMS <span class="math notranslate nohighlight">\(H\to \gamma \gamma\)</span> analysis [&#64;hig13001]. A
+high energy photon is reconstructed with the electromagnetic calorimeter
+where it develops a narrow electromagnetic shower. A jet faking a photon
+is typically a jet where a light neutral meson (<span class="math notranslate nohighlight">\(\pi^0\)</span> or <span class="math notranslate nohighlight">\(\eta\)</span>) gets
+most of the momentum of the jet. The neutral meson decays to a photons
+pair but because of its boost (the analysis searches for events with
+high energy photons) the two photons are collimated and their showers
+tend to overlap in the electromagnetic calorimeter. A jet faking a
+photon will then appear as a shower in the electromagnetic calorimeter
+with a shower shape which on average will be broader than a true photon.
+The classifier used in CMS to separate photons from jets faking photons
+is based on a BDT trained on several input variables which describe the
+shape of the shower. The algorithm is trained on a simulated (MC) set of
+photons and jets. The reason why we use simulations instead of collision
+data is that by simulating ourself the datasets, we know how to assign
+unabiguously each candidate to its correct category (photon/jet).<br />
+<br />
+Typically the output of a classifier will not be a binary value
+(“signal/background”),but a continuous value on which we will set a cut
+to separate the two classes. In
+Fig. <a class="reference external" href="#fig:classifier">1.19</a>{reference-type=”ref”
+reference=”fig:classifier”} we see the output of four different
+classifiers applied to the same toy dataset. An easy way to compare the
+performance of a classifier is the <strong>“receiving operator curve” (ROC)</strong>
+show in Fig. <a class="reference external" href="#fig:classifier">1.19</a>{reference-type=”ref”
+reference=”fig:classifier”} (bottom). This curve shows the background
+rejection (which is simply <span class="math notranslate nohighlight">\(1-\epsilon_{bkg}\)</span>) vs. the signal
+efficiency. The best classifier will show a curve with a sharp edge in
+the top right of the plot (both maximal background rejection and maximal
+signal efficiency). A classifier which assigns randomly events to signal
+and background will result in a ROC curve which is just the diagonal
+<span class="math notranslate nohighlight">\(1-\epsilon_{bkg} = 1 - \epsilon_{sig}\)</span> (i.e.
+<span class="math notranslate nohighlight">\(\epsilon_{bkg} = \epsilon_{sig}\)</span>). A standard figure of merit for to
+compare classifiers performance is the area under the ROC curve (AUC).
+In HEP the performance are often compared by fixing the efficiency at a
+given value (e.g. 90%) and then comparing the background rejections.\</p>
+<p><img alt="Example of a classifier output (left) and the corresponding ROCcurves [&#64;TMVA].[[fig:classifier]]{#fig:classifierlabel=&quot;fig:classifier&quot;}" src="Section10Bilder/classification1.png" />{#fig:classifier
+width=”100%”} <img alt="Example of a classifier output (left) and thecorresponding ROC curves [&#64;TMVA].[[fig:classifier]]{#fig:classifierlabel=&quot;fig:classifier&quot;}" src="Section10Bilder/classification2.png" />{#fig:classifier
+width=”60%”}</p>
+<p><br />
+A typical regression problem encountered in HEP comes with <strong>energy
+corrections</strong>. Let’s take again as an example the energy corrections
+applied on electrons in CMS [&#64;egm11001]. An electron will deposit most
+of its energy in the electromagnetic calorimeter. However some of it
+will be emitted by bremstrahlung in the material in front of the
+calorimeter, some in the non-instrumented gaps of the calorimeter and
+some might even not be correctly collected by the clustering
+algorithm<a class="footnote-reference brackets" href="#id2" id="id1">1</a>. The regression problem consists in assigning an energy
+value (which is continuous, that’s why is a regression and not a
+classification) to the electron which is the closest to its generated
+energy. The algorithm is trained on a simulated (MC) sample of
+electrons. The reason to use simulation instead of data is to know
+precisely the true value of energy which is the target of the
+regression. The input variables chosen for the BDT are: the energy sum
+obtained by the clustering algorithm, several shower shape variables and
+the position of the electromagnetic shower in the detector. To show the
+effect of the regression, CMS used a sample of Z-bosons decaying to
+<span class="math notranslate nohighlight">\(e^+ e^-\)</span>. The better the estimation of the energy, the better the
+energy resolution, the narrower is the invariance mass peak is going to
+be. In Fig. <a class="reference external" href="#fig:regression">1.20</a>{reference-type=”ref”
+reference=”fig:regression”} the blue curve is the invariant mass of the
+<span class="math notranslate nohighlight">\(Z\to e^+e^-\)</span> using a very simple clustering algorithm where only the
+energy collected in a 5x5 matrix around the position of the electron is
+used; in red are the same events, this time using the CMS clustering
+algorithm (called “supercluster” in the legend): by better collecting
+the energy of the particle, the resolution on the invariant mass
+improves; the histogram in black shows the final improvement obtained
+from the energy regression described above on the electrons.</p>
+<p><img alt="Effect of the energy regression on the  invariantmass.[[fig:regression]]{#fig:regressionlabel=&quot;fig:regression&quot;}" src="Section10Bilder/regression.png" />{#fig:regression
+width=”50%”}</p>
+<p><br />
+<br />
+MVAs are very commonly used also outside HEP. All major companies use
+them: searching suggestions, translate text, vision, voice recognition,
+tuning of websites advertisements, look and feel, suggestions for
+purchasing, etc… A simple non HEP example is the face recognition
+used in digital cameras. Faces are decomposed in basic features: left
+right symmetry, two darker shapes in the top half of the picture (the
+eyes), around the middle a vertical darker shape (nose) and a horizontal
+shape in the bottom half of the picture (the mouth). The algorithm is
+trained by showing a large sample of signal (faces) and background
+(non-faces). In Fig. <a class="reference external" href="#fig:nonHEP">1.21</a>{reference-type=”ref”
+reference=”fig:nonHEP”} you can see a few examples of the classifier
+output applied on different pictures.</p>
+<p><img alt="Example of the output of a face recognition classifier: (top left) aface recognized as such; (top right) a cloud recognized as a face;(bottom left) pine leaves not recognized a faces; (bottom right) a facewith a particular make up made to trick the face recognitionalgorithm.[[fig:nonHEP]]{#fig:nonHEPlabel=&quot;fig:nonHEP&quot;}" src="Section10Bilder/nonHEP.png" />{#fig:nonHEP
+width=”70%”}</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Cowan academic training lectures on MVA 2008</p></li>
+<li><p>Machine learning classes - youtube</p></li>
+<li><p>Alexander Ihler, University of California Irvine on “Boosting” -
+youtube</p></li>
+<li><p>TMVA [&#64;TMVA]: <a class="reference external" href="http://tmva.sourceforge.net">tmva.sourceforge.net</a></p></li>
+<li><p>Andrew Ng, Stanford: “Machine learning” at Coursera</p></li>
+</ul>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>The CMS calorimeter is build from thousands of <span class="math notranslate nohighlight">\(PbWO_4\)</span> crystals
+each of which is readout by photo-sensitive detector. The light
+detected by these sensors is a function of the energy of the
+inpinging particles. A clustering algorithm groups crystals with
+some significant energy deposit and creates a particle candidate.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="confidenceIntervals.html" title="previous page">Confidence Intervals {#ChapterConfidenceLimits}</a>
+    <a class='right-next' id="next-link" href="unfolding.html" title="next page">Unfolding {#ch:Unfolding}</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Mauro Donega<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

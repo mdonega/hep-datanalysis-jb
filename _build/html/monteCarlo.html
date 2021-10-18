@@ -1,0 +1,867 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monte Carlo methods {#sec:MC} &#8212; Statistical Methods and Data Analysis Techniques</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Statistical inference" href="inference.html" />
+    <link rel="prev" title="Measurements uncertainties {#ch:errors}" href="errors.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Statistical Methods and Data Analysis Techniques</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="preface.html">
+   Preface
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="probability.html">
+   Probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="probabilityDistributions.html">
+   Probability Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="errors.html">
+   Measurements uncertainties {#ch:errors}
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Monte Carlo methods {#sec:MC}
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inference.html">
+   Statistical inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="likelihood.html">
+   Parameter Estimation - Likelihood  {#ChapterParameterEstimations}
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="leastSquares.html">
+   Parameter Estimation - Least Squares {#sec:chi2}
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hypothesisTesting.html">
+   Hypotheses Testing {#ChapterHypothesisTesting}
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="confidenceIntervals.html">
+   Confidence Intervals {#ChapterConfidenceLimits}
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="mva.html">
+   Multivariate Analysis Methods {#ChapterMVA}
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="unfolding.html">
+   Unfolding {#ch:Unfolding}
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/monteCarlo.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pseudo-random-numbers-generators-sectionrandomgenerators">
+   (Pseudo)Random Numbers Generators {#SectionRandomGenerators}
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tests-of-random-generators">
+     Tests of Random Generators
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#arbitrarily-distributed-random-numbers">
+   Arbitrarily distributed Random Numbers
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inverse-of-the-cumulative-distribution">
+     Inverse of the Cumulative Distribution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#acceptance-rejection-method">
+     Acceptance-Rejection Method
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#specially-distributed-random-numbers">
+     Specially distributed Random Numbers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#random-numbers-in-root-and-python">
+     Random numbers in
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       ROOT
+      </span>
+     </code>
+     and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       PYTHON
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monte-carlo-integration">
+   Monte Carlo Integration
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#methods-to-reduce-the-variance">
+     Methods to reduce the Variance
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monte-carlo-simulations">
+   Monte Carlo Simulations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simulation-of-a-physics-process">
+     Simulation of a physics process
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simulation-of-a-detector">
+     Simulation of a detector
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#study-of-reconstruction-programs">
+     Study of reconstruction programs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#physics-reach-of-an-experiment">
+     Physics reach of an experiment
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#toy-modelling">
+     Toy modelling
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="monte-carlo-methods-sec-mc">
+<h1>Monte Carlo methods {#sec:MC}<a class="headerlink" href="#monte-carlo-methods-sec-mc" title="Permalink to this headline">¶</a></h1>
+<p>In this chapter we will discuss an introduction to the so-called Monte
+Carlo (MC) simulations, which use random numbers and a sequential
+description of the operations as basic concepts. Because this method
+uses principles from probability calculations and statistics, it is also
+known as the method of statistical trials. In the next sections, after a
+digression on random number generators, we will describe two of the most
+common applications of Monte Carlo methods: <strong>integration</strong> and
+<strong>simulation</strong>.</p>
+<p><img alt="Randomly distributed needles on a strip which has the width of thelength of one needle. 81 out of 128 needles cross the border of thestrip in this picture." src="Section4Bilder/needledisplay2.pdf" />{#fig:needles
+width=”120mm”}</p>
+<p>Probably the oldest mentioning of a Monte Carlo method, which
+illustrates all its basic elements, is known as the needle experiment by
+Buffon<a class="footnote-reference brackets" href="#id5" id="id1">1</a>. The duke baffled his colleagues in 1777 with a simple method
+to get the number <span class="math notranslate nohighlight">\(\pi\)</span> by simply counting the number of needles thrown
+onto a strip with the same width as the length of the needles <span class="math notranslate nohighlight">\((l)\)</span>. He
+found out that the ratio between the number of needles <span class="math notranslate nohighlight">\((k)\)</span> crossing
+the border of the strip (the slightly darker ones in
+Fig. <a class="reference external" href="#fig:needles">1.1</a>{reference-type=”ref” reference=”fig:needles”})
+and the total number of thrown needles <span class="math notranslate nohighlight">\((n)\)</span> is exactly <span class="math notranslate nohighlight">\(2 / \pi\)</span> (i.e.
+<span class="math notranslate nohighlight">\(k / n = 2 / \pi = p\)</span>). This value is calculated analytically using the
+position dependent probability density to cross the border of the strip,
+which is an <span class="math notranslate nohighlight">\(arccos\)</span> function, mirrored in the middle of the strip (see
+Fig. <a class="reference external" href="#fig:needlemc">1.2</a>{reference-type=”ref” reference=”fig:needlemc”}
+on the left). The picture on the right hand side in
+Fig. <a class="reference external" href="#fig:needlemc">1.2</a>{reference-type=”ref” reference=”fig:needlemc”}
+shows the convergence to the exact value of <span class="math notranslate nohighlight">\(\pi\)</span> with increasing number
+of thrown needles. The dashed line in this figure is the expected error
+for the value of <span class="math notranslate nohighlight">\(\pi\)</span>, which is calculated using the binomial
+distribution for <span class="math notranslate nohighlight">\(k\)</span> by including the error propagation to be
+<span class="math notranslate nohighlight">\(\frac{2n}{k^{2}} \sqrt{np(1-p)} = 2.37 / \sqrt{n}\)</span>.</p>
+<p><img alt="Probabilities for needles to cross the border of the strip dependingon their position between the two borders (left), and the result of a MCsimulation with its error (dashedline)." src="Section4Bilder/needlemcEnglishRotatedPNG.png" />{#fig:needlemc
+width=”\textwidth”}</p>
+<p>Another example for the determination of <span class="math notranslate nohighlight">\(\pi\)</span> is to inscribe a circle
+in a square and drop objects randomly on it (e.g. drops of rain, see
+Fig. <a class="reference external" href="#fig:piMC">1.3</a>{reference-type=”ref” reference=”fig:piMC”}). From
+the ratio of the number of drops ending in the circle to the total
+number of drops in the square one finds that <span class="math notranslate nohighlight">\(\pi = 4 * in / all\)</span>. With
+<span class="math notranslate nohighlight">\(10^6\)</span> drops we found a value of 3.13954.</p>
+<p><img alt="The circle inscribed in a square used to calculate." src="Section4Bilder/piMC.png" />{#fig:piMC width=”50%”}</p>
+<p>As of today, the MC methods are preferably used in numerical mathematics
+if the formulation of the stochastic model is simpler than the
+formulation of the analytic model for the numerical solution of the
+problem. Monte Carlo methods are used in many different areas of
+research. To name just a few of them:</p>
+<ul class="simple">
+<li><p>Numerical problems, such as the calculation of integrals or the
+solution of ordinary or partial differential equations.</p></li>
+<li><p>Quality control of products, for example the determination of the
+lifetime of light bulbs.</p></li>
+<li><p>Problems from operations research, such as transport problems.</p></li>
+<li><p>Decision management using simulations or risk analysis in investment
+banking.</p></li>
+</ul>
+<p>Monte Carlo methods can generally be spilt into three major steps:</p>
+<ul class="simple">
+<li><p>A stochastic model has to be found for the original mathematical
+model, which describes the problem accurately enough.</p></li>
+<li><p>A sequence of random numbers has to be generated, which are then
+used to simulate a realistic situation, and hence have the same
+underlying distribution.</p></li>
+<li><p>Estimates for the original problem have to be found using the
+results coming from the random numbers.</p></li>
+</ul>
+<p>Monte Carlo was eponymous for this process: the problems connected to
+gambling were motivating enough to start thinking about randomness of
+events.\</p>
+<div class="section" id="pseudo-random-numbers-generators-sectionrandomgenerators">
+<h2>(Pseudo)Random Numbers Generators {#SectionRandomGenerators}<a class="headerlink" href="#pseudo-random-numbers-generators-sectionrandomgenerators" title="Permalink to this headline">¶</a></h2>
+<p>True random generators are based on physical processes. Examples can be
+the noise level across a resistor, the time between the arrival of two
+cosmic rays or the number of radioactive decays in a fixed time
+interval. A method from the early applications of Monte Carlo technique
+in high energy physics, used the stopping azimuthal position of a
+cylinder which had been put in rotation by a motor (activated by an
+operator) and turned off by a cosmic ray recorded by a detector.<a class="footnote-reference brackets" href="#id6" id="id2">2</a><br />
+The main issues with these kind of random number generators is that they
+are very slow. The solution adopted is to generate random numbers
+running an algorithm on a computer. By construction the obtained random
+sequence is <em>not</em> random (that’s why they are called pseudo-random).
+We’ll see in the following that the two most important parameters of any
+generator are the period length (how many numbers it can generate before
+it starts to repeat itself) and the correlation between the generated
+numbers.<br />
+A simple and classic generator is the general <em>linear congruential
+generator</em>:
+$<span class="math notranslate nohighlight">\(n_{i+1}=(a\cdot n_{i}+c)\,\,\,\mathrm{mod}\,\,\,m\hspace{8mm} u_{i}=n_{i}/m\)</span><span class="math notranslate nohighlight">\(
+it generates uniformly distributed numbers in the interval (0\...1\].
+The boundary value 0 is usually not included to avoid the divide-by-zero
+danger in case the number is carelessly used in further calculations. We
+will call such a uniform probability density \)</span>U(0,1)<span class="math notranslate nohighlight">\(: \)</span><span class="math notranslate nohighlight">\(\begin{aligned}
+U(0,1) =
+\begin{cases}
+ 1 \qquad &amp;\text{if} \hspace{2mm}0&lt;u\le1,  \\
+ 0 &amp;\text{else}
+\end{cases}\end{aligned}\)</span><span class="math notranslate nohighlight">\( The algorithm uses three integer constants:
+the multiplicand \)</span>a<span class="math notranslate nohighlight">\(, the summand \)</span>c<span class="math notranslate nohighlight">\( and the module \)</span>m<span class="math notranslate nohighlight">\(. Generators
+with the summand \)</span>c = 0<span class="math notranslate nohighlight">\( are called *multiplicative linear congruential
+generators*. The initial value \)</span>n_{1}<span class="math notranslate nohighlight">\( is also called *seed*: the choice
+of the initial value allows to steer the generation process. The
+distribution and the correlation among the first 10'000 values using the
+values \)</span>m = 2^{31}<span class="math notranslate nohighlight">\(, \)</span>a=65539<span class="math notranslate nohighlight">\( and \)</span>c=0$ is shown in
+Fig. <a class="reference external" href="#fig:mulincong">1.4</a>{reference-type=”ref”
+reference=”fig:mulincong”}. It was first used in the sixties by IBM and
+became famous under the name of <em>RANDU</em>, but it had bad performance.\</p>
+<p><img alt="Histogram (100 bins) of the first 10'000 values generated with RANDUand correlations among three sequential values (not binned). 10'000values, generated with the Mersenne Twister-function, have been plottedfor comparison in the same way on the right hand sidegraph." src="Section4Bilder/mulincongPNG.png" />{#fig:mulincong
+width=”\textwidth”}</p>
+<p>It is a general property of a linear generator that a sequential
+<span class="math notranslate nohighlight">\(k\)</span>-tuple of random numbers lies in the <span class="math notranslate nohighlight">\(k\)</span>-dimensional space on
+<span class="math notranslate nohighlight">\((k-1)\)</span>-dimensional hyperplanes<a class="footnote-reference brackets" href="#id7" id="id3">3</a>. The maximal distance between these
+hyperplanes is an important test for linear generators (spectral test).
+The graph on the right hand side in
+Fig. <a class="reference external" href="#fig:mulincong">1.4</a>{reference-type=”ref”
+reference=”fig:mulincong”} compares <em>RANDU</em> (graph in the middle) to a
+far more uniform distribution from the Mersenne Twister generator.<br />
+Nowadays algorithms exist with a period length of <span class="math notranslate nohighlight">\(2^{19937}\)</span> and which
+are (for most practical purposes) uncorrelated. The random generators
+which are implemented in many computer programs are usually sufficient
+for daily use. Nevertheless, in some special cases such as lattice QCD
+calculations, far better generators are needed.<br />
+Two tricks used to get random numbers with minimal correlation and
+extraordinary long period length are:</p>
+<ul class="simple">
+<li><p><strong>Combination:</strong> Two random numbers are generated with a generator
+each, and a new one is generated using the operations <span class="math notranslate nohighlight">\(+\)</span>, <span class="math notranslate nohighlight">\(-\)</span> or
+<em>exclusive-OR</em> at bit level.</p></li>
+<li><p><strong>Rearrangement:</strong> The memory is filled with some random numbers,
+and the result of another generator is used to determine the address
+in the memory for the next random number.</p></li>
+</ul>
+<div class="section" id="tests-of-random-generators">
+<h3>Tests of Random Generators<a class="headerlink" href="#tests-of-random-generators" title="Permalink to this headline">¶</a></h3>
+<p>For an extensive overview see Knuth [&#64;KnuthBook], here we will briefly
+touch upon the most important ones:</p>
+<ul class="simple">
+<li><p><strong>Test for uniform distribution.</strong> The interval [0,1] is divided
+into <span class="math notranslate nohighlight">\(k\)</span> equal sub-intervals of length <span class="math notranslate nohighlight">\(1/k\)</span>. <span class="math notranslate nohighlight">\(N\)</span> random numbers
+<span class="math notranslate nohighlight">\(u_{i}\)</span> are generated and it is counted how many of these numbers
+come to lie in each of the sub-intervals. If we call the number of
+cases in each sub-interval <span class="math notranslate nohighlight">\(N_{i}\)</span>, <span class="math notranslate nohighlight">\(i\)</span> = 1 … <span class="math notranslate nohighlight">\(k\)</span>, then the sum
+$<span class="math notranslate nohighlight">\(\chi^{2}=\sum_{i=1}^{k}\frac{(N_{i}-N/k)^{2}}{N/k}\)</span><span class="math notranslate nohighlight">\( should (for
+\)</span>N / k \geq 10)<span class="math notranslate nohighlight">\( approximately follow a \)</span>\chi^{2}<span class="math notranslate nohighlight">\(-distribution with
+(\)</span>k<span class="math notranslate nohighlight">\(-1) degrees of freedom. This means that on average the ratio
+\)</span>\chi^{2} / (k-1)$ should be 1. Similar expressions can be
+constructed for non-uniform distributions.</p></li>
+<li><p><strong>Test for correlation.</strong> If <span class="math notranslate nohighlight">\(n\)</span> successive random numbers are
+plotted as coordinates in an <span class="math notranslate nohighlight">\(n\)</span>-dimensional space, then these
+points lie on hyperplanes, as shown above. A good generator has many
+hyperplanes which are uniformly distributed.</p></li>
+<li><p><strong>Gap test.</strong> Choose two numbers <span class="math notranslate nohighlight">\(\alpha, \beta\)</span> with
+<span class="math notranslate nohighlight">\(0 \leq \alpha &lt; \beta \leq 1\)</span>. Generate <span class="math notranslate nohighlight">\(r+1\)</span> random numbers, which
+are uniformly distributed in the interval [0,1]. The probability
+that the first <span class="math notranslate nohighlight">\(r\)</span> numbers are not included in the interval
+[<span class="math notranslate nohighlight">\(\alpha, \beta\)</span>] and the last, <span class="math notranslate nohighlight">\(r+1^{st}\)</span> number is included in
+the interval should be
+<span class="math notranslate nohighlight">\(P_{r}=p(1-p)^{r}\,\,\,\rm{with}\,\,\, p=\beta -\alpha\)</span>.<a class="footnote-reference brackets" href="#id8" id="id4">4</a></p></li>
+<li><p><strong>Random walk test</strong> Choose a number <span class="math notranslate nohighlight">\(0 &lt; \alpha &lt;1\)</span>. Build a large
+set of random numbers and note the number of cases <span class="math notranslate nohighlight">\(r\)</span> in which a
+random number is smaller than <span class="math notranslate nohighlight">\(\alpha\)</span>. We expect this to be a
+binomial distribution for <span class="math notranslate nohighlight">\(r\)</span> with <span class="math notranslate nohighlight">\(p = \alpha\)</span>. This test is very
+sensible for large values of <span class="math notranslate nohighlight">\(r\)</span>. The test should also be made for
+the amount of random numbers which are larger than <span class="math notranslate nohighlight">\((1-\alpha)\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="arbitrarily-distributed-random-numbers">
+<h2>Arbitrarily distributed Random Numbers<a class="headerlink" href="#arbitrarily-distributed-random-numbers" title="Permalink to this headline">¶</a></h2>
+<p>Up to now we considered random numbers generated on a constant
+distribution. More generally we will need random numbers distributed
+according to some probability density <span class="math notranslate nohighlight">\(f(x)\)</span>. For example, we might need
+random numbers following a Gaussian distribution. In this section we
+will describe the most important methods to generated arbitrarily
+distributed random numbers.</p>
+<div class="section" id="inverse-of-the-cumulative-distribution">
+<h3>Inverse of the Cumulative Distribution<a class="headerlink" href="#inverse-of-the-cumulative-distribution" title="Permalink to this headline">¶</a></h3>
+<p>A standard procedure to produce random numbers generated according to
+the distribution <span class="math notranslate nohighlight">\(f(x)\)</span> starts with random numbers <span class="math notranslate nohighlight">\(u_{i} \in U(0,1)\)</span>
+and transforms them using the inverse function of the cumulative
+distribution <span class="math notranslate nohighlight">\(F(x)\)</span>:
+$<span class="math notranslate nohighlight">\(f(x)\, dx = U(0,1)\,du\hspace{15mm}\int_{-\infty}^{x}f(t)\,dt = F(x) = u
+\hspace{15mm} x = F^{-1}(u)\)</span><span class="math notranslate nohighlight">\( \)</span>F^{-1}<span class="math notranslate nohighlight">\( is the inverse function of the
+cumulative distribution function \)</span>F(x)<span class="math notranslate nohighlight">\(. The method is illustrated in
+Fig. [1.5](#fig:invFtrans){reference-type=&quot;ref&quot;
+reference=&quot;fig:invFtrans&quot;}. For a sequence of uniform random numbers
+\)</span>u_{i}<span class="math notranslate nohighlight">\(, the random numbers \)</span>x_{i} = F^{-1}(u_{i})<span class="math notranslate nohighlight">\( are distributed
+according to the probability density \)</span>f(x)<span class="math notranslate nohighlight">\(. In practice one matches the
+first x-% quantile of the first distribution to the x-% quantile of the
+target distribution \)</span>f(x)$.</p>
+<p><img alt=" Generation of random numbers on a continuous distribution using the inverse of the cumulative distribution function ." src="Section4Bilder/invFtrans-eps-converted-to.pdf" />{#fig:invFtrans
+width=”40mm” height=”100mm”}</p>
+<p>This method can only be applied if the integral of the probability
+density can be expressed as an analytic function <span class="math notranslate nohighlight">\(F(x)\)</span> and this <span class="math notranslate nohighlight">\(F(x)\)</span>
+is invertible.<br />
+<br />
+<strong>Example</strong>: random numbers generated on an exponential distribution.
+The p.d.f. for the exponential distribution is given by the
+<span class="math notranslate nohighlight">\(f(x;\lambda) = \lambda e^{-\lambda x}\)</span> for <span class="math notranslate nohighlight">\(x\geq 0\)</span>, and it is zero
+for <span class="math notranslate nohighlight">\(x&lt;0\)</span>. The cumulative distribution is:
+$<span class="math notranslate nohighlight">\(u= F(x;\lambda) = \int _{0}^{x}\lambda e^{-\lambda t} dt=1-e^{-\lambda x}\)</span><span class="math notranslate nohighlight">\(
+Inverting the cumulative we get the sequence of exponentially
+distributed random numbers \)</span>x_{i} = - \ln (1 - u_{i} )/ \lambda<span class="math notranslate nohighlight">\(. Or,
+because \)</span>u_{i}<span class="math notranslate nohighlight">\( and \)</span>1-u_{i}<span class="math notranslate nohighlight">\( are equally distributed in the interval
+\)</span>(0…1)<span class="math notranslate nohighlight">\( we can write \)</span>x_{i} = - \ln(u_{i}) / \lambda<span class="math notranslate nohighlight">\(.\
+\
+If we have an application with very large random numbers (for example
+very long lifetimes \)</span>t \gg \tau = 1 / \lambda)<span class="math notranslate nohighlight">\(, then the above method
+might not be precise enough. Very large values of \)</span>x<span class="math notranslate nohighlight">\( are generated by
+very small values of \)</span>u<span class="math notranslate nohighlight">\(. Because floating point numbers are represented
+with finite accuracy in a computer, large values of \)</span>x$ will appear as
+discrete.</p>
+</div>
+<div class="section" id="acceptance-rejection-method">
+<h3>Acceptance-Rejection Method<a class="headerlink" href="#acceptance-rejection-method" title="Permalink to this headline">¶</a></h3>
+<p>The acceptance-rejection method (also known as “hit-or-miss”), even
+though not very efficient, can be used to generate random numbers
+according to a given probability density <span class="math notranslate nohighlight">\(f(x)\)</span> when the cumulative
+distribution function <span class="math notranslate nohighlight">\(F(x)\)</span> cannot be inverted.<br />
+Under the assumption that the variable <span class="math notranslate nohighlight">\(x\)</span> is restricted to some
+interval <span class="math notranslate nohighlight">\(a &lt; x &lt; b\)</span>, we can determine an upper limit <span class="math notranslate nohighlight">\(c\)</span> with
+<span class="math notranslate nohighlight">\(c \geq \max(f(x))\)</span>; where <span class="math notranslate nohighlight">\(\max(f(x))\)</span> is the maximum of <span class="math notranslate nohighlight">\(f(x)\)</span> in the
+interval <span class="math notranslate nohighlight">\([a,b]\)</span>. This is then fed into the following algorithm:</p>
+<ol class="simple">
+<li><p>Choose <span class="math notranslate nohighlight">\(x_{i}\)</span> uniformly from the interval [a,b]:
+<span class="math notranslate nohighlight">\(x_{i} = a + u_{i} \cdot (b-a)\)</span>.</p></li>
+<li><p>Choose another random number <span class="math notranslate nohighlight">\(u_{j} \in U(0,1)\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f(x_{i}) &lt; u_{j} \cdot c\)</span>, then go back to step 1, otherwise
+accept <span class="math notranslate nohighlight">\(x_{i}\)</span> as random number.</p></li>
+</ol>
+<p>The efficiency of this method is given by the ratio between the integral
+of <span class="math notranslate nohighlight">\(f(x)\)</span> over [a,b] and the total area <span class="math notranslate nohighlight">\(c \cdot (b-a)\)</span> of the space
+of all generated pairs <span class="math notranslate nohighlight">\((u_{i}, u_{j})\)</span>. The efficiency can be increased
+if we can find a function <span class="math notranslate nohighlight">\(s(x)\)</span> which has the <em>approximate</em> shape of
+<span class="math notranslate nohighlight">\(f(x)\)</span>, which has an invertible cdf and for all <span class="math notranslate nohighlight">\(x\)</span> in [a,b] and
+<span class="math notranslate nohighlight">\(s(x) &gt; f(x)\)</span>. By means of
+$<span class="math notranslate nohighlight">\(\int_{-\infty}^{x}s(t)dt=S(x)\hspace{20mm}x_{i}=S^{-1}(u_{i})\)</span>$ we can
+apply the following algorithm:</p>
+<ol class="simple">
+<li><p>Choose a random number <span class="math notranslate nohighlight">\(u_{i}\)</span> and calculate
+<span class="math notranslate nohighlight">\(x_{i} = S^{-1}(u_{i})\)</span>.</p></li>
+<li><p>Choose another random number <span class="math notranslate nohighlight">\(u_{j} \in U(0,1)\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f(x_{i}) \leq u_{j} \cdot s(x_{i})\)</span>, then go back to step 1,
+otherwise accept <span class="math notranslate nohighlight">\(x_{i}\)</span> as random number.</p></li>
+</ol>
+<p>The random number <span class="math notranslate nohighlight">\(x_{i}\)</span> corresponds to the <span class="math notranslate nohighlight">\(s(x)\)</span>-distribution. The
+probability that it is accepted in step 3 is so increased because we
+better target the generation of the sampling points.<br />
+Choosing an envelope for the generation of the sampling points is
+particularly useful in case of steeply falling or very “irregular”
+distributions.</p>
+</div>
+<div class="section" id="specially-distributed-random-numbers">
+<h3>Specially distributed Random Numbers<a class="headerlink" href="#specially-distributed-random-numbers" title="Permalink to this headline">¶</a></h3>
+<p><br />
+A random angle <span class="math notranslate nohighlight">\(\phi\)</span>, distributed in <span class="math notranslate nohighlight">\([0, 2 \pi]\)</span>, is obtained by
+<span class="math notranslate nohighlight">\(\phi_{i} = 2 \pi \cdot u_{i}\)</span>. The random unit vector is then simply:
+$<span class="math notranslate nohighlight">\(\cos \phi_{i} \choose \sin \phi_{i}\)</span><span class="math notranslate nohighlight">\(\
+\
+In three dimensions, an additional polar angle
+\)</span>\theta \in [- \pi / 2, \pi / 2]<span class="math notranslate nohighlight">\( is needed (in addition to sin \)</span>\phi<span class="math notranslate nohighlight">\(
+and cos \)</span>\phi<span class="math notranslate nohighlight">\(). According to the differential solid angle
+\)</span><span class="math notranslate nohighlight">\(d\Omega = {\rm sin}\theta\, d\theta\, d\phi = |d\,{\rm cos}\theta|\, d\phi\)</span><span class="math notranslate nohighlight">\(
+we obtain \)</span>\theta_{j} = {\rm arcsin} (2 \cdot u_{j} -1)<span class="math notranslate nohighlight">\( from the
+analytical transformation. For the 3 components of the random unit
+vector we get \)</span>e_{x} = \sin \phi \cdot \cos \theta<span class="math notranslate nohighlight">\(,
+\)</span>e_{y} = \cos \phi \cdot \cos \theta<span class="math notranslate nohighlight">\( and \)</span>e_{z} = \sin \theta<span class="math notranslate nohighlight">\(.\
+\
+This is one of the most commonly used distribution for random numbers.
+The simplest but only approximately correct generator for the random
+numbers \)</span>z_{i}<span class="math notranslate nohighlight">\(, which are distributed according to a Gaussian
+distribution (\)</span>1 / \sqrt{2 \pi} \cdot e^{-x^{2}/2}<span class="math notranslate nohighlight">\() in the interval
+\[-6,6\], is based on the central limit theorem (see
+Fig. [\[fig:CLT\]](#fig:CLT){reference-type=&quot;ref&quot; reference=&quot;fig:CLT&quot;}):
+\)</span><span class="math notranslate nohighlight">\(z_{i}=\sum_{j=1}^{12}u_{j}-6\)</span>$</p>
+</div>
+<div class="section" id="random-numbers-in-root-and-python">
+<h3>Random numbers in <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> and <code class="docutils literal notranslate"><span class="pre">PYTHON</span></code><a class="headerlink" href="#random-numbers-in-root-and-python" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">ROOT</span></code> (TRandom3) and <code class="docutils literal notranslate"><span class="pre">PYTHON</span></code> (import random) use the Mersenne Twister
+algorithm wiht a period of <span class="math notranslate nohighlight">\(2^{19927}-1 \sim 4.3 \cdot 4.3 10^{6001}\)</span>
+equidistributed in up to 623 dimensions (for 32-bit machines). Both
+<code class="docutils literal notranslate"><span class="pre">ROOT</span></code> and <code class="docutils literal notranslate"><span class="pre">PYTHON</span></code> have predefined functions to generate numbers
+according to the most common pdf.</p>
+</div>
+</div>
+<div class="section" id="monte-carlo-integration">
+<h2>Monte Carlo Integration<a class="headerlink" href="#monte-carlo-integration" title="Permalink to this headline">¶</a></h2>
+<p>Monte Carlo techniques can be used to evaluate (definite) integrals:
+$<span class="math notranslate nohighlight">\(I = \int_a^b f(x) dx\)</span><span class="math notranslate nohighlight">\( with \)</span>f(x)<span class="math notranslate nohighlight">\( is any function. The
+straightforward deterministic way to evaluate the integral is to divide
+the range \)</span>[a,b]<span class="math notranslate nohighlight">\( in n intervals and compute \)</span>I<span class="math notranslate nohighlight">\( as: \)</span><span class="math notranslate nohighlight">\(\label{eq:Idet}
+\frac{b-a}{n}\sum_{i=1}^n f(x_i)\)</span><span class="math notranslate nohighlight">\( where \)</span>x_i = a+(i-0.5)(b-a)$. This is
+what is typically called the method of the <em>trapezoid</em>. You can evaluate
+the funciton at the central value of the bin, or at the min and max and
+approximate the function with a linear interpolation, etc …</p>
+<p><img alt="Definite integral computed with the trapezoid method.[wiki]" src="Section4Bilder/trapezoid.png" />{#fig:trapezoid width=”50%”}</p>
+<p>The uncertainty on the integral goes as <span class="math notranslate nohighlight">\(n^{-2}\)</span> in one dimension.<br />
+<br />
+The most naive implementation of the Monte Carlo way of computing the
+integral differs in the choice of the points where we evaluate the sum:
+instead of regularly spaced points we randomly sample the axis:
+$<span class="math notranslate nohighlight">\(x_i = a+ r_i (b-a)\)</span><span class="math notranslate nohighlight">\( with \)</span>r_i<span class="math notranslate nohighlight">\( random numbers uniformly distributed
+in \)</span>[0,1]<span class="math notranslate nohighlight">\(.\
+\
+The first consequence of this approach is that the result is non
+deterministic: different sequences of random numbers will give different
+integral values.\
+\
+The uncertainty on the estimate of the integral \)</span>I<span class="math notranslate nohighlight">\( can be estimated as
+the variance of \)</span>f(x_{i})<span class="math notranslate nohighlight">\( in the following way:
+\)</span><span class="math notranslate nohighlight">\(V[I_{MC}]=\sigma_{I_{MC}}^{2}=V\Big[\frac{b-a}{n}\sum_{i=1}^{n}f(x_{i})\Big]=
+\Big(\frac{b-a}{n}\Big)^{2}V\Big[\sum_{i=1}^{n}f(x_{i})\Big]=\frac{(b-a)^{2}}{n}V[f(x_{i})]\)</span><span class="math notranslate nohighlight">\(
+This equation shows us that the accuracy of the computation decreases
+with \)</span>1/\sqrt{n}<span class="math notranslate nohighlight">\(.\
+\
+To compute integrals in larger dimensions with the trapezoidal method
+you need to create an d-dimensional equidistand grid of points, evaluate
+the function at those points and sum over the d-dimensional trapezoid.
+The uncertainty of the trapezoidal method in d-dimensions goes as
+\)</span>n^{-2/d}<span class="math notranslate nohighlight">\(, while the uncertainty of the Monte Carlo approach is
+\)</span>1/\sqrt{n}$ in any dimension.\</p>
+<div class="section" id="methods-to-reduce-the-variance">
+<h3>Methods to reduce the Variance<a class="headerlink" href="#methods-to-reduce-the-variance" title="Permalink to this headline">¶</a></h3>
+<p>The Monte Carlo integration shown above is just the most naive
+implementation of this technique. There are several ways to improve the
+numerical result (reducing the variance)<br />
+<br />
+<br />
+Simply dividing the range of integration in two regions and generating
+half of the Monte Carlo points in each of the regions reduces the
+variance. The reason is that in this way we allow a more uniform
+sampling of the distribution.<br />
+<br />
+<br />
+Given that we know how the integrand <span class="math notranslate nohighlight">\(f(x)\)</span> behaves, we can sample the
+distribution with higher density of random points where the function is
+varying more rapidly. It’s like in the stratification but this time the
+intervals are chosen in a more cleverer way.<br />
+<br />
+<br />
+Because the variance of the Monte Carlo result is proportional to the
+variance of the integrand, it makes sense to transform the integral to
+get a new integral with a smaller variance than the original one. By
+introducing a function <span class="math notranslate nohighlight">\(g(x)\)</span> we can write: $<span class="math notranslate nohighlight">\(\begin{aligned}
+\int_{a}^{b} f(x)dx=\int_{a}^{b} \Big[\frac{f(x)}{g(x)}\Big]g(x)dx =
+\int_{A}^{B} \Big[\frac{f(x)}{g(x)}\Big]dv(x)
+\quad \text{with }v(x)=\int g(x)dx \end{aligned}\)</span><span class="math notranslate nohighlight">\( The variance of the
+new result is now proportional to the one of \)</span>f(x)/g(x)<span class="math notranslate nohighlight">\( instead of
+being proportional to \)</span>f(x)<span class="math notranslate nohighlight">\( alone. If \)</span>g(x)<span class="math notranslate nohighlight">\( has been chosen carefully,
+the method of importance sampling allows us to reduce the variance of
+the Monte Carlo integration considerably. But the function \)</span>g(x)<span class="math notranslate nohighlight">\( has to
+be integrable and invertible, and it has to describe the original
+function \)</span>f(x)<span class="math notranslate nohighlight">\( appropriately enough.\
+\
+\
+This is similar to importance sampling except that instead of dividing
+by g(x) subtract it:
+\)</span><span class="math notranslate nohighlight">\(I = \int f(x) dx = \int [f(x) - g(x)] dx + \int g(x) dx\)</span><span class="math notranslate nohighlight">\( Here
+\)</span>\int g(x) dx<span class="math notranslate nohighlight">\( must be known and \)</span>g<span class="math notranslate nohighlight">\( is chosen such that \)</span>f-g<span class="math notranslate nohighlight">\( has a
+smaller variance than \)</span>f<span class="math notranslate nohighlight">\(. This method does not risk the instability of
+importance sampling, nor is it necessary to invert the integral of
+\)</span>g(x)<span class="math notranslate nohighlight">\(.\
+\
+\
+Up to now the Monte Carlo points were all independent. But looking at
+the variance of two general functions:
+\)</span><span class="math notranslate nohighlight">\(V[f_1(x)+f_2(x)] = V[f_1(x)] + V[f_2(x)] + 2cov[f_1(x),f_2(x)]\)</span><span class="math notranslate nohighlight">\( and
+writing the integral as \)</span>I = \int_a^b f = \int_a^b(f_1 + f_2) dx<span class="math notranslate nohighlight">\( we
+observe that we can reduce the covariance of \)</span>I<span class="math notranslate nohighlight">\( by introducing a large
+negative correlation.\
+\
+**Example**  Suppose that we know that \)</span>f(x)<span class="math notranslate nohighlight">\( is a monotonically
+increasing function of \)</span>x<span class="math notranslate nohighlight">\(. Then let \)</span>f_1 = 1/2 f(x)<span class="math notranslate nohighlight">\( and
+\)</span>f_2 = 1/2 f(b-(x-a))<span class="math notranslate nohighlight">\(. Clearly the integral of \)</span>(f_1 +f_2)<span class="math notranslate nohighlight">\( is just the
+integral of \)</span>f<span class="math notranslate nohighlight">\(. However, since \)</span>f<span class="math notranslate nohighlight">\( is monotonically increasing, \)</span>f_1<span class="math notranslate nohighlight">\(
+and \)</span>f_2<span class="math notranslate nohighlight">\( are negatively correlated; when \)</span>f_1<span class="math notranslate nohighlight">\( is small, \)</span>f_2<span class="math notranslate nohighlight">\( is large
+and vice versa. If this negative correlation is large enough,
+\)</span>V [f_1 + f_2] &lt; V [f]$.</p>
+</div>
+</div>
+<div class="section" id="monte-carlo-simulations">
+<h2>Monte Carlo Simulations<a class="headerlink" href="#monte-carlo-simulations" title="Permalink to this headline">¶</a></h2>
+<p>We will briefly describe in this section the typical applications of
+Monte Carlo techniques in high energy physics: simulation of a physics
+process, simulation of a detector, study of reconstruction programs,
+physics reach of an experiment, “toy” experiments.</p>
+<div class="section" id="simulation-of-a-physics-process">
+<h3>Simulation of a physics process<a class="headerlink" href="#simulation-of-a-physics-process" title="Permalink to this headline">¶</a></h3>
+<p>In particle physics, “generators” are programs used to simulate the
+production (and decays) of particles. The generators allow to compute
+the full kinematics of the process and to get the distributions of the
+observables, which are typically impossible to derive with analytical
+methods. The description of a proton proton collision for example
+requires the understanding of several components: the hard scatter
+(matrix elements + pdf), initial/final state radiation, parton showering
+and hadronization and decays of the generated final states. This kind of
+process can be treated only with Monte Carlo simulations. An
+introduction to Monte Carlo generators in high energy physics can be
+found in [&#64;MCgen].</p>
+</div>
+<div class="section" id="simulation-of-a-detector">
+<h3>Simulation of a detector<a class="headerlink" href="#simulation-of-a-detector" title="Permalink to this headline">¶</a></h3>
+<p>Once the particles are generated we will need to understand how they
+will be “seen” by a detector. This requires basically two steps, which
+in jargon are called “simulation” and “digitization”. In the first the
+particles are propagated through the detector simulating their
+interactions with all sensitive and passive materials. For instance a
+high energy photon hitting a calorimeter will create an electromagnetic
+shower, while a charged particle will deposit a fraction of its energy
+in a silicon layer. These phenomena are simulated with standard programs
+like <code class="docutils literal notranslate"><span class="pre">GEANT</span></code> or <code class="docutils literal notranslate"><span class="pre">FLUKA</span></code>, <code class="docutils literal notranslate"><span class="pre">MARS</span></code> etc… which contain software libraries
+describing the details of the interactions. The digitization step
+simulates how the energy deposited in the different sensitive material
+is transformed into electric/optical signals. In this case the signals
+are a mixture of deterministic effects (e.g. amplification/shaping)
+overlapped with random effects (e.g. noise or finite accuracy of
+calibrations) described with Monte Carlo methods.</p>
+</div>
+<div class="section" id="study-of-reconstruction-programs">
+<h3>Study of reconstruction programs<a class="headerlink" href="#study-of-reconstruction-programs" title="Permalink to this headline">¶</a></h3>
+<p>The electronic signals can then be analysed to “reconstruct” physics
+objects. Those can be e.g. the tracks of charged particles in a tracker,
+or the electromagnetic showers in a calorimeter. Even in this case,
+Monte Carlo simulations are essential tools to develop the
+reconstruction software. In this case, starting from Monte Carlo samples
+of particles, and so knowing exactly their type and their kinematics, we
+can develop the reconstruction packages to be able to reconstruct them
+with high efficiency and accuracy.</p>
+</div>
+<div class="section" id="physics-reach-of-an-experiment">
+<h3>Physics reach of an experiment<a class="headerlink" href="#physics-reach-of-an-experiment" title="Permalink to this headline">¶</a></h3>
+<p>Simulations are not important only to decipher the results of an
+experiment once the data are collected. They are the first necessary
+step in the design of an experiment. The conception of a detector starts
+with simulations where different solutions can be tested without doing
+the actual prototypes, which would be unacceptably expensive and time
+consuming.</p>
+</div>
+<div class="section" id="toy-modelling">
+<h3>Toy modelling<a class="headerlink" href="#toy-modelling" title="Permalink to this headline">¶</a></h3>
+<p>“A good physicist knows how to build toy models.” This quotation from an
+anonymous physicist summarize the importance of toy modeling in physics.
+Toys can be used to get a first understanding of a process picking only
+its essential characteristics (here is where the physicist has to be
+good) and avoiding all complications of real experimental life. As it
+will be seen in
+Ch. <a class="reference external" href="#ChapterHypothesisTesting">[ChapterHypothesisTesting]</a>{reference-type=”ref”
+reference=”ChapterHypothesisTesting”}, toys are also an ubiquitous tool
+used in statistics for hypothesis testing.</p>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p>Most of the material of this section comes from:</p>
+<ul class="simple">
+<li><p>L. Lyons [&#64;Lyons], “Statistics for Nuclear and Particle Physicist”:
+Ch. 6</p></li>
+</ul>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id5"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>George Louis Leclerc, Duke of Buffon (1707 - 1788), a French
+natural scientist</p>
+</dd>
+<dt class="label" id="id6"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p><a class="reference external" href="http://www.random.org">http://www.random.org</a> offers true random numbers generated from
+atmospheric noise.</p>
+</dd>
+<dt class="label" id="id7"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dd><p>G. Marsaglia, “Random numbers fall mainly in the planes”, Proc.
+Natl. Acad. Sci. 61(1), 25–28 (1968)</p>
+</dd>
+<dt class="label" id="id8"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
+<dd><p>Another definition of gap test looks for the significance of the
+interval between recurrence of the same digit.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="errors.html" title="previous page">Measurements uncertainties {#ch:errors}</a>
+    <a class='right-next' id="next-link" href="inference.html" title="next page">Statistical inference</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Mauro Donega<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
