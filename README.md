@@ -1,4 +1,4 @@
-## Statistical Methods and Analysis Techniques in Experimental Physics: the jupyter book 
+# Statistical Methods and Analysis Techniques in Experimental Physics: the Jupyter Book 
 
 These notes are part of the supporting material used for the ETHZ Master-level course:
 
