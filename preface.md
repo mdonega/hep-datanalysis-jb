@@ -11,6 +11,7 @@ The material reported in this notes is largely a **compilation of existing liter
 
 So why yet another collection of notes ? What we tried to do is to improve the presentation of the material, sometimes using a simpler language, recurring to several practical examples, and by using the format of a "jupyter book".
 
+
 How to use these notes:
 - as an online book: just jump to the chapter/section (left and right columns) you are interested in, or browse it sequentially using the arrows at the bottom of the page. You also have a useful search tool at the top left of the webpage;
 - as a standard book: you can download the pdf of each chapter clicking the download icon;
