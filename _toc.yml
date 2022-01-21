@@ -8,6 +8,8 @@ sections:
 - file: monteCarlo
 - file: inference.ipynb
 - file: likelihood.ipynb
+  sections:
+  - file: interactive-nbs/MLMethod.ipynb
 - file: leastSquares
 - file: hypothesisTesting
 - file: confidenceIntervals
