@@ -4,10 +4,10 @@ sections:
 - file: introduction
 - file: probability.ipynb
 - file: probabilityDistributions.ipynb
-- file: errors
+- file: errors.ipynb
 - file: monteCarlo
-- file: inference
-- file: likelihood
+- file: inference.ipynb
+- file: likelihood.ipynb
 - file: leastSquares
 - file: hypothesisTesting
 - file: confidenceIntervals
