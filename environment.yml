@@ -1,0 +1,10 @@
+name: stamet-jb
+channels:
+  - conda-forge
+dependencies:
+  - numpy
+  - jupyterlab
+  - scipy
+  - matplotlib
+  - jupyter-book
+  - ipympl
