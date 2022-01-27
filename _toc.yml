@@ -5,7 +5,7 @@ sections:
 - file: probability.ipynb
 - file: probabilityDistributions.ipynb
 - file: errors.ipynb
-- file: monteCarlo
+- file: monteCarlo.ipynb
 - file: inference.ipynb
 - file: likelihood.ipynb
   sections:
