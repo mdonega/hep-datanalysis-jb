@@ -5,6 +5,8 @@ sections:
 - file: probability.ipynb
 - file: probabilityDistributions.ipynb
 - file: errors.ipynb
+  sections:
+  - file: interactive-nbs/ErrorMatrix.ipynb
 - file: monteCarlo.ipynb
 - file: inference.ipynb
 - file: likelihood.ipynb
