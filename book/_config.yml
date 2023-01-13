@@ -43,12 +43,12 @@ launch_buttons:
   notebook_interface        : "classic"  # The interface interactive links will activate ["classic", "jupyterlab"]
   binderhub_url             : "https://mybinder.org"  # The URL of the BinderHub (e.g., https://mybinder.org)
   jupyterhub_url            : ""  # The URL of the JupyterHub (e.g., https://datahub.berkeley.edu)
-  thebelab                  : false  # Add a thebelab button to pages (requires the repository to run on Binder)
+  thebelab                  : true  # Add a thebelab button to pages (requires the repository to run on Binder)
 
 repository:
-  url                       : "https://gitlab.phys.ethz.ch/mdonega/stamet-jb"  # The URL to your book's repository
-  path_to_book              : ""  # A path to your book's folder, relative to the repository root.
-  branch                    : main  # Which branch of the repository should be used when creating links
+  url                       : "https://github.com/mdonega/hep-datanalysis-jb"  # The URL to your book's repository
+  path_to_book              : "book"  # A path to your book's folder, relative to the repository root.
+  branch                    : "dev"  # Which branch of the repository should be used when creating links
 
 #######################################################################################
 # Advanced and power-user settings

@@ -81,3 +81,4 @@ dask-worker-space
 # JB
 _build/*
 .ipynb_checkpoints/*
+book/_build/*

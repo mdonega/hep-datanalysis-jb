@@ -12,8 +12,8 @@ sections:
 - file: likelihood.ipynb
   sections:
   - file: interactive-nbs/MLMethod.ipynb
-- file: leastSquares
-- file: hypothesisTesting
-- file: confidenceIntervals
-- file: mva
+- file: leastSquares.ipynb
+- file: hypothesisTesting.ipynb
+- file: confidenceIntervals.ipynb
+- file: mva.ipynb
 - file: unfolding
