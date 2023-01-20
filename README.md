@@ -25,3 +25,4 @@ As usual, whenever you see any mistake or typo, please email them to mauro.doneg
 Enjoy learning!
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/mdonega/hep-datanalysis-jb/main)
+[![nbviewer](https://img.shields.io/badge/view%20on-nbviewer-orange)](https://nbviewer.org/github/mdonega/hep-datanalysis-jb/tree/main/book/)
