@@ -18,3 +18,12 @@ def test_pdfs(common_kwargs):
 
 def test_errors(common_kwargs):
     pm.execute_notebook("book/errors.ipynb", **common_kwargs)
+
+def test_montecarlo(common_kwargs):
+    pm.execute_notebook("book/monteCarlo.ipynb", **common_kwargs)
+
+def test_inference(common_kwargs):
+    pm.execute_notebook("book/inference.ipynb", **common_kwargs)
+
+def test_likelihood(common_kwargs):
+    pm.execute_notebook("book/likelihood.ipynb", **common_kwargs)
