@@ -1,13 +1,6 @@
-import os
+# https://github.com/matthewfeickert/Statistics-Notes/blob/main/tests/test_notebooks.py
 import papermill as pm
 import pytest
-
-exclude = ["notebooks.ipynb", "hypothesisTesting.ipynb"]
-
-notebooks = []
-for file in os.listdir("book"):
-    if file.endswith('.ipynb') and file not in exclude:
-        notebooks.append(os.path.join("book", file))
 
 @pytest.fixture()
 def common_kwargs(tmpdir):
@@ -16,6 +9,11 @@ def common_kwargs(tmpdir):
         "output_path": str(outputnb),
     }
 
-@pytest.mark.parametrize("notebook", notebooks)
-def test_notebook(notebook, common_kwargs):
-    pm.execute_notebook(notebook, **common_kwargs)
+def test_probability(common_kwargs):
+    pm.execute_notebook("book/probability.ipynb", **common_kwargs)
+
+def test_pdfs(common_kwargs):
+    pm.execute_notebook("book/probabilityDistributions.ipynb", **common_kwargs)
+
+def test_errors(common_kwargs):
+    pm.execute_notebook("book/errors.ipynb", **common_kwargs)
