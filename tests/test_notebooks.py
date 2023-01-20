@@ -2,13 +2,12 @@ import os
 import papermill as pm
 import pytest
 
+exclude = ["notebooks.ipynb", "hypothesisTesting.ipynb"]
+
 notebooks = []
 for file in os.listdir("book"):
-    if file.endswith('.ipynb') and file not in ["notebooks.ipynb", "hypothesisTesting.ipynb"]:
+    if file.endswith('.ipynb') and file not in exclude:
         notebooks.append(os.path.join("book", file))
-for file in os.listdir("book/interactive-nbs"):
-    if file.endswith('.ipynb'):
-        notebooks.append(os.path.join("book/interactive-nbs", file))
 
 @pytest.fixture()
 def common_kwargs(tmpdir):
