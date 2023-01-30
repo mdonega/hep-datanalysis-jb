@@ -1,2 +1,2 @@
-papermill>=2.0
-pytest
+papermill==2.3
+pytest==7.1
