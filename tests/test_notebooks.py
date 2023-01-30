@@ -2,7 +2,7 @@ import os
 import papermill as pm
 import pytest
 
-exclude = ["notebooks.ipynb", "hypothesisTesting.ipynb", "confidenceIntervals.ipynb"]
+exclude = ["notebooks.ipynb"]
 
 notebooks = []
 for file in os.listdir("book"):
