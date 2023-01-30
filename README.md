@@ -26,3 +26,4 @@ Enjoy learning!
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/mdonega/hep-datanalysis-jb/main)
 [![nbviewer](https://img.shields.io/badge/view%20on-nbviewer-orange)](https://nbviewer.org/github/mdonega/hep-datanalysis-jb/tree/main/book/)
+[![Deploy Jupyter Book](https://github.com/mdonega/hep-datanalysis-jb/actions/workflows/deploy-jupyter-book.yml/badge.svg?branch=main)](https://github.com/mdonega/hep-datanalysis-jb/actions/workflows/deploy-jupyter-book.yml)
