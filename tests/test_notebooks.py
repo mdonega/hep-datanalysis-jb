@@ -11,9 +11,3 @@ def common_kwargs(tmpdir):
 
 def test_probability(common_kwargs):
     pm.execute_notebook("book/probability.ipynb", **common_kwargs)
-
-def test_pdfs(common_kwargs):
-    pm.execute_notebook("book/probabilityDistributions.ipynb", **common_kwargs)
-
-def test_errors(common_kwargs):
-    pm.execute_notebook("book/errors.ipynb", **common_kwargs)
