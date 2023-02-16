@@ -16,4 +16,3 @@ sections:
 - file: hypothesisTesting.ipynb
 - file: confidenceIntervals.ipynb
 - file: mva.ipynb
-- file: unfolding
