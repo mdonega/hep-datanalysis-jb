@@ -15,5 +15,7 @@ sections:
 - file: leastSquares.ipynb
 - file: hypothesisTesting.ipynb
 - file: confidenceIntervals.ipynb
+  sections:
+  - file: interactive-nbs/UpperLimit.ipynb
 - file: mva.ipynb
 - file: unfolding
