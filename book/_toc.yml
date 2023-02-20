@@ -3,6 +3,8 @@ root: preface
 sections:
 - file: introduction
 - file: probability.ipynb
+  sections:
+  - file: interactive-nbs/BayesTheorem.ipynb
 - file: probabilityDistributions.ipynb
 - file: errors.ipynb
   sections:
