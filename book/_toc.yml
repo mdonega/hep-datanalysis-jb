@@ -5,6 +5,8 @@ sections:
 - file: probability.ipynb
   sections:
   - file: interactive-nbs/BayesTheorem.ipynb
+  - file: interactive-nbs/exponentialGrowth.ipynb
+  - file: interactive-nbs/harmonicMean.ipynb
 - file: probabilityDistributions.ipynb
 - file: errors.ipynb
   sections:
