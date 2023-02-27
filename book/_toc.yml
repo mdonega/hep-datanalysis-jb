@@ -19,3 +19,9 @@ sections:
 - file: confidenceIntervals.ipynb
 - file: mva.ipynb
 - file: bibliography.ipynb
+- file: exercises.ipynb
+  sections:
+  - file: exercises/Ex_Histograms.ipynb
+  - file: exercises/Ex_Probability.ipynb
+  - file: exercises/Ex_ProbabilityDensityFunctions.ipynb
+
