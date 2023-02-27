@@ -5,6 +5,8 @@ sections:
 - file: probability.ipynb
   sections:
   - file: interactive-nbs/BayesTheorem.ipynb
+  - file: interactive-nbs/exponentialGrowth.ipynb
+  - file: interactive-nbs/harmonicMean.ipynb
 - file: probabilityDistributions.ipynb
 - file: errors.ipynb
   sections:
@@ -21,3 +23,9 @@ sections:
   - file: interactive-nbs/UpperLimit.ipynb
 - file: mva.ipynb
 - file: bibliography.ipynb
+- file: exercises.ipynb
+  sections:
+  - file: exercises/Ex_Histograms.ipynb
+  - file: exercises/Ex_Probability.ipynb
+  - file: exercises/Ex_ProbabilityDensityFunctions.ipynb
+
