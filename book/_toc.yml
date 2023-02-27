@@ -7,7 +7,10 @@ sections:
   - file: interactive-nbs/BayesTheorem.ipynb
   - file: interactive-nbs/exponentialGrowth.ipynb
   - file: interactive-nbs/harmonicMean.ipynb
+  - file: interactive-nbs/covarianceCorrelation.ipynb 
 - file: probabilityDistributions.ipynb
+  sections:
+  - file: interactive-nbs/randomWalk.ipynb
 - file: errors.ipynb
   sections:
   - file: interactive-nbs/ErrorMatrix.ipynb
