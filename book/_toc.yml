@@ -31,4 +31,5 @@ sections:
   - file: exercises/Ex_Histograms.ipynb
   - file: exercises/Ex_Probability.ipynb
   - file: exercises/Ex_ProbabilityDensityFunctions.ipynb
-
+  - file: exercises/Ex_Covariance.ipynb
+  
