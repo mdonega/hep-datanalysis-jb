@@ -7,7 +7,8 @@ sections:
   - file: interactive-nbs/BayesTheorem.ipynb
   - file: interactive-nbs/exponentialGrowth.ipynb
   - file: interactive-nbs/harmonicMean.ipynb
-  - file: interactive-nbs/covarianceCorrelation.ipynb 
+  - file: interactive-nbs/covarianceCorrelation.ipynb
+  - file: interactive-nbs/ConditionalProbability.ipynb
 - file: probabilityDistributions.ipynb
   sections:
   - file: interactive-nbs/randomWalk.ipynb
@@ -32,4 +33,4 @@ sections:
   - file: exercises/Ex_Probability.ipynb
   - file: exercises/Ex_ProbabilityDensityFunctions.ipynb
   - file: exercises/Ex_Covariance.ipynb
-  
+
