@@ -4,17 +4,18 @@ sections:
 - file: introduction
 - file: probability.ipynb
   sections:
+  - file: interactive-nbs/ConditionalProbability.ipynb
   - file: interactive-nbs/BayesTheorem.ipynb
   - file: interactive-nbs/exponentialGrowth.ipynb
   - file: interactive-nbs/harmonicMean.ipynb
   - file: interactive-nbs/covarianceCorrelation.ipynb
-  - file: interactive-nbs/ConditionalProbability.ipynb
 - file: probabilityDistributions.ipynb
   sections:
   - file: interactive-nbs/randomWalk.ipynb
 - file: errors.ipynb
   sections:
   - file: interactive-nbs/ErrorMatrix.ipynb
+  - file: interactive-nbs/slidingMean.ipynb
 - file: monteCarlo.ipynb
 - file: inference.ipynb
 - file: likelihood.ipynb
@@ -26,6 +27,9 @@ sections:
   sections:
   - file: interactive-nbs/UpperLimit.ipynb
 - file: mva.ipynb
+- file: appendix.ipynb
+  sections:
+  - file: appendices/Histograms.ipynb
 - file: bibliography.ipynb
 - file: exercises.ipynb
   sections:

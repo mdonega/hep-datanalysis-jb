@@ -5,7 +5,7 @@ These notes are part of the supporting material used for the ETHZ Master-level c
 <strong>Statistical Methods and Analysis Techniques in Experimental Physics</strong>
 </div>
 <br>
-initially taught by Mauro Doneg&agrave;, Christoph Grab, Frank Lehner, Christian Regenf&uuml;s at ETH-Z&uuml;rich during various semesters.
+initially taught by Mauro Doneg&agrave;, Christoph Grab, Christian Regenf&uuml;s at ETH-Z&uuml;rich during various semesters.
 
 The material reported in this notes is largely a **compilation of existing literature** and detailed references are given throughout the manuscript. 
 
