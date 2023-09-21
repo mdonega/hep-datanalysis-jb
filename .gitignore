@@ -1,6 +1,9 @@
 # ipython notebooks checkpoitns
 .ipynb_checkpoints
 
+# APPLE DS_store
+.DS_Store
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
