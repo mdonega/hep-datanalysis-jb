@@ -17,6 +17,8 @@ sections:
   - file: interactive-nbs/ErrorMatrix.ipynb
   - file: interactive-nbs/slidingMean.ipynb
 - file: monteCarlo.ipynb
+  sections:
+  - file: interactive-nbs/randomNumbers.ipynb
 - file: inference.ipynb
 - file: likelihood.ipynb
   sections:
@@ -25,7 +27,9 @@ sections:
 - file: hypothesisTesting.ipynb
 - file: confidenceIntervals.ipynb
   sections:
+  - file: interactive-nbs/Poisson_CI.ipynb
   - file: interactive-nbs/UpperLimit.ipynb
+  - file: interactive-nbs/Gaussian_CI.ipynb
 - file: mva.ipynb
 - file: appendix.ipynb
   sections:
