@@ -28,8 +28,10 @@ sections:
 - file: confidenceIntervals.ipynb
   sections:
   - file: interactive-nbs/Poisson_CI.ipynb
-  - file: interactive-nbs/UpperLimit.ipynb
   - file: interactive-nbs/Gaussian_CI.ipynb
+  - file: interactive-nbs/LimitNearBoundariesBayesianApproach.ipynb
+  - file: interactive-nbs/LimitNearBoundariesBayesianApproachPoisson.ipynb
+  - file: interactive-nbs/UpperLimit.ipynb
 - file: mva.ipynb
 - file: appendix.ipynb
   sections:
