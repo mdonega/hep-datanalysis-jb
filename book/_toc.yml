@@ -31,6 +31,7 @@ sections:
   - file: interactive-nbs/Gaussian_CI.ipynb
   - file: interactive-nbs/LimitNearBoundariesBayesianApproach.ipynb
   - file: interactive-nbs/LimitNearBoundariesBayesianApproachPoisson.ipynb
+  - file: interactive-nbs/FC_PoissonMeanWithKnownBackground.ipynb
   - file: interactive-nbs/UpperLimit.ipynb
 - file: mva.ipynb
 - file: appendix.ipynb
