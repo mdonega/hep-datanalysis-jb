@@ -24,6 +24,9 @@ sections:
   sections:
   - file: interactive-nbs/MLMethod.ipynb
 - file: leastSquares.ipynb
+  sections:
+  - file: interactive-nbs/LSM_errorBand.ipynb
+  - file: interactive-nbs/chi2-1sigma.ipynb
 - file: hypothesisTesting.ipynb
 - file: confidenceIntervals.ipynb
   sections:
