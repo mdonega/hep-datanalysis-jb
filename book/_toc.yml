@@ -22,6 +22,7 @@ sections:
 - file: inference.ipynb
 - file: likelihood.ipynb
   sections:
+  - file: interactive-nbs/StraighLineFit_LSM_vs_MLM.ipynb
   - file: interactive-nbs/MLMethod.ipynb
 - file: leastSquares.ipynb
 - file: hypothesisTesting.ipynb
