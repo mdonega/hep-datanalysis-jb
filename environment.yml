@@ -6,6 +6,6 @@ dependencies:
   - jupyterlab
   - scipy
   - matplotlib
-  - jupyter-book
+  - jupyter-book<2.0
   - ipympl
   - uncertainties
