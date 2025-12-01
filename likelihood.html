@@ -1,0 +1,1529 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Parameter Estimation - Likelihood &#8212; Statistical Methods and Data Analysis Techniques</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'likelihood';</script>
+    <link rel="icon" href="_static/favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="From LSM to MLM (…a.k.a. from Physics 1 laboratory to the Likelihood)" href="interactive-nbs/StraighLineFit_LSM_vs_MLM.html" />
+    <link rel="prev" title="Statistical inference" href="inference.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="preface.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Statistical Methods and Data Analysis Techniques - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Statistical Methods and Data Analysis Techniques - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="preface.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="probability.html">Probability</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/ConditionalProbability.html">Conditional Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/BayesTheorem.html">Bayes Theorem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/exponentialGrowth.html">Example of exponential growth</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/harmonicMean.html">Harmonic mean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/covarianceCorrelation.html">Covariance and correlation</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="probabilityDistributions.html">Probability Distributions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/randomWalk.html">Random Walk</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="errors.html">Measurements uncertainties</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/ErrorMatrix.html">Interactive Example - Error Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/slidingMean.html">Sliding Mean</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="monteCarlo.html">Monte Carlo methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/randomNumbers.html">Random numbers generators with “numpy”</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="inference.html">Statistical inference</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Parameter Estimation - Likelihood</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/StraighLineFit_LSM_vs_MLM.html">From LSM to MLM (…a.k.a. from Physics 1 laboratory to the Likelihood)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/MLMethod.html">Interactive Example - ML Method: Mean of a Gaussian</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="leastSquares.html">Parameter Estimation - Least Squares</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="hypothesisTesting.html">Hypotheses Testing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="confidenceIntervals.html">Confidence Intervals</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/Poisson_CI.html">Poisson Confidence Intervals</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/Gaussian_CI.html">Gaussian Confidence Intervals</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/LimitNearBoundariesBayesianApproach.html">Compute the bayesian upper limit for a gaussian near the physical boundary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/LimitNearBoundariesBayesianApproachPoisson.html">Compute the bayesian upper limit for a Poisson near the physical boundary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/FC_PoissonMeanWithKnownBackground.html">Feldman-Cousins confidence cnterval construction for a single Poisson, with known background and unknown signal</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/UpperLimit.html">Interactive Example - Upper Limit</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="mva.html">Multivariate Analysis Methods</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="appendix.html">Appendices</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="appendices/Histograms.html">Histograms</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="exercises.html">Exercises</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/Ex_Histograms.html">Exercises on Histograms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises/Ex_Probability.html">Exercises on Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises/Ex_ProbabilityDensityFunctions.html">Exercises on Probability Density Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises/Ex_Covariance.html">Exercises on Covariance and Correlation</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/mdonega/hep-datanalysis-jb/main?urlpath=tree/book/likelihood.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/likelihood.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Parameter Estimation - Likelihood</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-the-estimators">Properties of the estimators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation-of-the-mean">Estimation of the Mean</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation-of-the-variance">Estimation of the Variance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-likelihood-method">Maximum Likelihood Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minimum-variance-bound">Minimum Variance Bound</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#information">Information</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rao-cramer-frechet-inequality">Rao-Cramér-Frechet inequality</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-for-ml-estimators">Uncertainty for ML estimators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binned-maximum-likelihood">Binned Maximum Likelihood</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-maximum-likelihood-method">Extended Maximum Likelihood Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combination-of-measurements-with-the-ml-method">Combination of Measurements with the ML Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constraining-parameters">Constraining parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-general-remarks-concerning-ml-estimators">Some general remarks concerning ML estimators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="parameter-estimation-likelihood">
+<h1>Parameter Estimation - Likelihood<a class="headerlink" href="#parameter-estimation-likelihood" title="Link to this heading">#</a></h1>
+<p>Take a random variable <span class="math notranslate nohighlight">\(x\)</span> described by a pdf <span class="math notranslate nohighlight">\(f(x)\)</span>: the <strong>sample
+space</strong> is defined to be the set of all possible values of <span class="math notranslate nohighlight">\(x\)</span>. The set
+of <span class="math notranslate nohighlight">\(n\)</span> independent measurements of the random variable <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(\{x_i\}\)</span> is
+called a <strong>sample of size</strong> <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>In theory of probability, from the pdf <span class="math notranslate nohighlight">\(f(x)\)</span> we can compute all sorts
+of quantities (mean, moments, etc…). In statistical inference we are
+concerned about the opposite problem: take the distribution of a
+quantity measured in data and infer its parent pdf <span class="math notranslate nohighlight">\(f(x)\)</span>. In the
+simplest case of data distributed following a known pdf which depends on
+a parameter <span class="math notranslate nohighlight">\(\theta\)</span> (i.e. <span class="math notranslate nohighlight">\(f(x,\theta)\)</span>), the statistical inference is
+reduced to the extraction of the best estimate of the parameter from
+data.</p>
+<p>Often when talking about an estimate we use the adjectives “accurate”
+and “precise”. In what follows we mean (see <a class="reference internal" href="#fig-precacc"><span class="std std-numref">Fig. 13</span></a>):</p>
+<ul class="simple">
+<li><p><em>accuracy:</em> how close is the estimated value to the true reference
+value</p></li>
+<li><p><em>precision:</em> how reproducible the measurements are.</p></li>
+</ul>
+<p>This means for instance that a poorly calibrated device can give you
+high precision but poor accuracy.</p>
+<figure class="align-center" id="fig-precacc">
+<a class="reference internal image-reference" href="_images/PrecAcc.png"><img alt="_images/PrecAcc.png" src="_images/PrecAcc.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 13 </span><span class="caption-text">Meaning of “accuracy” and “precision” <a class="reference external" href="https://en.wikipedia.org/wiki/Accuracy_and_precision">Wikipedia</a></span><a class="headerlink" href="#fig-precacc" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Any function of the observed measurements is called a <strong>statistic</strong>. A
+statistic used to estimate some parameter of a distribution is called
+<strong>estimator</strong>. We will generally denote an estimator of a parameter by
+adding a circumflex (<span class="math notranslate nohighlight">\(\;\hat{ }\;\)</span>) to the symbol of the parameter:
+<span class="math notranslate nohighlight">\(\hat{\theta}\)</span>.</p>
+<p>You can build several estimators for any parameter. As an example take
+the estimation of the average height of all students enrolled at ETH. Be
+<span class="math notranslate nohighlight">\(h_i\)</span> the outcome of the measurement of each of the <span class="math notranslate nohighlight">\(N\)</span> students, then
+any of the following procedures would produce an estimate:</p>
+<ul class="simple">
+<li><p>add all <span class="math notranslate nohighlight">\(h_i\)</span> and divide by N</p></li>
+<li><p>add only the first 15, divide by 15; ignore the rest</p></li>
+<li><p>add all <span class="math notranslate nohighlight">\(h_i\)</span> and divide by N-1</p></li>
+<li><p>just quote it to be 1.82 m</p></li>
+<li><p>multiply all <span class="math notranslate nohighlight">\(h_i\)</span> and take <span class="math notranslate nohighlight">\(N^{th}\)</span>-root of result</p></li>
+<li><p>choose the most popular height (mode)</p></li>
+<li><p>take shortest and tallest and divide by 2</p></li>
+<li><p>add 2<span class="math notranslate nohighlight">\(^{nd}\)</span>, 4<span class="math notranslate nohighlight">\(^{th}\)</span>, 6<span class="math notranslate nohighlight">\(^{th}\)</span>,… and divide by N/2 [ or
+(N-1)/2 if N odd]</p></li>
+<li><p>take only <span class="math notranslate nohighlight">\(h_i\)</span> of students with brown hair, divide by M</p></li>
+</ul>
+<p>All these are by definition estimators. Some appear to be clearly better
+than others, but how do we define what is a better/worse estimator? To
+answer this question we define some general properties of the
+estimators: bias, consistency, efficiency and robustness.</p>
+<section id="properties-of-the-estimators">
+<h2>Properties of the estimators<a class="headerlink" href="#properties-of-the-estimators" title="Link to this heading">#</a></h2>
+<p>The estimator <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> being a function of random variables (data)
+is itself a random variable and it will be distributed according to a
+pdf <span class="math notranslate nohighlight">\(g(\hat{\theta}|\theta)\)</span>, which will clearly depend on the parameter
+<span class="math notranslate nohighlight">\(\theta\)</span>. We define the following properties for an estimator (see <a class="reference internal" href="#fig-estprop"><span class="std std-numref">Fig. 14</span></a> )</p>
+<figure class="align-center" id="fig-estprop">
+<a class="reference internal image-reference" href="_images/estProp.png"><img alt="_images/estProp.png" src="_images/estProp.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 14 </span><span class="caption-text">Some estimator properties.</span><a class="headerlink" href="#fig-estprop" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>An estimator is called <em>unbiased</em> if its expectation value is equal
+to the true value: <span class="math notranslate nohighlight">\(&lt;\hat{\theta}&gt;=\theta\)</span>. Thus an estimator is
+biased if <span class="math notranslate nohighlight">\(b_n = &lt;\hat{\theta}&gt; - \theta \ne 0\)</span>. The number <span class="math notranslate nohighlight">\(b_n\)</span> is
+called the bias of the estimator. We include the subscript <span class="math notranslate nohighlight">\(n\)</span> in
+this definition since we will see that some estimators are unbiased
+only asymptotically, i.e. only for <span class="math notranslate nohighlight">\(n\to \infty\)</span>. An example of an
+unbiased estimator is the mean (<span class="math notranslate nohighlight">\(\langle \bar{\mu} \rangle = \mu\)</span>);
+the third in the list of the previous section is asymptotically
+unbiased (<span class="math notranslate nohighlight">\(\langle \hat{\mu} \rangle = n/(n-1)\mu\)</span>) and so
+<span class="math notranslate nohighlight">\(b_n(\hat{\mu}) \to 0\)</span> for <span class="math notranslate nohighlight">\(n\to \infty\)</span>. If we know the bias, we
+can construct an unbiased estimator by correcting it.</p></li>
+<li><p>An estimator is called <em>consistent</em> if <span class="math notranslate nohighlight">\(\forall \epsilon &gt; 0\)</span>,
+<span class="math notranslate nohighlight">\(\lim_{n \to \infty} P(|\hat{\theta}-\theta| \ge \epsilon) = 0\)</span>. For
+instance if <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> is the average of data distributed
+according to a p.d.f. where we can apply the CLT, then
+<span class="math notranslate nohighlight">\(\hat{\theta}\)</span> is a consistent estimator because
+<span class="math notranslate nohighlight">\(N(\bar{x}; \mu, \sigma^2/n)\)</span> tends to a delta function for
+<span class="math notranslate nohighlight">\(n \to \infty\)</span>. In the list of the previous section for example, the
+first and the third are consistent the second is not.</p></li>
+<li><p>An estimator is called <em>efficient</em> if it has the smallest possible
+variance of <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> (see later in this section the minimum
+variance bound). The efficiency <span class="math notranslate nohighlight">\(\epsilon\)</span> is defined as
+<span class="math notranslate nohighlight">\(\epsilon=\frac{{\rm minimal\, Variance\, of\,} \hat{\theta}}{{\rm Variance\, of\,} \hat{\theta}}\)</span>.</p></li>
+<li><p>An estimator is called <em>robust</em> if it is insensitive to wrong data
+or wrong assumptions, especially in the tails of a distribution.</p></li>
+</ul>
+</section>
+<section id="estimation-of-the-mean">
+<h2>Estimation of the Mean<a class="headerlink" href="#estimation-of-the-mean" title="Link to this heading">#</a></h2>
+<p>The estimator for the mean <span class="math notranslate nohighlight">\(\mu\)</span> obtained from <span class="math notranslate nohighlight">\(n\)</span> independent
+measurements <span class="math notranslate nohighlight">\(x_{i}\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[\label{estimate_mean}
+\hat{\mu}=\frac{1}{n}\sum_i x_i.\]</div>
+<p>This estimator is unbiased, i.e.
+<span class="math notranslate nohighlight">\(\langle\hat{\mu}\rangle=\langle \frac{1}{n}\sum_i x_i\rangle=\frac{1}{n}\sum_i\langle x_i\rangle = \mu\)</span>.</p>
+<p>Furthermore it is consistent because of the CLT. Its variance is given
+by</p>
+<div class="math notranslate nohighlight">
+\[V(\hat{\mu})=\frac{1}{n}\sigma^2.\]</div>
+<p>Whether this estimator is
+efficient or not depends on the p.d.f. of the parent distribution. For
+instance, given a uniform distribution the mean is not the most
+efficient estimator; the estimator <span class="math notranslate nohighlight">\(\hat{\mu}=0.5(x_{max}+x_{min})\)</span> has
+a smaller variance. The robustness for the sample mean is increased if
+the truncated mean is used. This means that the largest and smallest
+values are trimmed (truncated). This more robust mean is less sensitive
+to outliers, but unless the parent distribution is symmetric it will be
+biased. An example for a truncated mean can be found in sports rating
+when only 4 out of 6 grades are used to form the final grade.</p>
+</section>
+<section id="estimation-of-the-variance">
+<h2>Estimation of the Variance<a class="headerlink" href="#estimation-of-the-variance" title="Link to this heading">#</a></h2>
+<p>An estimator for the variance of a parent distribution <span class="math notranslate nohighlight">\(\sigma^2\)</span>, when
+we know the true mean <span class="math notranslate nohighlight">\(\langle x \rangle = \mu\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[
+s_1^2 = \frac{1}{n}\sum_{i=1}^n (x_i - \mu)^2.
+\]</div>
+<p>This estimator is unbiased</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&lt;s_1^2&gt; &amp;=&amp; \frac{1}{n}\langle\sum(x_i - \mu)^2\rangle  \\
+        &amp;=&amp; \frac{1}{n}\left(\langle \sum x_i^2 \rangle - 2\mu\langle \sum x_i \rangle + n \mu^2\right) \\
+        &amp;=&amp; \frac{1}{n}\left( n \langle  x^2 \rangle - 2n\mu\langle x \rangle + n \mu^2\right)  \qquad (independent~x_i~so~: \langle\sum x_i^2\rangle= n\langle x^2 \rangle)\\
+        &amp;=&amp; \langle x^2 \rangle - 2\mu^2 + \mu^2 \\
+        &amp;=&amp; \sigma^2 -\mu^2 + \mu^2  \qquad (\sigma^2 = \langle x^2 \rangle - \mu^2) \\
+        &amp;=&amp; \sigma^2        \\
+\end{aligned}
+\end{split}\]</div>
+<p>So <span class="math notranslate nohighlight">\(s_1^2\)</span> is an unbiased
+estimator of the variance of the parent p.d.f <span class="math notranslate nohighlight">\(\sigma^2\)</span>, when <span class="math notranslate nohighlight">\(\mu\)</span> is
+known.</p>
+<p>When it is not known, we use the estimate <span class="math notranslate nohighlight">\(\bar{x} = \hat{\mu}\)</span> and
+define:</p>
+<div class="math notranslate nohighlight">
+\[
+s_x^2 = \frac{1}{n}\sum(x_i-\bar{x})^2 = \bar{x^2} - \bar{x}^2
+\]</div>
+<p>The expectation value of <span class="math notranslate nohighlight">\(s_x^2\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+\langle s_x^2 \rangle= \frac{1}{n}\left( \langle\sum x_i^2\rangle- \frac{1}{n}\langle\left( \sum x_i  \right)^2  \rangle\right).\end{aligned}
+\]</div>
+<p>Substituting:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+ \langle\sum x_i^2\rangle&amp;=&amp; n\langle x^2 \rangle\\
+ \sigma^2 &amp;=&amp; \langle x^2\rangle- \mu^2\\
+ V\left( \sum x_i \right) &amp;=&amp; \langle\left( \sum x_i\right)^2\rangle- \left( \langle\sum x_i\rangle\right)^2
+ \end{aligned}
+\end{split}\]</div>
+<p>we get</p>
+<div class="math notranslate nohighlight">
+\[
+\langle s_x^2\rangle= \frac{1}{n}\left( n(\sigma^2+\mu^2) - \frac{1}{n}\left( \langle\left( \sum x_i\right)^2 \rangle+ \langle\sum x_i\rangle^2 \right)  \right)
+\]</div>
+<p>and using</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+ V(\langle\sum x_i\rangle) &amp;=&amp; \sum V(x_i) = nV(x) = n\sigma^2 \\
+\langle\sum x_i\rangle&amp;=&amp; n \langle x \rangle= n \mu
+\end{aligned}
+\end{split}\]</div>
+<p>we finally have</p>
+<div class="math notranslate nohighlight">
+\[
+\langle s_x^2 \rangle= \frac{1}{n}\left( n\sigma^2 + n \mu^2 - \frac{1}{n}(n\sigma^2 + (n\mu)^2 ) \right) = \frac{1}{n}(n-1) \sigma^2 .
+\]</div>
+<p>This means that <span class="math notranslate nohighlight">\(s_x^2\)</span> is a biased estimator of <span class="math notranslate nohighlight">\(\sigma^2\)</span>. The reason
+is that we used the sample mean <span class="math notranslate nohighlight">\(\bar{x}\)</span> as an estimator of the true
+mean <span class="math notranslate nohighlight">\(\mu\)</span>. The spread of the data around the sample mean is less than
+the spread around the true mean and since the variance is the spread
+around the true mean <span class="math notranslate nohighlight">\(s_x^2\)</span> underestimates the true variance.<br />
+The formula for the variance we are used to is the one with the
+corrected bias:</p>
+<div class="math notranslate nohighlight">
+\[
+s^2 = \frac{n}{n-1} s_x^2 = \frac{n}{n-1}(&lt;x^2&gt; - &lt;x&gt;^2) = \frac{1}{n-1}\sum (x_i -&lt;x&gt;)^2.
+\]</div>
+<p>In the same way as we got to the unbiased estimator of the variance, we
+obtain the expression for the unbiased estimator of the covariance
+<span class="math notranslate nohighlight">\(V_{xy}\)</span> of two random variables <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> with unknown (but
+estimated) means</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{V}_{xy}=\frac{1}{n-1}\sum(x_i-&lt;x&gt;)(y_i-&lt;y&gt;)=\frac{n}{n-1}(&lt;xy&gt;-&lt;x&gt;&lt;y&gt;).
+\]</div>
+<p>The correlation coefficient is then given by</p>
+<div class="math notranslate nohighlight">
+\[
+\rho_{xy}=\frac{\hat{V}_{xy}}{s_xs_y}.
+\]</div>
+</section>
+<section id="maximum-likelihood-method">
+<h2>Maximum Likelihood Method<a class="headerlink" href="#maximum-likelihood-method" title="Link to this heading">#</a></h2>
+<p>Assume we have <span class="math notranslate nohighlight">\(n\)</span> measurements of a random variable <span class="math notranslate nohighlight">\(x\)</span>, distributed
+according to a known probability density function <span class="math notranslate nohighlight">\(f(x|\theta)\)</span>. Where
+<span class="math notranslate nohighlight">\(\theta\)</span> stands for one parameter of the p.d.f. (e.g. the mean). Note
+that here you assume you know what is the correct pdf to fit and you are
+“only” interested in finding the value of the parameter <span class="math notranslate nohighlight">\(\theta\)</span> that
+allows the model to best fit the data.</p>
+<p>Can we find a <em>general</em> method to build an estimator for <span class="math notranslate nohighlight">\(\theta\)</span> ( i.e.
+<span class="math notranslate nohighlight">\(\hat{\theta}\)</span> ) ? The procedure we present here goes under the name of
+<strong>maximum likelihood method</strong> and it is the most intuitive way to set up
+such an estimator.</p>
+<p>To understand the maximum likelihood method for parameter estimation
+(sometimes abbreviated as ML method) we start from the probability
+<span class="math notranslate nohighlight">\(f(x|\theta)dx\)</span> (i.e. the probability to observe <span class="math notranslate nohighlight">\(x\in (x,x+dx)\)</span> given
+<span class="math notranslate nohighlight">\(\theta\)</span>). With this we can compute the probability to observe a certain
+set of data <span class="math notranslate nohighlight">\(\{x_i\}\)</span> <em>given</em> the parameter <span class="math notranslate nohighlight">\(\theta\)</span>, as the joint
+probability:</p>
+<div class="math notranslate nohighlight">
+\[
+P= f(x_1|\theta)dx_1\cdot f(x_2|\theta)dx_2\cdot \ldots \cdot f(x_n|\theta)dx_n
+\]</div>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Note that likelihood and probability are both translated in German
+as “Wahrscheinlichkeit”. Nevertheless there is a fundamental
+difference between a true analytical probability density function
+and a likelihood function. The latter is a function of a sample and
+therefore also a random variable.</p>
+</aside>
+<p>The <strong>likelihood function</strong> is then defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+L(\theta)=f(x_1|\theta)\cdot f(x_2|\theta)\cdots f(x_n|\theta)=\prod_{i = 1}^{Nevts} f(x_i|\theta).
+\]</div>
+<p>where the product runs over all the events in the data sample <span class="math notranslate nohighlight">\(\{x_i\}\)</span>
+and <span class="math notranslate nohighlight">\(L(\theta)\)</span> is normalized to 1 for all values of <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<p>The function <span class="math notranslate nohighlight">\(L(\theta)\)</span> is, for a given data sample, a function of only
+the parameter <span class="math notranslate nohighlight">\(\theta\)</span> and it gives us the probability to get with this
+choice of the parameter <span class="math notranslate nohighlight">\(\theta\)</span> the measured values <span class="math notranslate nohighlight">\(\{x_{i}\}\)</span>. The
+likelihood function is <em>not</em> a probability density function in the
+parameters <span class="math notranslate nohighlight">\(\theta\)</span> (if that was the case we would calculate explicitly
+the expectation value of <span class="math notranslate nohighlight">\(\theta\)</span> and all its higher moments).</p>
+<p>The <strong>ML principle</strong> states that the best estimate of <span class="math notranslate nohighlight">\(\theta\)</span> is given
+by the estimator <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> which maximizes <span class="math notranslate nohighlight">\(L(\theta)\)</span>, i.e. the
+value which maximizes the probability to obtain the observed set of
+observed data <span class="math notranslate nohighlight">\(\{x_{i}\}\)</span> given <span class="math notranslate nohighlight">\(\theta\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\theta} = max_\theta~L(\theta)
+\]</div>
+<p>The maximum is then computed by differentiating <span class="math notranslate nohighlight">\(dL(\theta) / d\theta = 0\)</span>.</p>
+<p>The concept is trivially generalized to several parameters <span class="math notranslate nohighlight">\(a_{k}\)</span>
+requiring: <span class="math notranslate nohighlight">\(\partial L/\partial a_k=0 \ \ \forall k\)</span>.</p>
+<p>In practice we often work with the (natural) logarithm of the likelihood
+function <span class="math notranslate nohighlight">\(l(\theta) = \ln L(\theta)\)</span> (slang: the <em>log-likelihood</em>). The
+reason for this is that likelihoods are usually calculated with
+computers and the product of several probabilities (i.e. numbers smaller
+than 1) will hit the numerical precision of the machine. The logarithm
+transforms the product into a sum which does not create precision
+problems. Since the logarithm is a monotonic rising function, the value
+that maximizes <span class="math notranslate nohighlight">\(L(\theta)\)</span> also maximizes <span class="math notranslate nohighlight">\(\ln L(\theta)\)</span>, and our
+condition becomes:</p>
+<div class="math notranslate nohighlight">
+\[
+l(\theta)=\ln L(\theta)=\sum_{i=1}^{Nevts} \ln f(x_i|\theta) = \mbox{Maximum}.
+\]</div>
+<p>Any monotonic transformation of the likelihood will leave its maximum
+unchanged.</p>
+<p>It has to be stressed again that the ML estimation yields a value
+<span class="math notranslate nohighlight">\(\hat{\theta}\)</span>, for which the observed data are the most “likely”
+(compared to other parameter values), and not vice-versa! It is not to
+be confused with the statement that the parameter <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> is the
+most probable value.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>Take the probability density given by
+<span class="math notranslate nohighlight">\(f(x|\theta) = 1 + \theta(x-0.5)\)</span> with <span class="math notranslate nohighlight">\(x\)</span> between 0 and 1. The provided
+sample data <span class="math notranslate nohighlight">\(\{x_{i}\}= \{0.89, 0.03, 0.5, 0.36, 0.49\}\)</span>. The
+log-likelihood function is then given by</p>
+<div class="math notranslate nohighlight">
+\[
+l(\theta)=\sum_{i=1}^5 \ln(1+\theta(x_i-0.5))
+\]</div>
+<p>The maximum of the log-likelihood function can be determined graphically
+to be <span class="math notranslate nohighlight">\(\hat{\theta} = -0.6\)</span>.</p>
+</div>
+<figure class="align-center" id="fig-loglikelihoodjpg">
+<a class="reference internal image-reference" href="_images/LogLikelihoodJPG.png"><img alt="_images/LogLikelihoodJPG.png" src="_images/LogLikelihoodJPG.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 15 </span><span class="caption-text">The log-likelihood function from the example <span class="math notranslate nohighlight">\(l(\theta)=\sum_{i=1}^5 \ln(1+\theta(x_i-0.5))\)</span>.</span><a class="headerlink" href="#fig-loglikelihoodjpg" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The numerical libraries in use to solve optimization problems search for
+minima, not maxima. To use a minimization program to find a maximum you
+just need to flip the sign of the likelihood: the problem is trivially
+moved from a maximization to a minimization. In the following we will
+typically work with the <span class="math notranslate nohighlight">\(-\ln L(\theta)\)</span> (slang: negative log-likelihood
+or NLL).</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p><em>Exponential decay.</em> Let’s derive the ML estimator for a
+particle’s lifetime. The proper decay time of an unstable particle with
+lifetime <span class="math notranslate nohighlight">\(\tau\)</span> follows the exponential distribution:</p>
+<div class="math notranslate nohighlight">
+\[
+f(t;\tau)=\frac{1}{\tau}e^{-t/\tau}
+\]</div>
+<p>Given a set of <span class="math notranslate nohighlight">\(n\)</span> measurements
+<span class="math notranslate nohighlight">\(\{t_i\}\)</span> of the proper-decay time, we can write the log-likelihood as:</p>
+<div class="math notranslate nohighlight">
+\[
+l(\tau)=\ln L(\tau)= \ln \prod_i f(t_i;\tau) = \sum_i \ln f(t_i;\tau)=\sum_i\left(\ln\frac{1}{\tau}-\frac{t_i}{\tau}\right).
+\]</div>
+<p>Maximizing the log-likelihood with respect to <span class="math notranslate nohighlight">\(\tau\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial l}{\partial \tau}= \sum_i \left(-\frac{1}{\tau} + \frac{t_i}{\tau^2} \right) = -\frac{n}{\tau}+\frac{1}{\tau^2}\sum t_i = 0
+\]</div>
+<p>we obtain the ML estimator <span class="math notranslate nohighlight">\(\hat{\tau}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\tau}=\frac{1}{n}\sum_i t_i
+\]</div>
+<p>Hence we get the mean as the ML
+estimator of the lifetime! Furthermore it shows that the ML estimator is
+asymptotically unbiased: increasing the number of measurements the bias
+decreases.</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p><em>Gaussian distribution.</em> The Gaussian probability
+distribution function is given by</p>
+<div class="math notranslate nohighlight">
+\[
+f(x_i;\mu)=\frac{1}{\sqrt{2\pi}}\frac{1}{\sigma_i}\cdot e^{-\frac{1}{2}\left(\frac{x_i-\mu}{\sigma_i}\right)^2}.
+\]</div>
+<p>To get a ML estimator for the mean <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> we construct again the
+log-likelihood function:</p>
+<div class="math notranslate nohighlight">
+\[
+\label{eq_gauss_llh}
+l(\mu)=\ln L(\mu)= \ln \prod_i f(t_i;\mu) = \sum_i \ln f(t_i;\mu) = 
+\sum_i\left( \ln\frac{1}{\sqrt{2\pi}} - \ln \sigma_i - \frac{1}{2} \left( \frac{x_i-\mu}{\sigma_i} \right)^2 \right)
+\]</div>
+<p>Differentiating with respect to <span class="math notranslate nohighlight">\(\mu\)</span>, the determination of the maximum
+yields:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\frac{dl(\mu)}{d\mu}&amp;=&amp; \frac{d}{d\mu} \sum_i -\frac{1}{2}\left( \frac{x_i-\mu}{\sigma_i}\right)^2   = \sum_i\frac{x_i-\mu}{\sigma_i^2}=0 \\
+\hat{\mu}&amp;=&amp;\frac{\sum_i x_i/\sigma_i^2 }{\sum_i 1/\sigma_i^2}\end{aligned}
+\end{split}\]</div>
+<p>Which is the weighted mean of the sample <span class="math notranslate nohighlight">\(\{x_i\}\)</span> and it simplifies to
+<span class="math notranslate nohighlight">\(\hat{\mu} = \frac{1}{n} \sum_{i}x_{i}\)</span> if all the <span class="math notranslate nohighlight">\(x_{i}\)</span> have the same
+<span class="math notranslate nohighlight">\(\sigma_{i}\)</span>. In this case (<span class="math notranslate nohighlight">\(\sigma_{i} = \sigma \, \forall i\)</span>) we can
+use the likelihood method to get an estimate for the variance
+<span class="math notranslate nohighlight">\(\hat{\sigma}^{2}\)</span>. The ML method yields</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\sigma}^{2}=\frac{1}{n}\sum_i(x_i-\hat{\mu})^2.
+\]</div>
+<p>which is, as
+already discussed, asymptotically unbiased.</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p><em>Poisson distribution:</em> Consider a set of data <span class="math notranslate nohighlight">\(\{r_i\}\)</span>
+which we assume to be distributed according to a Poisson distribution
+with parameter <span class="math notranslate nohighlight">\(\lambda\)</span>. We use the ML method to find an estimator for
+<span class="math notranslate nohighlight">\(\lambda\)</span>. The log-likelihood function for the Poisson distribution is
+given by</p>
+<div class="math notranslate nohighlight">
+\[
+l(\lambda) = \sum_i\ln \frac{\lambda^{r_i}}{r_i!}e^{-\lambda} = \sum_i \ln \lambda^{r_i} - n\lambda - \sum_i \ln r_i! =
+\ln\lambda\cdot\sum_i r_i-n\lambda - \sum_i \ln r_i!
+\]</div>
+<p>Differentiating
+<span class="math notranslate nohighlight">\(l(\lambda)\)</span> w.r.t. <span class="math notranslate nohighlight">\(\lambda\)</span> and equating it to zero gives as estimator
+for the mean of a Poisson distribution
+<span class="math notranslate nohighlight">\(\hat{\lambda} = \frac{1}{n} \sum_{i} r_{i}\)</span>, which is again the mean of
+the sample.</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p><em>Binomial distribution:</em> As for the Poisson case above,
+consider a set of data <span class="math notranslate nohighlight">\(\{s_i, r_i\}\)</span> (for the measurement <span class="math notranslate nohighlight">\(i\)</span> we obtain
+<span class="math notranslate nohighlight">\(s_i\)</span> successes and <span class="math notranslate nohighlight">\(r_i\)</span> failures, <span class="math notranslate nohighlight">\(n_i = s_i +r_i\)</span>) which we assume to
+be distributed according to a binomial distribution
+<span class="math notranslate nohighlight">\(B(p) = {n \choose s} p^{s} (1-p)^{r}\)</span> with <span class="math notranslate nohighlight">\(s + r = n\)</span>. We use the ML
+method to find an estimator for <span class="math notranslate nohighlight">\(p\)</span>. The log-likelihood function for the
+binomial distribution is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+l(p)=\ln B(p) = \ln{n \choose s} + s\ln p + r\ln(1-p)
+\]</div>
+<p>The
+requirement <span class="math notranslate nohighlight">\(\frac{\partial l(p)}{\partial p} = 0\)</span> yields
+<span class="math notranslate nohighlight">\(\frac{s}{p} - \frac{r}{1-p}=0\)</span> and hence <span class="math notranslate nohighlight">\(\hat{p}=s/n\)</span>, which is the
+fraction of successes given n trials.</p>
+</div>
+</section>
+<section id="minimum-variance-bound">
+<h2>Minimum Variance Bound<a class="headerlink" href="#minimum-variance-bound" title="Link to this heading">#</a></h2>
+<section id="information">
+<h3>Information<a class="headerlink" href="#information" title="Link to this heading">#</a></h3>
+<p>We introduce here the concept of information following Fisher’s
+definition. Any information definition should fulfil the following
+criteria:</p>
+<ul class="simple">
+<li><p>the information should increase if we make more observations - add
+more data</p></li>
+<li><p>data, which are irrelevant to the estimation of the parameters we
+wish to estimate or to the hypothesis we wish to test, should
+contain no information</p></li>
+<li><p>the precision of the estimation should be greater if we have more
+information</p></li>
+</ul>
+<p>The <strong>Fisher information</strong> (information for short in the following) on a
+parameter <span class="math notranslate nohighlight">\(\theta\)</span> given by a data set <span class="math notranslate nohighlight">\(\{\vec{x}\}\)</span> of the random
+variable <span class="math notranslate nohighlight">\(x\)</span> is defined as the expectation value:</p>
+<div class="math notranslate nohighlight">
+\[
+I_{\vec{x}}(\theta) = \langle\left( \frac{\partial \ln L(\vec{x};\theta)}{\partial \theta}  \right)^2  \rangle=
+\]</div>
+<div class="math notranslate nohighlight">
+\[= \langle\left( \frac{\partial l}{ \partial \theta }  \right)^2  \rangle= \int \left( \frac{\partial \ln L(\vec{x};\theta)}{\partial \theta} \right)^2 L(\vec{x}; \theta) d\vec{x}
+\]</div>
+<p>To have a more compact notation we define the <strong>score</strong> of one
+measurement as the random variable:</p>
+<div class="math notranslate nohighlight">
+\[
+S_1 = \frac{\partial}{\partial \theta}\ln f(x;\theta)
+\]</div>
+<p>The score of a sample is the sum of the score of each measurement:</p>
+<div class="math notranslate nohighlight">
+\[
+S(\vec{x},\theta) = \sum_{i=1}^{n} S_1(x_i;\theta)
+\]</div>
+<p>and it is equal
+to the derivative of the log-likelihood w.r.t to the parameter of
+interest:</p>
+<div class="math notranslate nohighlight">
+\[
+S(\vec{x},\theta) = \frac{\partial \ln L(\vec{x},\theta)}{\partial \theta}
+\]</div>
+<p>So the definition of the information of the sample <span class="math notranslate nohighlight">\(\vec{x}\)</span> on the
+parameter <span class="math notranslate nohighlight">\(\theta\)</span>, can be rewritten as the expectation value of the
+square of the score:</p>
+<div class="math notranslate nohighlight">
+\[
+I_{\vec{x}}(\theta) = \langle S^2(\vec{x};\theta) \rangle
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(\ln L(\vec{x},\theta)\)</span> is twice differentiable w.r.t. <span class="math notranslate nohighlight">\(\theta\)</span>, then
+the Fisher information can be rewritten as:</p>
+<div class="math notranslate nohighlight">
+\[
+I_{\vec{x}}(\theta)  = \langle\; \left( \frac{\partial}{\partial \theta} \ln L \right)^2 \;\rangle
+= -\langle\; \frac{\partial^2}{\partial \theta^2} \ln L \;\rangle
+\]</div>
+<p><em>Proof</em>:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial^2}{\partial\theta^2}\ln L =
+\frac{\partial}{\partial\theta}\left( \frac{1}{L} \frac{\partial L}{\partial \theta} \right) =
+\frac{-(\partial L / \partial \theta )^2}{L^2} + \frac{1}{L}\frac{\partial^2 L}{\partial\theta^2}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+-\langle\frac{\partial^2 \ln L}{\partial\theta^2}\rangle=
+\langle\left(\frac{\partial L / \partial \theta }{L} \right)^2\rangle- \langle\frac{ \partial^2  L / \partial\theta^2}{L} \rangle=
+\langle\left(\frac{\partial \ln L}{\partial \theta}\right)^2 \rangle-
+\int \left( \frac{\partial^2 L }{\partial \theta^2} \right) \frac{1}{L} L dx =
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\langle\left(\frac{\partial \ln L}{\partial \theta}\right)^2 \rangle= I_{\vec{x}} (\theta)
+\]</div>
+<p>the last is because
+<span class="math notranslate nohighlight">\(\int \left( \frac{\partial^2 L }{\partial \theta^2} \right) \frac{1}{L} L dx = \frac{\partial^2}{\partial \theta^2} \int L dx = \frac{\partial^2}{\partial \theta^2} 1 = 0\)</span>.</p>
+<p>With these definitions we can check that the Fisher information fulfils
+the requirements shown above.</p>
+<p><span class="math notranslate nohighlight">\(\rightarrow 1)\)</span> The information should increase if we make more
+observations. For n measurements:</p>
+<div class="math notranslate nohighlight">
+\[
+I(\theta) = \langle\left( \sum_{i=1}^n S_1 (x_i ; \theta \right)^2 \rangle
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+I(\theta) = \langle\left( \sum_{i=1}^n S_1(x_i; \theta)  \right)^2\rangle
+= V\left( \sum_{i=1}^n S_1(x_i; \theta) \right) + \langle\sum_{i=1}^n S_1(x_i; \theta)  \rangle^2
+\]</div>
+<p>where we used <span class="math notranslate nohighlight">\(V(a) = \langle a^2\rangle- \langle a \rangle^2\)</span>. Assuming
+that the single measurements <span class="math notranslate nohighlight">\(x_i\)</span> are independent, the variance of the
+sum is the sum of the variances. And since all the measurements are
+taken from the same p.d.f., the variance is the same for all <span class="math notranslate nohighlight">\(i\)</span>. A
+similar argument applies to the second term. So:</p>
+<div class="math notranslate nohighlight">
+\[
+I(\theta) = n V\left( S_1(x; \theta) \right) + n^2 \langle S_1(x; \theta)  \rangle^2
+\]</div>
+<p>which shows that the information increases with the number of
+observations.</p>
+<p><span class="math notranslate nohighlight">\(\rightarrow 2)\)</span> Irrelevant data carry no information. For irrelevant
+data the p.d.f. will not depend on <span class="math notranslate nohighlight">\(\theta\)</span>; the score will be 0 adding
+no information.</p>
+<p><span class="math notranslate nohighlight">\(\rightarrow 3)\)</span> The precision should be greater if we have more
+information. This comes from the definition of Fisher’s information:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma^2(\hat{\theta}) = \frac{1}{d^2 L/d\theta^2|_{\theta = \hat{\theta}}} = \frac{1}{I(\hat{\theta})}
+\]</div>
+<p>The variance is the inverse of the second derivative of the likelihood,
+i.e. the inverse of the information. The larger the information the
+smaller the variance. Another way to look at it: think about the second
+derivative computed at the best estimate of the parameter
+(<span class="math notranslate nohighlight">\(\hat{\theta}\)</span>) as the curvature of the likelihood at that point. The
+larger the curvature, the more pronounced the minimum, the larger the
+information in the data set (the smaller the uncertainty on the
+parameter see <a class="reference internal" href="#likelihood.html#uncertainty-for-ml-estimators-sec-mlunc"><span class="xref myst">ML uncertainty</span></a>).
+Now go to the other extreme: a likelihood that
+does not depend on a parameter will be flat with respect to it, so the
+curvature and the information will be zero, and the variance infinite.</p>
+</section>
+<section id="rao-cramer-frechet-inequality">
+<h3>Rao-Cramér-Frechet inequality<a class="headerlink" href="#rao-cramer-frechet-inequality" title="Link to this heading">#</a></h3>
+<p>The “Rao-Cramér-Frechet inequality” (1945) tells that any estimator
+will never have a variance smaller than a given number that depends on
+the information contained in the dataset and the bias of the estimator.</p>
+<p>To see how this is possible, let’s compute the covariance among the
+score and the MLE (both are random variables):</p>
+<div class="math notranslate nohighlight">
+\[
+\mbox{cov}[S(\vec{x}; \hat{\theta}(\vec{x})), \hat{\theta}(\vec{x})] = \langle S(\vec{x}; \hat{\theta}(\vec{x}))\hat{\theta}(\vec{x})\rangle-\langle S(\vec{x}; \hat{\theta}(\vec{x}))\rangle\langle\hat{\theta}(\vec{x})\rangle
+\]</div>
+<p>Let’s compute it taking <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> as an estimator of <span class="math notranslate nohighlight">\(\theta\)</span> with
+bias <span class="math notranslate nohighlight">\(b_n(\hat{\theta}) = \langle\hat{\theta} \rangle- \theta\)</span> and
+assume that its variance is finite and that the range of <span class="math notranslate nohighlight">\(x\)</span> does not
+depend on <span class="math notranslate nohighlight">\(\theta\)</span>. Then we can write the first term as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\langle\hat{\theta} S(\vec{x},\theta) \rangle&amp;=&amp; \int\ldots\int \hat{\theta}\left( \frac{\partial}{\partial \theta} \ln L(\vec{x},\theta) \right) L(\vec{x},\theta) dx_1\ldots dx_n\\
+&amp;=&amp; \int\ldots\int \hat{\theta}\left( \frac{1}{L(\vec{x},\theta)}\frac{\partial}{\partial \theta} L(\vec{x},\theta) \right) L(\vec{x},\theta) dx_1\ldots dx_n\\
+&amp;=&amp; \int\ldots\int \hat{\theta}\left( \frac{\partial}{\partial \theta} L(\vec{x},\theta) \right)dx_1\ldots dx_n\\
+&amp;=&amp; \int\ldots\int \hat{\theta}\frac{\partial}{\partial \theta}\left( \prod_{i=1}^nf(x_i;\theta)dx_i \right)\\
+&amp;=&amp; \int\ldots\int \frac{\partial}{\partial \theta}\left(\hat{\theta} \prod_{i=1}^nf(x_i;\theta)dx_i \right)\end{aligned}
+\end{split}\]</div>
+<p>the last step follows because <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> is a statistic (a function
+of the data only) and therefore does not depend on <span class="math notranslate nohighlight">\(\theta\)</span>. Then we
+change the order of integration and differentiation:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\langle\hat{\theta} S(\vec{x},\theta) \rangle&amp;=&amp;  \frac{\partial}{\partial \theta}\int\ldots\int \hat{\theta} \prod_{i=1}^n f(x_i;\theta)dx_i \\
+&amp;=&amp; \frac{\partial}{\partial \theta} \langle\hat{\theta}\rangle= \frac{\partial}{\partial \theta} (\theta + b_n(\hat{\theta}))\\
+&amp;=&amp; 1 + \frac{\partial}{\partial \theta} b_n(\hat{\theta})\end{aligned}
+\end{split}\]</div>
+<p>The second term is zero because
+<span class="math notranslate nohighlight">\(\langle S(\vec{x};\theta)\rangle= \sum \langle S_1 (x_i;\theta)\rangle\)</span></p>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+ \langle S_1(x;\theta)  \rangle&amp;=&amp; \langle\frac{\partial}{\partial \theta} \ln f(x;\theta) \rangle\\
+ &amp;=&amp; \int \left(  \frac{\partial}{\partial \theta} \ln f(x;\theta)  \right) f(x; \theta) dx \\
+ &amp;=&amp; \int \frac{1}{f(x;\theta)} \left( \frac{\partial}{\partial \theta} f(x;\theta) \right) f(x;\theta) dx \\
+ &amp;=&amp;  \int \frac{\partial}{\partial \theta} f(x;\theta) dx\\
+ \end{aligned}
+\end{split}\]</div>
+<p>interchanging the order of integration and
+differentiation (this usually holds for smooth distributions encountered
+in physics):</p>
+<div class="math notranslate nohighlight">
+\[
+\langle S_1(x;\theta) \rangle=  \frac{\partial}{\partial \theta} \int f(x;\theta) dx = \frac{\partial}{\partial \theta} 1 = 0
+\]</div>
+<p>since <span class="math notranslate nohighlight">\(f(x;\theta)\)</span> is normalized for all values of <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<p>Putting everything together:</p>
+<div class="math notranslate nohighlight">
+\[
+\mbox{cov}[S(\vec{x},\hat{\theta}),\hat{\theta}(\vec{x})] = 1 + \frac{\partial}{\partial \theta} b_n(\hat{\theta}).
+\]</div>
+<p>Their correlation coefficient is:</p>
+<div class="math notranslate nohighlight">
+\[
+\rho^2 = \frac{(\mbox{cov}[S,\hat{\theta}])^2}{V(S)V(\hat{\theta})} = \frac{\left( 1 + \frac{\partial}{\partial \theta} b_n(\hat{\theta})\right)^2}{I(\theta)V(\hat{\theta})}
+\]</div>
+<p>and since <span class="math notranslate nohighlight">\(\rho^2 \le 1\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+V(\hat{\theta}) \ge \frac{\left( 1 + \frac{\partial}{\partial \theta} b_n(\hat{\theta})\right)^2}{I(\theta)}
+\]</div>
+<p>This is the so called “<strong>Rao-Cramér-Frechet inequality</strong>” (RCF) or
+“Information inequality”.</p>
+<p>This inequality means that there is a lower bound on the variance of the
+estimator; i.e. given a certain amount of information (a data set) we
+can never find an estimator with lower variance than this bound. To
+reduce the bound we need to get more information or get rid of the bias.
+For an unbiased estimator the bound becomes
+<span class="math notranslate nohighlight">\(V(\hat{\theta}) = 1/I(\theta)\)</span>.</p>
+<p>Now that we know what is the minimum variance of an estimator we can
+also define the <strong>efficiency</strong> of the estimator as:</p>
+<div class="math notranslate nohighlight">
+\[
+\epsilon(\hat{\theta}) = \frac{V_{min}(\hat{\theta})}{V(\hat{\theta})} \le 1
+\]</div>
+<p>which for an unbiased estimator is</p>
+<div class="math notranslate nohighlight">
+\[
+\epsilon(\hat{\theta}) = \frac{1}{V(\hat{\theta})I(\theta)} \le 1
+\]</div>
+<p>An estimator with <span class="math notranslate nohighlight">\(\epsilon = 1\)</span> is called <em>efficient</em>. It is not always
+possible to find an <em>efficient</em> estimator, but it can be shown that:</p>
+<ul class="simple">
+<li><p>if an efficient estimator for a given problem exist, it will be
+found using the ML method</p></li>
+<li><p>ML estimators are efficient in the large sample limit.</p></li>
+</ul>
+<p>In simple words, the maximum likelihood estimator is the best you can
+get…</p>
+<p><em>Theorem</em>: An efficient estimator can be found if and only if it belongs
+to the exponential family:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x;\theta) = \exp[A(\theta)\hat{\theta}(x) + B(\theta) + C(x) ]
+\]</div>
+</section>
+</section>
+<section id="uncertainty-for-ml-estimators">
+<h2>Uncertainty for ML estimators<a class="headerlink" href="#uncertainty-for-ml-estimators" title="Link to this heading">#</a></h2>
+<p>Let’s take the simplest case of a likelihood with only one parameter in
+the large sample limit (i.e. the estimator is asymptotically unbiased,
+efficient and the RCF is valid as an equality). Expand its NLL function
+around <span class="math notranslate nohighlight">\(\theta = \hat{\theta}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+F(\theta) = -\ln L(\theta)=F(\hat{\theta})+\frac{1}{2}\frac{d^2F}{d\theta^2}\lvert_{\theta=\hat{\theta}} (\theta-\hat{\theta})^2+\cdots
+\]</div>
+<p>(the first derivative vanishes by construction because of the ML
+principle). Then let’s approximate the likelihood with a Gaussian in the
+neighborhood of its maximum:</p>
+<div class="math notranslate nohighlight">
+\[
+L(\theta)
+        \sim const\cdot \exp\left(-\frac{1}{2}\cdot\frac{d^2F}{d\theta^2}\lvert_{\theta=\hat{\theta}}(\theta-\hat{\theta})^2\right) 
+        := const\cdot \exp\left(-\frac{(\theta-\hat{\theta})^2}{2\sigma^2}\right).
+\]</div>
+<p>By comparing the exponents we find:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma^2(\hat{\theta})=\frac{1}{\left.d^2F/d\theta^2\right|_{\theta=\hat{\theta}}} = \frac{1}{I(\hat{\theta})}.
+\]</div>
+<p>The variance is the inverse of the second derivative of the
+log-likelihood at <span class="math notranslate nohighlight">\(\theta = \hat{\theta}\)</span>, i.e. the inverse of the
+information.</p>
+<p>The difference <span class="math notranslate nohighlight">\(F(\theta) - F(\hat{\theta})\)</span> calculated at
+<span class="math notranslate nohighlight">\(\theta = \hat{\theta} \pm n \cdot \sigma(\hat{\theta})\)</span>, using the
+equations above is:</p>
+<div class="math notranslate nohighlight">
+\[
+F(\hat{\theta} \pm n\sigma) - F(\hat{\theta}) = \frac{1}{2}\frac{d^2F}{d\theta^2}\lvert_{\theta=\hat{\theta}} (\hat{\theta} \pm n\sigma - \hat{\theta})^2 = \frac{1}{2}\frac{1}{\sigma^2} ( n\sigma )^2  = \frac{1}{2}n^2
+%F(\hat{\theta}\pm n\cdot\sigma) - F(\hat{\theta}) = \frac{1}{2}n^2.
+\]</div>
+<p>This enables us to find the uncertainty of an estimator <span class="math notranslate nohighlight">\(\hat{\theta}\)</span>
+easily by looking at the graph for the log-likelihood function. When the
+log-likelihood has decreased from the maximum by <span class="math notranslate nohighlight">\(0.5\)</span> you are at
+<span class="math notranslate nohighlight">\(\pm 1 \sigma\)</span>, by <span class="math notranslate nohighlight">\(2\)</span> you are at <span class="math notranslate nohighlight">\(\pm2 \sigma\)</span>, by <span class="math notranslate nohighlight">\(4.5\)</span> you are at
+<span class="math notranslate nohighlight">\(\pm 3\sigma\)</span> and so on.</p>
+<p>If the log-likelihood function is not parabolic at the maximum then you
+can try with a non-linear transformation (<span class="math notranslate nohighlight">\(\theta\)</span> goes into
+<span class="math notranslate nohighlight">\(z = z(\theta)\)</span>) such that <span class="math notranslate nohighlight">\(F(z)\)</span> shows the desired parabolic behavior:
+the best estimator is then <span class="math notranslate nohighlight">\(\hat{z} = z(\hat{\theta})\)</span> and the standard
+deviation <span class="math notranslate nohighlight">\(\sigma_{z}\)</span> of <span class="math notranslate nohighlight">\(z\)</span> can then be determined as above.</p>
+<p>If a transformation cannot be found (which is the typical case in any
+realistic application), you can always proceed numerically and find the
+values for which the likelihood crosses <span class="math notranslate nohighlight">\(1/2 n^2\)</span>.</p>
+<p>Monte Carlo techniques can also be used to estimate the standard
+deviation or the variance of a parameter. One can simulate a large
+amount pseudo-experiments (slang: toy data or toys) and for each of them
+compute the ML estimator: the distribution of the ML estimators is then
+used to compute the variance. To generate the toy data, one can choose
+as “true” value of the parameter the one from the real experiment and as
+the size of the sample the number of events of the real experiment.
+Finally the value of the variance can be computed from
+<span class="math notranslate nohighlight">\(s^2 = 1/(n-1) \sum (x_i - \bar{x})^2\)</span> (where <span class="math notranslate nohighlight">\(x_i\)</span> are the ML estimates
+and <span class="math notranslate nohighlight">\(i\)</span> runs over the toy datasets) and give this as the statistical
+error of the parameter estimated from the real measurement.</p>
+<p>In the case of several parameters
+<span class="math notranslate nohighlight">\(\theta_{1},\theta_{2}, \ldots , \theta_{m}\)</span> the likelihood function is
+generalized to</p>
+<div class="math notranslate nohighlight">
+\[
+L(\theta_1,\theta_2,\ldots,\theta_m)=\prod_{i=1}^n f(x_i;\theta_1,\theta_2,\ldots,\theta_m).
+\]</div>
+<p>Expanding the NLL function around its minimum at <span class="math notranslate nohighlight">\(\hat{\theta}\)</span>, we
+obtain (the first derivative vanishes - ML principle):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+F(\theta_1,\ldots,\theta_m)&amp;=&amp;F(\hat{\theta}_1,\ldots,\hat{\theta}_m)+\frac{1}{2}\sum_{i,k}\frac{\partial^2F}{\partial \theta_i\partial \theta_k}(\theta_i-\hat{\theta}_i)(\theta_k-\hat{\theta}_k)+\cdots \\ &amp;=&amp;F(\hat{\theta}_1,\ldots,\hat{\theta}_m)+\frac{1}{2}\sum_{i,k}G_{ik}(\theta_i-\hat{\theta}_i)(\theta_k-\hat{\theta}_k)+\cdots\end{aligned}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(G\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+V&amp;=&amp;G^{-1} \\
+G_{ik}&amp;=&amp;\frac{\partial^2 F}{\partial \theta_i\partial \theta_k },\end{aligned}
+\end{split}\]</div>
+<p>evaluated at the minimum <span class="math notranslate nohighlight">\(\hat{\theta}\)</span>. In the case of only two
+parameters the contour lines are drawn as lines with the same likelihood
+values <span class="math notranslate nohighlight">\(F({\bf \theta}) = F({\bf \hat{\theta}}) + 1/2 r^{2}\)</span>, which
+correspond to ellipses (see <a class="reference internal" href="#errors.html#a-closer-look-at-the-error-matrix"><span class="xref myst">Error matrix</span></a>
+).</p>
+</section>
+<section id="binned-maximum-likelihood">
+<h2>Binned Maximum Likelihood<a class="headerlink" href="#binned-maximum-likelihood" title="Link to this heading">#</a></h2>
+<p>The likelihood function as we described it in the previous chapter is
+“unbinned”. This means that it is constructed out of all available data
+points <span class="math notranslate nohighlight">\(x_{i}\)</span> and therefore no information is lost due to binning. For
+large data sets, using each single point might very time consuming (in
+the minimization of the NLL at each variation of the parameters you need
+to loop over all data points) and it might be practical to bin the data
+and represent it in histograms. We assume that the random variables
+<span class="math notranslate nohighlight">\(x_{i}\)</span> are distributed according to a p.d.f. <span class="math notranslate nohighlight">\(f(x;\theta)\)</span> and that the
+expectation value <span class="math notranslate nohighlight">\(\nu = (\nu_{1}, \ldots, \nu_{N})\)</span> for the number of
+entries per bin <span class="math notranslate nohighlight">\(i\)</span> is given by</p>
+<div class="math notranslate nohighlight" id="equation-eq-nubinned">
+<span class="eqno">(6)<a class="headerlink" href="#equation-eq-nubinned" title="Link to this equation">#</a></span>\[\nu_i=\int_{x_i^{min}}^{x_i^{max}}f(x;\theta) dx.\]</div>
+<p>The boundaries of
+bin <span class="math notranslate nohighlight">\(i\)</span> are denoted by <span class="math notranslate nohighlight">\(x_{i}^{min}\)</span> and <span class="math notranslate nohighlight">\(x_{i}^{max}\)</span>, respectively. We
+can now think of the histogram as some sort of single measurement of a
+<span class="math notranslate nohighlight">\(N\)</span>-dimensional random vector for which the combined probability density
+is given by a multinomial distribution. This means we are asking for the
+joint probability to observe <span class="math notranslate nohighlight">\(n_i\)</span> entries in bin <span class="math notranslate nohighlight">\(i\)</span> when the expected
+is <span class="math notranslate nohighlight">\(\nu_i\)</span>. Normalizing by <span class="math notranslate nohighlight">\(n_{tot} = \sum n_{i}\)</span> we get:</p>
+<div class="math notranslate nohighlight">
+\[
+f_{comb}(\vec{n};\vec{\nu})=\frac{n_{tot}!}{n_1!\cdots n_N!}\left(\frac{\nu_1}{n_{tot}}\right)^{n_1}\cdots \left(\frac{\nu_N}{n_{tot}}\right)^{n_N}
+\]</div>
+<p>Remember that the dependence on the parameter <span class="math notranslate nohighlight">\(\theta\)</span> is embedded in
+the <span class="math notranslate nohighlight">\(\nu_i\)</span> as in Eq. <a class="reference internal" href="#equation-eq-nubinned">(6)</a>. The negative logarithm of the joint
+probability yields now the binned NLL function (all uninteresting terms
+are dropped):</p>
+<div class="math notranslate nohighlight">
+\[
+l(\theta) = \sum_{i=1}^N \ln\nu_i(\theta)^{n_i}
+\]</div>
+<p>The estimations for <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> are found as in the unbinned case by
+minimizing the NLL.</p>
+<p>Taking the number of bins <span class="math notranslate nohighlight">\(N\to \infty\)</span> brings back the unbinned
+likelihood case. Provided that the expected number of entries in a bin
+is not zero (<span class="math notranslate nohighlight">\(\nu_i(\theta) &gt; 0\)</span>) the binned ML is usable even when some
+bins have zero entries observed (in contrast with the least square
+method that we will discussed in the next chapter).</p>
+</section>
+<section id="extended-maximum-likelihood-method">
+<h2>Extended Maximum Likelihood Method<a class="headerlink" href="#extended-maximum-likelihood-method" title="Link to this heading">#</a></h2>
+<p>We applied up to now the ML to a fixed number of events <span class="math notranslate nohighlight">\(N\)</span>. We can
+easily extend the ML to the case where the total number of events is
+itself not known and it is treated as a parameter to be estimated. To do
+this we can multiply the previous expression of the likelihood by a
+Poisson p.d.f. which represents the probability to observe <span class="math notranslate nohighlight">\(n\)</span> events
+when the expected number of events is <span class="math notranslate nohighlight">\(\nu\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+L(x;\vec{\theta}) = \prod_{i=1}^n f(x_i;{\bf \theta}) \to L_E(x;{\bf \theta}, \nu) = \frac{e^{-\nu}\nu^n}{n!} \prod_{i=1}^n f(x_i;{\bf \theta})
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight" id="equation-eq-eml">
+<span class="eqno">(7)<a class="headerlink" href="#equation-eq-eml" title="Link to this equation">#</a></span>\[l(\vec{x};\vec{\theta}) = \sum_{i=1}^n \ln f(x_i;{\bf \theta}) \to l_E(\vec{x};{\bf \theta},\nu)  = \sum_{i=1}^n \ln \nu f(x_i;{\bf \theta}) - \nu + const\label{eq_eml}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\ln\nu f(x;{\bf \theta})\)</span> is now normalized to <span class="math notranslate nohighlight">\(\nu\)</span> instead of 1
+and where we dropped the constant term <span class="math notranslate nohighlight">\(\ln n!\)</span> which is irrelevant in
+the minimization. This new likelihood is called the
+<em>extended-maximum-likelihood</em> or EML.</p>
+<p>We can now distinguish two cases:</p>
+<p>Case 1: the parameter <span class="math notranslate nohighlight">\(\nu\)</span> depends on <span class="math notranslate nohighlight">\({\bf \theta}\)</span>. The EML
+log-likelihood function can be written as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\ln L({\bf \theta})&amp;=&amp;n\ln \nu({\bf \theta})-\nu({\bf \theta})+\sum_{i=1}^{n}\ln f(x_i;{\bf \theta})\\
+&amp;=&amp;-\nu({\bf \theta})+\sum_{i=1}^{n}\ln(\nu({\bf \theta}) f(x_i;{\bf \theta}))\end{aligned}
+\end{split}\]</div>
+<p>where the additive terms not depending on <span class="math notranslate nohighlight">\({\bf \theta}\)</span> are dropped. By
+taking the Poisson term into consideration in the EML function, the
+resulting variance is usually smaller, because when estimating
+<span class="math notranslate nohighlight">\({\bf \hat{\theta}}\)</span>, we use the extra information brought in by <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>Case 2: <span class="math notranslate nohighlight">\(\nu\)</span> does not dependent on <span class="math notranslate nohighlight">\({\bf \theta}\)</span>. Differentiating
+Eq. <a class="reference internal" href="#equation-eq-eml">(7)</a> w.r.t <span class="math notranslate nohighlight">\(\nu\)</span> and equating it to zero yields as estimator simply
+<span class="math notranslate nohighlight">\(\hat{\nu} = n\)</span>, as expected. We also obtain as estimators the same
+<span class="math notranslate nohighlight">\(\hat{\theta}\)</span> of the standard ML. Nevertheless the variance of the
+<span class="math notranslate nohighlight">\(\hat{\theta}\)</span> would be bigger because now not only <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> but
+also <span class="math notranslate nohighlight">\(n\)</span> is a source of statistical uncertainty.</p>
+</section>
+<section id="combination-of-measurements-with-the-ml-method">
+<h2>Combination of Measurements with the ML Method<a class="headerlink" href="#combination-of-measurements-with-the-ml-method" title="Link to this heading">#</a></h2>
+<p>Suppose we have different measurements of the same parameter <span class="math notranslate nohighlight">\(\theta\)</span> by
+different experiments and you want to combine them using the ML method.
+More precisely, suppose we have a set of <span class="math notranslate nohighlight">\(n\)</span> measured data points with
+probability density <span class="math notranslate nohighlight">\(f(x;\theta)\)</span> from one experiment and a second set
+with <span class="math notranslate nohighlight">\(m\)</span> measured data points <span class="math notranslate nohighlight">\(y_{i}\)</span>, which are distributed according
+to a probability density <span class="math notranslate nohighlight">\(g(y;\theta)\)</span> from a second experiment. The two
+probability densities <span class="math notranslate nohighlight">\(f(x;\theta)\)</span> and <span class="math notranslate nohighlight">\(g(y;\theta)\)</span> can have different
+functional forms, because of the different experimental techniques used
+to determine <span class="math notranslate nohighlight">\(\theta\)</span>. As an example you can think of <span class="math notranslate nohighlight">\(\theta\)</span> being the
+mass of a particle and <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> the results of two experiments or the
+results of the mass measurement in two decay modes.<br />
+The two experiments together can be interpreted as one single experiment
+and the resulting likelihood is just the product of:</p>
+<div class="math notranslate nohighlight">
+\[
+L(\theta)=\prod_{i=1}^{n}f(x_i;\theta)\cdot \prod_{i=1}^{m}g(y_i;\theta)=L_x(\theta)\cdot L_y(\theta)
+\]</div>
+<p>This expression becomes clear if you think back at the definition of
+likelihood. The likelihood is based on the conditional probability that,
+given a parameter <span class="math notranslate nohighlight">\(\theta\)</span> we observe the data set we have. The product
+above, just extends the conditional probability further to a larger data
+set comprising two experiments.<br />
+This way of combining different measurements is only valid in the case
+where the two likelihood are totally uncorrelated, i.e. the two
+experiments do not share any common source of uncertainty. If that is
+not the case then the parameters correlation has to be included in the
+likelihoods expressions. A real life example can be found in the
+combination of the Higgs mass measurement performed by the ATLAS and CMS
+collaborations <a class="reference external" href="https://arxiv.org/abs/1503.07589">ATLASCMS</a>.</p>
+</section>
+<section id="constraining-parameters">
+<h2>Constraining parameters<a class="headerlink" href="#constraining-parameters" title="Link to this heading">#</a></h2>
+<p>It often happens that the parameters to be estimated are constrained,
+for instance by a physical reason (e.g. mass <span class="math notranslate nohighlight">\(&gt; 0\)</span>) or by other
+measurements. Imposing constraints always implies adding some
+information, and therefore the errors of the parameters are in general
+reduced.</p>
+<p>The most efficient method to deal with a constraint is to rewrite the
+parameters such that the constraints are embedded in their definition.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>Take <span class="math notranslate nohighlight">\(\theta_i\)</span> as fractions subjected to the constraint
+that they should add to 1:</p>
+<div class="math notranslate nohighlight">
+\[
+0 \le \theta \le 1 \qquad \; \qquad \sum_{i=1}^n \theta_i =1.
+\]</div>
+<p>Then we can redefine the parameters as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\theta_1 &amp;=&amp; \psi_1\\
+\theta_2 &amp;=&amp; (1-\psi_1)\psi_2\\
+\theta_3 &amp;=&amp; (1-\psi_1)(1-\psi_2)\psi_3\\
+&amp;\ldots&amp;\\
+\theta_{k-1} &amp;=&amp; (1-\psi_1)(1-\psi_2)\ldots(1-\psi_{k-2})\psi_{k-1}\\
+\theta_k &amp;=&amp; (1-\psi_1)(1-\psi_2)\ldots(1-\psi_{k-1})\end{aligned}
+\end{split}\]</div>
+<p>where the <span class="math notranslate nohighlight">\(\psi_i \; \forall i\)</span> are bounded to be between 0 and 1.</p>
+</div>
+<p>The most general way to express a constraint is through an implicit
+equation (or in general a set of equations) of the form:
+<span class="math notranslate nohighlight">\(\vec{g}(\vec{\theta}) =0\)</span> and the general method to implement them is
+to use the <em>Lagrange multipliers</em>. Given a likelihood
+<span class="math notranslate nohighlight">\(L(\vec{x};\vec{\theta})\)</span> and the constraint <span class="math notranslate nohighlight">\(\vec{g}(\vec{\theta}) = 0\)</span>
+we will find the maximum of:</p>
+<div class="math notranslate nohighlight">
+\[
+F(\vec{x};\vec{\theta}, \vec{\alpha}) = \ln L(\vec{x};\vec{\theta}) + \vec{\alpha} \vec{g}(\vec{\theta})
+\]</div>
+<p>with respect to <span class="math notranslate nohighlight">\(\vec{\theta}\)</span> and <span class="math notranslate nohighlight">\(\vec{\alpha}\)</span>. The estimators of
+<span class="math notranslate nohighlight">\(\vec{\theta}\)</span> found in this way satisfy the constraints and also have
+all the usual properties of maximum likelihood estimators.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>Take the likelihood <span class="math notranslate nohighlight">\(L(x; \theta_1; \theta_2)\)</span> and say we
+want to estimate <span class="math notranslate nohighlight">\(\theta_1\)</span> but we know from a different measurement
+that <span class="math notranslate nohighlight">\(\theta_2\)</span> has a a value <span class="math notranslate nohighlight">\(\bar{\theta}_2 \pm \sigma_{\theta_2}\)</span>. We
+can introduce the constraint on <span class="math notranslate nohighlight">\(\theta_2\)</span> by simply multiplying the
+likelihood by a gaussian function centred at <span class="math notranslate nohighlight">\(\bar{\theta}_2\)</span> with width
+<span class="math notranslate nohighlight">\(\sigma_{\theta_2}\)</span> (or adding the equivalent parabolic term to the
+log-likelihood).</p>
+</div>
+</section>
+<section id="some-general-remarks-concerning-ml-estimators">
+<h2>Some general remarks concerning ML estimators<a class="headerlink" href="#some-general-remarks-concerning-ml-estimators" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>For large data sets (large <span class="math notranslate nohighlight">\(n\)</span>) the ML estimator <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> is
+unbiased and normally distributed around the true value <span class="math notranslate nohighlight">\(\theta\)</span>.
+The variance approaches the RCF-boundary, i.e. ML estimators are
+efficient. They are furthermore consistent for large <span class="math notranslate nohighlight">\(n\)</span>. These
+properties explain the popularity of the ML method.</p></li>
+<li><p>A way to study the bias of an estimator <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> is through
+toy MC. Multiple data sets of the same size <span class="math notranslate nohighlight">\(n\)</span> of the original one,
+all depending on the parameter <span class="math notranslate nohighlight">\(\theta\)</span>, have to be generated and
+analysed with the ML method. With the obtained results we can
+produce the so called “pull-distribution”, i.e. the histogram filled
+with the value <span class="math notranslate nohighlight">\((\theta - \hat{\theta}) / \sigma_{\hat{\theta}}\)</span>.
+For an unbiased estimator, this distribution should be centred at
+zero and have width 1.</p></li>
+<li><p>It is important for the likelihood function and the ML estimator
+that the probability density <span class="math notranslate nohighlight">\(f(x,\theta)\)</span> is normalized, i.e.
+<span class="math notranslate nohighlight">\(\int f(x,\theta) dx\)</span> is independent from <span class="math notranslate nohighlight">\(\theta\)</span>. If the
+maximization/minimization is done numerically, it is important to
+ensure the normalization at each step (numerical programs like
+ROOFIT do that automatically).</p></li>
+<li><p>Errors on the ML estimator: For sufficiently large <span class="math notranslate nohighlight">\(n\)</span> the
+likelihood function <span class="math notranslate nohighlight">\(L(\theta)\)</span>, the error <span class="math notranslate nohighlight">\(\sigma\)</span> of the estimator
+can be determined from:</p>
+<ul class="simple">
+<li><p>the values for <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> for which <span class="math notranslate nohighlight">\(\ln L\)</span> decreases by 0.5</p></li>
+<li><p><span class="math notranslate nohighlight">\(1/\sqrt{-\frac{\partial^2\ln L}{\partial a^2}}\)</span></p></li>
+<li><p>the boundaries of the integral <span class="math notranslate nohighlight">\(\int_{a}^{b} L(\theta) d\theta\)</span>
+that encloses 68% of the whole area.</p></li>
+</ul>
+<p>In the case of small <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(\ln L\)</span> is not necessarily parabolic. The
+function does not even have to be symmetric around its maximum.
+Nevertheless <span class="math notranslate nohighlight">\(\Delta \ln L = \frac{1}{2}\)</span> can be used as a rule of
+thumb to get an approximation for the 68% confidence interval. For a
+better estimation of the uncertainty you can use Monte Carlo toys.</p>
+</li>
+</ul>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>Most of the material of this section is taken from:</p>
+<ul class="simple">
+<li><p>W. Metzger, <span id="id1">[<a class="reference internal" href="bibliography.html#id3" title="Wes Metzger. Statistical Methods in Data Analysis. Katholieke Universiteit Nijmegen, Nijmegen, The Netherlands, 2002. URL: https://www.hef.ru.nl/~wes/stat_course/statist_2002.pdf.">Met02</a>]</span>, “Statistical Methods in Data Analysis”: Ch.8</p></li>
+<li><p>G. Cowan, <span id="id2">[<a class="reference internal" href="bibliography.html#id12" title="Glen Cowan. Statistical Data Analysis. Oxford Science Publications, 1998. URL: https://global.oup.com/academic/product/statistical-data-analysis-9780198501558?cc=ch&amp;lang=en&amp;.">Cow98</a>]</span>, “Statistical Data Analysis”,Ch. 6</p></li>
+<li><p>R. Barlow, <span id="id3">[<a class="reference internal" href="bibliography.html#id8" title="Roger Barlow. Statistics - A guide to the use of statistical methods in the physical sciences. Wiley, 1989. URL: https://www.wiley.com/en-us/Statistics:+A+Guide+to+the+Use+of+Statistical+Methods+in+the+Physical+Sciences-p-9780471922957.">Bar89</a>]</span>, “ A guide to the use of statistical methods in the physical sciences”. Ch. 5</p></li>
+</ul>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="inference.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Statistical inference</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="interactive-nbs/StraighLineFit_LSM_vs_MLM.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">From LSM to MLM (…a.k.a. from Physics 1 laboratory to the Likelihood)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-the-estimators">Properties of the estimators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation-of-the-mean">Estimation of the Mean</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation-of-the-variance">Estimation of the Variance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-likelihood-method">Maximum Likelihood Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minimum-variance-bound">Minimum Variance Bound</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#information">Information</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rao-cramer-frechet-inequality">Rao-Cramér-Frechet inequality</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-for-ml-estimators">Uncertainty for ML estimators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binned-maximum-likelihood">Binned Maximum Likelihood</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-maximum-likelihood-method">Extended Maximum Likelihood Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combination-of-measurements-with-the-ml-method">Combination of Measurements with the ML Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constraining-parameters">Constraining parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-general-remarks-concerning-ml-estimators">Some general remarks concerning ML estimators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mauro Donega
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

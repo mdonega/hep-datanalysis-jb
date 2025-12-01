@@ -1,0 +1,2013 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Probability &#8212; Statistical Methods and Data Analysis Techniques</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'probability';</script>
+    <link rel="icon" href="_static/favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Conditional Probability" href="interactive-nbs/ConditionalProbability.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="preface.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Statistical Methods and Data Analysis Techniques - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Statistical Methods and Data Analysis Techniques - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="preface.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Probability</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/ConditionalProbability.html">Conditional Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/BayesTheorem.html">Bayes Theorem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/exponentialGrowth.html">Example of exponential growth</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/harmonicMean.html">Harmonic mean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/covarianceCorrelation.html">Covariance and correlation</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="probabilityDistributions.html">Probability Distributions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/randomWalk.html">Random Walk</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="errors.html">Measurements uncertainties</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/ErrorMatrix.html">Interactive Example - Error Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/slidingMean.html">Sliding Mean</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="monteCarlo.html">Monte Carlo methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/randomNumbers.html">Random numbers generators with “numpy”</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="inference.html">Statistical inference</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="likelihood.html">Parameter Estimation - Likelihood</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/StraighLineFit_LSM_vs_MLM.html">From LSM to MLM (…a.k.a. from Physics 1 laboratory to the Likelihood)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/MLMethod.html">Interactive Example - ML Method: Mean of a Gaussian</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="leastSquares.html">Parameter Estimation - Least Squares</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="hypothesisTesting.html">Hypotheses Testing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="confidenceIntervals.html">Confidence Intervals</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/Poisson_CI.html">Poisson Confidence Intervals</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/Gaussian_CI.html">Gaussian Confidence Intervals</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/LimitNearBoundariesBayesianApproach.html">Compute the bayesian upper limit for a gaussian near the physical boundary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/LimitNearBoundariesBayesianApproachPoisson.html">Compute the bayesian upper limit for a Poisson near the physical boundary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/FC_PoissonMeanWithKnownBackground.html">Feldman-Cousins confidence cnterval construction for a single Poisson, with known background and unknown signal</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/UpperLimit.html">Interactive Example - Upper Limit</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="mva.html">Multivariate Analysis Methods</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="appendix.html">Appendices</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="appendices/Histograms.html">Histograms</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="exercises.html">Exercises</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/Ex_Histograms.html">Exercises on Histograms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises/Ex_Probability.html">Exercises on Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises/Ex_ProbabilityDensityFunctions.html">Exercises on Probability Density Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises/Ex_Covariance.html">Exercises on Covariance and Correlation</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/mdonega/hep-datanalysis-jb/main?urlpath=tree/book/probability.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/probability.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Probability</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#randomness">Randomness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#axiomatic-definition">Axiomatic definition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-as-frequency-limit">Probability as frequency limit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">Conditional probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">Bayes’ Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subjective-probability-or-the-bayesian-interpretation">Subjective probability or the Bayesian interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-density-function">Probability density function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cumulative-distribution-function">Cumulative distribution function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantiles">Quantiles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-median-and-mode">Mean, Median and Mode</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation-value">Expectation value</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-and-standard-deviation">Variance and Standard Deviation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-width-at-half-maximum">Full Width at Half Maximum</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#higher-moments">Higher Moments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moment-generating-function">Moment generating function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-inequalities">Useful Inequalities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#characteristic-function">Characteristic Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-than-one-dimension">More than one dimension</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation-of-variables">Transformation of variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance-and-correlation">Covariance and Correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="probability">
+<h1>Probability<a class="headerlink" href="#probability" title="Link to this heading">#</a></h1>
+<p>I was promised a book on data analysis and the first chapter is about probability, why?</p>
+<p>The concept of probability, and how to work with it, is a pre-requisite to perform data analysis. Probabilities are one of the mathematical tools that will allow us to make quantitative statements about data.</p>
+<!-- Xcheck [test label](testLabel) and {eq}`my_label` and link to another [`.md`](./unfolding.md) and to {figure} --><section id="randomness">
+<h2>Randomness<a class="headerlink" href="#randomness" title="Link to this heading">#</a></h2>
+<p>Probability and randomness come as very closed ideas.
+Let’s begin by trying to understand what we mean by randomness.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>A good outline concerning randomness in classical systems can be found in J. Fords article “How random is a coin toss?” FIXME <a class="reference internal" href="#refs"><span class="xref myst">Ref. 1</span></a>. The author makes the analogy between quantum mechanics stemming from the finiteness of the Planck’s constant, special relativity stemming from the finiteness of the speed of light and the complexity theory stemming from dropping the assumption of infinite precision.</p>
+</aside>
+<p>The classical example for randomness comes from tossing a coin where the outcome is head or tail. Because it is a classical system, its outcome can in principle be predicted by evaluating the equations of motion. So how can the aspect of randomness arise from a, at least in principle, deterministic system? The issue is that in order to predict precisely the evolution of a physical system it would be necessary to “prepare” it in a configuration with infinitely precise initial conditions, which is in practice not possible. On this case, probability comes in as a convenient tool to predict the outcome of the experiment (head/tail).</p>
+<p>A different situation is encountered in quantum mechanics when we study the physics at the atomic and sub-atomic scale. Here the governing laws are “intrinsically” probabilistic.</p>
+</section>
+<section id="id1">
+<h2>Probability<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>There are several definitions of probability. We will start from the
+axiomatic definition and then introduce the frequency interpretation.
+After having defined the conditional probability we will consider the
+subjective interpretation arising from the Bayes theorem. Later in the
+course we will address the implications on statistical inference coming from
+the frequentists/Bayesian interpretation of probability.</p>
+</section>
+<section id="axiomatic-definition">
+<h2>Axiomatic definition<a class="headerlink" href="#axiomatic-definition" title="Link to this heading">#</a></h2>
+<p>We beging from the axiomatic definition of probability (also known as
+the <a class="reference external" href="https://en.wikipedia.org/wiki/Probability_axioms">Kolmogorov</a> axioms). Let <span class="math notranslate nohighlight">\(S\)</span> be the set of possible outcomes of an
+experiment. For every possible outcome <span class="math notranslate nohighlight">\(E\subseteq S\)</span> the probability <span class="math notranslate nohighlight">\(p(E)\)</span>
+fulfills the following axioms:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(S) = 1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(E) \ge 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(\cup E_i) = \sum P(E_i)\)</span> for any set of disjoint <span class="math notranslate nohighlight">\(E_i \subset S \)</span> and <span class="math notranslate nohighlight">\(E_j \subset S\)</span>
+(i.e. when <span class="math notranslate nohighlight">\(E_i\)</span> and <span class="math notranslate nohighlight">\(E_j\)</span> are mutually exclusive)</p></li>
+</ul>
+<p>It follows immediately that:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(E) = 1-P(E^*)\)</span> where <span class="math notranslate nohighlight">\(S = E \cup E^*\)</span> and <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(E^*\)</span> are
+disjoint</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(E) \le 1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(\emptyset) = 0\)</span> where <span class="math notranslate nohighlight">\(\emptyset\)</span> is the null set</p></li>
+</ul>
+<p>Any P fulfilling these axioms can be called probability.</p>
+</section>
+<section id="probability-as-frequency-limit">
+<h2>Probability as frequency limit<a class="headerlink" href="#probability-as-frequency-limit" title="Link to this heading">#</a></h2>
+<p>The most popular definition of probability is based on the limit of
+relative frequencies. In particle physics, where we scatter particles several times and we count how often a certain process occurs, this definition seems particulary appealing.</p>
+<p>Assume we conduct an experiment which has a certain number of descrete outcomes (events).</p>
+<p>Suppose we prepare N identical
+experiments (or identically repeat the experiment N times)
+and find that the outcome <span class="math notranslate nohighlight">\(E_i\)</span> occurs <span class="math notranslate nohighlight">\(N_i\)</span> times. We
+assign the probability P<span class="math notranslate nohighlight">\((E_i)\)</span> to the outcome <span class="math notranslate nohighlight">\(E_i\)</span>, as defined by its
+relative frequency of occurrence:<br />
+<span class="math notranslate nohighlight">\(P(E_i)=\lim_{N\rightarrow \infty} \frac{N_i}{N}.\)</span></p>
+<p>It’s easy to verify
+that this definition satisfies the axioms given above. This definition
+is also called the <em>objective posterior probability</em>, because the
+probability is defined a posteriori, i.e. <em>after the outcomes of the
+experiment are known</em>.</p>
+<p>The “frequency limit” approach is very useful in practice, however:</p>
+<ul class="simple">
+<li><p>the limit does not exist in a strict mathematical sense. There is
+no deterministic rule linking the outcome of
+experiment <span class="math notranslate nohighlight">\(j\)</span> with the outcome of experiment <span class="math notranslate nohighlight">\(j+1\)</span>.</p></li>
+<li><p>how do we prepare <span class="math notranslate nohighlight">\(N\)</span> identical experiments? Is it sufficient if
+they are very similar? (e.g. back to the coin toss: at each toss the
+coin has some abrasion and the <span class="math notranslate nohighlight">\((j+1)^{th}\)</span> toss is not identical to
+the <span class="math notranslate nohighlight">\(j^{th}\)</span>).</p></li>
+<li><p>nobody can conduct infinitely many experiments. When does the series
+converge to the limit?</p></li>
+<li><p>for some problems this definition is meaningless:
+what is the probability that tomorrow will rain ? it’s a single experiment;
+what is the probability that Nature is supersymmetric ? it’s either susy or not.</p></li>
+</ul>
+</section>
+<section id="conditional-probability">
+<h2>Conditional probability<a class="headerlink" href="#conditional-probability" title="Link to this heading">#</a></h2>
+<p>Let A and B be two different events. The probability for A to happen is
+<span class="math notranslate nohighlight">\(P(A)\)</span> and correspondingly <span class="math notranslate nohighlight">\(P(B)\)</span> is the probability for B to happen.
+The probability that either A or B happens is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+P(A\,\cup\, B)=P(A)+P(B)-P(A\,\cap\,B)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(P(A\, \cap \, B)\)</span> denotes the probability that A and B occur together.
+If A and B are
+mutually exclusive, then <span class="math notranslate nohighlight">\(P(A\, \cap \, B)=0\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(P(A|B)\)</span> be the <strong>conditional probability</strong> that event A occurs,
+given that event B has already occured. Then
+<span class="math notranslate nohighlight">\(P(A\, \cap \, B)=  P(A|B) \cdot P(B)\)</span>: the probability that A and B
+happen is the probability that A happens given B, multiplied by the
+probability that B happens.  The conditional probability <span class="math notranslate nohighlight">\(P(A|B)\)</span>
+can be written as:</p>
+<div class="math notranslate nohighlight">
+\[
+P(A|B)=\frac{P(A\, \cap\, B)}{P(B)}.
+\]</div>
+<p>If the two events are independent, then
+<span class="math notranslate nohighlight">\(P(A|B)=P(A)\)</span>, i.e. the occurrence of A does not depend on B, and so
+<span class="math notranslate nohighlight">\(P(A\, \cap\, B)=P(A)\cdot P(B)\)</span>. In plain english, the occurrence of
+B does not influence the occurrence of A.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>Suppose you draw a card from a deck of 52 cards and it’s red.
+What is the probability that it is also a diamond ?</p>
+<p><span class="math notranslate nohighlight">\(\mbox{P(diamond|red)=}\frac{\mbox{P(diamond}\, \cap\, \mbox{red)}}{\mbox{P(red)}}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\mbox{P(diamond}\, \cap\, \mbox{red)}\)</span> = number of red diamonds divided by the total number of cards = 13/52</p>
+<p><span class="math notranslate nohighlight">\(\mbox{P(red)}\)</span> = number of red cards divided by the total number of cards = 26/52</p>
+<p><span class="math notranslate nohighlight">\(\mbox{P(diamond|red)} = \frac{13/52}{26/52} = 13/26  = 0.5\)</span></p>
+<p>which makes sense: 50% of the red cards are diamonds</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>Suppose you draw a card from a deck of 52 cards and it’s red.</p>
+<p>What is the probability that it is a queen ?</p>
+<p><span class="math notranslate nohighlight">\(\mbox{P(queen|red)}=\frac{\mbox{P(queen}\, \cap\, \mbox{red)}}{\mbox{P(red)}} \)</span></p>
+<p><span class="math notranslate nohighlight">\(\mbox{P(queen}\, \cap\, \mbox{red)}\)</span> = number of red queens divided by the total number of cards = 2 / 52</p>
+<p><span class="math notranslate nohighlight">\(\mbox{P(red)}\)</span> = number of red cards divided by the total number of cards = 26/52</p>
+<p><span class="math notranslate nohighlight">\(\mbox{P(queen|red)}= \frac{2/52}{26/52} = 1/13\)</span></p>
+<p>which makes sense: only 2 cards are queen out of the 26 red cards.</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>Suppose you draw a card from a deck of 52 cards and it’s red.</p>
+<p>What is the probability that it is a queen of diamonds ?</p>
+<p><span class="math notranslate nohighlight">\(\mbox{P(queen of diamonds|red)=}\frac{\mbox{P(queen of diamonds}\, \cap\, \mbox{red)}}{\mbox{P(red)}} \)</span></p>
+<p><span class="math notranslate nohighlight">\(\mbox{P(queen of diamonds}\, \cap\, \mbox{red)}\)</span> = number of queens of diamonds divided by the total number of cards = 1 / 52</p>
+<p><span class="math notranslate nohighlight">\(\mbox{P(red)}\)</span> = number of red cards divided by the total number of cards = 26/52</p>
+<p><span class="math notranslate nohighlight">\(\mbox{P(queen|red)}= \frac{1/52}{26/52} = 1/26\)</span></p>
+<p>which makes sense: only 1 cards are queen of diamonds out of the 26 red cards.</p>
+</div>
+</section>
+<section id="bayes-theorem">
+<h2>Bayes’ Theorem<a class="headerlink" href="#bayes-theorem" title="Link to this heading">#</a></h2>
+<p>The Bayes’ theorem formalize the relation between the conditional probability P(A|B) and P(B|A):</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Thomas Bayes, British clergyman [1702 - 1761]. The so-called “Bayes’ Theorem” is named after him, but it has been independently re-discovered by Pierre-Simon Laplace [1749 – 1827] and others.</p>
+</aside>
+<div class="math notranslate nohighlight">
+\[
+P(A|B)=\frac{P(B|A)\cdot P(A)}{P(B)}
+\]</div>
+<p>It can be proven in one line by writing <span class="math notranslate nohighlight">\(P(A \cap B)\)</span> in two different ways:</p>
+<p><span class="math notranslate nohighlight">\(P(A\, \cap\, B)= P(A|B) \cdot P(B) =  P(B|A) \cdot P(A) = P(B\, \cap\, A)\)</span></p>
+<p>and hence</p>
+<p><span class="math notranslate nohighlight">\(P(A|B)=\frac{P(B|A)\cdot P(A)}{P(B)}.\)</span></p>
+<p>To fix some nomenclature, let’s use a specific example where A is a theory we are testing and B is a given set of data.</p>
+<div class="math notranslate nohighlight">
+\[
+P(theory|data)=\frac{P(data|theory)\cdot P(theory)}{P(data)}
+\]</div>
+<ul class="simple">
+<li><p>P(data | theory) = <strong>“likelihood”</strong>; how likely is to measure the given set of data assuming that the theory is correct</p></li>
+<li><p>P(theory | data) = <strong>“posterior probability”</strong>; it’s what you are interested in ! the probability that the theory is correct given the measured data</p></li>
+<li><p>P(theory)           = <strong>“prior probability”</strong>; the probability we assign to the theory to be correct based on all our knowledge before collecting the givenset of  data. Typically information coming from previous experiments</p></li>
+<li><p>P(data)              = <strong>“evidence”</strong>; it’s a normalization factor: the posterior must be normalised to 1</p></li>
+</ul>
+<p>The theorem states that the probability that A happens given B is equal to
+the probability that B happens given A (note that A and B are inverted)
+times your <strong>prior knowledge</strong> about A and divided by a <strong>normalization
+factor</strong> P(B). The normalization P(B), the probability for B to happen
+given that A or not-A happens, in all practical cases is expresses as:
+<span class="math notranslate nohighlight">\(P(B) = P(B|A)P(A)+P(B|\mbox{not-A})P(\mbox{not-A})\)</span>.</p>
+<p>Let’s take a concrete example to understand how the Bayes theorem works:</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>Consider a topic coming from virology. We assume that 0.1%
+of all swans of a certain colony are infected by an influenza virus. A
+specially developed test for influenza shall, in case of an infected
+bird, have a detection efficiency of 98%. Unfortunately, the probability
+of error (false positive) is 3%, which means that the test indicates an
+infection in 3% of all cases where the bird is not infected.</p>
+<p>We ask now for the probability <span class="math notranslate nohighlight">\(P\)</span> that, after having had a positive test, a swan
+is actually infected by the influenza virus.</p>
+<p>According to the given information, we have:</p>
+<p><span class="math notranslate nohighlight">\(P({\rm influenza})=0.001\)</span> (0.1% of all swans are infected)</p>
+<p><span class="math notranslate nohighlight">\(P({\rm non-influenza})=1-0.001=0.999\)</span>.</p>
+<p>The probabilities for the test response are:</p>
+<p><span class="math notranslate nohighlight">\(P(+|{\rm influenza})=0.98\)</span> and</p>
+<p><span class="math notranslate nohighlight">\(P(-|{\rm influenza})=1-0.98=0.02\)</span>.</p>
+<p>Where <span class="math notranslate nohighlight">\(P(+|{\rm influenza})\)</span>  (<span class="math notranslate nohighlight">\(P(-|{\rm influenza})\)</span>) denote the positive (negative) response
+under the condition that the swan is actually infected.</p>
+<p>Furthermore, the probability of a wrong result of the test is given by</p>
+<p><span class="math notranslate nohighlight">\(P(+|{\rm non-influenza})=0.03\)</span> and</p>
+<p><span class="math notranslate nohighlight">\(P(-|{\rm non-influenza})=1-0.03=0.97\)</span>.</p>
+<p>Therefore, the probability <span class="math notranslate nohighlight">\(P({\rm influenza}|+)\)</span> that a swan is infected, given the test was positive, is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+P({\rm influenza}|+)
+&amp;=&amp;\frac{P(+|{\rm influenza})\cdot P({\rm influenza})}{P(+|{\rm influenza})\cdot P({\rm influenza})+P(+|{\rm non-influenza})\cdot P({\rm non-influenza})}\\
+\end{aligned}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+= \frac{0.98\times 0.001}{0.98\times 0.001+0.03\times 0.999} =3\%.
+\]</div>
+<p>This means that an infection is present in only 3% of all cases in which
+the test was positive!</p>
+<p>One way to look at it: a test with a false positive rate of 3% means that every 1000 people tested 30 will be positive, while the number of sick people in a population of 1000 should be only 1. You are among the 30 tested positive. You are comparing 1 against 30.</p>
+</div>
+</section>
+<section id="subjective-probability-or-the-bayesian-interpretation">
+<h2>Subjective probability or the Bayesian interpretation<a class="headerlink" href="#subjective-probability-or-the-bayesian-interpretation" title="Link to this heading">#</a></h2>
+<p>In Bayesian inference the probability is interpreted as a subjective
+“<strong>degree of belief</strong>” which can be modified by observations (more
+data). This is the strength of the Bayesian theorem: it provides a
+quantitative way to update the initial knowledge (prior belief) about a
+proposition when new data becomes available. Try to compute as an
+exercise how the <span class="math notranslate nohighlight">\(P({\rm influenza}|+)\)</span> of the previous example changes
+if you get two consecutive positive tests (see the <a class="reference internal" href="interactive-nbs/BayesTheorem.html"><span class="doc std std-doc">interactive-nb</span></a> ).</p>
+<p>Going back to the case where we considered A as a theory that we want to test, and B a given set of data, we have: P(theory) the probability (“belief”) that a theory is
+correct before doing the experiment; P(data<span class="math notranslate nohighlight">\(|\)</span>theory) is
+the probability of getting the given set of data if the theory is true; P(data) is our normalization factor, and  P (theory <span class="math notranslate nohighlight">\(|\)</span> data) is our belief in the theory after having obtained the result.</p>
+<p>It’s important to notice the <em>inversion of the logic</em>: for
+<span class="math notranslate nohighlight">\(P(\mbox{theory}|\mbox{data})\)</span> you have collected the data and you are
+evaluating the probability of the theory to be right; for
+<span class="math notranslate nohighlight">\(P(\mbox{data}|\mbox{theory})\)</span> you are estimating the probability to obtain such a data
+distribution given a certain theory.</p>
+<p>The fundamental difference between the frequentist approach and the
+Bayesian approach relies in the interpretation. The frequentist’s
+probability is interpreted as a <em>State of Nature</em>, whereas the Bayesian
+probability is a <em>State of Knowledge</em> introducing inevitably some
+subjectivity.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>What is the probability that Nature is supersymmetric ?
+This question has no meaning in a frequentist inference (either it supersymmetric or it is not), but you can compute a degree of belief using the bayesian inference to compute the posterior probability, given the information you have.</p>
+</div>
+<p>The probability of an event <span class="math notranslate nohighlight">\(P(E)\)</span> depends on the
+information which is accessible to the observer. The function <span class="math notranslate nohighlight">\(P(E)\)</span> is
+therefore not purely an intrinsic function of the event, it rather
+depends on the knowledge and information possessed by the observer.</p>
+<p>Unfortunately there is no a priori way to assign the “prior” assumption <span class="math notranslate nohighlight">\(P(A)\)</span>:
+the assignment of the prior probability is
+subjective. The usual prescription is to assume complete ignorance about
+the prior P(A) and take all values of A as equiprobable, but there are objections
+to this approach:</p>
+<ul class="simple">
+<li><p>if we are completely ignorant about P(A), how do we know it is a
+constant?</p></li>
+<li><p>a different choice of P(A) would give a different P(A<span class="math notranslate nohighlight">\(|\)</span>B)</p></li>
+<li><p>if we are ignorant about P(A), we are also ignorant about P(<span class="math notranslate nohighlight">\(A^2\)</span>)
+or P(1/A), etc… taking any of these (P(<span class="math notranslate nohighlight">\(A^2\)</span>) or P(1/A), etc…)
+as constant would imply a different P(A), giving a different
+posterior probability.</p></li>
+</ul>
+<p>Another approach consists in developing a prior that is invariant under
+a change of coordinates in the parameter (or parameter space). This can
+be done by constructing a distribution for the prior that is proportional
+to the square root of the determinant of the Fisher <a class="reference internal" href="#likelihood.html"><span class="xref myst">Information</span></a>.
+This approach goes under the name of <a class="reference external" href="https://en.wikipedia.org/wiki/Jeffreys_prior">Jeffrey’s priors</a> <span id="id2">[<a class="reference internal" href="bibliography.html#id29" title="Harold Jeffrey. Theory of Probability. Oxford University Press, 1948.">Jef48</a>]</span>.</p>
+<p>The distinction between the frequentist and Bayesian approaches to
+statistical inference reaches its climax when addressing the problem of
+setting confidence/credible intervals in Sec. <a class="reference internal" href="#confidenceIntervals.html#feldman-cousins"><span class="xref myst">Confidence Intervals</span></a>.</p>
+<p>The following is an example to give an idea of the problem.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>Let’s take the measurement of the mass of the electron as
+an example to understand the difference between the frequentist and
+Bayesian interpretation of confidence intervals. You measure the mass of
+the electron to be <span class="math notranslate nohighlight">\(520 \pm 10~keV/c^2\)</span>, i.e. you measured <span class="math notranslate nohighlight">\(520~keV/c^2\)</span>
+with an apparatus with a resolution of <span class="math notranslate nohighlight">\(10~keV/c^2\)</span>.
+It is tempting to conclude that “the mass of the electron is between 510 and 530 <span class="math notranslate nohighlight">\(keV/c^2\)</span> with 68%
+probability”. This is not the frequentist’s meaning of probability. In
+the frequentist interpretation, the statement that the electron has a
+certain mass with a certain probability is nonsense. The electron has a
+definite mass, the problem is that we do not know what the value is. It
+sounds much more like a Bayesian statement: with a resolution, or
+“error”, of <span class="math notranslate nohighlight">\(\sigma = 10~keV/c^2\)</span>, the probability that we will measure
+a mass m when the true value is <span class="math notranslate nohighlight">\(m_e\)</span> is</p>
+<p><span class="math notranslate nohighlight">\(P(m | m_e) \propto e^{-(m - m_e)^2/2\sigma^2}\)</span></p>
+<p>this is the likelihood
+term. Then by Bayes’ theorem, the probability that the true mass has the
+value <span class="math notranslate nohighlight">\(m_e\)</span> after we have measured a value m is</p>
+<p><span class="math notranslate nohighlight">\(P(m_e | m) = \frac{P(m | m_e)P_{prior}(m_e)}{P(m)}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\propto P (m | m_e) \;\; \mbox{assuming} \;\;\;P_{prior}(m_e) = const\)</span></p>
+<p><span class="math notranslate nohighlight">\(\propto e^{-(m-m_e)^2/2\sigma^2}\)</span></p>
+<p>What we typically state is that
+“the 68% credible interval for the mass of the electron is between 510 and <span class="math notranslate nohighlight">\(530~keV/c^2\)</span>. Note the use of “credible level” instead of “probability”.</p>
+<p>This and other subtleties will be discussed further when discussing confidence intervals.</p>
+</div>
+<p>A more general case is when, instead of having only two possible cases, e.g. A or not A (the theory is either correct or wrong), you have <span class="math notranslate nohighlight">\(n\)</span> mutually exclusive classes <span class="math notranslate nohighlight">\({A_i}, i=1..n\)</span>. In this case the theorem generalizes to:</p>
+<div class="math notranslate nohighlight">
+\[
+P(A_i|B)=\frac{P(B|A_i)P(A_i)}{\sum_i P(B|A_i)\cdot P(A_i)}.
+\]</div>
+<p>Another common case is to have a <em>continuous pdf</em>.</p>
+<p>Define:
+<span class="math notranslate nohighlight">\(f(x,y) dx dy\)</span> as the joint probability to observe x in <span class="math notranslate nohighlight">\([x, x+dx]\)</span> and y in <span class="math notranslate nohighlight">\([y, y+dy]\)</span> (that in case of independent variables the pdf factorizes to f(x,y)=f(x)f(y)).</p>
+<p>Then the Bayes theorem can be written as:</p>
+<div class="math notranslate nohighlight">
+\[
+p(y|x) = \frac{f(x,y)\int f(x,y)dx}{\int f(x,y)dy}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\int f(x,y)dx\)</span> and <span class="math notranslate nohighlight">\(\int f(x,y)dy\)</span> are the marginalized pdf on z and y (see below in this chapter).</p>
+</section>
+<section id="probability-density-function">
+<h2>Probability density function<a class="headerlink" href="#probability-density-function" title="Link to this heading">#</a></h2>
+<p>We define as <strong>random variable</strong> any function of the data. The <strong>event
+space</strong> is the set of all possible values of a random variable. A random
+variable which can take any value between two arbitrarily given points
+in the event space is called a <strong>continuous</strong> variable; conversely, if
+the variable can only take certain values it is called a <strong>discrete</strong>
+variable. In the same manner, data described by discrete or continuous
+variables are called discrete data or continuous data respectively.</p>
+<p>The distribution <span class="math notranslate nohighlight">\(f(x)\)</span> of a continuous random variable <span class="math notranslate nohighlight">\(x\)</span> is called <strong>probability
+density function (p.d.f.)</strong>. <span class="math notranslate nohighlight">\(f(x')dx'\)</span> is the probability to find <span class="math notranslate nohighlight">\(x\)</span>
+in the interval between <span class="math notranslate nohighlight">\(x'\)</span> and <span class="math notranslate nohighlight">\(x'+dx'\)</span> and it is normalized
+<span class="math notranslate nohighlight">\(\int_{-\infty}^{+\infty}f(x')dx'=1\)</span> (the probability to find <span class="math notranslate nohighlight">\(x\)</span>
+anywhere in its event space is 1). Note that <span class="math notranslate nohighlight">\(f(x)\)</span> is <em>not</em> a
+probability but <span class="math notranslate nohighlight">\(f(x)dx\)</span> is.</p>
+<p>In case of a discrete random variable <span class="math notranslate nohighlight">\(x\)</span> its distribution f(x) is called
+<strong>probability mass function (p.m.f.)</strong> (or frequency distribution).<br />
+<span class="math notranslate nohighlight">\(f(x_i)\)</span> is the probability to obtain the values <span class="math notranslate nohighlight">\(x_i\)</span>.
+The p.m.f. is normalized <span class="math notranslate nohighlight">\(\sum_0^n f(x_i)=1\)</span>, n can be <span class="math notranslate nohighlight">\(\infty\)</span>(the probability to find <span class="math notranslate nohighlight">\(x\)</span>
+anywhere in its event space is 1).</p>
+<p>In the following we will often call probability density function (p.d.f.)
+both the continuous and the discrete distributions.</p>
+</section>
+<section id="cumulative-distribution-function">
+<h2>Cumulative distribution function<a class="headerlink" href="#cumulative-distribution-function" title="Link to this heading">#</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(x\)</span> be a one-dimensional continuous random variable distributed
+according to <span class="math notranslate nohighlight">\(f(x)\)</span>. The <strong>cumulative distribution function (cdf)</strong>
+<span class="math notranslate nohighlight">\(F(x')\)</span> gives the probability that the random variable <span class="math notranslate nohighlight">\(x\)</span> will be found
+to have a value less than or equal to <span class="math notranslate nohighlight">\(x'\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+F(x') = \int_{-\infty}^{x'} f(x)dx
+\]</div>
+<p>It follows trivially (with some abuse of notation) that
+<span class="math notranslate nohighlight">\(F(-\infty)=0\)</span> and <span class="math notranslate nohighlight">\(F(+\infty)=1\)</span>. The function <span class="math notranslate nohighlight">\(F\)</span> is a monotonic
+(but not necessarily strictly monotonic) rising function of <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>The probability density function <span class="math notranslate nohighlight">\(f(x)\)</span> is then (by the fundamental theorem of calculus) <span class="math notranslate nohighlight">\(f(x)=dF(x)/dx\)</span>.</p>
+<p>The function <span class="math notranslate nohighlight">\(F\)</span> is dimensionless (and can be read as a probability)
+whereas the function <span class="math notranslate nohighlight">\(f\)</span> has dimension <span class="math notranslate nohighlight">\(1/x\)</span>.
+The probability to observe the random variable <span class="math notranslate nohighlight">\(x\)</span> between two
+values <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> can be written in terms of the cdf as:</p>
+<div class="math notranslate nohighlight">
+\[
+P(x_1 \le x \le x_2)=\int_{x_1}^{x_2} f(x')dx'=F(x_2)-F(x_1)
+\]</div>
+<p>The concept of cumulative can be trivially extended to the discrete case.</p>
+<!-- 
+
+The relationship between $f$ and $F$ is depicted in
+
+```{figure} ./tmp/Section1Bilder/FWHM.png
+---
+name: directive-fig
+class: bg-primary mb-1
+height: 150px
+width: 200px
+align: center
+---
+A density function $f(x)$ as well as its cumulative function $F(x)$.
+```
+-->
+<p>The following is an example to show what is the cumulative of a pdf (chosen to be a gaussian - see <a class="reference internal" href="#./probabilityDistributions.html#gaussian-or-normal-distribution"><span class="xref myst">next chapter</span></a> for more details on the gaussian pdf).</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import relevant libraries</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+<span class="n">x</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mf">0.01</span><span class="p">)</span> <span class="c1"># range of the x axis</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;pdf(x)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="s2">&quot;black&quot;</span><span class="p">)</span> <span class="c1"># plot the gaussian pdf (norm.pdf) as a function of x</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/c7ea1181083abb9ccff557e7d5c234bd6a2db016435e15e85f051708613d4d18.png" src="_images/c7ea1181083abb9ccff557e7d5c234bd6a2db016435e15e85f051708613d4d18.png" />
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;pdf(x)&#39;</span><span class="p">)</span>
+<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.01</span><span class="p">)</span> <span class="c1"># cumulative plotted from -5 to 1</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/ad0b9405e1ff297546c4636985f317a6fc251878aac67fe0922e70656ffac593.png" src="_images/ad0b9405e1ff297546c4636985f317a6fc251878aac67fe0922e70656ffac593.png" />
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;cdf(x)&#39;</span><span class="p">)</span>
+<span class="n">x</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mf">0.01</span><span class="p">)</span> <span class="c1"># range of the x axis</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/5e945c981c015354d63813e3b11cebc022d051ec65027a942856a013a8c67fb9.png" src="_images/5e945c981c015354d63813e3b11cebc022d051ec65027a942856a013a8c67fb9.png" />
+</div>
+</div>
+</section>
+<section id="quantiles">
+<h2>Quantiles<a class="headerlink" href="#quantiles" title="Link to this heading">#</a></h2>
+<p>Quantiles are values taken from the inverse of the
+cdf of a random variable. When they are taken at regular intervals
+they get special names. If the set of data is split into:</p>
+<ul class="simple">
+<li><p>two equally sized parts, then the value in the middle is the median.</p></li>
+<li><p>four equally sized parts, then the four values are called <em>quartiles</em> Q1, Q2, Q3 and Q4. The value of Q2 coincides to the median.</p></li>
+<li><p>ten parts we call them <em>deciles</em></p></li>
+<li><p>hundred parts we call them <em>percentile</em>.</p></li>
+</ul>
+<p>The quantiles allow to describe any data distribution without knowing what is its underlying pdf. For example, when a baby is born the pediatrician will compare her/his weight or height with respect to a reference population of babies of the same age, in terms of percentiles. When a baby is in the 20-th weight percentile, it means that 20% of the babies in the reference sample will be lighter.</p>
+<p>The following is an example of deciles on a gaussian distribution.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">25</span><span class="p">])</span>
+
+<span class="c1"># cumulative of the gaussian pdf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;x [units]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;cdf(x)&#39;</span><span class="p">)</span>
+
+<span class="c1"># draw vertical lines</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">11</span><span class="p">):</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.1</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="n">step</span><span class="p">,</span> <span class="n">step</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="s1">&#39;0.2&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">step</span><span class="p">),</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">step</span><span class="p">)],</span> <span class="p">[</span><span class="n">step</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="s1">&#39;0.2&#39;</span><span class="p">)</span>
+
+<span class="c1"># gaussian pdf </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">211</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;x [units]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;pdf(x)&#39;</span><span class="p">)</span>
+
+<span class="c1"># write out the corresponding numerical values</span>
+<span class="n">s</span> <span class="o">=</span><span class="p">[]</span>
+<span class="n">p</span> <span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">11</span><span class="p">):</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.1</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.1f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">step</span><span class="p">))</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">step</span><span class="p">)))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">step</span><span class="p">),</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">step</span><span class="p">)],</span> <span class="p">[</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">step</span><span class="p">)),</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="s1">&#39;0.2&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;0.0&#39;, &#39;0.1&#39;, &#39;0.2&#39;, &#39;0.3&#39;, &#39;0.4&#39;, &#39;0.5&#39;, &#39;0.6&#39;, &#39;0.7&#39;, &#39;0.8&#39;, &#39;0.9&#39;, &#39;1.0&#39;]
+[&#39;-inf&#39;, &#39;-1.282&#39;, &#39;-0.842&#39;, &#39;-0.524&#39;, &#39;-0.253&#39;, &#39;0.000&#39;, &#39;0.253&#39;, &#39;0.524&#39;, &#39;0.842&#39;, &#39;1.282&#39;, &#39;inf&#39;]
+</pre></div>
+</div>
+<img alt="_images/5b8a82f6a40b785e6f05ecd2c0a6a4962ed2882c9acea35db272a210d79471a0.png" src="_images/5b8a82f6a40b785e6f05ecd2c0a6a4962ed2882c9acea35db272a210d79471a0.png" />
+</div>
+</div>
+</section>
+<section id="mean-median-and-mode">
+<h2>Mean, Median and Mode<a class="headerlink" href="#mean-median-and-mode" title="Link to this heading">#</a></h2>
+<p>The <strong>arithmetic mean</strong> <span class="math notranslate nohighlight">\(\bar{x}\)</span> (or simply mean value) of a set of <span class="math notranslate nohighlight">\(N\)</span>
+numbers <span class="math notranslate nohighlight">\(X_{i}\)</span> is defined as:</p>
+<p><span class="math notranslate nohighlight">\(\bar{x}=\frac{1}{N}\sum_{i=1}^N X_i\)</span></p>
+<p>The mean of a function of <span class="math notranslate nohighlight">\(x\)</span>, (<span class="math notranslate nohighlight">\(\bar{f}\)</span>) can be calculated analogously:</p>
+<p><span class="math notranslate nohighlight">\(\bar{f}=\frac{1}{N}\sum_{i=1}^N f(X_i).\)</span></p>
+<p>If the <span class="math notranslate nohighlight">\(N\)</span> data points are
+classified in <span class="math notranslate nohighlight">\(m\)</span> intervals (i.e. bins of a histogram), and if <span class="math notranslate nohighlight">\(n_{i}\)</span> stands for the number of entries in the
+interval (bin) <span class="math notranslate nohighlight">\(i\)</span>, then:</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>See also the weighted mean in <a class="reference internal" href="#./errors.html#weighted-mean-sec-weigthedmean"><span class="xref myst">Measurements uncertainties</span></a></p>
+</aside>
+<p><span class="math notranslate nohighlight">\(\bar{x}=\frac{1}{N}\sum_{i=1}^{m}n_iX_i.\)</span></p>
+<p>The <strong>median</strong> of a random variable <span class="math notranslate nohighlight">\(x\)</span> divides a frequency distribution
+into two equally sized halves:</p>
+<p><span class="math notranslate nohighlight">\(\int_{-\infty}^{x_{median}}f(x')dx'=\int_{x_{median}}^{+\infty}f(x')dx'=0.5.\)</span></p>
+<p>The <strong>mode</strong> or <strong>most probable value</strong> corresponds to the value of <span class="math notranslate nohighlight">\(x\)</span> where the probability
+density <span class="math notranslate nohighlight">\(f(x)\)</span> has a maximum. The mode is not necessarily unique: if a
+distribution has two maxima, we call it <em>bimodal</em>, if it has several
+maxima, we call it <em>multimodal</em>.</p>
+<!--
+A sketch to illustrate the meaning of the mean, median, mode is shown in
+Fig. [1.2](#BarlowComic){reference-type="ref" reference="BarlowComic"}.\
+
+![[\[BarlowComic\]]{#BarlowComic label="BarlowComic"} The distribution
+of the monthly income of Americans around the year 1950. This pictorial
+representation explains well the differences between mean, mode and
+median. Tricky question: which of the three describes the most important
+property of the distribution? Ask yourself what is for you the most
+important property, and what is the message you want to convey
+highlighting that. (Taken
+from [@Barlow])](Section1Bilder/BarlowComic){#BarlowComic
+width="0.5\\linewidth"}
+-->
+<p>A rough relation between mode, median and mean (true for unimodal and
+“not very skewed” distributions) is given by</p>
+<p><span class="math notranslate nohighlight">\(\mbox{ Mean - Mode}=3\times\mbox{ (Mean - Median)}.\)</span></p>
+<p>So by knowing two out of the three, the third one can be estimated easily by this
+formula.</p>
+<p>The <strong>weighted mean</strong> is typically used to combine measurements with different resolutions.
+Given a dataset {Xi} i=1..N and their (event by event) uncertainties <span class="math notranslate nohighlight">\({\sigma_i}\)</span> i=1..N, the weighted mean is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\bar{x}_{weighted}=\frac{\sum_i w_i x_i}{\sum_i w_i}
+\]</div>
+<p>For the case of measurements with different resolutions we will use as weight <span class="math notranslate nohighlight">\(w_i = 1/\sigma^2_i\)</span>.</p>
+<p>We will see later how to also assign weights to events (i.e. instead of counting events - each event counting one - we will assign to each event a continuous weight).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span> 
+
+<span class="n">mu</span><span class="p">,</span><span class="n">sigma</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="mi">5</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;array = &quot;</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;size of the array = &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array =  [ 1.30262694  0.65958626  6.16758332 -2.42206684  3.57845248  2.96816762
+  9.57362627  2.74716791  1.43169306 -0.39644808 -0.95894937]
+size of the array =  11
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#compute the mean</span>
+<span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">:</span>
+    <span class="nb">sum</span> <span class="o">+=</span> <span class="n">x</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;mean = &quot;</span><span class="p">,</span> <span class="nb">sum</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+
+<span class="c1"># or using the numpy mean function</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;mean = &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean =  2.2410399590125496
+mean =  2.2410399590125496
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Compute the median</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;sorted array = &quot;</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sorted array =  [ 1.30262694  0.65958626  6.16758332 -2.42206684  3.57845248  2.96816762
+  9.57362627  2.74716791  1.43169306 -0.39644808 -0.95894937]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.431693058303253
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Compute the mode of this array:</span>
+<span class="n">X</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">mode</span>
+<span class="c1"># this will give you back the mode and the number of times it appears</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;mode&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mode ModeResult(mode=array([5]), count=array([3]))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot the distribution to see visually the mode</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+<span class="n">n</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e02347e79ac3c5f63493df68259ab3bf04df10af3f1a886f6e0bf7cc3983f3d3.png" src="_images/e02347e79ac3c5f63493df68259ab3bf04df10af3f1a886f6e0bf7cc3983f3d3.png" />
+</div>
+</div>
+<p>The <strong>geometric mean</strong> <span class="math notranslate nohighlight">\(\mu_g\)</span> is defined as:</p>
+<p><span class="math notranslate nohighlight">\(\mu_g = \sqrt[N]{x1\cdot x2\cdot \dots \cdot x_N}.\)</span></p>
+<p>It is used to
+characterize the mean of a geometric sequence
+<span class="math notranslate nohighlight">\((a, ar, ar^2, ar^3, ...)\)</span>. The geometric interpretation of the
+geometric mean of two numbers, a and b, is the length of one side of a
+square whose area is equal to the area of a rectangle with sides of
+lengths a and b.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>A population of bacteria grows from 2000 to 9000 in 3 days.
+What is the daily grow (assuming a constant rate r) ?<br />
+<span class="math notranslate nohighlight">\(1^{st}\)</span> day: <span class="math notranslate nohighlight">\(n_1\)</span> = 2000 + 2000 r<br />
+<span class="math notranslate nohighlight">\(2^{nd}\)</span> day: <span class="math notranslate nohighlight">\(n_2\)</span> = n1 + n1 r = 2000 <span class="math notranslate nohighlight">\((1+r)^2\)</span><br />
+<span class="math notranslate nohighlight">\(3^{rd}\)</span> day: <span class="math notranslate nohighlight">\(n_3\)</span> = n2 + n2 r = 2000 <span class="math notranslate nohighlight">\((1+r)^3\)</span> = 9000<br />
+<span class="math notranslate nohighlight">\(\Rightarrow  1+r = \sqrt[3]{4.5} \Rightarrow r = 65.1\%\)</span></p>
+</div>
+<p>The function</p>
+<p><span class="math notranslate nohighlight">\(f(x) = a \cdot (1+f)^x\)</span></p>
+<p>is called geometrical or exponential growth when <span class="math notranslate nohighlight">\(x\)</span> is discrete or continuous respectively.
+It covers a particularly important role in finance where it describes
+the compound interest (see the interactive notebook in this section).</p>
+<p>The <strong>harmonic mean</strong> <span class="math notranslate nohighlight">\(H\)</span> is defined as:</p>
+<p><span class="math notranslate nohighlight">\(\frac{1}{H}=\frac{1}{N}\sum_{i} \frac{1}{X_{i}}.\)</span></p>
+<p>It is characterize
+the mean value of a harmonic sequence</p>
+<p><span class="math notranslate nohighlight">\(\frac{1}{a}\;, \;\frac{1}{a+d}\;, \;\frac{1}{a+2d}\;,...\;,\; \frac{1}{a+kd}\;,...\)</span></p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>A car travels at 80 km/h for the half of the trip and 100
+km/h for the second half. What’s his average speed? 2/(1/80+1/100) = 89
+km/h (averaging over periods of time not distances)</p>
+</div>
+</section>
+<section id="expectation-value">
+<h2>Expectation value<a class="headerlink" href="#expectation-value" title="Link to this heading">#</a></h2>
+<p>The <strong>expectation value</strong> of a random variable <span class="math notranslate nohighlight">\(x\)</span> (or first moment) is defined as:</p>
+<p><span class="math notranslate nohighlight">\(&lt;x&gt;=\int_{-\infty}^{\infty} x' f(x') dx'\)</span></p>
+<p>and for discrete variables
+<span class="math notranslate nohighlight">\(r\)</span> as:</p>
+<p><span class="math notranslate nohighlight">\(&lt;r&gt;=\sum r_i P(r_i).\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(f(x)dx\)</span> is the probability that
+the value x is found to be in the interval <span class="math notranslate nohighlight">\((x, x+dx)\)</span> and in the
+discrete case <span class="math notranslate nohighlight">\(P(r_i)\)</span> is the probability that the value <span class="math notranslate nohighlight">\(r_i\)</span> occurs.</p>
+<p>The expectation value reduces to the arithmetic mean when the
+probability for any value to occur (<span class="math notranslate nohighlight">\(f(x)\)</span> in the continuous case or
+<span class="math notranslate nohighlight">\(P(r)\)</span> in the discrete case) is constant. Take e.g. the discrete case
+and set the probability for any event <span class="math notranslate nohighlight">\(r_i\)</span> <span class="math notranslate nohighlight">\((i = 1,...,N )\)</span> to occurr
+to be the same. Because <span class="math notranslate nohighlight">\(P(r_i)\)</span> is normalized <span class="math notranslate nohighlight">\(\sum_{i=1}^N P(r_i) = 1\)</span>
+then for each <span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\(P(r_i) = 1/N\)</span>:</p>
+<p><span class="math notranslate nohighlight">\(&lt; r &gt; = \sum r_i P(r_i) = \frac{1}{N}\sum r_i\)</span></p>
+<p>More generally, the expectation value for any <em>symmetric</em> probability
+distribution will coincide with the arithmetic mean. In case of
+<em>asymmetric</em> distributions, the expectation value will be pulled towards
+the side of the largest tail (more details on this when we will see some
+examples of probability distibution functions).</p>
+<p>The expectation value of a function <span class="math notranslate nohighlight">\(h(x)\)</span> is defined by
+<span class="math notranslate nohighlight">\(&lt;h&gt;=\int h(x')f(x')dx'\)</span>.</p>
+<p>The expectation value is a linear operator, i.e.</p>
+<p><span class="math notranslate nohighlight">\(&lt;a\cdot g(x)+b\cdot h(x)&gt; = a  &lt;g(x)&gt;+\,b  &lt;h(x)&gt;,\)</span></p>
+<p>but in general <span class="math notranslate nohighlight">\(&lt;fg&gt;\ne&lt;f&gt;&lt;g&gt;\)</span>. The equality is true only if <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> are
+independent.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>In quantum mechanics, to compute the expectation value of A,
+the eigenvalues (outcomes of a measurement) are weighted on their
+probability to occur:
+<span class="math notranslate nohighlight">\(\langle A \rangle_\psi = \sum_j a_j |\langle\psi|\phi_j\rangle|^2\)</span></p>
+</div>
+<p>Note that the expectation value need not be one of the possible elements !</p>
+<p>For instance: rolling a die <span class="math notranslate nohighlight">\(E[x] = 1\cdot1/6 + 2\cdot1/6 + 3\cdot1/6 + 4\cdot1/6 + 5\cdot1/6 + 6\cdot1/6  = 3.5\)</span></p>
+</section>
+<section id="variance-and-standard-deviation">
+<h2>Variance and Standard Deviation<a class="headerlink" href="#variance-and-standard-deviation" title="Link to this heading">#</a></h2>
+<p>The expectation values of <span class="math notranslate nohighlight">\(x^{n}\)</span> and of <span class="math notranslate nohighlight">\((x-&lt;x&gt;)^{n}\)</span> are called the
+<span class="math notranslate nohighlight">\(n^{th}\)</span> <em>algebraic</em> moment <span class="math notranslate nohighlight">\(\mu_{n}\)</span> and the <span class="math notranslate nohighlight">\(n^{th}\)</span> <em>central</em> moment
+<span class="math notranslate nohighlight">\(\mu'_{n}\)</span>, respectively. Central refers to the fact that the
+expectation value of x is subtracted from each value of x (which in case
+of a symmetric distribution effectively centers it at zero).</p>
+<p>The first algebraic moment <span class="math notranslate nohighlight">\(\mu_{1}\)</span> is equal to the expectation value
+<span class="math notranslate nohighlight">\(&lt;x&gt;\)</span> and it is usually just called <span class="math notranslate nohighlight">\(\mu\)</span>. The first central moment is
+zero by definition.</p>
+<p>The second central moment is a measure of the width
+of a probability distribution and it is called <strong>variance</strong> <span class="math notranslate nohighlight">\(V(x)\)</span>. Its
+square root is called the <strong>standard deviation</strong> <span class="math notranslate nohighlight">\(\sigma\)</span>:</p>
+<p><span class="math notranslate nohighlight">\(\begin{aligned}
+V(x) &amp;=&amp; &lt;(x-&lt;x&gt;)^2&gt;              = &lt;x^2 + &lt;x&gt;^2 -2x&lt;x&gt; &gt;= \\ 
+     &amp;=&amp;  &lt;x^2&gt; + &lt;x&gt;^2 - 2&lt;x&gt;&lt;x&gt; = &lt;x^2&gt;-&lt;x&gt;^2          \end{aligned}\)</span></p>
+<p>where we just used the linearity of the expectation value.</p>
+<p>We will see when discussing the characteristic function that any pdf
+is uniquely described by its moments (see
+<a class="reference internal" href="#./probabilityDistributions.html#characteristic-function-sec-characteristic"><span class="xref myst">Characteristic function</span></a>)</p>
+<p>The variance is not a linear operator:</p>
+<div class="math notranslate nohighlight">
+\[
+V(a+bx) = b^2 V(x)
+\]</div>
+<p>i.e. if you shift a random variable the variance of its distribution will not change, while if you scale it by a constant b, the variance will increase by <span class="math notranslate nohighlight">\(b^2\)</span>.</p>
+<p>It is important to notice that quantities like the variance or the
+standard deviation are defined using expectation values, and they can
+only be determined if the “true” underlying probability density of the
+sampling distribution is known. When analysing data we need to distinguish the distribution of the
+collected data, the (known) <strong>sampling distribution</strong>, from the (unknown) <strong>parent
+distribution</strong> that we are effectively sampling with our measurements.
+One of the goals of data analysis (called parameter estimation) is to
+estimate the parameters of the parent distribution from the properties
+of the collected data sample.</p>
+<p>When the the mean <span class="math notranslate nohighlight">\(&lt;x&gt;\)</span> of the parent distribution is not known, we define the
+<em>sample variance</em>, commonly called <span class="math notranslate nohighlight">\(s^{2}\)</span>, as:</p>
+<p><span class="math notranslate nohighlight">\(\begin{aligned}
+\label{samplevariance}
+  s^2&amp;=&amp; \frac{1}{N-1}\sum_i(x_i-\bar{x})^2 \\\end{aligned}\)</span>.</p>
+<p>To compute this expression, one has to loop on the data a first time to compute the sample mean, and then a second time to compute the sample variance. A little algebra, transforms the previous expression into</p>
+<p><span class="math notranslate nohighlight">\(\begin{aligned}
+     s^2 &amp;=&amp; \frac{1}{N-1}\left(\sum_i x_i^2-\frac{1}{N}\left(\sum_i x_i\right)^2\right)                                                                   \end{aligned}\)</span></p>
+<p>that can be computed by looping only once on the events. This is particularly useful when the number of data points is huge.</p>
+<p>The value of <span class="math notranslate nohighlight">\(s^{2}\)</span> can be understood as the best estimate of the
+“true” variance of the parent distribution. The origin of the factor
+<span class="math notranslate nohighlight">\(\frac{1}{N-1}\)</span> instead of the usual <span class="math notranslate nohighlight">\(\frac{1}{N}\)</span> will become clear
+when we will discuss the <a class="reference internal" href="#./likelihood.html#properties-of-the-estimators-sec-propestimator"><span class="xref myst">theory of estimators</span></a>, but naively you can interpret it as the variance becomes meaningless when you only have one point (N=1).</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>The following table collects some of the quantities defined above,
+for the Maxwell distribution. The probability density for the magnitude
+of the velocity <span class="math notranslate nohighlight">\(v\)</span> of molecules in an ideal gas at temperature <span class="math notranslate nohighlight">\(T\)</span> is
+given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(v)=N\cdot (m/2\pi k_{B}T)^{\frac{3}{2}}\exp(-mv^2/2k_{B}T)\cdot 4\pi v^2.
+\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(m\)</span> is the mass of the molecule and <span class="math notranslate nohighlight">\(k_{B}\)</span> is the Boltzmann
+constant.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Quantity</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Mode (most probable value) <span class="math notranslate nohighlight">\(v_m\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\((2kT/m)^{1/2}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Mean <span class="math notranslate nohighlight">\(&lt;v&gt;\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\((8kT/\pi m)^{1/2}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Median</p></td>
+<td><p><span class="math notranslate nohighlight">\(v_{median}= 1.098\cdot v_m\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>RMS-velocity <span class="math notranslate nohighlight">\(v_{rms}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\((3kT/m)^{1/2}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="full-width-at-half-maximum">
+<h2>Full Width at Half Maximum<a class="headerlink" href="#full-width-at-half-maximum" title="Link to this heading">#</a></h2>
+<p>Another way to characterize the spread of the data is to compute the
+Full Width at Half Maximum (FWHM). Given a
+distribution P(x), the FWHM  can be computed as the difference between the two
+values of x at which P(x) is equal to half of its maximum. For a
+gaussian distribution the relation between FWHM and the standard
+deviation is:</p>
+<p><span class="math notranslate nohighlight">\(\mbox{FWHM} = 2\sqrt{2\ln2}\sigma \sim 2.355\sigma\)</span></p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Gaussian mu = 0, sigma = 1</span>
+<span class="nb">max</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">halfMax</span> <span class="o">=</span> <span class="nb">max</span><span class="o">/</span><span class="mf">2.</span>
+
+<span class="c1"># Constant array at halfMax</span>
+<span class="n">f</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">halfMax</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+<span class="n">x</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mf">0.001</span><span class="p">)</span> 
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;pdf(x)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="s1">&#39;k&#39;</span><span class="p">)</span> <span class="c1"># Gaussian</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">)</span> <span class="c1"># Constant</span>
+
+<span class="c1"># Find the intersection between the gaussian and the constant </span>
+<span class="c1"># by finding where the sign of the difference of the two functions changes</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">)))</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="s1">&#39;ro&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Half Maximum = &quot;</span><span class="p">,</span> <span class="n">halfMax</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Intersections: &quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;FWHM = &quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/b46e64fa88a503c74e3e06fbc69ae27d540c2c78f6f63d61f6ead02ffcbd57d6.png" src="_images/b46e64fa88a503c74e3e06fbc69ae27d540c2c78f6f63d61f6ead02ffcbd57d6.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Half Maximum =  0.19947114020071635
+Intersections:  [-1.178  1.177]
+FWHM =  2.3550000000007865
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="higher-moments">
+<h2>Higher Moments<a class="headerlink" href="#higher-moments" title="Link to this heading">#</a></h2>
+<p>The third moment is called <strong>skewness</strong> <span class="math notranslate nohighlight">\(\gamma_1\)</span> and it is often
+defined as</p>
+<p><span class="math notranslate nohighlight">\(\gamma_1=\mu'_3/\sigma^3=\frac{1}{\sigma^3}&lt;(x-&lt;x&gt;)^3&gt;=
+\frac{1}{\sigma^3}(&lt;x^3&gt;-3&lt;x&gt;&lt;x^2&gt;+2&lt;x&gt;^3).\)</span></p>
+<p>The quantity <span class="math notranslate nohighlight">\(\gamma_1\)</span> is
+dimensionless and characterizes the skew. It is zero for symmetric
+distributions, and positive(negative) for asymmetric distributions with
+a tail to the right(left).</p>
+<p>Another definition of skewness often used is the <em>Pearson’s skew</em> given
+by <span class="math notranslate nohighlight">\((mean-mode)/\sigma\)</span>.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">skewnorm</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">axl</span><span class="p">,</span> <span class="n">axr</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">yl_</span> <span class="o">=</span> <span class="n">skewnorm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">yl</span> <span class="o">=</span> <span class="n">skewnorm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="o">=-</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">yr_</span> <span class="o">=</span> <span class="n">skewnorm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">yr</span> <span class="o">=</span> <span class="n">skewnorm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">axl</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">yl_</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;skewness=0&#39;</span><span class="p">)</span>
+<span class="n">axl</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">yl</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;skewness=-5&#39;</span><span class="p">)</span>
+<span class="n">axr</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">yr_</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;skewness=0&#39;</span><span class="p">)</span>
+<span class="n">axr</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">yr</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;skewness=5&#39;</span><span class="p">)</span>
+<span class="n">axl</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axr</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/a3e27b52183500199cc62853ae7845b339c6aa19afff68ac9e94982ef61bb7f7.png" src="_images/a3e27b52183500199cc62853ae7845b339c6aa19afff68ac9e94982ef61bb7f7.png" />
+</div>
+</div>
+<p>The <strong>kurtosis</strong> <span class="math notranslate nohighlight">\(\gamma_2\)</span> is defined as
+<span class="math notranslate nohighlight">\(\gamma_{2}=\mu'_4/\sigma^4-3\)</span>, which is a (dimensionless) measure of
+how the distribution behaves in the tails compared to its maximum. The
+factor <span class="math notranslate nohighlight">\(-3\)</span> is subtracted to obtain a kurtosis of zero for a Gaussian
+distribution. A positive <span class="math notranslate nohighlight">\(\gamma_{2}\)</span> means that the distribution has
+larger tails than a Gaussian distribution with the
+same values for mean and variance.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">kurtosis</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">uniform</span><span class="p">,</span> <span class="n">laplace</span><span class="p">,</span> <span class="n">t</span>
+
+<span class="c1"># Generate sample data</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">data_normal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Normal distribution</span>
+<span class="n">data_uniform</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=-</span><span class="mi">5</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Uniform distribution</span>
+<span class="n">data_laplace</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">laplace</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Laplace distribution</span>
+<span class="n">data_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_t</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Student&#39;s t-distribution (df=3)</span>
+
+<span class="c1"># Compute kurtosis values</span>
+<span class="n">kurt_values</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Normal&quot;</span><span class="p">:</span> <span class="n">kurtosis</span><span class="p">(</span><span class="n">data_normal</span><span class="p">),</span>
+    <span class="s2">&quot;Uniform&quot;</span><span class="p">:</span> <span class="n">kurtosis</span><span class="p">(</span><span class="n">data_uniform</span><span class="p">),</span>
+    <span class="s2">&quot;Laplace&quot;</span><span class="p">:</span> <span class="n">kurtosis</span><span class="p">(</span><span class="n">data_laplace</span><span class="p">),</span>
+    <span class="s2">&quot;Student&#39;s t (df=3)&quot;</span><span class="p">:</span> <span class="n">kurtosis</span><span class="p">(</span><span class="n">data_t</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># Plot distributions</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">distributions</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Normal&quot;</span><span class="p">:</span> <span class="n">data_normal</span><span class="p">,</span>
+    <span class="s2">&quot;Uniform&quot;</span><span class="p">:</span> <span class="n">data_uniform</span><span class="p">,</span>
+    <span class="s2">&quot;Laplace&quot;</span><span class="p">:</span> <span class="n">data_laplace</span><span class="p">,</span>
+    <span class="s2">&quot;Student&#39;s t (df=3)&quot;</span><span class="p">:</span> <span class="n">data_t</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">distributions</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    
+    <span class="c1"># Overlay theoretical PDF for comparison</span>
+    <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s2">&quot;Normal&quot;</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;PDF&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">label</span> <span class="o">==</span> <span class="s2">&quot;Uniform&quot;</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">uniform</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;PDF&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">label</span> <span class="o">==</span> <span class="s2">&quot;Laplace&quot;</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">laplace</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;PDF&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">label</span> <span class="o">==</span> <span class="s2">&quot;Student&#39;s t (df=3)&quot;</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;PDF&#39;</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2"> Distribution</span><span class="se">\n</span><span class="s2">Kurtosis: </span><span class="si">{</span><span class="n">kurt_values</span><span class="p">[</span><span class="n">label</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/76484d4e5d7e17610147139b76d4440334949c945d9c00f5f77e581bae712ee5.png" src="_images/76484d4e5d7e17610147139b76d4440334949c945d9c00f5f77e581bae712ee5.png" />
+</div>
+</div>
+<p>Here are some useful scipy functions to compute moments:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">mu</span><span class="p">,</span><span class="n">sigma</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="mi">5</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+<span class="c1">#print (X)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">moment</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;-th moment&quot;</span><span class="p">,</span> <span class="n">moment</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="n">i</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1-th moment 0.0
+2-th moment 25.292978429991994
+3-th moment -5.629257900739212
+4-th moment 1842.355169810612
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">skew</span>
+<span class="n">skew</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># left tail</span>
+<span class="n">Xleft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">skew</span><span class="p">(</span><span class="n">Xleft</span><span class="p">))</span>
+
+<span class="c1"># right tail</span>
+<span class="n">Xright</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">skew</span><span class="p">(</span><span class="n">Xright</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>left -0.3818440590736698
+right 0.337575590140799
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">kurtosis</span>
+<span class="n">kurtosis</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.1201265099719997
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="moment-generating-function">
+<h2>Moment generating function<a class="headerlink" href="#moment-generating-function" title="Link to this heading">#</a></h2>
+<p>A way to compute all moments of a pdf is to use the moment generating function, defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+M(\zeta) = \int_{-\infty}^{+\infty} \exp(\zeta x) f(x) dx
+\]</div>
+<p>The integral is only defined in a neighbour of <span class="math notranslate nohighlight">\(\zeta=0\)</span>. If you expand the exponential you get:</p>
+<div class="math notranslate nohighlight">
+\[
+M(\zeta) = \int_{-\infty}^{+\infty} (1+\zeta x + \frac{\zeta^2 x^2}{2!} + \ldots) f(x) dx = M_0 + \zeta M_1 + \frac{\zeta^2}{2!} M_2 + \ldots
+\]</div>
+<p>With this all moments can be computed from the derivatives:</p>
+<div class="math notranslate nohighlight">
+\[
+M_m = \frac{\partial M(\zeta)}{\partial \zeta^m}\Bigr|_0 \;\;\;\;\;\;\mbox{for} \;\;\;m\ge 1 
+\]</div>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>Take the exponential distribution:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = a e^{-ax} \; \mbox{with} \; x\ge0.
+\]</div>
+<p>The moment generating function is:</p>
+<div class="math notranslate nohighlight">
+\[
+M(\zeta) = a \int_{0}^{+\infty} e^{\zeta x}  e^{-ax}  dx = \frac{a}{a-\zeta}
+\]</div>
+<p>from which you get:</p>
+<div class="math notranslate nohighlight">
+\[
+M_1 = \frac{1}{a} \;\;\;;\;\; M_2 = \frac{2}{a^2} \;\; \; \mbox{etc}\ldots
+\]</div>
+</div>
+</section>
+<section id="useful-inequalities">
+<h2>Useful Inequalities<a class="headerlink" href="#useful-inequalities" title="Link to this heading">#</a></h2>
+<p>Two useful inequalities can be used to estimate the upper limits
+probabilities if the underlying distribution is not known. Both
+inequalities are given without proof.<br />
+<br />
+Let <span class="math notranslate nohighlight">\(x\)</span> be a positive random variable. Then it holds:</p>
+<p><span class="math notranslate nohighlight">\(P(x\geq a) \leq \frac{&lt;x&gt;}{a}.\)</span></p>
+<p>This inequality provides an upper limit for the probability
+of random events located in the tails of the distribution.</p>
+<p>Let <span class="math notranslate nohighlight">\(x\)</span> be a positive random variable. Then it holds:</p>
+<p><span class="math notranslate nohighlight">\(P(\,|~x~-&lt;x&gt;|\geq k)\leq \frac{\sigma^2}{k^2}\)</span></p>
+<p>So for example the probability for a result to deviate for more than three standard
+deviations from the expectation value, is always smaller than 1/9,
+independent of the underlying probability distribution. The inequality
+is true in general, but it gives quite a weak limit (for a Gaussian
+distribution, the probability to lie outside three standard deviations
+is about 0.0027, see next chapter). It is nevertheless useful for
+qualitative considerations, if nothing at all is known about the
+underlying distribution.</p>
+</section>
+<section id="characteristic-function">
+<h2>Characteristic Function<a class="headerlink" href="#characteristic-function" title="Link to this heading">#</a></h2>
+<p>The <em>characteristic function</em> <span class="math notranslate nohighlight">\(\Phi(t)\)</span> is defined as the expectation
+value of <span class="math notranslate nohighlight">\(e^{itx}\)</span> for a p.d.f. <span class="math notranslate nohighlight">\(f(x)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi(t):=&lt;e^{itx}&gt;=\int e^{itx}\cdot f(x)dx
+\]</div>
+<p>i.e <span class="math notranslate nohighlight">\(\Phi(t)\)</span> is the Fourier integral of f(x). The characteristic function completely
+determines the p.d.f., since by inverting the Fourier transformation we
+regain <span class="math notranslate nohighlight">\(f(x)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x)=\frac{1}{2\pi}\int e^{-itx}\cdot \Phi(t)dt
+\]</div>
+<p>The
+characteristic function as well as its first and second derivative are
+readily calculated for the special case where <span class="math notranslate nohighlight">\(t=0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\Phi(0)&amp;=&amp;1 \\
+\frac{d\Phi(0)}{dt}&amp;=&amp;i&lt;x&gt; \\
+\frac{d^2\Phi(0)}{dt^2}&amp;=&amp;-(\sigma^2+&lt;x&gt;^2)
+\end{aligned}
+\end{split}\]</div>
+<p>What do we
+need characteristic functions for? They may be useful when performing
+calculations with probability densities, for example if the convolution
+of two probability densities <span class="math notranslate nohighlight">\(f_{1}\)</span> and <span class="math notranslate nohighlight">\(f_{2}\)</span> for two random
+variables <span class="math notranslate nohighlight">\(x_{1}\)</span> and <span class="math notranslate nohighlight">\(x_{2}\)</span> should be calculated. A convolution of
+<span class="math notranslate nohighlight">\(f_{1}\)</span> and <span class="math notranslate nohighlight">\(f_{2}\)</span> yields a new probability density <span class="math notranslate nohighlight">\(g(y)\)</span>, according
+to which the sum of the random variable <span class="math notranslate nohighlight">\(y = x_{1} + x_{2}\)</span> is
+distributed as:</p>
+<div class="math notranslate nohighlight">
+\[
+g(y)=\int \int f_1(x_1)f_2(x_2)\delta(y-x_1-x_2)dx_1dx_2=\int f_1(x_1)f_2(y-x_1)dx_1=\int f_2(x_2)f_1(y-x_2)dx_2
+\]</div>
+<p>The convolution integral can now be transformed with the help of the
+characteristic functions:</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi_g(t)=\Phi_{f_1}(t)\cdot\Phi_{f_2}(t)
+\]</div>
+<p>In words: the characteristic function (Fourier transform) of the convolution of two
+variables is obtained by the product of their characteristic functions.
+For example it can be easily shown that the convolution of two Gaussian
+distributions with <span class="math notranslate nohighlight">\(\mu_{1,2}\)</span> and <span class="math notranslate nohighlight">\(\sigma_{1,2}\)</span> is again a Gaussian
+distribution with <span class="math notranslate nohighlight">\(\mu = \mu_{1} + \mu_{2}\)</span> and
+<span class="math notranslate nohighlight">\(\sigma^{2} = \sigma_{1}^{2} + \sigma_{2}^{2}\)</span>. Furthermore, the
+convolution of two Poisson distributions is again a Poisson
+distribution. The characteristic functions of some probability densities
+are:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Distribution</p></th>
+<th class="head"><p>Characteristic Function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Binomial</p></td>
+<td><p><span class="math notranslate nohighlight">\(\Phi(t)=(pe^{it}+q)^n\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Poisson</p></td>
+<td><p><span class="math notranslate nohighlight">\(\Phi(t)=e^{\lambda(e^{it}-1)}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Gauss</p></td>
+<td><p><span class="math notranslate nohighlight">\(\Phi(t)=e^{i\mu t-t^2\sigma^2/2}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\chi^2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\Phi(t)=(1-2it)^{-n/2}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Uniform (from a to b)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\Phi(t)=(e^{ibt}-e^{iat})/(b-a)^{it}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Breit-Wigner</p></td>
+<td><p>$\Phi(t)=e^{-iE_0t-(\Gamma/2)</p></td>
+</tr>
+<tr class="row-even"><td><p>Gamma</p></td>
+<td><p><span class="math notranslate nohighlight">\(\Phi(t)=(1-it/\mu)^{-\alpha}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="more-than-one-dimension">
+<h2>More than one dimension<a class="headerlink" href="#more-than-one-dimension" title="Link to this heading">#</a></h2>
+<p>When doing measurements we are often performing a sampling of a
+multi-dimensional pdf. For example in the case of a 2D
+pdf, the probability to observe <span class="math notranslate nohighlight">\(X\)</span> in <span class="math notranslate nohighlight">\([x, x+dx]\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> in
+<span class="math notranslate nohighlight">\([y, y+dy]\)</span> is:</p>
+<p><span class="math notranslate nohighlight">\(\begin{aligned}
+P(x&lt; X &lt; x+dx, y &lt; Y &lt; y+dy) &amp;=&amp; f(x,y)dx dy\\
+P(a&lt; X &lt; b, c &lt; Y &lt; d) &amp;=&amp; \int_a^b dx \int_c^d dy f(x,y)\\\end{aligned}\)</span></p>
+<p>For multi-dimensional pdfs we can define the concept of marginal and
+conditional pdf. To get the idea let’s take a 2D example:</p>
+<ul>
+<li><p><strong>Marginal</strong> pdf: it’s the pdf describing <span class="math notranslate nohighlight">\(x\)</span> independently of the
+value of <span class="math notranslate nohighlight">\(y\)</span>; the 2D probability can be “marginalised / projected”
+by integrating over one variable</p>
+<p><span class="math notranslate nohighlight">\(\begin{aligned}
+f_1(x) &amp;=&amp; \int_{-\infty}^{+\infty}f(x,y)dy \\
+f_2(y) &amp;=&amp; \int_{-\infty}^{+\infty}f(x,y)dx \\
+\end{aligned}\)</span></p>
+</li>
+<li><p><strong>Conditional</strong> pdf: it’s the pdf of <span class="math notranslate nohighlight">\(x\)</span> for a fixed value of
+<span class="math notranslate nohighlight">\(y\)</span>:</p>
+<p><span class="math notranslate nohighlight">\(\begin{equation}
+P(X|Y) = \frac{f(X|Y=y)}{\int_{-\infty}^{+\infty}f(x,y)dx} = \frac{f(X|Y=y)}{f_2(y)}
+\end{equation}\)</span></p>
+</li>
+</ul>
+<p>In plain english: the marginal pdf ignores the values of the other
+variable(s), the conditional pdf fix the value of the other variable(s).</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mpl_toolkits.mplot3d</span><span class="w"> </span><span class="kn">import</span> <span class="n">axes3d</span>
+
+<span class="c1"># multivariate gaussian mu = 0; sigma = 1</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">gg</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">1.</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="p">))</span>
+
+<span class="c1"># gaussian mu = 1; sigma </span>
+<span class="k">def</span><span class="w"> </span><span class="nf">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">1.</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">/</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">gg</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+
+<span class="c1"># Conditional distribution</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greys&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">)</span>
+<span class="c1"># p(X| y=-1)</span>
+<span class="n">xline</span> <span class="o">=</span> <span class="n">x</span>
+<span class="n">yline</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.</span><span class="o">+</span><span class="mf">0.</span><span class="o">*</span><span class="n">y</span>
+<span class="n">zline</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">xline</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot3D</span><span class="p">(</span><span class="n">xline</span><span class="p">,</span> <span class="n">yline</span><span class="p">,</span> <span class="n">zline</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;p(X=x,Y)&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+<span class="c1"># Marginalized distribution</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greys&#39;</span><span class="p">)</span>
+<span class="n">cset</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">zdir</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">offset</span><span class="o">=-</span><span class="mi">5</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greys&#39;</span><span class="p">)</span>
+<span class="n">cset</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">zdir</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greys&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/7e03cbd4ee0cb2ed47d702f3616dd07e795c32cd00f5d7dd39c382c7cb37d17e.png" src="_images/7e03cbd4ee0cb2ed47d702f3616dd07e795c32cd00f5d7dd39c382c7cb37d17e.png" />
+<img alt="_images/2a5cc4112198856f71d8c5d56c040159530a432cfb71dddc009103ad9a765fb5.png" src="_images/2a5cc4112198856f71d8c5d56c040159530a432cfb71dddc009103ad9a765fb5.png" />
+</div>
+</div>
+<p>The multivariate gaussian conditioned at y=-1 P(X|Y=-1) (plot on the left), is the slice at y=-1 (i.e. a 1D gaussian) normalized to 1.</p>
+</section>
+<section id="transformation-of-variables">
+<h2>Transformation of variables<a class="headerlink" href="#transformation-of-variables" title="Link to this heading">#</a></h2>
+<p>Let’s consider a 2-dimensional event space as an example (easily
+generalizable to the N-dimensional case) and call the two random
+variables <span class="math notranslate nohighlight">\((x,y)\)</span>. How does the pdf <span class="math notranslate nohighlight">\(f(x,y)\)</span> transforms under a change
+of variable to <span class="math notranslate nohighlight">\((X,Y)\)</span>?</p>
+<a class="reference internal image-reference" href="_images/transformation.png"><img alt="_images/transformation.png" class="align-center" src="_images/transformation.png" style="width: 400px;" />
+</a>
+<p>Consider a small interval <span class="math notranslate nohighlight">\(A\)</span> around a point <span class="math notranslate nohighlight">\((x,y)\)</span> that we will
+transform to a small interval <span class="math notranslate nohighlight">\(B\)</span> around the point <span class="math notranslate nohighlight">\((X,Y)\)</span> such that
+<span class="math notranslate nohighlight">\(P(A)=P(B)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+P\left[(X,Y) \in B\right] = P\left[(x,y) \in A \right] = \int_A f(x,y) dx dy.
+\]</div>
+<p>Assume that the transformation</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+X = u_x(x,y)\\
+Y = u_y(x,y)
+\end{split}\]</div>
+<p>is bijective so that the inverse exist
+(together with the first derivative):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+x = w_x(X,Y)\\
+y = w_y(X,Y).
+\end{split}\]</div>
+<p>Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+P(A) = P(B)\\
+\int_A f(x,y) dx dy &amp;=&amp; \int_B f(w_x(X,Y), w_y(X,Y)) |J| dX dY
+\end{split}\]</div>
+<p>where J is the Jacobian determinant:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+J = 
+\left| \begin{array}{cc}
+\frac{\partial w_x}{\partial x} \frac{\partial w_x}{\partial y}\\
+\frac{\partial w_y}{\partial x} \frac{\partial w_y}{\partial y}
+\end{array}\right|
+\end{split}\]</div>
+<p>So the p.d.f. in (X,Y) is the p.d.f. in (x,y) times the Jacobian:</p>
+<div class="math notranslate nohighlight">
+\[
+g(X,Y) = f(x,y) |J| = f(w_x(X,Y), w_y(X,Y)) |J|
+\]</div>
+<p>The error propagation that we will encounter later, can be viewed as a change of variables (see also <a class="reference external" href="https://pdg.lbl.gov/2023/reviews/rpp2023-rev-probability.pdf">PFG:Propagation of errors</a> )</p>
+</section>
+<section id="covariance-and-correlation">
+<h2>Covariance and Correlation<a class="headerlink" href="#covariance-and-correlation" title="Link to this heading">#</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(f(x_1,x_2) dx_1 dx_2\)</span> be the joint probability to observe
+<span class="math notranslate nohighlight">\(x_1\in [x_1,x_1+dx_1]\)</span> and <span class="math notranslate nohighlight">\(x_2\in [x_2, x_2+dx_2]\)</span>. The two variables
+<span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are <strong>uncorrelated</strong> if and only if they fulfill the
+following relation:</p>
+<p><span class="math notranslate nohighlight">\(f(x_1,x_2)=f(x_1)\cdot f(x_2).\)</span></p>
+<p>If the above condition is not fulfilled, then the variables are <strong>correlated</strong>.</p>
+<p>The <strong>covariance</strong> <span class="math notranslate nohighlight">\(cov(x_{1},x_{2})\)</span> between two variables is defined
+as</p>
+<p><span class="math notranslate nohighlight">\(cov(x_1,x_2)=&lt;(x_1-&lt;x_1&gt;)\cdot (x_2-&lt;x_2&gt;)&gt;=&lt;x_1x_2&gt;-&lt;x_1&gt;&lt;x_2&gt;.\)</span></p>
+<p>If two variables are uncorrelated then <span class="math notranslate nohighlight">\(&lt;x_1x_2&gt;=&lt;x_1&gt;&lt;x_2&gt;\)</span> and so the
+covariance is zero.<br />
+Knowing the covariance between two variables, we can write the general
+expression of the variance of their sum:</p>
+<p><span class="math notranslate nohighlight">\(V(x_1+x_2)=V(x_1)+V(x_2)+2\cdot cov(x_1,x_2).\)</span></p>
+<p>Some more properties of the covariance are:
+(<span class="math notranslate nohighlight">\(a\in \mathbb{R}\)</span>)</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(cov(x,a) = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(cov(x,x) = V(x)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(cov(x,y) = cov(y,x)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(cov(ax,by) = ab~cov(x,y)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(cov(x+a,y+b) = cov(x,y)\)</span> is translation invariant (shift origin)</p></li>
+<li><p><span class="math notranslate nohighlight">\(cov(x,y)\)</span> has units !</p></li>
+</ul>
+<p>The <strong>correlation</strong> coefficient between <span class="math notranslate nohighlight">\(x_{1}\)</span> and <span class="math notranslate nohighlight">\(x_{2}\)</span> is defined
+as:</p>
+<div class="math notranslate nohighlight" id="equation-rho">
+<span class="eqno">(1)<a class="headerlink" href="#equation-rho" title="Link to this equation">#</a></span>\[ \rho_{x_1x_2} = \frac{cov(x_1,x_2)}{\sqrt{V(x_1)V(x_2)}}\]</div>
+<p>The correlation coefficient is the covariance normalized by the square root
+of the product of the variances, and it is bound between -1 and +1.</p>
+<p>If two variables are uncorrelated, given that their covariance is zero,
+also <span class="math notranslate nohighlight">\(\rho_{x_1 x_2}=0\)</span>. The inverse is not necessarily true,
+as illustrated by the examples in <a class="reference internal" href="#fig-wikicorr"><span class="std std-numref">Fig. 1</span></a>.</p>
+<figure class="align-center" id="fig-wikicorr">
+<a class="reference internal image-reference" href="_images/wikiCorr.png"><img alt="_images/wikiCorr.png" src="_images/wikiCorr.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Several sets of (x, y) points, with the Pearson correlation coefficient of x and y for each set.
+<a class="reference external" href="https://en.wikipedia.org/wiki/Correlation">wikipedia</a></span><a class="headerlink" href="#fig-wikicorr" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Being uncorrelated is a weaker condition than being independent.</p>
+<p>Note in particular the second raw where the correlation coefficient
+is not defined for the horizontal line because one of the variables
+has null variance; and the third raw, where the correlation coefficient is always
+zero.</p>
+<p>Given a sample of size <span class="math notranslate nohighlight">\(n\)</span>
+(<span class="math notranslate nohighlight">\((x_{1},y_{1}),(x_{2},y_{2}),\ldots, (x_{n},y_{n})\)</span>), the <em>sample
+covariance</em> or empirical covariance <span class="math notranslate nohighlight">\(s_{xy}\)</span>, which is the best estimate
+for the (true) covariance <span class="math notranslate nohighlight">\(s_{xy}\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+s_{xy}=\frac{1}{n-1}\sum_i(x_i-\bar{x})(y_i-\bar{y}).
+\]</div>
+<p>and the empirical correlation <span class="math notranslate nohighlight">\(r_{xy}\)</span> also called
+Pearson-correlation-coefficient gives the best estimate for the (true)
+correlation coefficient <span class="math notranslate nohighlight">\(\rho_{xy}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+r_{xy}=\frac{s_{xy}}{\sqrt{s_x} \sqrt{s_y}}.
+\]</div>
+<p>Here, the sample variances are labeled with <span class="math notranslate nohighlight">\(s_{x}\)</span> and <span class="math notranslate nohighlight">\(s_{y}\)</span>,
+respectively.</p>
+<p>See also <a class="reference internal" href="#hep-datanalysis-jb/book/_build/html/hypothesisTesting.html#information-theory-to-quantify-the-compatibility-between-distributions"><span class="xref myst">later</span></a> the concepts of mutual information, cross entropy, Kullback-Leibler divergence and Wasserstein metrix.</p>
+<p>A word of caution: “correlation is not causation”. The fact that one can
+find a correlation between two observables does not necessarily means
+that there is a causality relation between the two (see <a class="reference internal" href="#fig-correlationcausation"><span class="std std-numref">Fig. 2</span></a>)</p>
+<figure class="align-center" id="fig-correlationcausation">
+<a class="reference internal image-reference" href="_images/chocoNobel.jpg"><img alt="_images/chocoNobel.jpg" src="_images/chocoNobel.jpg" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">“Chocolate consumption, cognitive function, and Nobel laureates.
+<em>N. Engl. J. Med. 2012 Oct 18; 367(16):1562-4.</em></span><a class="headerlink" href="#fig-correlationcausation" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>Most of the material of this section is taken from:</p>
+<ul class="simple">
+<li><p>R. Feynman, <span id="id3">[<a class="reference internal" href="bibliography.html#id2" title="Richard Phillips Feynman, Robert Benjamin Leighton, and Matthew Sands. The Feynman lectures on physics; Online edition. California Institute of Technology, 1965. Originally published 1963-1965. URL: https://www.feynmanlectures.caltech.edu/.">FLS65</a>]</span> “Feynamn lectures on physics”: Ch.6</p></li>
+<li><p>W. Metzger, <span id="id4">[<a class="reference internal" href="bibliography.html#id3" title="Wes Metzger. Statistical Methods in Data Analysis. Katholieke Universiteit Nijmegen, Nijmegen, The Netherlands, 2002. URL: https://www.hef.ru.nl/~wes/stat_course/statist_2002.pdf.">Met02</a>]</span>, “Statistical Methods in Data Analysis”: Ch.2</p></li>
+<li><p>L. Lyons, <span id="id5">[<a class="reference internal" href="bibliography.html#id4" title="Lyons Louis. Statistics for Nuclear and Particle Physicists. Cambridge University Press, 1986. URL: https://www.cambridge.org/highereducation/books/statistics-for-nuclear-and-particle-physicists/9544B39F3244D9457BEC324CD34F1571#overview.">Lou86</a>]</span>, “Statistics for Nuclear and Particle Physicist”: Ch. 2</p></li>
+</ul>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="introduction.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="interactive-nbs/ConditionalProbability.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Conditional Probability</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#randomness">Randomness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#axiomatic-definition">Axiomatic definition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-as-frequency-limit">Probability as frequency limit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">Conditional probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">Bayes’ Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subjective-probability-or-the-bayesian-interpretation">Subjective probability or the Bayesian interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-density-function">Probability density function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cumulative-distribution-function">Cumulative distribution function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantiles">Quantiles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-median-and-mode">Mean, Median and Mode</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation-value">Expectation value</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-and-standard-deviation">Variance and Standard Deviation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-width-at-half-maximum">Full Width at Half Maximum</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#higher-moments">Higher Moments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moment-generating-function">Moment generating function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-inequalities">Useful Inequalities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#characteristic-function">Characteristic Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-than-one-dimension">More than one dimension</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation-of-variables">Transformation of variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance-and-correlation">Covariance and Correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mauro Donega
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

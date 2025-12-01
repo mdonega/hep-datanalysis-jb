@@ -1,0 +1,1844 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Hypotheses Testing &#8212; Statistical Methods and Data Analysis Techniques</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'hypothesisTesting';</script>
+    <link rel="icon" href="_static/favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Confidence Intervals" href="confidenceIntervals.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="interactive-nbs/chi2-1sigma.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="preface.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Statistical Methods and Data Analysis Techniques - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Statistical Methods and Data Analysis Techniques - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="preface.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="probability.html">Probability</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/ConditionalProbability.html">Conditional Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/BayesTheorem.html">Bayes Theorem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/exponentialGrowth.html">Example of exponential growth</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/harmonicMean.html">Harmonic mean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/covarianceCorrelation.html">Covariance and correlation</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="probabilityDistributions.html">Probability Distributions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/randomWalk.html">Random Walk</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="errors.html">Measurements uncertainties</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/ErrorMatrix.html">Interactive Example - Error Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/slidingMean.html">Sliding Mean</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="monteCarlo.html">Monte Carlo methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/randomNumbers.html">Random numbers generators with “numpy”</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="inference.html">Statistical inference</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="likelihood.html">Parameter Estimation - Likelihood</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/StraighLineFit_LSM_vs_MLM.html">From LSM to MLM (…a.k.a. from Physics 1 laboratory to the Likelihood)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/MLMethod.html">Interactive Example - ML Method: Mean of a Gaussian</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="leastSquares.html">Parameter Estimation - Least Squares</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Hypotheses Testing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="confidenceIntervals.html">Confidence Intervals</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/Poisson_CI.html">Poisson Confidence Intervals</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/Gaussian_CI.html">Gaussian Confidence Intervals</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/LimitNearBoundariesBayesianApproach.html">Compute the bayesian upper limit for a gaussian near the physical boundary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/LimitNearBoundariesBayesianApproachPoisson.html">Compute the bayesian upper limit for a Poisson near the physical boundary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/FC_PoissonMeanWithKnownBackground.html">Feldman-Cousins confidence cnterval construction for a single Poisson, with known background and unknown signal</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/UpperLimit.html">Interactive Example - Upper Limit</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="mva.html">Multivariate Analysis Methods</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="appendix.html">Appendices</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="appendices/Histograms.html">Histograms</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="exercises.html">Exercises</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/Ex_Histograms.html">Exercises on Histograms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises/Ex_Probability.html">Exercises on Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises/Ex_ProbabilityDensityFunctions.html">Exercises on Probability Density Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises/Ex_Covariance.html">Exercises on Covariance and Correlation</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/mdonega/hep-datanalysis-jb/main?urlpath=tree/book/hypothesisTesting.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/hypothesisTesting.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Hypotheses Testing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypotheses-and-tests-statistics">Hypotheses and tests statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#significance-power-consistency-and-bias">Significance, power, consistency and bias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#is-there-a-signal">Is there a signal ?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neyman-pearson-lemma">Neyman Pearson Lemma</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goodness-of-fit">Goodness of Fit</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-chi-2-test">The <span class="math notranslate nohighlight">\(\chi^2\)</span>-Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#degrees-of-freedom-for-chi-2-test-on-fitted-data">Degrees of freedom for <span class="math notranslate nohighlight">\(\chi^2\)</span>-test on fitted data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unbinned-tests">Unbinned tests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-sample-problem">Two-sample problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-gaussians-known-sigma">Two Gaussians, known <span class="math notranslate nohighlight">\(\sigma\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-gaussians-unknown-sigma">Two Gaussians, unknown <span class="math notranslate nohighlight">\(\sigma\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-test">F-test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matched-and-correlated-samples">Matched and correlated samples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-most-general-test">The most general test</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anova">ANOVA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resampling-techniques">Resampling techniques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jackknife">Jackknife</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap">Bootstrap</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#information-theory-to-quantify-the-compatibility-between-distributions">Information theory to quantify the compatibility between distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kullback-leibler-divergence">Kullback-Leibler divergence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-entropy">Cross Entropy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mutual-information">Mutual Information</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wasserstein-distance-earth-mover-s-distance">Wasserstein distance / Earth mover’s distance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="hypotheses-testing">
+<h1>Hypotheses Testing<a class="headerlink" href="#hypotheses-testing" title="Link to this heading">#</a></h1>
+<p>In the previous chapters we used experimental data to estimate
+parameters. Here we will use data to test hypotheses. A typical example
+is to test whether the data are compatible with the theoretical
+prediction or to choose among different hypothesis which one best
+represents the data.</p>
+<section id="hypotheses-and-tests-statistics">
+<h2>Hypotheses and tests statistics<a class="headerlink" href="#hypotheses-and-tests-statistics" title="Link to this heading">#</a></h2>
+<p>Let’s begin by defining some terminology that we will need in the
+following. The goal of a statistical test is to make a statement about
+how well the observed data stand in agreement (accept) or not (reject)
+with a given predicted distribution, i.e. a hypothesis. The typical
+naming for the hypothesis under test is the <strong>null hypothesis</strong> or
+<span class="math notranslate nohighlight">\(H_{0}\)</span>. The <strong>alternative hypothesis</strong>, if there is one, is usually
+called <span class="math notranslate nohighlight">\(H_{1}\)</span>. If there are several alternative hypotheses they are
+labeled <span class="math notranslate nohighlight">\(H_{1}, H_{2}, \ldots\)</span></p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>When testing data for the presence of a signal, we define
+the null hypothesis as the “background only” hypothesis and the
+alternative hypothesis as the “signal+background” hypothesis.</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p><a class="reference internal" href="#fig-l3sm"><span class="std std-numref">Fig. 20</span></a> shows the cross section
+<span class="math notranslate nohighlight">\(\sigma(e^+e^-)\to W^+W^-(\gamma)\)</span> measured by the L3 collaboration at
+different centre of mass energies. In this case the test statistic is
+the cross-section as a function of energy. The measured values are then
+compared with different theoretical models (different hypothesis). We
+haven’t explained yet how to quantitatively accept or reject an
+hypothesis, but already at a naive level we can see that data clearly
+prefer one of the models.</p>
+</div>
+<figure class="align-center" id="fig-l3sm">
+<a class="reference internal image-reference" href="_images/L3SM.png"><img alt="_images/L3SM.png" src="_images/L3SM.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 20 </span><span class="caption-text">Analysis of the cross section of <span class="math notranslate nohighlight">\(e^+e^-\to W^+W^-(\gamma)\)</span> as a
+function of the centre of mass energy (L3 detector at LEP).</span><a class="headerlink" href="#fig-l3sm" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The hypothesis can be <strong>simple</strong> if the
+p.d.f. of the random variable under test is completely specified (e.g. test for the existence of a new particle with all specified properties)
+or <strong>composite</strong> if at least one of the parameters is not specified (e.g. test for the existence of a new particle of unknown mass).</p>
+<p>To quantify the agreement between the observed data <span class="math notranslate nohighlight">\(\vec{x}\)</span> and a given hypothesis,
+we construct a function <span class="math notranslate nohighlight">\(t(\vec{x})\)</span>: the <strong>test statistics</strong>.</p>
+<p>If we build it in a clever way, the test statistic will be distributed differently depending
+on the hypothesis under test: <span class="math notranslate nohighlight">\(g(t(\vec{x})|H_0) \neq g(t(\vec{x})|H_1)\)</span>. This pedantic notation is used here to stress that
+the test statistic is a function of the data and that it is the
+distribution of the test statistic values that is different under the
+different hypotheses (the lighter notation <span class="math notranslate nohighlight">\(g(t|H_i)\)</span> will be used from
+now on).</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>In order to better understand the terminology we can use a
+specific example based on particle identification. The average specific
+ionization <span class="math notranslate nohighlight">\(dE/dx\)</span> of two charged particle with the same momentum
+passing through matter will be different depending on their masses (see
+<a class="reference internal" href="#fig-dedx"><span class="std std-numref">Fig. 21</span></a>,
+<span class="math notranslate nohighlight">\(\beta\gamma = p / m\)</span>). Because of this dependence <span class="math notranslate nohighlight">\(dE/dx\)</span> can be used
+as a particle identification tool to distinguish particle types. For
+example the ionization of electrons with momenta in the range of few GeV
+tend to be larger than the one of pions of the same momentum range.</p>
+<p>If we want to distinguish an electron from a pion with a given momentum
+we can use the specific ionization itself as test statistic
+<span class="math notranslate nohighlight">\(t(\vec{x}) = dE/dx\)</span>. This is a typical case where the data itself is
+used as test statistic. The test statistics will then be distributed
+differently under the two following hypotheses (see
+<a class="reference internal" href="#fig-dedx-proj"><span class="std std-numref">Fig. 22</span></a>):</p>
+<ul class="simple">
+<li><p>null hypothesis <span class="math notranslate nohighlight">\(g(t|H_0) = P\left(\frac{dE}{dx}|e^{\pm}\right)\)</span></p></li>
+<li><p>alternative hypothesis
+<span class="math notranslate nohighlight">\(g(t|H_1) = P\left(\frac{dE}{dx}|\pi^{\pm}\right)\)</span></p></li>
+</ul>
+</div>
+<figure class="align-center" id="fig-dedx">
+<a class="reference internal image-reference" href="_images/BetheBloch.png"><img alt="_images/BetheBloch.png" src="_images/BetheBloch.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 21 </span><span class="caption-text">The specific ionization for some particle types (pions in green, electrons in red;
+other particles species are shown with different colors: protons in purple, kaons in blue, muons in yellow)</span><a class="headerlink" href="#fig-dedx" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="fig-dedx-proj">
+<a class="reference internal image-reference" href="_images/BetheBlochProjection.png"><img alt="_images/BetheBlochProjection.png" src="_images/BetheBlochProjection.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 22 </span><span class="caption-text">The projections of <a class="reference internal" href="#fig-dedx"><span class="std std-numref">Fig. 21</span></a> plot on the y-axis for electrons and pions, i.e. their
+measured specific ionization.</span><a class="headerlink" href="#fig-dedx-proj" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The test statistic can be any function of the data: it can be a
+multidimensional vector <span class="math notranslate nohighlight">\(\vec{t}(\vec{x})\)</span> or a single real number
+<span class="math notranslate nohighlight">\(t(\vec{x})\)</span>. As seen in the example above, even the data themselves <span class="math notranslate nohighlight">\(\{\vec{x}\}\)</span> can be used as a
+test statistic. Collapsing all the information about the data into a
+single meaningful variable is particularly helpful in visualizing the
+test statistic and the separation between the two hypothesis.</p>
+<p>There is no general rule about the choice of the test statistic. The specific
+choice will depend on the particular case at hand. Different test
+statistic will give in general different results and it is up to the
+physicist to decide which is the most appropriate for the specific
+problem.</p>
+<p>The p.d.f. describing the test statistic corresponding to a certain
+hypothesis <span class="math notranslate nohighlight">\(g(\vec{t}|H)\)</span> is usually built from a data set that has
+precisely the characteristic associated to that hypothesis. In the
+particle identification example discussed before, the data used
+to build the p.d.f. for the two hypotheses were pure sample of electrons
+and pure samples of pions.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>In a test beam, a beam of particles is prepared in a well defined condition (particle type, energy, etc…) and it is typically used to test a device under development. This configuration inverts the typical experimental conditions where a device with known properties is used to characterize particles in a beam or from collisions.</p>
+</aside>
+<p>For example you can get a pure sample of
+electrons selecting tracks from photon conversions <span class="math notranslate nohighlight">\(\gamma \to e^+ e^-\)</span>
+and a pure sample of pions from the self-tagging decays of charmed
+mesons <span class="math notranslate nohighlight">\(D^{*+}\to \pi^+ D^0; D^0\to K^- \pi^+ (D^{*-}\to \pi^- D^0; D^0\to K^+ \pi^-)\)</span>
+(self-tagging means that by knowing the charge of the <span class="math notranslate nohighlight">\(\pi\)</span> in the first
+decay you can unambiguously assign the pion/kaon hypothesis to the
+positive/negative charge of the second decay). In other cases the p.d.f.
+are built from dedicated measurement (e.g. a test beam) or from
+Monte Carlo simulations.</p>
+<div class="tip admonition">
+<p class="admonition-title">Important remark:</p>
+<p>In physics/science <em>we cannot meaningfully accept an hypothesis: we can only reject them</em>.
+E.g. we will never be able to say that the 125 resonance discovered at the LHC in 2012 is the SM Higgs boson.
+The reason is that its properties could deviate from the SM predictions by an amount not yet experimentally accessible.</p>
+<p>The logic used to check the hypotheses is “reversed”, i.e. you always check that an hypothesis is not consistent with data.
+e.g: If the data are not in agreement with background predictions, then there is something else: a signal !</p>
+</div>
+</section>
+<section id="significance-power-consistency-and-bias">
+<h2>Significance, power, consistency and bias<a class="headerlink" href="#significance-power-consistency-and-bias" title="Link to this heading">#</a></h2>
+<p>Now that we have the concept of test statistics and its distribution under a given hypothesis,
+we can quantitatively decide if we accept or reject the statement that data are
+distributed according to the given hypothesis.</p>
+<p>To do this we partition the space of
+the test statistics values into a <strong>critical region</strong> and its
+complementary the <strong>acceptance region</strong> (see
+<a class="reference internal" href="#fig-acceptreject"><span class="std std-numref">Fig. 23</span></a>). The value of the test statistics chosen
+to define the two regions is called <strong>decision boundary</strong>: “<span class="math notranslate nohighlight">\(t_{cut}\)</span>”.
+If the value of the test statistic computed on the data under
+test falls in the rejection region, then the null hypothesis is
+discarded, otherwise it is accepted (or more precisely not rejected).</p>
+<figure class="align-center" id="fig-acceptreject">
+<a class="reference internal image-reference" href="_images/acceptReject.png"><img alt="_images/acceptReject.png" src="_images/acceptReject.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 23 </span><span class="caption-text">A test statistic in red, where we defined an acceptance <span class="math notranslate nohighlight">\(x\le 1\)</span> and
+rejection region <span class="math notranslate nohighlight">\(x&gt;1\)</span>.</span><a class="headerlink" href="#fig-acceptreject" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>To decide the rejection region we will introduce two quantities: significance and power of the test.</p>
+<p>The first one is the <strong>significance</strong> of the
+test (see <a class="reference internal" href="#fig-nullhp"><span class="std std-numref">Fig. 24</span></a>). It is defined as the integral of the
+null hypothesis p.d.f. above the decision boundary:</p>
+<div class="math notranslate nohighlight">
+\[\alpha = \int_{t_{cut}}^\infty g(t|H_0)dt \]</div>
+<figure class="align-center" id="fig-nullhp">
+<a class="reference internal image-reference" href="images/ch8/nullHP.png"><img alt="images/ch8/nullHP.png" src="images/ch8/nullHP.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 24 </span><span class="caption-text">Illustration of the acceptance and rejection region for the
+hypothesis <span class="math notranslate nohighlight">\(H_{0}\)</span>.</span><a class="headerlink" href="#fig-nullhp" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The probability <span class="math notranslate nohighlight">\(\alpha\)</span> can be read as the probability to reject <span class="math notranslate nohighlight">\(H_0\)</span> even if <span class="math notranslate nohighlight">\(H_0\)</span> is in
+reality correct. This is called an <strong>error of the first kind</strong>.</p>
+<p>If we have an alternative hypothesis <span class="math notranslate nohighlight">\(H_1\)</span>, an error of the <strong>second
+kind</strong> occurs when <span class="math notranslate nohighlight">\(H_0\)</span> is accepted but the correct hypothesis is in
+reality the alternative one <span class="math notranslate nohighlight">\(H_1\)</span>. The integral of the alternative
+hypothesis p.d.f. below <span class="math notranslate nohighlight">\(t_{cut}\)</span> is called the <strong>power of the test</strong> to
+discriminate against the alternative hypothesis <span class="math notranslate nohighlight">\(H_1\)</span> (see
+Fig. <a class="reference internal" href="#fig-alternativehp"><span class="std std-numref">Fig. 25</span></a>):</p>
+<div class="math notranslate nohighlight">
+\[\beta = \int_{-\infty}^{t_{cut}} g(t|H_1)dt\]</div>
+<figure class="align-center" id="fig-alternativehp">
+<a class="reference internal image-reference" href="images/ch8/alternativeHP.png"><img alt="images/ch8/alternativeHP.png" src="images/ch8/alternativeHP.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 25 </span><span class="caption-text">Illustration of the acceptance and rejection region the alternative <span class="math notranslate nohighlight">\(H_{1}\)</span>.</span><a class="headerlink" href="#fig-alternativehp" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>A good test has both <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> small, which is equivalent to
+say high significance and high power. This means that <span class="math notranslate nohighlight">\(H_{0}\)</span> and
+<span class="math notranslate nohighlight">\(H_{1}\)</span> are <em>“well separated”</em>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>Search for new physics: you analyse a mass spectrum looking for a bump.
+The null hypothesis is that data contains only background (see Fig. <a class="reference internal" href="#fig-typeerrors"><span class="std std-numref">Fig. 26</span></a>).</p>
+<p>Type I error: there’s really no resonance, but you reject H0 and you announce a non existing discovery</p>
+<p>Type II: there is a real resonance, you accept H0 and you miss the Nobel prize</p>
+</div>
+<figure class="align-center" id="fig-typeerrors">
+<a class="reference internal image-reference" href="_images/Type1Type2.png"><img alt="_images/Type1Type2.png" src="_images/Type1Type2.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 26 </span><span class="caption-text">Example of errors of the first and second kind in search for new physics.</span><a class="headerlink" href="#fig-typeerrors" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>While errors of the first type can be controlled by choosing <span class="math notranslate nohighlight">\(\alpha\)</span>
+as small as you want, errors of the second type depend on the
+separation between the two hypothesis and are not as easily controllable.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The typical criticism coming with this choice is on how we can be
+sure that we control the test statistics to such extreme tails. The
+typical answer is that such small values allow to a certain extent
+to also cover for possible mis-estimations of systematic
+uncertainties. It’s all hand-waving. The choice of the threshold to
+claim a discovery remains subjective.</p>
+</aside>
+<p>In HEP searches we typically speak of “evidence” when
+<span class="math notranslate nohighlight">\(\alpha \leq 3\cdot 10^{-3}\)</span>, and of “discovery” when
+<span class="math notranslate nohighlight">\(\alpha \leq 3\cdot 10^{-7}\)</span> (corresponding to the probability outside 3
+<span class="math notranslate nohighlight">\(\sigma\)</span> and 5 <span class="math notranslate nohighlight">\(\sigma\)</span> respectively in a single sided tail Gaussian);
+these numbers are purely conventional and they don’t have any scientific
+ground. They are defined this way to set a high threshold for such
+important claims about the observation of new phenomena.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example in Quality Control:</p>
+<p>Consider a machine BM1 which is used for bonding wires of
+Si-detector modules. The produced detectors had a scrap rate of
+<span class="math notranslate nohighlight">\(P_{0} = 0.2\)</span>. BM1 should be replaced with a newer bonding machine
+called BM2, if (and only if) the new machine can produce detector
+modules with a lower scrap rate <span class="math notranslate nohighlight">\(P_{1}\)</span>. In a test run we produce <span class="math notranslate nohighlight">\(n=30\)</span>
+modules. To verify <span class="math notranslate nohighlight">\(P_{1} &lt; P_{0}\)</span> statistically, we use the hypothesis
+test discussed above. Define the two hypotheses <span class="math notranslate nohighlight">\(H_{0}\)</span> and <span class="math notranslate nohighlight">\(H_{1}\)</span> as:</p>
+<div class="math notranslate nohighlight">
+\[H_{0} : P_{1} \geq 0.2; \quad H_{1}: P_{1} &lt; 0.2.\]</div>
+<p>We choose <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span> and our test statistic <span class="math notranslate nohighlight">\(t\)</span> is the number of
+malfunctioning detector modules. This quantity is distributed according
+to a binomial distribution, with the total number of produced modules
+<span class="math notranslate nohighlight">\(n=30\)</span> and a probability <span class="math notranslate nohighlight">\(P\)</span>. The rejection region for <span class="math notranslate nohighlight">\(H_{0}\)</span> is
+constructed out of</p>
+<div class="math notranslate nohighlight">
+\[ \sum_{i=0}^{n_c}{n \choose i}P_0^i(1-P_0)^{n-i}&lt;\alpha.\]</div>
+<p>Here, the
+critical value is denoted by <span class="math notranslate nohighlight">\(n_{c}\)</span>, and it is the maximal number of
+malfunctioning modules produced by BM2 which still implies a rejection
+of <span class="math notranslate nohighlight">\(H_{0}\)</span> with CL <span class="math notranslate nohighlight">\(1-\alpha\)</span>. By going through the calculation we find
+that for <span class="math notranslate nohighlight">\(n_{c} =2\)</span> the value of <span class="math notranslate nohighlight">\(\alpha\)</span> is still just below 0.05. This
+means that if we find two or less malfunctioning modules produced by BM2
+we should replace BM1 by the new machine BM2.</p>
+</div>
+<p>Once the test statistics is defined there is a trade-off between
+<span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>, the smaller you make <span class="math notranslate nohighlight">\(\alpha\)</span> the larger <span class="math notranslate nohighlight">\(\beta\)</span>
+will be; it’s up to the experimenter to decide what is acceptable and
+what is not.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>Suppose we want to distinguish <span class="math notranslate nohighlight">\(K-p\)</span> elastic scattering
+events from inelastic scattering events where a <span class="math notranslate nohighlight">\(\pi^0\)</span> is produced:</p>
+<p><span class="math notranslate nohighlight">\(H_0 : K^- p \to K^- p\)</span></p>
+<p><span class="math notranslate nohighlight">\(H_1 : K^- p \to K^- p \pi^0\)</span>.</p>
+<p>The detector used for this experiment is a spectrometer capable of measuring the
+momenta of all the charged particles (<span class="math notranslate nohighlight">\(K^-\)</span>, <span class="math notranslate nohighlight">\(p\)</span>) but it is blind to
+neutral particles (photons from the <span class="math notranslate nohighlight">\(\pi^0 \rightarrow \gamma\gamma\)</span> decay). The considered test statistic is the
+“missing mass” <span class="math notranslate nohighlight">\(M\)</span> defined as the difference between the initial and
+final visible mass. The true value of the missing mass is <span class="math notranslate nohighlight">\(M=0\)</span> under
+the null hypothesis <span class="math notranslate nohighlight">\(H_0\)</span> (no <span class="math notranslate nohighlight">\(\pi^0\)</span> produced) and
+<span class="math notranslate nohighlight">\(M_{\pi^0}=135~MeV/c^2\)</span> under the alternative hypothesis <span class="math notranslate nohighlight">\(H_1\)</span> (a
+<span class="math notranslate nohighlight">\(\pi^0\)</span> is produced). The critical region can be defined as <span class="math notranslate nohighlight">\(M&gt;M_c\)</span>. The
+value of <span class="math notranslate nohighlight">\(M_c\)</span> depends on the significance and power we want to obtain
+(see <a class="reference internal" href="#fig-inelastic"><span class="std std-numref">Fig. 27</span></a>): a high value of <span class="math notranslate nohighlight">\(M_c\)</span> will correspond to a
+high significance at the expenses of the power, while low values of
+<span class="math notranslate nohighlight">\(M_c\)</span> will result in a high power but low significance.</p>
+</div>
+<figure class="align-center" id="fig-inelastic">
+<a class="reference internal image-reference" href="_images/inelastic.png"><img alt="_images/inelastic.png" src="_images/inelastic.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 27 </span><span class="caption-text">Top: the p.d.f. for the test statistic <span class="math notranslate nohighlight">\(M\)</span> under the null hypothesis
+of elastic scattering <span class="math notranslate nohighlight">\(H_0\)</span> centred at <span class="math notranslate nohighlight">\(M=0\)</span>; bottom the p.d.f. for the
+test statistic under the alternative hypothesis of inelastic scattering
+<span class="math notranslate nohighlight">\(H_1\)</span> centred at <span class="math notranslate nohighlight">\(M=m_{\pi^0}\)</span>. <span class="math notranslate nohighlight">\(M_c\)</span> defines the critical
+region.</span><a class="headerlink" href="#fig-inelastic" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Some caution is necessary when using <span class="math notranslate nohighlight">\(\alpha\)</span>. Suppose you have 20
+researchers looking for a new phenomenon which “in reality” does not
+exist. Their <span class="math notranslate nohighlight">\(H_0\)</span> hypothesis is that what they see is only background.
+One of them could reject <span class="math notranslate nohighlight">\(H_0\)</span> with <span class="math notranslate nohighlight">\(\alpha = 5\%\)</span>, while the other 19
+will not. This is part of the game and therefore, before rushing for
+publication, that researcher should balance the claim with what the
+others don’t see. That’s the main reason why anytime there is a
+discovery claim, we always need to have the results to be corroborated
+by independent measurements. We will come back to this point when we
+will talk about the look-elsewhere effect.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>Let’s use again the example of the electron/pion
+separation. As already shown before the specific ionization <span class="math notranslate nohighlight">\(dE/dx\)</span> of a
+charged particle can be used as a test statistic to distinguish particle
+types, for example electrons (<span class="math notranslate nohighlight">\(e\)</span>) from pions (<span class="math notranslate nohighlight">\(\pi\)</span>)(see
+<a class="reference internal" href="#fig-dedx"><span class="std std-numref">Fig. 21</span></a>). The
+selection efficiency is defined as the probability for a particle to
+pass the selection cut:</p>
+<div class="math notranslate nohighlight">
+\[\epsilon_e = \int_{-\infty}^{t_{cut}}g(t|e) dt = 1-\alpha \qquad  \epsilon_\pi = \int_{-\infty}^{t_{cut}}g(t|\pi) dt = \beta\]</div>
+<p>By moving the value of <span class="math notranslate nohighlight">\(t_{cut}\)</span> you can change the composition of your
+sample. The lower the value of <span class="math notranslate nohighlight">\(t_{cut}\)</span> the larger the electron
+efficiency but the higher the contamination from pions and vice-versa.
+In general, one can set a value of <span class="math notranslate nohighlight">\(t_{cut}\)</span>, select a sample and work
+out what is the fraction of electrons <span class="math notranslate nohighlight">\(N_{acc}\)</span> present in the initial
+sample (before the requirement <span class="math notranslate nohighlight">\(t&lt;t_{cut}\)</span>). The number of accepted
+particles in the sample is composed by:</p>
+<div class="math notranslate nohighlight">
+\[N_{acc}=\epsilon_e N_e + \epsilon_\pi N_\pi = \epsilon_e N_e + \epsilon_\pi(N_{tot} - N_e)\]</div>
+<p>which gives</p>
+<div class="math notranslate nohighlight">
+\[N_{e}=\frac{N_{acc} - \epsilon_\pi N_{tot}}{\epsilon_e - \epsilon_\pi}\]</div>
+<p>From this, one can immediately notice that the <span class="math notranslate nohighlight">\(N_e\)</span> can only be
+calculated if <span class="math notranslate nohighlight">\(\epsilon_e \neq \epsilon_\pi\)</span>, i.e. <span class="math notranslate nohighlight">\(N_e\)</span> can only be
+extracted if there is any separation power at all. If there are
+systematic uncertainties in <span class="math notranslate nohighlight">\(\epsilon_e\)</span> or <span class="math notranslate nohighlight">\(\epsilon_\pi\)</span> these will
+translate into an uncertainty on <span class="math notranslate nohighlight">\(N_e\)</span>. One should try to select the
+critical region <span class="math notranslate nohighlight">\(t_{cut}\)</span> such that the total error on <span class="math notranslate nohighlight">\(N_e\)</span> is
+negligible.</p>
+<p>The other side of the problem is to estimate the <strong>purity</strong> <span class="math notranslate nohighlight">\(p_e\)</span> of the
+sample of candidates passing the requirement <span class="math notranslate nohighlight">\(t&lt;t_{cut}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+p_e &amp;=&amp; \frac{\#electrons~with~t&lt;t_{cut}}{\#particles~with~t&lt;t_{cut}}\\
+    &amp;=&amp; \frac{\int_{-\infty}^{t_{cut}}a_e g(t|e) dt }{\int_{-\infty}^{t_{cut}}(a_e g(t|e) + (1-a_e)g(t|\pi) ) dt }\\
+    &amp;=&amp; \frac{a_e\epsilon_e N_{tot}}{N_{acc}}
+\end{aligned}
+\end{split}\]</div>
+</div>
+<p>Historically, in high energy physics a parallel nomenclature has been
+defined to express the same concepts we have encounter in this section:</p>
+<ul class="simple">
+<li><p><em>signal efficiency</em> = 1-<span class="math notranslate nohighlight">\(\alpha\)</span> (a test is significant at a level
+1-<span class="math notranslate nohighlight">\(\alpha\)</span> %)</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span> = probability of a type I error</p></li>
+</ul>
+</li>
+<li><p><em>background efficiency</em> = <span class="math notranslate nohighlight">\(\beta\)</span> = probability of a type II error</p>
+<ul>
+<li><p>1-<span class="math notranslate nohighlight">\(\beta\)</span> = power of the test = background rejection</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="is-there-a-signal">
+<h2>Is there a signal ?<a class="headerlink" href="#is-there-a-signal" title="Link to this heading">#</a></h2>
+<p>A typical application of hypothesis testing in high energy physics is to
+test for the presence of a signal in data. The easiest case is
+represented by counting experiments. In this type of experiments the
+detector is used to count the number of events satisfying some selection
+criteria (slang: “cut-and-count”).</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The signal doesn’t always appear as an excess of events. In case
+of test for neutrino oscillations the signal can appear as a deficit
+of events.</p>
+</aside>
+<p>The number of expected events in case
+of background only hypothesis is compared with the measured number. The
+signal would typically appear as an excess over the expected
+background.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>Let <span class="math notranslate nohighlight">\(n\)</span> be a number of events which is the sum of some
+signal and some background events <span class="math notranslate nohighlight">\(n = n_s + n_b\)</span>. Each of the
+components can be treated as a Poisson variable <span class="math notranslate nohighlight">\(\nu_s\)</span> (signal) and
+<span class="math notranslate nohighlight">\(\nu_b\)</span> (background) and so the total <span class="math notranslate nohighlight">\(\nu = \nu_s + \nu_b\)</span> is also a
+Poisson variable. The probability to observe <span class="math notranslate nohighlight">\(n\)</span> events is:</p>
+<div class="math notranslate nohighlight">
+\[f(n; \nu_s, \nu_b) = \frac{(\nu_s+\nu_b)^n}{n!}e^{-(\nu_s+\nu_b)}\]</div>
+<p>Suppose you measure <span class="math notranslate nohighlight">\(n_{obs}\)</span> events. To quantify our degree of
+confidence in the discovery of a new phenomenon, i.e. <span class="math notranslate nohighlight">\(\nu_s\ne 0\)</span>, we
+can compute <em>how likely it is to find <span class="math notranslate nohighlight">\(n_{obs}\)</span> events or more from
+background alone</em>.</p>
+<div class="math notranslate nohighlight">
+\[P(n\ge n_{obs}) = \sum_{n=n_{obs}}^\infty f(n; \nu_s = 0, \nu_b) = 1 - \sum_{n=0}^{n_{obs}-1} f(n; \nu_s = 0, \nu_b) =
+1- \sum_{n=0}^{n_{obs}-1} \frac{\nu_b^n}{n!}e^{-\nu_b}.\]</div>
+<p>For example,
+if we expect <span class="math notranslate nohighlight">\(\nu_b = 0.5\)</span> background events and we observe
+<span class="math notranslate nohighlight">\(n_{obs} = 5\)</span>, then the <em>p</em>-value is <span class="math notranslate nohighlight">\(1.7 \cdot 10^{-4}\)</span>. <em>This is not
+the probability of the hypothesis <span class="math notranslate nohighlight">\(\nu_s = 0\)</span> ! It is rather the
+probability, under the assumption <span class="math notranslate nohighlight">\(\nu_s = 0\)</span>, of obtaining as many
+events as observed or more.</em></p>
+<p>You should be very careful with a common pitfall. Often the result of a
+measurement is given as the estimated value of a number of events plus
+or minus one standard deviation. Since the standard deviation of a
+Poisson variable is equal to the square root of its mean, from the
+previous example, we have <span class="math notranslate nohighlight">\(5 \pm \sqrt{5}\)</span> for an estimate of <span class="math notranslate nohighlight">\(\nu\)</span>,
+i.e. after subtracting the expected background, <span class="math notranslate nohighlight">\(4.5 \pm 2.2\)</span> for our
+estimate of <span class="math notranslate nohighlight">\(\nu_s\)</span>. This is very misleading: it is only two standard
+deviations from zero, and it gives the impression that <span class="math notranslate nohighlight">\(\nu_s\)</span> is not
+very incompatible with zero, but we have seen from the <em>p</em>-value that it
+is not the case. The subtlety is that we need to ask for the probability
+that a Poisson variable of mean <span class="math notranslate nohighlight">\(\nu_b\)</span> will fluctuate up to <span class="math notranslate nohighlight">\(n_{obs}\)</span>
+or higher, not for the probability that a Poisson variable with mean
+<span class="math notranslate nohighlight">\(n_{obs}\)</span> will fluctuate down to <span class="math notranslate nohighlight">\(\nu_b\)</span> or lower.</p>
+<p>Another important point is that usually <span class="math notranslate nohighlight">\(\nu_b\)</span> is known within some
+uncertainty. If we set <span class="math notranslate nohighlight">\(\nu = 0.8\)</span> rather than 0.5, the <em>p</em>-value would
+increase by almost an order of magnitude to <span class="math notranslate nohighlight">\(1.4 \cdot 10^{-3}\)</span>. It is
+therefore crucial to quantify the systematic uncertainty of the
+background when evaluating the significance of a new effect.</p>
+</div>
+<p>In other types of searches the signal would reveal itself as a
+resonance, i.e. an excess of data in a localized region of a mass
+spectrum (slang: “bump hunt”), or as an excess of events in the tail of
+a distribution. Two examples are show in
+<a class="reference internal" href="#fig-searches"><span class="std std-numref">Fig. 28</span></a>). In these cases the signal is extracted from
+the background using a fit (more on this will be developed in the next
+sections). In this case on top of using the number of expected events,
+we add the information about the way they are distributed (slang: “shape
+analysis”).</p>
+<figure class="align-center" id="fig-searches">
+<a class="reference internal image-reference" href="_images/searches.png"><img alt="_images/searches.png" src="_images/searches.png" style="width: 800px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 28 </span><span class="caption-text">Left: Higgs boson search in 2011. Right: search for an excess of
+events at high missing transverse energy. In both cases the data are
+well described by the background only
+hypothesis.</span><a class="headerlink" href="#fig-searches" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="neyman-pearson-lemma">
+<h2>Neyman Pearson Lemma<a class="headerlink" href="#neyman-pearson-lemma" title="Link to this heading">#</a></h2>
+<p>We haven’t addressed up to now the choice of <span class="math notranslate nohighlight">\(t_{cut}\)</span>. The only thing
+we know up to now is that it affects the efficiency and the purity of
+the sample under study. Ideally what we want is to set the desired
+efficiency and for that value get the best possible purity.<br />
+Take the case of a <em>simple hypothesis</em> <span class="math notranslate nohighlight">\(H_0\)</span> and allow for an
+alternative <em>simple hypothesis</em> <span class="math notranslate nohighlight">\(H_1\)</span> (e.g. the typical situation of
+signal and background). The <em>Neyman Pearson lemma</em> states that the
+acceptance region giving the highest power (i.e. the highest purity) for
+a given significance level <span class="math notranslate nohighlight">\(\alpha\)</span>, is the region of space such that:</p>
+<div class="math notranslate nohighlight">
+\[\frac{g(\vec{t} | H_{0})}{g(\vec{t} | H_{1})} &gt; c,\]</div>
+<p>where <span class="math notranslate nohighlight">\(c\)</span> is the
+knob we can tune to achieve the desired efficiency and
+<span class="math notranslate nohighlight">\(g(\vec{t}|H_{i})\)</span> is the distribution of <span class="math notranslate nohighlight">\(\vec{t}\)</span> under the hypothesis
+<span class="math notranslate nohighlight">\(H_{i}\)</span>.</p>
+<p>Basically what the lemma says is that there is function <span class="math notranslate nohighlight">\(r\)</span> defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+r = \frac{g(\vec{t} | H_{0})}{g(\vec{t} | H_{1})}\end{aligned}
+\]</div>
+<p>that brings the problem to a 1 dimensional case and that gives the best
+purity given a fixed efficiency. The function <span class="math notranslate nohighlight">\(r\)</span> is called the
+<em>likelihood ratio</em> for the simple hypotheses <span class="math notranslate nohighlight">\(H_0\)</span> and <span class="math notranslate nohighlight">\(H_1\)</span> (in the
+likelihood the data are fixed, the hypothesis is what is changed). The
+corresponding acceptance region is given by <span class="math notranslate nohighlight">\(r&gt;c\)</span>. Any monotonic
+function of <span class="math notranslate nohighlight">\(r\)</span> will be good too and will lead to the same test.</p>
+<p>The main draw back of the Neyman-Pearson lemma is that is is valid if
+and only if both <span class="math notranslate nohighlight">\(H_0\)</span> and <span class="math notranslate nohighlight">\(H_1\)</span> are simple hypothesis (and that is
+pretty rare). Even in those cases in order to determine c one needs to
+know <span class="math notranslate nohighlight">\(g(\textbf{t}|H_{0})\)</span> and <span class="math notranslate nohighlight">\(g(\textbf{t}| H_{1})\)</span>. These have to be
+determined by Monte Carlo simulations, or data driven techniques, for
+both data and background. The simplest way to represent the p.d.f.’s is
+to use a multidimensional histogram. This can cause some troubles when
+the dimensionality of the problems is high. Say we have <span class="math notranslate nohighlight">\(M\)</span> bins for
+each of the <span class="math notranslate nohighlight">\(n\)</span> dimension of the test statistics <span class="math notranslate nohighlight">\(\textbf{t}\)</span>, then the
+total number of bins is <span class="math notranslate nohighlight">\(M^n\)</span>, i.e. <span class="math notranslate nohighlight">\(M^n\)</span>, parameters must be determined
+from Monte Carlo or data and this can quickly become impractical. We
+will see later (Ch. <a class="reference internal" href="#mva.html#."><span class="xref myst">MVA</span></a>) a different way to model the p.d.f. using
+Multi-Variate techniques.</p>
+</section>
+<section id="goodness-of-fit">
+<h2>Goodness of Fit<a class="headerlink" href="#goodness-of-fit" title="Link to this heading">#</a></h2>
+<p>A typical application of hypothesis testing is to assess the goodness of
+a fit, i.e. quantifying how well the null hypothesis <span class="math notranslate nohighlight">\(H_0\)</span> describes a
+sample of data, <em>without any specific reference to an alternative
+hypothesis</em>. The test statistic has to be constructed such that it
+reflects the level of agreement between the observed data and the
+predictions of <span class="math notranslate nohighlight">\(H_0\)</span>.<br />
+The typical quantitative way to assess the agreement is to use the
+concept of <span class="math notranslate nohighlight">\(p-\)</span>value. As we have already seen
+(Eq. <a class="reference internal" href="leastSquares.html#equation-eq-pvalue">(11)</a>) the <span class="math notranslate nohighlight">\(p-\)</span>value is the probability, under the
+assumption of H, to observe data with equal or less compatibility with
+<span class="math notranslate nohighlight">\(H_0\)</span>, relative to the data we got.<br />
+N.B.: the <span class="math notranslate nohighlight">\(p-\)</span>value does not give the probability for <span class="math notranslate nohighlight">\(H_0\)</span> to be true!
+As a frequentist the probability of the hypothesis is not even defined:
+the probability is defined on the data. As Bayesian the probability of
+the hypothesis is a different thing and it is defined through the Bayes
+theorem using the prior hypothesis.</p>
+<section id="the-chi-2-test">
+<h3>The <span class="math notranslate nohighlight">\(\chi^2\)</span>-Test<a class="headerlink" href="#the-chi-2-test" title="Link to this heading">#</a></h3>
+<p>We have already encountered the <span class="math notranslate nohighlight">\(\chi^2\)</span> as a goodness of fit test in
+section Sec.<a class="reference internal" href="#leastSquares.html#use-of-the-chi-2-to-test-the-goodness-of-fit"><span class="xref myst">Least Squares</span></a>.
+The <span class="math notranslate nohighlight">\(\chi^{2}\)</span>-test is by far the most commonly used goodness of fit test. The first application we
+discuss is with a set of measurements <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(y_i\)</span>, where the <span class="math notranslate nohighlight">\(x_i\)</span>
+are supposed to be exact (or at least with negligible uncertainty) and
+the <span class="math notranslate nohighlight">\(y_i\)</span> are known with an uncertainty <span class="math notranslate nohighlight">\(\sigma_i\)</span>. We want to test the
+function <span class="math notranslate nohighlight">\(f(x)\)</span> which we believe it gives (predicts) the correct value
+of <span class="math notranslate nohighlight">\(y_i\)</span> for each value of <span class="math notranslate nohighlight">\(x_i\)</span>; to do so we define the <span class="math notranslate nohighlight">\(\chi^2\)</span> as:</p>
+<div class="math notranslate nohighlight">
+\[\chi^{2} = \sum_{i=1}^{N} \frac{[y_{i}-f(x_{i})]^{2}}{\sigma_{i}^{2}}.\]</div>
+<p>If the uncertainties on the <span class="math notranslate nohighlight">\(y_i\)</span> measurements are correlated, the above
+formula becomes (with the lighter matrix notation, see
+Sec.<a class="reference internal" href="#leastSquares.html#matrix-notation-and-the-uncertainty-on-the-fitted-parameters"><span class="xref myst">Matrix Notation</span></a>:</p>
+<div class="math notranslate nohighlight">
+\[\chi^{2} = (\bf{y}-\bf{f})^T \bf{V}^{-1} (\bf{y} - \bf{f})\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bf{V}\)</span> is the covariance matrix. A function that correctly describes
+the data will give a small difference between the values predicted by
+the function <span class="math notranslate nohighlight">\(f\)</span> and the measurements <span class="math notranslate nohighlight">\(y_i\)</span>. This difference reflects
+the statistical uncertainty on the measurements, so for <span class="math notranslate nohighlight">\(N\)</span> measurements
+the <span class="math notranslate nohighlight">\(\chi^2\)</span> should be roughly <span class="math notranslate nohighlight">\(N\)</span>.</p>
+<p>Recalling the p.d.f. of the <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution (see
+Sec.<a class="reference internal" href="#probabilityDistributions.html#chi-2-distribution"><span class="xref myst"><span class="math notranslate nohighlight">\(\chi^2\)</span></span></a>):</p>
+<div class="math notranslate nohighlight">
+\[
+\label{Chi2EquationAgain}
+  P(\chi^{2};N) = \frac{2^{\frac{-N}{2}}}{\Gamma\left(\frac{N}{2}\right)} \chi^{N-2} e ^{\frac{-\chi^{2}}{2}}
+\]</div>
+<p>(where the expectation value of this distribution is <span class="math notranslate nohighlight">\(N\)</span>, and so
+<span class="math notranslate nohighlight">\(\chi^{2} / N \sim 1\)</span>), we can base our <em>decision boundary</em> on the
+goodness-of-fit, by defining the <span class="math notranslate nohighlight">\(p-\)</span>value:</p>
+<div class="math notranslate nohighlight">
+\[
+\label{Chi2Probability}
+  p = \text{Prob}(\chi^{2};N) = \int_{\chi^{2}}^{\infty} P(\chi'^{2}; N) d\chi'^{2}
+\]</div>
+<p>which is called the <em><span class="math notranslate nohighlight">\(\chi^{2}\)</span> probability</em>. This expression gives the
+probability that the function describing the <span class="math notranslate nohighlight">\(N\)</span> measured data points
+gives a <span class="math notranslate nohighlight">\(\chi^{2}\)</span> <em>as large or larger than</em> the one we obtained from
+our measurement.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>Suppose you compute a <span class="math notranslate nohighlight">\(\chi^2\)</span> of 20 for N=5 points. The
+feeling is that the function is a very poor model of the data
+(<span class="math notranslate nohighlight">\(20/5 =4 \gg 1\)</span>). To quantify that we compute the <span class="math notranslate nohighlight">\(\chi^2\)</span> probability
+<span class="math notranslate nohighlight">\(\int_{20}^{\infty}P(\chi^2,5)d\chi^2\)</span>. In <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> FIXME you can compute this
+as <code class="docutils literal notranslate"><span class="pre">TMath::Prob(20,5)</span> <span class="pre">=</span> <span class="pre">0.0012</span></code>. The <span class="math notranslate nohighlight">\(\chi^2\)</span> probability is indeed very
+small and the <span class="math notranslate nohighlight">\(H_0\)</span> hypothesis should be discarded.</p>
+</div>
+<p>You have to be careful when using the <span class="math notranslate nohighlight">\(\chi^2\)</span> probability to take
+decisions. For instance if the <span class="math notranslate nohighlight">\(\chi^2\)</span> is large, giving a very small
+<span class="math notranslate nohighlight">\(\chi^2\)</span> probability, it could be both that the function <span class="math notranslate nohighlight">\(f\)</span> is a bad
+representation of the data or that the uncertainties are underestimated.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Here the function is given, not fitted on data.</p>
+</aside>
+<p>On the other hand if you obtain a very small value for the <span class="math notranslate nohighlight">\(\chi^2\)</span>, the
+function cannot be blamed, so you might have overestimated the
+uncertainties. It’s up to you to interpret correctly the meaning of the
+probability. A very useful tool for this scope is the <strong>pull
+distribution</strong> (see Sec. <a class="reference internal" href="#likelihood.html#some-general-remarks-concerning-ml-estimators"><span class="xref myst">ML remarks</span></a>),
+where each entry is defined as
+(measured-predicted)/uncertainty = <span class="math notranslate nohighlight">\((y_i - f(x_i))/ \sigma_i\)</span>; if
+everything is done correctly (i.e. the model is correct and the
+uncertainties are computed correctly) the pull will result in a normal
+distribution centred at 0 with width 1. If the pull is not centred at 0
+(bias) the model is incorrect, if the pull has a width larger than 1
+either the uncertainties are underestimated or the model is wrong, if
+the pull has a width smaller than 1 the uncertainties are
+overestimated.</p>
+</section>
+<section id="degrees-of-freedom-for-chi-2-test-on-fitted-data">
+<h3>Degrees of freedom for <span class="math notranslate nohighlight">\(\chi^2\)</span>-test on fitted data<a class="headerlink" href="#degrees-of-freedom-for-chi-2-test-on-fitted-data" title="Link to this heading">#</a></h3>
+<p>The concept of <span class="math notranslate nohighlight">\(\chi^2\)</span> developed above only works if you are given a
+set of data points and a function (model). If the function comes out
+<em>from a fit to the data</em> then, by construction, you will get a <span class="math notranslate nohighlight">\(\chi^2\)</span>
+which is the smallest, because you fit the parameters of the function in
+order to minimize it.</p>
+<p>This problem turns out to be very easy to treat. You just need to remove
+degrees of freedom from the computation. For example, suppose you have
+<span class="math notranslate nohighlight">\(N\)</span> points and you fitted <span class="math notranslate nohighlight">\(m\)</span> parameters of your function to minimize
+the <span class="math notranslate nohighlight">\(\chi^2\)</span> sum; then all you have to do to compute the new <span class="math notranslate nohighlight">\(\chi^2\)</span>
+probability is to reduce the number of d.o.f. to <span class="math notranslate nohighlight">\(n=N-m\)</span>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>You have a set of 20 points, you consider as function f(x)
+a straight line and you get <span class="math notranslate nohighlight">\(\chi^2 = 36.3\)</span>. If you use a parabola you
+get <span class="math notranslate nohighlight">\(\chi^2 = 20.1\)</span>. The straight line has 2 degrees of freedom (slope
+and intercept), so the number of d.o.f. of the problem is 20-2=18; the
+<span class="math notranslate nohighlight">\(\chi^2\)</span> probability is FIXME <code class="docutils literal notranslate"><span class="pre">TMath::Prob(36.3,18)</span> <span class="pre">=</span> <span class="pre">0.0065</span></code> which makes the
+hypothesis that data are described by a straight line improbable. If you
+now fit it with a parabola you get <code class="docutils literal notranslate"><span class="pre">TMath::Prob(20.1,17)</span> <span class="pre">=</span> <span class="pre">0.27</span></code> which
+means that you can’t reject the hypothesis that the data are distributed
+according to a parabolic shape.</p>
+</div>
+<p>Notes on the <span class="math notranslate nohighlight">\(\chi^{2}\)</span>-test:</p>
+<ul>
+<li><p>For large values of d.o.f. the distribution of <span class="math notranslate nohighlight">\(\sqrt{2\chi^2}\)</span> can
+be approximated with a Gaussian distribution with mean <span class="math notranslate nohighlight">\(\sqrt{2n-1}\)</span>
+and standard deviation <span class="math notranslate nohighlight">\(1\)</span>. When in the past the integrals were
+extracted from tables this was a neat trick; still it is a useful
+simplification when the the <span class="math notranslate nohighlight">\(\chi^2\)</span> is used in some explicit
+calculation.</p></li>
+<li><p>The <span class="math notranslate nohighlight">\(\chi^{2}\)</span>-test can also be used as a goodness of fit test for
+binned data. The number of events in bin <span class="math notranslate nohighlight">\(i\)</span> (<span class="math notranslate nohighlight">\(i = 1, 2, \ldots, n\)</span>)
+are <span class="math notranslate nohighlight">\(y_{i}\)</span>, with bin <span class="math notranslate nohighlight">\(i\)</span> having mean value <span class="math notranslate nohighlight">\(x_{i}\)</span>. The predicted
+number of events is thus <span class="math notranslate nohighlight">\(f(x_{i})\)</span>. The errors are given by Poisson
+statistics in the bin (<span class="math notranslate nohighlight">\(\sqrt{f(x_i)}\)</span>, see Ch. <a class="reference internal" href="#leastSquares.html#binned-chi-2-fit"><span class="xref myst">Binned <span class="math notranslate nohighlight">\(\chi^2\)</span></span></a>
+for the use of the Poisson uncertainties) and the <span class="math notranslate nohighlight">\(\chi^{2}\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\chi^{2} = \sum_{i=1}^{n}\frac{[y_{i}-f(x_{i})]^{2}}{f(x_{i})},\]</div>
+<p>where the number of degrees of freedom <span class="math notranslate nohighlight">\(n\)</span> is given by the number of
+bins minus the number of fitted parameters (do not forget the
+overall normalization of the model when counting the number of
+fitted parameters).</p>
+</li>
+<li><p>when binning data, you should try to have enough entries per bin
+such that the computation of the <span class="math notranslate nohighlight">\(\chi^2\)</span> is actually meaningful; as
+a rule of thumb you should have <em>at least 5 entries per bin</em>. Most
+of the results for binned data are only true asymptotically.</p></li>
+</ul>
+</section>
+</section>
+<section id="unbinned-tests">
+<h2>Unbinned tests<a class="headerlink" href="#unbinned-tests" title="Link to this heading">#</a></h2>
+<p>Unbinned tests are used when the binning procedure would result in a too
+large loss of information (e.g. when the data set is small).</p>
+<p>They are all based on the comparison of the cumulative distribution function
+(c.d.f.) <span class="math notranslate nohighlight">\(F(x)\)</span> of the model <span class="math notranslate nohighlight">\(f(x)\)</span> under some hypothesis <span class="math notranslate nohighlight">\(H_0\)</span> and the
+c.d.f. for the data. To define a c.d.f. on data we define an order
+statistics, i.e. a rule to order the data and then define on it the
+<em>Empirical Cumulative Distribution Function</em> e.c.d.f.:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}S_n(x) =
+\left\{
+\begin{array}{rll}
+  0 &amp;\mbox{,} &amp; x &lt;x_1 \\
+  \frac{r}{n} &amp;\mbox{,} &amp; x_r \le x  &lt; x_{r+1} \\
+  1 &amp;\mbox{,} &amp; x_n &lt;x 
+\end{array}
+\right.\end{split}\]</div>
+<p>This is just the fraction of events not exceeding x (which is
+a staircase function from 0 to 1), see <a class="reference internal" href="#fig-ks"><span class="std std-numref">Fig. 29</span></a></p>
+<figure class="align-center" id="fig-ks">
+<a class="reference internal image-reference" href="_images/KS_Example.png"><img alt="_images/KS_Example.png" src="_images/KS_Example.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 29 </span><span class="caption-text">Example of c.d.f. and e.c.d.f..
+The arrow indicates the largest distance used by the Kolmogorov-Smirnov
+test.</span><a class="headerlink" href="#fig-ks" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The first unbinned test we describe is the <strong>Smirnov-Cramér-von Mises</strong>
+test. We define a measure of the distance between <span class="math notranslate nohighlight">\(S_n(x)\)</span> and F(x) as:</p>
+<div class="math notranslate nohighlight">
+\[W^2 = \int_0^1 [S_n(x) - F(x)]^2 dF(x)\]</div>
+<p>(dF(x) can be in general a non decreasing weight).
+Inserting the explicit expression of <span class="math notranslate nohighlight">\(S_n(x)\)</span> in this definition we get:</p>
+<div class="math notranslate nohighlight">
+\[nW^2 = \frac{1}{12n} + \sum_{i=1}^n \left( F(x_i) - \frac{2i-1}{2n}   \right)^2\]</div>
+<p>From the asymptotic distribution of <span class="math notranslate nohighlight">\(nW^2\)</span> the critical regions can be
+computed: frequently used test sizes are given in the
+Tab. <a class="reference internal" href="#fig-skvm"><span class="std std-numref">Fig. 30</span></a>.
+The asymptotic distribution is reached remarkably rapidly (in this table the
+asymptotic limit is reached for <span class="math notranslate nohighlight">\(n \ge 3\)</span>).</p>
+<figure class="align-center" id="fig-skvm">
+<a class="reference internal image-reference" href="_images/smirnovCramer.png"><img alt="_images/smirnovCramer.png" src="_images/smirnovCramer.png" style="width: 200px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 30 </span><span class="caption-text">Rejection regions for the
+Smirnov-Cramér-von Mises test the for some typical test
+sizes.</span><a class="headerlink" href="#fig-skvm" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The <strong>Kolmogorov-Smirnov</strong> test follows the same idea of comparing the
+model c.d.f. with the data e.c.d.f. but it defines a different metric
+for the distance between the two. The test statistic is
+<span class="math notranslate nohighlight">\(d := D \sqrt{N}\)</span> where <span class="math notranslate nohighlight">\(D\)</span> is the maximal vertical difference between
+<span class="math notranslate nohighlight">\(F_{n}(x)\)</span> and <span class="math notranslate nohighlight">\(F(x)\)</span> (see <a class="reference internal" href="#fig-ks"><span class="std std-numref">Fig. 29</span></a>:</p>
+<div class="math notranslate nohighlight">
+\[D := \max_{x} |S_{n}(x)-F(x)|\]</div>
+<p>The hypothesis <span class="math notranslate nohighlight">\(H_{0}\)</span> corresponding
+to the function <span class="math notranslate nohighlight">\(f(x)\)</span> is rejected if <span class="math notranslate nohighlight">\(d\)</span> is larger than a given
+critical value. The probability <span class="math notranslate nohighlight">\(P(d\le t_0)\)</span> can be calculated in FIXME
+<code class="docutils literal notranslate"><span class="pre">ROOT</span></code> by <code class="docutils literal notranslate"><span class="pre">TMath::KolmogorovProb(t0)</span></code>. Some values are reported in
+<a class="reference internal" href="#fig-kstable"><span class="std std-numref">Fig. 31</span></a>.</p>
+<figure class="align-center" id="fig-kstable">
+<a class="reference internal image-reference" href="_images/KSTable.png"><img alt="_images/KSTable.png" src="_images/KSTable.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 31 </span><span class="caption-text">Rejection regions for the Kolmogorov-Smirnov test
+for some typical test sizes.</span><a class="headerlink" href="#fig-kstable" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The Kolmogorov-Smirnov test can also be used to test if <em>two data sets</em>
+have been drawn from the same parent distribution. Take the two
+histograms corresponding to the data to be compared and normalize them
+(such that the cumulative plateaus at 1). Then compare the e.c.d.f. for
+the two histograms and compute the maximum distance as before (in FIXME <code class="docutils literal notranslate"><span class="pre">ROOT</span></code>
+use <code class="docutils literal notranslate"><span class="pre">h1.KolmogorovTest(h2)</span></code>).</p>
+<p>Notes on the Kolmogorov-Smirnov test:</p>
+<ul class="simple">
+<li><p>the test is more sensitive to departures of the data from the median
+of <span class="math notranslate nohighlight">\(H_0\)</span> than to departures from the width (more sensitive to the
+core than to the tails of the distributions)</p></li>
+<li><p>the test becomes meaningless if the <span class="math notranslate nohighlight">\(H_0\)</span> p.d.f. is a fit to the
+data. This is due to the fact that there is no equivalent of the
+number of degrees of freedom as in the <span class="math notranslate nohighlight">\(\chi^{2}\)</span>-test, hence it
+cannot be corrected for.</p></li>
+</ul>
+</section>
+<section id="two-sample-problem">
+<h2>Two-sample problem<a class="headerlink" href="#two-sample-problem" title="Link to this heading">#</a></h2>
+<p>In this section we will look at the problem of telling if two samples
+are compatible with each other, i.e. if both are drawn from the same
+parent distribution. Clearly the complication is that, even if they are,
+they will exhibit differences coming from statistical fluctuations. In
+the following we will examine some typical examples of two-sample
+problems (see <a class="reference internal" href="#fig-hypo2"><span class="std std-numref">Fig. 33</span></a>).</p>
+<section id="two-gaussians-known-sigma">
+<h3>Two Gaussians, known <span class="math notranslate nohighlight">\(\sigma\)</span><a class="headerlink" href="#two-gaussians-known-sigma" title="Link to this heading">#</a></h3>
+<p>Suppose you have two random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> distributed as
+Gaussians of known width. Typical situations are when you have two
+measurements taken with the same device with a known resolution; or two
+samples are taken under different conditions where the variances of the
+parent distribution are known (you have the two means
+<span class="math notranslate nohighlight">\(\langle X \rangle\)</span>, <span class="math notranslate nohighlight">\(\langle Y \rangle\)</span> and the uncertainty on the
+means <span class="math notranslate nohighlight">\(\sigma_x/\sqrt{N_x}\)</span> and <span class="math notranslate nohighlight">\(\sigma_y/\sqrt{N_y}\)</span>).</p>
+<p>This problem is equivalent to check if <span class="math notranslate nohighlight">\(X-Y\)</span> is compatible with <span class="math notranslate nohighlight">\(0\)</span>. The
+variance of <span class="math notranslate nohighlight">\(X-Y\)</span> is <span class="math notranslate nohighlight">\(V(X-Y) = \sigma_x^2 +\sigma_y^2\)</span> and so the
+problem boils down to how many <span class="math notranslate nohighlight">\(\sigma\)</span> the difference is from 0:
+<span class="math notranslate nohighlight">\((X-Y)/ \sqrt{\sigma_x^2 + \sigma_y^2}\)</span>.</p>
+<p>More generally what you are doing is defining a test statistics
+<span class="math notranslate nohighlight">\(\frac{|\langle x \rangle - \mu_0|}{\sigma/\sqrt{N}}\)</span> (in the previous
+case <span class="math notranslate nohighlight">\(\mu_0 = 0\)</span>) and a double sided rejection region. This means that
+you choose the significance of your test (<span class="math notranslate nohighlight">\(\alpha\)</span>) and set as rejection
+region the (symmetric) values <span class="math notranslate nohighlight">\(u_{1-\alpha/2}\)</span> on the corresponding
+Gaussian as:</p>
+<div class="math notranslate nohighlight">
+\[\int_{-\infty}^{u_{1-\alpha/2}} G(x;\mu_0,\sigma)dx  = \int_{u_{1-\alpha/2}}^{\infty} G(x;\mu_0,\sigma)dx = \frac{\alpha}{2}\]</div>
+<p>If the measured difference ends up in the rejection region (either of
+the two tails) then the two samples are to be considered different.<br />
+You can also test whether <span class="math notranslate nohighlight">\(X&gt;Y\)</span> (or <span class="math notranslate nohighlight">\(Y&gt;X\)</span>). In this case the test
+statistic is <span class="math notranslate nohighlight">\(\frac{(\langle x \rangle - \mu_0)}{\sigma/\sqrt{N}}\)</span> and
+the rejection region becomes single sided <span class="math notranslate nohighlight">\((u_{1-\alpha},\infty)\)</span> (or
+<span class="math notranslate nohighlight">\((-\infty,u_{1-\alpha})\)</span>).</p>
+</section>
+<section id="two-gaussians-unknown-sigma">
+<h3>Two Gaussians, unknown <span class="math notranslate nohighlight">\(\sigma\)</span><a class="headerlink" href="#two-gaussians-unknown-sigma" title="Link to this heading">#</a></h3>
+<p>The problem is similar to the previous one, you’re comparing two
+Gaussian distributions with means <span class="math notranslate nohighlight">\(\langle X \rangle\)</span> and
+<span class="math notranslate nohighlight">\(\langle Y \rangle\)</span>, but this time you don’t know what are the parents’
+standard deviations. All you can do is to estimate them from the samples
+at hand:</p>
+<div class="math notranslate nohighlight">
+\[s^2_x = \frac{\sum(x_i -\langle x\rangle)^2}{N_x-1} \qquad ; \qquad s^2_y = \frac{\sum(y_i -\langle y\rangle)^2}{N_y-1}.\]</div>
+<p>Because we’re using the estimated standard deviation we have to build a
+Student’s <span class="math notranslate nohighlight">\(t\)</span> variable to test the significance, and not the Gaussian
+p.d.f. as we did in the previous case. As we have seen in
+Sec. <a class="reference internal" href="#probabilityDistributions.html#student-s-t-distribution"><span class="xref myst">Student’s <span class="math notranslate nohighlight">\(t\)</span></span></a>
+the <span class="math notranslate nohighlight">\(t\)</span>-variable comes from the ratio of a
+Gaussian and a <span class="math notranslate nohighlight">\(\chi^2\)</span> variable; the trick was to cancel out in the
+ratio our ignorance about <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
+<p>For the numerator, the expression</p>
+<div class="math notranslate nohighlight">
+\[\frac{\langle x \rangle - \langle y \rangle}{\sqrt{(\sigma_x^2/N_x)+(\sigma_y^2/N_y)}}\]</div>
+<p>under the null hypothesis that the two distributions have the same mean
+(<span class="math notranslate nohighlight">\(\mu_x = \mu_y\)</span>) is a Gaussian centred at zero with standard deviation
+one.</p>
+<p>For the denominator, the sum</p>
+<div class="math notranslate nohighlight">
+\[\frac{(N_x-1)s_x^2}{\sigma_x^2} + \frac{(N_y-1)s_y^2}{\sigma_y^2}\]</div>
+<p>is a <span class="math notranslate nohighlight">\(\chi^2\)</span> (to convince yourself just plugin the <span class="math notranslate nohighlight">\(s^2_x\)</span> and <span class="math notranslate nohighlight">\(s^2_y\)</span>
+written above) with <span class="math notranslate nohighlight">\(N_x+N_y-2\)</span> d.o.f, because we used them to compute
+the means.</p>
+<p>If we assume that the unknown parent standard deviation is the same for
+the two samples <span class="math notranslate nohighlight">\(\sigma_x = \sigma_y\)</span>, that will do the trick: <span class="math notranslate nohighlight">\(\sigma\)</span>
+cancels out in the ratio. The definition for the <span class="math notranslate nohighlight">\(t\)</span>-distribution
+becomes:</p>
+<div class="math notranslate nohighlight">
+\[t = \frac{\langle x \rangle - \langle y \rangle}{S \sqrt{(1/N_x)+(1/N_y)}}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[S^2 = \frac{(N_x-1)s_x^2 + (N_y-1)s_y^2}{N_x +N_x -2}\]</div>
+<p>The variable <span class="math notranslate nohighlight">\(t\)</span> is distributed as a Student’s <span class="math notranslate nohighlight">\(t\)</span> with <span class="math notranslate nohighlight">\(N_x +N_x -2\)</span> d.o.f.
+With this variable we can now use the same testing procedure (double or
+single sided rejection regions) used in the case shown
+above in <a class="reference internal" href="#hypothesisTesting.html#two-gaussians-known-sigma-sec-knownsigma"><span class="xref myst">known <span class="math notranslate nohighlight">\(\sigma\)</span></span></a>
+substituting the c.d.f of the Gaussian with
+the c.d.f. of the Student’s t.</p>
+</section>
+<section id="f-test">
+<h3>F-test<a class="headerlink" href="#f-test" title="Link to this heading">#</a></h3>
+<p>The <span class="math notranslate nohighlight">\(F\)</span>-test is used to test whether the variances of two samples with
+size <span class="math notranslate nohighlight">\(n_{1}\)</span> and <span class="math notranslate nohighlight">\(n_{2}\)</span>, respectively, are compatible. Because the true
+variances are not known, the sample variances <span class="math notranslate nohighlight">\(V_{1}\)</span> and <span class="math notranslate nohighlight">\(V_{2}\)</span> are
+used to build the ratio <span class="math notranslate nohighlight">\(F = \frac{V_{1}}{V_{2}}\)</span>. Recalling the
+definition of the sample variance, we can write:</p>
+<div class="math notranslate nohighlight">
+\[F= \frac{V_{1}}{V_{2}}=\frac{\frac{1}{n_{1}-1}\sum_{i=1}^{n_{1}}(x_{1_{i}}-\bar{x}_{1})^{2}}{\frac{1}{n_{2}-1}\sum_{i=1}^{n_{2}}(x_{2_{i}}-\bar{x}_{2})^{2}}\]</div>
+<p>(by convention the bigger sample variance is at the numerator, such that
+<span class="math notranslate nohighlight">\(F \geq 1\)</span>). Intuitively the ratio will be close to 1 if the two
+variances are similar, while it will go to a large value if they are
+not. When you divide the variance by <span class="math notranslate nohighlight">\(\sigma^2\)</span> you obtain a random
+variable which is distributed as a <span class="math notranslate nohighlight">\(\chi^2\)</span> with <span class="math notranslate nohighlight">\(N-1\)</span> d.o.f. Given that
+the random variable <span class="math notranslate nohighlight">\(F\)</span> is the ratio of two such variables, the
+<span class="math notranslate nohighlight">\(\sigma^2\)</span> cancels and we are left with the ratio of two <span class="math notranslate nohighlight">\(\chi^2\)</span>
+distributions with <span class="math notranslate nohighlight">\(f_1 = N_1-1\)</span> d.o.f. for the numerator and
+<span class="math notranslate nohighlight">\(f_2=N_2-1\)</span> d.o.f. for the denominator.</p>
+<p>The variable <span class="math notranslate nohighlight">\(F\)</span> follows the <span class="math notranslate nohighlight">\(F\)</span>-distribution with <span class="math notranslate nohighlight">\(f_1\)</span> and <span class="math notranslate nohighlight">\(f_2\)</span>
+degrees of freedom: <span class="math notranslate nohighlight">\(F(f_{1},f_{2})\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[P(F) = \frac{\Gamma((f_1+f_2)/2)}{\Gamma(f_1/2)\Gamma(f_2/2)}\sqrt{f_1^{f_1} f_2^{f_2}}\frac{F^{f_1/2-1}}{(f_1+f_2F)^{(f_1+f_2)/2}}\]</div>
+<p>For large numbers, the variable</p>
+<div class="math notranslate nohighlight">
+\[Z= \frac{1}{2} \log{F}\]</div>
+<p>converges
+to a Gaussian distribution with mean <span class="math notranslate nohighlight">\(\frac{1}{2}(1/f_2-1/f_1)\)</span> and
+variance <span class="math notranslate nohighlight">\(\frac{1}{2}(1/f_2+1/f_1)\)</span>. In any case you can test the
+compatibility by using e.g. the FIXME  <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> function <code class="docutils literal notranslate"><span class="pre">TMath::fdistribution_pdf</span></code>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>Background model for the <span class="math notranslate nohighlight">\(H\to \gamma\gamma\)</span> search: The
+collected diphoton events are divided in several categories (based on
+resolution and S/B to optimize the analysis sensitivity). Once a model
+for the background is chosen (e.g. a polynomial) the number of d.o.f.
+for that model (e.g. the order of the polynomial) can be chosen using an
+F-test. The main idea is gradually increase the number of d.o.f. until
+you don’t see any decrease in the variance (see snapshot of the text
+here below).</p>
+</div>
+<figure class="align-center" id="fig-ftesthgg">
+<a class="reference internal image-reference" href="_images/FtestHgg.png"><img alt="_images/FtestHgg.png" src="_images/FtestHgg.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 32 </span><span class="caption-text">Example from the CMS Hgg analysis. (FIXME find published paper text)</span><a class="headerlink" href="#fig-ftesthgg" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="fig-hypo2">
+<a class="reference internal image-reference" href="_images/hypo2.png"><img alt="_images/hypo2.png" src="_images/hypo2.png" style="width: 800px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 33 </span><span class="caption-text">Summary of the hypothesis tests for the two-sample problem.</span><a class="headerlink" href="#fig-hypo2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="matched-and-correlated-samples">
+<h3>Matched and correlated samples<a class="headerlink" href="#matched-and-correlated-samples" title="Link to this heading">#</a></h3>
+<p>In the previous sections we’ve seen how to compare two samples under
+different hypothesis. The tests are more discriminating the smaller are
+their variances. Correlations between the two samples can be used to our
+advantage to reduce the variance. Take as test statistic:</p>
+<div class="math notranslate nohighlight">
+\[\sum_i (x_i-y_i)\]</div>
+<p>where each of the data point of the first sample is
+paired to a corresponding one in the second sample. The variance of this
+distribution is:</p>
+<div class="math notranslate nohighlight">
+\[V(x-y) = \sigma_x^2 + \sigma_y^2 - 2\rho \sigma_x \sigma_y\]</div>
+<p>Now, if the two samples are correlated (<span class="math notranslate nohighlight">\(\rho &gt; 0\)</span>) then the variance is reduced
+and will make the test more discriminating.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>A consumer magazine is testing a widget claimed to increase
+fuel economy. Here are the data on seven cars are reported in
+<a class="reference internal" href="#fig-cars"><span class="std std-numref">Fig. 34</span></a>. Is
+there evidence for any improvement?</p>
+<p>If you ignore the matching, the means are <span class="math notranslate nohighlight">\(38.6 \pm 3.0\)</span> and
+<span class="math notranslate nohighlight">\(35.6 \pm 2.3\)</span> for the samples with and without the widget. The
+improvement of 3 m.p.g. is within the statistical uncertainties. Now
+look at the differences. Their average is 3.0. The estimated standard
+deviation s is 3.6, so the error on the estimated average is
+<span class="math notranslate nohighlight">\(3.6/ \sqrt{7} = 1.3\)</span>, and t is <span class="math notranslate nohighlight">\(3.6/1.3 = 2.0\)</span>. This is significant at
+the 5% level using Student’s t (one-tailed test, 6 degrees of freedom,
+<span class="math notranslate nohighlight">\(t_{critic}= 1.943\)</span>).</p>
+</div>
+<figure class="align-center" id="fig-cars">
+<a class="reference internal image-reference" href="_images/cars.png"><img alt="_images/cars.png" src="_images/cars.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 34 </span><span class="caption-text">Data from seven cars.</span><a class="headerlink" href="#fig-cars" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="the-most-general-test">
+<h3>The most general test<a class="headerlink" href="#the-most-general-test" title="Link to this heading">#</a></h3>
+<p>As we already said the more precisely the test can be formulated, the
+more discriminant it will be. The most general two-sample test, makes no
+assumptions at all on the two distributions, it just asks whether the
+two are the same.</p>
+<p>You can apply an unbinned test like the the Kolmogorov-Smirnov (as
+explained in Sec. <a class="reference internal" href="#hypothesisTesting.html#unbinned-tests"><span class="xref myst">unbinned tests</span></a>
+by ordering the two samples and computing the
+maximal distance between the two e.c.d.f. Or you can approach the
+problem ordering together both samples and then apply a run-test. If the
+two samples are drawn from the same parent distribution there will be
+several very short runs; if on the other hand the two samples are from
+different parent distributions you will have long runs from both
+samples. This test can be tried only if he number of points in sample A
+is similar to the one in sample B.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>Two samples A and B from the same parent distribution will
+give something like: <span class="math notranslate nohighlight">\(AABBABABAABBAABABAABBBA\)</span>.
+Two samples from two narrow distributions with different means will give
+something like:
+<span class="math notranslate nohighlight">\(AAAAAAAAAABBBBBBBBBBBBB\)</span>.</p>
+</div>
+</section>
+</section>
+<section id="anova">
+<h2>ANOVA<a class="headerlink" href="#anova" title="Link to this heading">#</a></h2>
+<p>The analysis of variance (ANOVA) is a technique rarely used in high
+energy physics, but because of its use in natural sciences a brief
+introduction will be given.</p>
+<p>The idea is a generalization of the two sample problem: instead of two
+samples you are confronted with several. The obvious approach to compare
+the different samples in pairs doesn’t work. Suppose as an example that
+you have 15 samples and you have to decide if they are sampled from the
+same parent distribution (i.e. they are “compatible”). If you start
+comparing them in pairs you will end up with <span class="math notranslate nohighlight">\(\binom{15}{2}\)</span> = 105
+pairs. If you now set the significance at the 99% the probability to
+have all of them passing is <span class="math notranslate nohighlight">\((1-0.01)^{105}\)</span> = 0.348, i.e. the
+probability to make a type 1 error (reject the true hypothesis that they
+all come from the same parent distribution) is 1-0.348 = 0.652.<br />
+To expose the ANOVA method we take the simple case where all samples
+(“groups” as they are generally called in ANOVA) are Gaussian of the
+same unknown variance and we want to check if their means are compatible
+with the hypothesis of being all samples taken from the same parent
+distribution.<br />
+To fix the notation we set <span class="math notranslate nohighlight">\((\mu,\sigma)\)</span> the true mean and width of the
+parent distribution; <span class="math notranslate nohighlight">\(n\)</span> the number of groups <span class="math notranslate nohighlight">\(g\)</span> each with a number of
+events <span class="math notranslate nohighlight">\(N_g\)</span> and mean and variance <span class="math notranslate nohighlight">\((\bar{x}_g,V_g)\)</span> and true (unknown)
+sample mean <span class="math notranslate nohighlight">\(\mu_g\)</span>. The total number of events is <span class="math notranslate nohighlight">\(N\)</span> and the mean and
+variance of the sample made summing together all groups are
+<span class="math notranslate nohighlight">\((\bar{x},V)\)</span>.<br />
+The null hypothesis we want to test is <span class="math notranslate nohighlight">\(H_0\)</span> all groups are compatible
+(all <span class="math notranslate nohighlight">\(\mu_g\)</span> are the same and equal to <span class="math notranslate nohighlight">\(\mu\)</span>), the alternative
+hypothesis <span class="math notranslate nohighlight">\(H_1\)</span> is that there are differences.<br />
+To test if the groups are compatible means that we will have to say
+whether the variations we see from one group to the other are just
+statistical fluctuations or they are indeed the expression of coming
+from different parent distributions. Let’s define the “spread <em>between</em>
+the groups” as the spread of their means <span class="math notranslate nohighlight">\(\bar{x_g}\)</span> which follows the
+<span class="math notranslate nohighlight">\(\sigma\)</span> of the parent distribution. Clearly we don’t know <span class="math notranslate nohighlight">\(\sigma\)</span> but
+it can be estimated from the data itself looking at the variation
+“<em>within</em> the groups”. Stated in this way the problem can be solved
+using the <span class="math notranslate nohighlight">\(F-\)</span>test we ecountered in the previous section, by comparing
+the variances “between” and “within” the groups:</p>
+<div class="math notranslate nohighlight">
+\[F=\frac{V_b}{V_w} = \frac{between}{within}\]</div>
+<p>The numerator, the
+variance between the groups, can be taken as:</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{n-1} \sum_g N_g (\bar{x}_g - \bar{x})^2.\]</div>
+<p>There are <span class="math notranslate nohighlight">\(n-1\)</span>
+degrees of freedom because the mean is taken as <span class="math notranslate nohighlight">\(\bar{x}_g\)</span>. As for the
+denominator we can take the estimate of <span class="math notranslate nohighlight">\(\sigma\)</span> from the different
+groups:</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{N-n}\sum_g \sum_{i\in g} (x_i - \bar{x}_g)^2\]</div>
+<p>where
+<span class="math notranslate nohighlight">\(g\)</span> is the group and <span class="math notranslate nohighlight">\(i\)</span> is the element within that group.</p>
+<p>By taking the ratio of numerator and denominator we obtain an <span class="math notranslate nohighlight">\(F-\)</span>test.
+Now we just need to set the critical value for the desidered
+significance level and proceed as in the <span class="math notranslate nohighlight">\(F-\)</span> test. Note that the ANOVA
+method formally reduces to the Student’s <span class="math notranslate nohighlight">\(t\)</span> discussed
+in Sec. <a class="reference internal" href="#probabilityDistributions.html#student-s-t-distribution"><span class="xref myst">Student’s <span class="math notranslate nohighlight">\(t\)</span></span></a> when
+you have only two samples.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>As an example we take the shares of industrial, financial,
+and textile sectors for a particular day see
+{numref}(fig:anovaEx).
+Is there any difference in the behaviour of the different sectors ?</p>
+<p>We can compute:</p>
+<ul class="simple">
+<li><p>total average: <span class="math notranslate nohighlight">\(\bar{x}\)</span> = 0.48</p></li>
+<li><p>average for group 1: <span class="math notranslate nohighlight">\(\bar{x}_1\)</span> = 0.25; <span class="math notranslate nohighlight">\(\bar{x}_1 - \bar{x}\)</span> =0.23</p></li>
+<li><p>average for group 2: <span class="math notranslate nohighlight">\(\bar{x}_2\)</span> = 0.18; <span class="math notranslate nohighlight">\(\bar{x}_2 - \bar{x}\)</span> =0.30</p></li>
+<li><p>average for group 3: <span class="math notranslate nohighlight">\(\bar{x}_3\)</span> = 1.5; <span class="math notranslate nohighlight">\(\bar{x}_3 - \bar{x}\)</span> =1.02</p></li>
+</ul>
+<p>Computing the numerator we get
+<span class="math notranslate nohighlight">\(1/2 (12\times 0.23^2 + 11 \times 0.30^2 + 6\times 1.02^2) = 3.93\)</span>.
+Computing the variances within the groups, for the denominator we have
+<span class="math notranslate nohighlight">\((44.3 + 103.6 + 161.5) / 26 = 11.9\)</span>.</p>
+<p>The numerator (between) is even smaller than the denominator (within),
+so we can say that there is no evidence for different behaviour in the
+different sectors. If the numerator was larger than the denominator we
+should have used the critical values for the <span class="math notranslate nohighlight">\(F-\)</span>test.</p>
+</div>
+<figure class="align-center" id="fig-anovaex">
+<a class="reference internal image-reference" href="_images/anovaEx.png"><img alt="_images/anovaEx.png" src="_images/anovaEx.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 35 </span><span class="caption-text">The shares of industrial, financial, and textile sectors for a particular day see.</span><a class="headerlink" href="#fig-anovaex" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="resampling-techniques">
+<h2>Resampling techniques<a class="headerlink" href="#resampling-techniques" title="Link to this heading">#</a></h2>
+<p>Rasampling is a technique used for non-parametric estimation of the
+statistical uncertainty (bias and variance) of a statistical estimator.
+To get an idea of non-parametric statistics see e.g. wiki. In this
+section we will review the two most used: jackknife and bootstrap (see B. Efron and G. Gong in References).</p>
+<p>Non parametric techniques allow to <em>generalize the concept of
+uncertainty to any estimator</em>. Take as an example a random sample of
+size <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(\{ x_i\}\)</span> with <span class="math notranslate nohighlight">\(i=1,\ldots,n\)</span>, taken from an unknown parent
+distribution <span class="math notranslate nohighlight">\(F\)</span>. Typically you will characterize the sample by
+computing the estimated mean and its standard deviation:</p>
+<div class="math notranslate nohighlight">
+\[\bar{x} = \frac{\sum_i x_i}{n} \qquad; \qquad \hat{\sigma}=\left( \frac{1}{n-1} \sum_i (x_i - \bar{x})^2  \right)^{1/2}\]</div>
+<p>The issue with this expression for the estimated standard deviation is
+that it does not generalize to any other estimator but the mean. For
+instance there is no way to extend it to compute the the standard
+deviation of the median. The resampling techniques allow to make this
+generalization.</p>
+<section id="jackknife">
+<h3>Jackknife<a class="headerlink" href="#jackknife" title="Link to this heading">#</a></h3>
+<p>Let’s first introduce some notation. Let</p>
+<div class="math notranslate nohighlight">
+\[\bar{x}_{(i)} = \frac{n\bar{x} -x_i}{n-1} = \frac{1}{n-1}\sum_{j \neq i} x_j\]</div>
+<p>be the average of the dataset constructed by the initial dataset, but
+removing the i-th element (the new sample will have n-1 elements), also
+known as the “deleted average”. Let</p>
+<div class="math notranslate nohighlight">
+\[\bar{x}_{(\cdot)} = \sum_i \frac{\bar{x}_{(i)}}{n}\]</div>
+<p>be the average of
+the sample at hand, i.e. the average of the averages computed on the
+samples where we have removed the i-th element (the average of the
+deleted averages).</p>
+<p>The <strong>jackkinfe estimate of the standard error</strong> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[\bar{\sigma}_J = \left[\frac{n-1}{n} \sum_{i=1}^n (\bar{x}_{(i)} - \bar{x}_{(\cdot)})^2   \right]^{1/2}\]</div>
+<p>which is a different way of rewriting the standard deviation, i.e.</p>
+<div class="math notranslate nohighlight">
+\[\hat{\sigma} = \bar{\sigma}_J.\]</div>
+<p>The advantage of this expression is
+that it can trivially be generalized to any estimator <span class="math notranslate nohighlight">\(\hat{\theta}\)</span>
+function of the <span class="math notranslate nohighlight">\(\{x_i\}\)</span> dataset:
+<span class="math notranslate nohighlight">\(\hat{\theta} = \theta(x_1,\ldots,x_n)\)</span>. Just replace</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+        \bar{x}_{(i)}     &amp;\to&amp; \hat{\theta}_{(i)} = \hat{\theta}(x_1,\ldots,x_{i-1},x_{i+1},\ldots,x_n)\\
+        \bar{x}_{(\cdot)} &amp;\to&amp; \hat{\theta}_{(\cdot)} = \frac{\sum_i \hat{\theta}_{(i)}}{n}
+\end{aligned}
+\end{split}\]</div>
+<p>The jackknife in general perform less well than the bootstrap method
+that we will see in the next section, but it is often preferred because
+computationally less expensive.</p>
+</section>
+<section id="bootstrap">
+<h3>Bootstrap<a class="headerlink" href="#bootstrap" title="Link to this heading">#</a></h3>
+<p>The bootstrap represents a generalization of the jackknife. Again let’s
+start with some notation. Let <span class="math notranslate nohighlight">\(\hat{F}\)</span> be the empirical cumulative
+probability distribution function (ECDF) of the data:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{F} (x) = 
+\left\{
+\begin{array}{rcl}
+ 0           &amp; , &amp; x&lt;x_{1}\\
+ \frac{r}{n} &amp; , &amp; x_{r} \leq x &lt; x_{r+1}\\
+ 1           &amp; , &amp; x_{n} \leq x\\
+\end{array}
+\right.
+\end{split}\]</div>
+<p>and let’s define <span class="math notranslate nohighlight">\(\{x_i^*\} = \{x_1^*, \ldots x_n^*\}\)</span> a
+random sample taken from <span class="math notranslate nohighlight">\(\hat{F}\)</span>, i.e. the <span class="math notranslate nohighlight">\(x_i^*\)</span> are drawn
+independently with repetition from <span class="math notranslate nohighlight">\(\{x_i\} = \{x_1, \ldots x_n\}\)</span>.</p>
+<p>For each of these samples we can compute the average and the variance:</p>
+<div class="math notranslate nohighlight">
+\[\bar{x}^* = \frac{\sum_i x^*}{n} \qquad ; \qquad var_\cdot \bar{x}^* = \frac{1}{n^2} \sum_i (x_i - \bar{x})^2\]</div>
+<p>where the dot represents the sample at hand.</p>
+<p>As before with the jackknife this definition can be generalized to any
+estimator <span class="math notranslate nohighlight">\(\bar{x}_{(\cdot)} \to \hat{\theta}_{(i)}\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\hat{\sigma}_B = \left[ var_\cdot \bar{\theta}(x_1^*,\ldots,x_n^*)\right]^{1/2}\]</div>
+<p>and it can be verified that</p>
+<div class="math notranslate nohighlight">
+\[\sqrt{\frac{n}{n-1}}~\sigma_B = \hat{\sigma}.\]</div>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>LSAT = Law School Admission Test, GPA = undergraduate Grade Point Average</p>
+</aside>
+<p>To clarify the procedure let’s take the correlation coefficient <span class="math notranslate nohighlight">\(\rho\)</span> as an example
+for which we have the expression for its variance:
+<span class="math notranslate nohighlight">\(\hat{\sigma} = \frac{1-\hat{\rho}^2}{\sqrt{n-3}}\)</span>. In <a class="reference internal" href="#fig-databootstrap"><span class="std std-numref">Fig. 36</span></a>
+is reported a dataset made of 15 points,
+each representing the average LSAT and GPA scores for students
+coming from school <span class="math notranslate nohighlight">\(i\)</span> entering the american law school in 1973. This
+plot shows the correlation between the results of the admission exam
+LSAT and the average grades of undergraduate students from a school.
+From these data, we can estimate the sample correlation
+<span class="math notranslate nohighlight">\(\hat{\rho}=0.776\)</span> and its uncertainty <span class="math notranslate nohighlight">\(\hat{\sigma} = 0.115\)</span>.</p>
+<figure class="align-center" id="fig-databootstrap">
+<a class="reference internal image-reference" href="_images/dataBootstrap.png"><img alt="_images/dataBootstrap.png" src="_images/dataBootstrap.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 36 </span><span class="caption-text">Data taken from B. Efron and G. Gong in References.</span><a class="headerlink" href="#fig-databootstrap" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Now let’s compute the sample correlation and its uncertainty using the
+bootstrap method writing esplicitly the algorithm.</p>
+<ul class="simple">
+<li><p>Build the ECDF <span class="math notranslate nohighlight">\(\hat{F}\)</span> on the bivariate distribution from the
+dataset given above.</p></li>
+<li><p>Draw a “bootstrap sample” <span class="math notranslate nohighlight">\((x_1^*,\ldots,x_n^*)\)</span>, i.e. take <span class="math notranslate nohighlight">\(n\)</span>
+random draws with repetition from <span class="math notranslate nohighlight">\((x_1,\ldots,x_n)\)</span></p></li>
+<li><p>Compute the value of the statistics (in this case the correlation
+coefficient) from the bootstrapped sample
+<span class="math notranslate nohighlight">\(\hat{\rho}^* = \hat{\rho}(x_1^*,\ldots,x_n^*)\)</span></p></li>
+<li><p>Repeat steps 2) and 3) a large number of times <span class="math notranslate nohighlight">\(B\)</span> obtaining <span class="math notranslate nohighlight">\(B\)</span>
+estimations of the correlation coefficient:
+<span class="math notranslate nohighlight">\(\hat{\rho}^{*1}, \hat{\rho}^{*2},\ldots,\hat{\rho}^{*B}\)</span></p></li>
+<li><p>Finally compute
+<span class="math notranslate nohighlight">\(\hat{\sigma}_B = \left( \sum_{b=1}^B(\hat{\rho}^{*b} - \hat{\rho}^{*\cdot} )^2/(B-1)  \right)^{1/2}\)</span>;
+where <span class="math notranslate nohighlight">\(\hat{\rho}^{*\cdot} = \frac{\sum \hat{\rho}^{*b}}{B}\)</span></p></li>
+</ul>
+<p><a class="reference internal" href="#fig-bootstrap"><span class="std std-numref">Fig. 37</span></a> shows the ditribution of
+<span class="math notranslate nohighlight">\(\hat{\rho}^* - \hat{\rho}\)</span>, i.e. <span class="math notranslate nohighlight">\(\hat{\rho}^* -0.776\)</span> the residual
+between the bootstrapped estimations and the <span class="math notranslate nohighlight">\(\rho\)</span> computed on the
+dataset, using the esplicit formula. The plot has been obtained using
+<span class="math notranslate nohighlight">\(B = 1000\)</span>, i.e. computing
+<span class="math notranslate nohighlight">\(\hat{\rho}^{*1}, \hat{\rho}^{*2},\ldots,\hat{\rho}^{*1000}\)</span>. Using the
+algorithm above we obtained <span class="math notranslate nohighlight">\(\hat{\sigma}_B = 0.127\)</span> to be compared with
+the <span class="math notranslate nohighlight">\(\hat{\sigma} = 0.115\)</span>.</p>
+<figure class="align-center" id="fig-bootstrap">
+<a class="reference internal image-reference" href="_images/bootstrap.png"><img alt="_images/bootstrap.png" src="_images/bootstrap.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 37 </span><span class="caption-text">Histogram of
+<span class="math notranslate nohighlight">\(B=1000\)</span> bootstrap replication of <span class="math notranslate nohighlight">\(\hat{\rho}^*\)</span> for the law school
+data. The normal theory density curve is overlapped.</span><a class="headerlink" href="#fig-bootstrap" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Another application of the resampling techniques is the estimation of
+the bias (this is what the resampling was originally designed for). Let
+<span class="math notranslate nohighlight">\(\hat{\theta} = \theta(\hat{F})\)</span> and define the bias
+<span class="math notranslate nohighlight">\(\beta = E[\theta(\hat{F}) - \theta(F)]\)</span>, where F is the unknown parent
+distribution and <span class="math notranslate nohighlight">\(\hat{F}\)</span> is the sampled distribution. We can consider
+the bias just as another estimator and so we “bootstrap the bias” i.e.
+compute the bootstrap estimate of the bias.</p>
+<div class="math notranslate nohighlight">
+\[\hat{\beta}_B = \beta(\hat{F}) = E_*[\theta(\hat{F}^*) - \theta(\hat{F})]\]</div>
+<p>where <span class="math notranslate nohighlight">\(E_*\)</span> is the expectation value on the bootstrap sampling and
+<span class="math notranslate nohighlight">\(\hat{F}^*\)</span> is the ECDF of the bootstrapped sample.<br />
+<span class="math notranslate nohighlight">\(\beta_B\)</span> is computed with the same algorithm we used before to compute
+<span class="math notranslate nohighlight">\(\sigma_B\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\beta_B = \hat{\theta}^{*\cdot} - \hat{\theta} = \frac{1}{B}\sum_{b=1}^B (\hat{\theta}^{*\cdot} - \hat{\theta})\]</div>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>A common application of the resampling techniques is when
+you apply two different estimators of the same parameter to the dataset
+at hand and you ask yourself if the two estimates are compatible. We
+will follow an example from literature [&#64;jackknifeHgg].<br />
+The estimates of the best fit of the signal strength modifier of the
+Higgs decaying into two photons are: for the first method
+<span class="math notranslate nohighlight">\(0.54^{+0.31}_{-0.26}\)</span> for the second <span class="math notranslate nohighlight">\(0.96^{+0.37}_{-0.33}\)</span>.</p>
+<p><a class="reference internal" href="#fig-jackknifehgg2"><span class="std std-numref">Fig. 38</span></a> is
+the excerpt from the paper discussing the compatibility.</p>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/jackknifeHgg1.png"><img alt="_images/jackknifeHgg1.png" src="_images/jackknifeHgg1.png" style="width: 600px;" />
+</a>
+</figure>
+<figure class="align-center" id="fig-jackknifehgg2">
+<a class="reference internal image-reference" href="_images/jackknifeHgg2.png"><img alt="_images/jackknifeHgg2.png" src="_images/jackknifeHgg2.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 38 </span><span class="caption-text"><span class="math notranslate nohighlight">\(H\to\gamma\gamma\)</span> compatibility studies.</span><a class="headerlink" href="#fig-jackknifehgg2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="information-theory-to-quantify-the-compatibility-between-distributions">
+<h2>Information theory to quantify the compatibility between distributions<a class="headerlink" href="#information-theory-to-quantify-the-compatibility-between-distributions" title="Link to this heading">#</a></h2>
+<p>In several real life problems, you will need to assess the compatibility between two distributions in a phase space with a large number of dimensions. To do this you can use a few metrics, coming from Information Theory.</p>
+<section id="kullback-leibler-divergence">
+<h3>Kullback-Leibler divergence<a class="headerlink" href="#kullback-leibler-divergence" title="Link to this heading">#</a></h3>
+<p>The Kullback-Leibler (KL) divergence tells how one probability distribution P is different from a reference one Q:</p>
+<p>discrete case:
+<span class="math notranslate nohighlight">\( D_{KL}(P||Q) = \sum_{x\in X} P(x) ~\log \left( \frac{P(x)}{Q(x)} \right) \)</span></p>
+<p>continuous case:
+<span class="math notranslate nohighlight">\( D_{KL}(P||Q) = \int_{-\infty}^{\infty} p(x) ~\log \left( \frac{p(x)}{q(x)} \right)dx \)</span></p>
+<p>It’s defined as the expectation value of the logarithmic difference between P(x) and Q(x) (i.e. the relative entropy)
+Remember: entropy <span class="math notranslate nohighlight">\(H(X) = -\sum_{x\in X}p(x)~\log p(x)\)</span>.</p>
+<p>It can be viewed as a distance between the two distributions or the information gain when comparing two statistical models.</p>
+<p>NB: it’s not symmetric! <span class="math notranslate nohighlight">\( D_{KL}(Q||P) = - \sum_{x\in X} P(x) ~\log \left( \frac{Q(x)}{P(x)} \right)\)</span></p>
+<p>Link to the Neyman-Pearson lemma: the best test statistics to distinguish between two distributions is the ratio of their likelihoods. The KL divergence is the expected value of this statistic.</p>
+<p>The KL-divergence is non negative and zero when the two distributions have the same amount of information.
+(when <span class="math notranslate nohighlight">\( p(x) = 0 \)</span>, <span class="math notranslate nohighlight">\(D_{KL} = 0\)</span> because <span class="math notranslate nohighlight">\(\lim_{x\to 0^+} x\log(x) = 0\)</span>).</p>
+<p>You can find a basic numerical example here:
+<a class="reference external" href="https://en.wikipedia.org/wiki/Kullback-Leibler_divergence#Basic_example">https://en.wikipedia.org/wiki/Kullback-Leibler_divergence#Basic_example</a></p>
+</section>
+<section id="cross-entropy">
+<h3>Cross Entropy<a class="headerlink" href="#cross-entropy" title="Link to this heading">#</a></h3>
+<p>When working with the loss function of a ML algortithm you often encounter the Cross Entropy.
+The Cross Entropy is closely related to the KL divergence and it is defined as:</p>
+<p><span class="math notranslate nohighlight">\( H(P,Q) = H(P) - D_{KL}(P||Q)\)</span></p>
+<p>i.e. it’s the same as the KL divergence without the P log P term:</p>
+<p><span class="math notranslate nohighlight">\(H(P,Q) = - \sum_{x\in X} P(x) ~\log Q(x)\)</span></p>
+<p>Minimising the cross entropy wrt Q  = minimising the KL divergence.</p>
+</section>
+<section id="mutual-information">
+<h3>Mutual Information<a class="headerlink" href="#mutual-information" title="Link to this heading">#</a></h3>
+<p>The mutual information of two random variables X, Y can be seen as a “generalisation of the linear correlation coefficient”. It quantifies the difference between the joint distribution P(X,Y) and the product of the marginal distributions P(X)P(Y).</p>
+<p>Let (X,Y) two random variables:
+<span class="math notranslate nohighlight">\( MI(X,Y) = D_{KL}(P(X,Y) || P(X)P(Y)) \)</span></p>
+<p>MI is zero when the joint distribution coincides with the product of the marginal distributions (i.e. when X and Y are independent)</p>
+</section>
+<section id="wasserstein-distance-earth-mover-s-distance">
+<h3>Wasserstein distance / Earth mover’s distance<a class="headerlink" href="#wasserstein-distance-earth-mover-s-distance" title="Link to this heading">#</a></h3>
+<p>The p-Wasserstein distance is defined as:</p>
+<p><span class="math notranslate nohighlight">\( W_p(P,Q) = \left(\frac{1}{n} \sum_{i=1}^{n} | X_{(i)} - Y_{(i)}|^p \right)^{1/p} \)</span></p>
+<p>Intuitively: each distribution is viewed as a unit amount of earth, piled on, the metric is the minimum “cost” of turning one pile into the other, which is assumed to be the amount of earth that needs to be moved times the mean distance it has to be moved.</p>
+<p>A simple example comparing the KL-divergence with the Wasserstein distance can be found here:
+<a class="reference external" href="https://stats.stackexchange.com/questions/295617/what-is-the-advantages-of-wasserstein-metric-compared-to-kullback-leibler-diverg">https://stats.stackexchange.com/questions/295617/what-is-the-advantages-of-wasserstein-metric-compared-to-kullback-leibler-diverg</a></p>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>Most of the material of this section is taken from:</p>
+<ul class="simple">
+<li><p>G. Cowan, <span id="id1">[<a class="reference internal" href="bibliography.html#id12" title="Glen Cowan. Statistical Data Analysis. Oxford Science Publications, 1998. URL: https://global.oup.com/academic/product/statistical-data-analysis-9780198501558?cc=ch&amp;lang=en&amp;.">Cow98</a>]</span>, “Statistical Data Analysis”,Ch. 4</p></li>
+<li><p>R. Barlow, <span id="id2">[<a class="reference internal" href="bibliography.html#id8" title="Roger Barlow. Statistics - A guide to the use of statistical methods in the physical sciences. Wiley, 1989. URL: https://www.wiley.com/en-us/Statistics:+A+Guide+to+the+Use+of+Statistical+Methods+in+the+Physical+Sciences-p-9780471922957.">Bar89</a>]</span>, “ A guide to the use of statistical methods in the physical sciences”. Ch. 8</p></li>
+<li><p>W. Metzger, <span id="id3">[<a class="reference internal" href="bibliography.html#id3" title="Wes Metzger. Statistical Methods in Data Analysis. Katholieke Universiteit Nijmegen, Nijmegen, The Netherlands, 2002. URL: https://www.hef.ru.nl/~wes/stat_course/statist_2002.pdf.">Met02</a>]</span>, “Statistical Methods in Data Analysis”: Ch.10</p></li>
+<li><p>B. Efron and G. Gong, <span id="id4">[<a class="reference internal" href="bibliography.html#id13" title="Bradley Efron and Gail Gong. A leisurely look at the bootstrap, the jackknife, and cross-validation. The American Statistician, 37(1):36–48, 1983. URL: http://www.jstor.org/stable/2685844 (visited on 2023-02-16).">EG83</a>]</span>, “A Leisurely Look at the Bootstrap, the
+Jackknife, and Cross-Validation</p></li>
+<li><p>CMS collaboration, <span id="id5">[<a class="reference internal" href="bibliography.html#id14" title="CMS. Updated measurements of the Higgs boson at 125 GeV in the two photon decay channel. Technical Report, CERN, Geneva, 2013. URL: https://cds.cern.ch/record/1530524.">CMS13b</a>]</span>”Updated measurements of the Higgs boson at 125 GeV in the two photon decay channel”</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="interactive-nbs/chi2-1sigma.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">&lt;no title&gt;</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="confidenceIntervals.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Confidence Intervals</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypotheses-and-tests-statistics">Hypotheses and tests statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#significance-power-consistency-and-bias">Significance, power, consistency and bias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#is-there-a-signal">Is there a signal ?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neyman-pearson-lemma">Neyman Pearson Lemma</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goodness-of-fit">Goodness of Fit</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-chi-2-test">The <span class="math notranslate nohighlight">\(\chi^2\)</span>-Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#degrees-of-freedom-for-chi-2-test-on-fitted-data">Degrees of freedom for <span class="math notranslate nohighlight">\(\chi^2\)</span>-test on fitted data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unbinned-tests">Unbinned tests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-sample-problem">Two-sample problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-gaussians-known-sigma">Two Gaussians, known <span class="math notranslate nohighlight">\(\sigma\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-gaussians-unknown-sigma">Two Gaussians, unknown <span class="math notranslate nohighlight">\(\sigma\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-test">F-test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matched-and-correlated-samples">Matched and correlated samples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-most-general-test">The most general test</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anova">ANOVA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resampling-techniques">Resampling techniques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jackknife">Jackknife</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap">Bootstrap</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#information-theory-to-quantify-the-compatibility-between-distributions">Information theory to quantify the compatibility between distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kullback-leibler-divergence">Kullback-Leibler divergence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-entropy">Cross Entropy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mutual-information">Mutual Information</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wasserstein-distance-earth-mover-s-distance">Wasserstein distance / Earth mover’s distance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mauro Donega
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

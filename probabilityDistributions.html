@@ -1,0 +1,2212 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Probability Distributions &#8212; Statistical Methods and Data Analysis Techniques</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'probabilityDistributions';</script>
+    <link rel="icon" href="_static/favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Random Walk" href="interactive-nbs/randomWalk.html" />
+    <link rel="prev" title="Covariance and correlation" href="interactive-nbs/covarianceCorrelation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="preface.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Statistical Methods and Data Analysis Techniques - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Statistical Methods and Data Analysis Techniques - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="preface.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="probability.html">Probability</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/ConditionalProbability.html">Conditional Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/BayesTheorem.html">Bayes Theorem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/exponentialGrowth.html">Example of exponential growth</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/harmonicMean.html">Harmonic mean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/covarianceCorrelation.html">Covariance and correlation</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Probability Distributions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/randomWalk.html">Random Walk</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="errors.html">Measurements uncertainties</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/ErrorMatrix.html">Interactive Example - Error Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/slidingMean.html">Sliding Mean</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="monteCarlo.html">Monte Carlo methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/randomNumbers.html">Random numbers generators with “numpy”</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="inference.html">Statistical inference</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="likelihood.html">Parameter Estimation - Likelihood</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/StraighLineFit_LSM_vs_MLM.html">From LSM to MLM (…a.k.a. from Physics 1 laboratory to the Likelihood)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/MLMethod.html">Interactive Example - ML Method: Mean of a Gaussian</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="leastSquares.html">Parameter Estimation - Least Squares</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="hypothesisTesting.html">Hypotheses Testing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="confidenceIntervals.html">Confidence Intervals</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/Poisson_CI.html">Poisson Confidence Intervals</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/Gaussian_CI.html">Gaussian Confidence Intervals</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/LimitNearBoundariesBayesianApproach.html">Compute the bayesian upper limit for a gaussian near the physical boundary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/LimitNearBoundariesBayesianApproachPoisson.html">Compute the bayesian upper limit for a Poisson near the physical boundary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/FC_PoissonMeanWithKnownBackground.html">Feldman-Cousins confidence cnterval construction for a single Poisson, with known background and unknown signal</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/UpperLimit.html">Interactive Example - Upper Limit</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="mva.html">Multivariate Analysis Methods</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="appendix.html">Appendices</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="appendices/Histograms.html">Histograms</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="exercises.html">Exercises</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/Ex_Histograms.html">Exercises on Histograms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises/Ex_Probability.html">Exercises on Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises/Ex_ProbabilityDensityFunctions.html">Exercises on Probability Density Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises/Ex_Covariance.html">Exercises on Covariance and Correlation</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/mdonega/hep-datanalysis-jb/main?urlpath=tree/book/probabilityDistributions.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/probabilityDistributions.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Probability Distributions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-combinatorics">Basic combinatorics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factorial">Factorial</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permutations-with-repetitions">Permutations with repetitions:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permutations-without-repetitions">Permutations without repetitions:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combinations-without-repetitions">Combinations without repetitions:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combinations-with-repetitions">Combinations with repetitions:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-distributions">Discrete Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bernoulli-trials">Bernoulli trials</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial">Binomial</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-distribution">Multinomial Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poisson-distribution">Poisson Distribution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-distributions">Continuous Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-distribution">Uniform Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-or-normal-distribution">Gaussian or Normal Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-2-distribution"><span class="math notranslate nohighlight">\(\chi^2\)</span> Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-normal-distribution">Log-Normal Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exponential-distribution">Exponential Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gamma-distribution">Gamma Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#student-s-t-distribution">Student’s <span class="math notranslate nohighlight">\(t\)</span>-distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-distribution"><span class="math notranslate nohighlight">\(F\)</span>-distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weibull-distribution">Weibull Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cauchy-breit-wigner-distribution">Cauchy (Breit-Wigner) Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#landau-distribution">Landau Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crystal-ball">Crystal Ball</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-central-limit-theorem">The Central Limit Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="probability-distributions">
+<h1>Probability Distributions<a class="headerlink" href="#probability-distributions" title="Link to this heading">#</a></h1>
+<p>In this chapter, we will review key concepts in combinatorics and then introduce the most common probability distributions in physics, including discrete distributions (<strong>probability mass functions</strong>) and continuous distributions (<strong>probability density functions</strong>). We will conclude the chapter with one of the most important theorems in statistics: the Central Limit Theorem.</p>
+<section id="basic-combinatorics">
+<h2>Basic combinatorics<a class="headerlink" href="#basic-combinatorics" title="Link to this heading">#</a></h2>
+<p>Let’s start with some nomenclature and some basic results from combinatorics that will be needed for what follows.</p>
+<p>In this section we will be talking about sequences of objects: a distinction
+has to be made on whether we care or not about the order of the elements
+in a sequence. If we care about the order we talk about
+<strong>permutations</strong>, otherwise we talk about <strong>combinations</strong> (permutations
+are ordered combinations).</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>take the set of letters <span class="math notranslate nohighlight">\(\{abc\}\)</span>. The sequences <span class="math notranslate nohighlight">\(\{cab\}\)</span>
+and <span class="math notranslate nohighlight">\(\{bac\}\)</span> are considered equivalent combinations but distinct
+permutations.</p>
+</div>
+<section id="factorial">
+<h3>Factorial<a class="headerlink" href="#factorial" title="Link to this heading">#</a></h3>
+<p>The number of ways to order a set of n distinct objects is given by the factorial:</p>
+<p>n!=n×(n−1)×(n−2)×⋯×2×1</p>
+<p>This accounts for every possible arrangement (permutation) of the n objects.</p>
+<p>For large <span class="math notranslate nohighlight">\(n\)</span>, the <em>Stirling formula</em> can be used to approximate <span class="math notranslate nohighlight">\(n!\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+n! &amp; \approx &amp; \left(\frac{n}{e}\right)^n\sqrt{2\pi n}\\
+\ln n! &amp; \approx &amp;  (n+1/2)\ln n-n+ln\sqrt{2\pi}
+\end{split}\]</div>
+<p>The factorial <span class="math notranslate nohighlight">\(n!\)</span> can be extended for non-integer arguments <span class="math notranslate nohighlight">\(x\)</span> by the gamma function <span class="math notranslate nohighlight">\(\Gamma(x)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+x!&amp;=&amp;\int_0^\infty u^xe^{-u}du=\Gamma(x+1)\\
+\Gamma(x+1)&amp;=&amp;x\Gamma(x)
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="permutations-with-repetitions">
+<h3>Permutations with repetitions:<a class="headerlink" href="#permutations-with-repetitions" title="Link to this heading">#</a></h3>
+<p>pick r objects from a set of n and put them back each time. The number
+of permutations (ordered sequences) is:</p>
+<p><span class="math notranslate nohighlight">\(n^r\)</span></p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>A byte is a
+sequence of 8 bits (0/1): the number of permutations with repetitions is
+<span class="math notranslate nohighlight">\(2^8 = 256\)</span>. A lock with three digits (form 0 to 9) has <span class="math notranslate nohighlight">\(10^3\)</span>
+permutations.</p>
+</div>
+</section>
+<section id="permutations-without-repetitions">
+<h3>Permutations without repetitions:<a class="headerlink" href="#permutations-without-repetitions" title="Link to this heading">#</a></h3>
+<p>pick r objects from a set of n and don’t put them back. At each pick you
+will have one less object to choose from, so the number number of
+permutations is reduced with respect to <span class="math notranslate nohighlight">\(n^r\)</span> (permutations with
+repetitions). The number of permutations (ordered sequences) is:</p>
+<p><span class="math notranslate nohighlight">\(\frac{n!}{(n-r)!}\)</span></p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>take all permutations without
+repetitions of the 52 cards in the deck: 52! (first pick you choose
+among 52 cards, second pick among 51 etc…). Take all permutations of
+the first 4 picks in a deck of 52 cards:
+<span class="math notranslate nohighlight">\(52\cdot51\cdot50\cdot49 = 52!/ (52-4)!\)</span> (first you pick from 52, then
+from 51, then from 50, then form 49).</p>
+</div>
+</section>
+<section id="combinations-without-repetitions">
+<h3>Combinations without repetitions:<a class="headerlink" href="#combinations-without-repetitions" title="Link to this heading">#</a></h3>
+<p>pick r objects from a set of n and don’t put them back. At each pick you
+will have less objects to choose from as for permutations, but this time
+all sequences that differ only by their order are considered to be the
+same. The number of combinations (non-ordered sequences) is the number
+of permutations corrected by the factor that describes the number of
+ordered sequences (i.e. r!):</p>
+<p><span class="math notranslate nohighlight">\(\frac{n!}{(n-r)!}\frac{1}{r!} = \binom{n}{r}\)</span></p>
+<p>we read this “n pick r”.</p>
+<p>These numbers are the
+so-called binomial coefficients, which appear in the binomial theorem:</p>
+<p><span class="math notranslate nohighlight">\((p+q)^n=\sum_{r=0}^{n}{n\choose r}\, p^r\cdot q^{n-r}\)</span></p>
+<p>An interesting
+propertiy is that the number of combinations extracting r objects from n
+or (n-r) from n is the same.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>“lotto” (six-numbers lottery game): 6 numbers are extracted
+(without putting them back) from a set of 90. The order of the
+extraction is irrelevant. The probability to win (when all tickets are
+sold) is <span class="math notranslate nohighlight">\(1/\binom{90}{6}\)</span> =1.6 <span class="math notranslate nohighlight">\(10^{-9}\)</span>.</p>
+</div>
+</section>
+<section id="combinations-with-repetitions">
+<h3>Combinations with repetitions:<a class="headerlink" href="#combinations-with-repetitions" title="Link to this heading">#</a></h3>
+<p>pick r objects from a set of n and put them back. As in the case of
+permutations with repetition but this time without considering the
+order.</p>
+<p><span class="math notranslate nohighlight">\(\frac{(n+r-1)!}{(n-1)!r!} =  \binom{n+r-1}{r}\)</span></p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>take r-scoops from n-icecream flavours. You can take them all the same
+or repeat them as you like (assuming there is enough icecream…).</p>
+</div>
+<p>Derivation:</p>
+<p>Start from an example: take 3 objects from a set of 5 (a,b,c,d,e).
+Examples of those sequences are (a a b),<span class="math notranslate nohighlight">\(\;\)</span> (a b c),<span class="math notranslate nohighlight">\(\;\)</span> (c c c).
+Now think about the sequences as ordered boxes filled with the letters:
+one box for the a’s, one box for the b’s, etc… I will use a separator
+“<span class="math notranslate nohighlight">\(|\)</span>” instead of drawing boxes (this trick will become very important in
+a second):<br />
+(a a b) <span class="math notranslate nohighlight">\(\rightarrow\)</span> a a <span class="math notranslate nohighlight">\(|\)</span> b <span class="math notranslate nohighlight">\(|\)</span> <span class="math notranslate nohighlight">\(\;\)</span> <span class="math notranslate nohighlight">\(|\)</span> <span class="math notranslate nohighlight">\(\;\)</span> <span class="math notranslate nohighlight">\(|\)</span> (the last three
+are empty boxes corresponding to c, d, e)<br />
+(a b c) <span class="math notranslate nohighlight">\(\rightarrow\)</span> a <span class="math notranslate nohighlight">\(|\)</span> b <span class="math notranslate nohighlight">\(|\)</span> c <span class="math notranslate nohighlight">\(|\)</span> <span class="math notranslate nohighlight">\(\;\)</span> <span class="math notranslate nohighlight">\(|\)</span> <span class="math notranslate nohighlight">\(\;\)</span><br />
+(c c c) <span class="math notranslate nohighlight">\(\rightarrow\)</span> <span class="math notranslate nohighlight">\(\;\)</span><span class="math notranslate nohighlight">\(|\)</span> <span class="math notranslate nohighlight">\(\;\)</span> <span class="math notranslate nohighlight">\(|\)</span> c c c <span class="math notranslate nohighlight">\(|\)</span> <span class="math notranslate nohighlight">\(\;\)</span> <span class="math notranslate nohighlight">\(|\)</span><br />
+We can also drop the letters and replace them with “x”, the position of
+the box already tells which letter it correspnds to.<br />
+e.g.: aab <span class="math notranslate nohighlight">\(\rightarrow\)</span> a a <span class="math notranslate nohighlight">\(|\)</span> b <span class="math notranslate nohighlight">\(|\)</span> <span class="math notranslate nohighlight">\(\;\)</span> <span class="math notranslate nohighlight">\(|\)</span> <span class="math notranslate nohighlight">\(\;\)</span> <span class="math notranslate nohighlight">\(|\)</span> <span class="math notranslate nohighlight">\(\rightarrow\)</span> x
+x <span class="math notranslate nohighlight">\(|\)</span> x <span class="math notranslate nohighlight">\(|\)</span> <span class="math notranslate nohighlight">\(\;\)</span> <span class="math notranslate nohighlight">\(|\)</span> <span class="math notranslate nohighlight">\(\;\)</span> <span class="math notranslate nohighlight">\(|\)</span><br />
+Considering “x” and “<span class="math notranslate nohighlight">\(|\)</span>” as objects (here is where the trick becomes
+important), we can rephrase the problem as “in how many ways we can
+place r = 3 “x” and n = 5-1 = 4 “<span class="math notranslate nohighlight">\(|\)</span>”.
+This is the same as the combination w/o repetition “N pick R”, where in
+this case:</p>
+<p>N = n-1 + r (sum of all “<span class="math notranslate nohighlight">\(|\)</span>” and “x”)
+R = r
+<span class="math notranslate nohighlight">\(\;\;\;\;\;\Rightarrow\binom{n-1+r}{r}\)</span></p>
+<p><a class="reference external" href="https://www.mathsisfun.com/combinatorics/combinations-permutations.html">Derivation reference</a></p>
+</section>
+</section>
+<section id="discrete-distributions">
+<h2>Discrete Distributions<a class="headerlink" href="#discrete-distributions" title="Link to this heading">#</a></h2>
+<section id="bernoulli-trials">
+<h3>Bernoulli trials<a class="headerlink" href="#bernoulli-trials" title="Link to this heading">#</a></h3>
+<p>A <em>Bernoulli trial</em> is an experiment with only two outcomes
+(success/failure or 1/0) and where success will occur with constant
+probability <span class="math notranslate nohighlight">\(p\)</span> and failure with constant probability <span class="math notranslate nohighlight">\(q=1-p\)</span>. Examples
+are again the coin toss, or (from particle physics) the decay of <span class="math notranslate nohighlight">\(K^{+}\)</span> into either
+<span class="math notranslate nohighlight">\(\mu^{+}\nu\)</span> or any other channels. The random variable <span class="math notranslate nohighlight">\(r\in\{0,1\}\)</span> is
+the outcome of the experiment and its p.d.f. is:</p>
+<div class="math notranslate nohighlight">
+\[
+f(r;p) = p^r~q^{(1-r)}
+\]</div>
+<p>The p.d.f. is simply the probability for a single experiment to give success/failure.
+The first two moments of the distribution are:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mu = p \\
+V(r) = p(1-p)
+\end{split}\]</div>
+<p>The distribution for a given value of p is:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;font.size&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+        <span class="s2">&quot;lines.linewidth&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Bernoulli trials for a fixed p = 0.3 and 1000 trials</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Possible outcomes of a Bernoulli trial</span>
+<span class="n">outcomes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Failure (0)&quot;</span><span class="p">,</span> <span class="s2">&quot;Success (1)&quot;</span><span class="p">]</span>
+<span class="n">probabilities</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]</span>  <span class="c1"># Example for a fair coin flip</span>
+
+<span class="c1"># Create a bar plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Outcome&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Bernoulli Trial&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/768f792f8e1319cb8ee5479eeec4781f0d656da37a5a5fbace745592faf4cf02.png" src="_images/768f792f8e1319cb8ee5479eeec4781f0d656da37a5a5fbace745592faf4cf02.png" />
+</div>
+</div>
+</section>
+<section id="binomial">
+<h3>Binomial<a class="headerlink" href="#binomial" title="Link to this heading">#</a></h3>
+<p>Given <span class="math notranslate nohighlight">\(n\)</span> Bernoulli trials with a probability of success <span class="math notranslate nohighlight">\(p\)</span>, the
+binomial distribution gives the probability to observe <span class="math notranslate nohighlight">\(r\)</span> successes
+and, consequently, <span class="math notranslate nohighlight">\(n-r\)</span> failures independently of the order with which
+they appear. The random variable is again <span class="math notranslate nohighlight">\(r\)</span> but this time
+<span class="math notranslate nohighlight">\(r\in\{0,n\}\)</span>, i.e. the maximum is given when all trials give a success.
+The p.d.f. is:</p>
+<div class="math notranslate nohighlight" id="equation-binomial">
+<span class="eqno">(2)<a class="headerlink" href="#equation-binomial" title="Link to this equation">#</a></span>\[P(r;n,p)={n\choose r}\, p^r(1-p)^{n-r}.\]</div>
+<p>Eq.<a class="reference internal" href="#equation-binomial">(2)</a> can be motivated in the following way: the probability that we get a
+positive outcome in the first <span class="math notranslate nohighlight">\(r\)</span> attempts and negative outcome in the
+last <span class="math notranslate nohighlight">\(n-r\)</span> attempts, is given by <span class="math notranslate nohighlight">\(p^{r} \cdot (1-p)^{n-r}\)</span>; but this
+sequential arrangement is only one of a total of <span class="math notranslate nohighlight">\({n \choose r}\)</span>
+possible arrangements. The distribution for different values of the
+parameters is plotted below.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The binomial distribution for a fixed p=0.4 and different values of n</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">n</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">repetitions</span> <span class="o">=</span> <span class="mi">10000</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">N</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">repetitions</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="c1"># -1, N + 1)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;n = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;P(x=r)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/8f6df76ab63430be12fb5539d7cbe4a929654eaa5be83a907ab2548892829fc1.png" src="_images/8f6df76ab63430be12fb5539d7cbe4a929654eaa5be83a907ab2548892829fc1.png" />
+</div>
+</div>
+<p>The important properties of the binomial distribution are:</p>
+<ul class="simple">
+<li><p>It is normalized to 1, i.e. <span class="math notranslate nohighlight">\(\sum_{r=0}^n P(r)=1.\)</span></p></li>
+<li><p>The mean of <span class="math notranslate nohighlight">\(r\)</span> is <span class="math notranslate nohighlight">\(&lt;r&gt;=\sum_{r=0}^n r\cdot P(r)=np.\)</span></p></li>
+<li><p>The variance of <span class="math notranslate nohighlight">\(r\)</span> is <span class="math notranslate nohighlight">\(V(r)=np(1-p).\)</span></p></li>
+</ul>
+<p>The binomial distribution (like several others we will encounter) has
+the <strong>reproductive property</strong>:</p>
+<p>if <span class="math notranslate nohighlight">\(X\)</span> is binomially distributed as
+<span class="math notranslate nohighlight">\(P(X;n,p)\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> is binomially distributed (with the same probability
+<span class="math notranslate nohighlight">\(p\)</span>) as <span class="math notranslate nohighlight">\(P(Y;m,p)\)</span>, then the sum is binomially distributed as
+<span class="math notranslate nohighlight">\(P(X+Y; n+m, p)\)</span>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>What is the probability to get out of 10 coin tosses 3 times a “head”? Solution:
+<span class="math notranslate nohighlight">\(P(3; 10, 0.5)={10 \choose 3}\,0.5^3\cdot (1-0.5)^{10-3}=\frac{10!}{3!7!}0.5^3\cdot 0.5^7=0.12\)</span></p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>A detector with 4 layers has an efficiency per layer to
+create a hit from a traversing particle of 99%.</p>
+<p>What is the probability to reconstruct a tracklet with 2 or
+3 or 4 hits ? and what is the probability to reconstruct a tracklet with at least 2 hits ?</p>
+<p>P(r = 2; n = 4, p=0.99) = 0.00 (0.0006)</p>
+<p>P(r = 3; n = 4, p=0.99) = 0.038</p>
+<p>P(r = 4; n = 4, p=0.99) = 0.96</p>
+<p>P(r ≥ 2; n = 4, p=0.99) = sum of the above &gt; 99%</p>
+</div>
+</section>
+<section id="multinomial-distribution">
+<h3>Multinomial Distribution<a class="headerlink" href="#multinomial-distribution" title="Link to this heading">#</a></h3>
+<p>The precedent considerations can directly be generalized in this way: assume we have <span class="math notranslate nohighlight">\(n\)</span> objects of <span class="math notranslate nohighlight">\(k\)</span> different
+types, and <span class="math notranslate nohighlight">\(r_{i}\)</span> is the number of objects of type <span class="math notranslate nohighlight">\(i\)</span>. The number of
+distinguishable arrangements is then given by
+<span class="math notranslate nohighlight">\(\frac{n!}{r_1!r_2!\cdots r_k!}\)</span>.
+If we now choose randomly</p>
+<div class="math notranslate nohighlight">
+\[n = r_1 + r_2 + ... + r_k\]</div>
+<p>objects (putting them back every time), then
+the probability of getting an arrangement of <span class="math notranslate nohighlight">\(r_{1}\)</span> objects of type
+<span class="math notranslate nohighlight">\(1\)</span>, <span class="math notranslate nohighlight">\(r_{2}\)</span> objects of type <span class="math notranslate nohighlight">\(2\)</span>, etc… is given by
+<span class="math notranslate nohighlight">\(p_1^{r_1}\cdot p_2^{r_2}\cdots p_k^{r_k}\)</span>. The overall probability is
+therefore simply the probability of our arrangement, multiplied with the
+number of possible distinguishable arrangements:</p>
+<div class="math notranslate nohighlight">
+\[P(r_1,..,r_k;p_1,p_k)=\left(\frac{n!}{r_1!r_2!r_3!\cdots r_k!}\right)p_1^{r_1}\cdot p_2^{r_2}\cdots p_k^{r_k}.\]</div>
+<p>This distribution is called the multinomial distribution and it is what
+describes the probability to have <span class="math notranslate nohighlight">\(r_i\)</span> events in bin i of a histogram
+with <span class="math notranslate nohighlight">\(n\)</span> entries. The corresponding properties are:</p>
+<div class="math notranslate nohighlight">
+\[&lt;r_i&gt;=np_i \qquad \textrm{and} \qquad \; V(r_i)=np_i(1-p_i).\]</div>
+<p>You can also compute the covariance among the bins of a histogram:</p>
+<div class="math notranslate nohighlight">
+\[\mbox{cov}(r_i, r_j) = -n p_i p_j\]</div>
+<p>and the correlation coefficient:</p>
+<div class="math notranslate nohighlight">
+\[\rho_{ij} = \frac{\mbox{cov}(r_i,r_j)}{\sigma_i \sigma_j} = -\sqrt{\frac{p_i}{1-p_i}\frac{p_j}{1-p_j}}\]</div>
+<p>The correlation among bins comes from the fact that the total number of entries <span class="math notranslate nohighlight">\(n = r_1+\ldots+r_k\)</span> is fixed, i.e. <span class="math notranslate nohighlight">\(r_i = n - r_1 - \ldots - r_{i-1} - r_{i+1} -\ldots - r_k .\)</span></p>
+<p>If n is not fixed, i.e. n is another random variable, the bin entries are
+uncorrelated and instead of having a multinomial we will have a Poisson
+for each bin (see also <a class="reference internal" href="#./likelihood.html#sec:EMLF"><span class="xref myst">extended maximum likelihood fit</span></a>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Define parameters</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># Total number of trials</span>
+<span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">]</span>  <span class="c1"># Given probability distribution</span>
+
+<span class="c1"># Generate a random sample from a multinomial distribution</span>
+<span class="n">observed_counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multinomial</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+
+<span class="c1"># Compute expected counts</span>
+<span class="n">expected_counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="n">n</span>
+
+<span class="c1"># Compute error bars for observed counts (using Poisson statistics)</span>
+<span class="n">errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">observed_counts</span><span class="p">)</span>  <span class="c1"># Poisson uncertainty ~ sqrt(N)</span>
+
+<span class="c1"># Labels for bins</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Bin 1&quot;</span><span class="p">,</span> <span class="s2">&quot;Bin 2&quot;</span><span class="p">,</span> <span class="s2">&quot;Bin 3&quot;</span><span class="p">,</span> <span class="s2">&quot;Bin 4&quot;</span><span class="p">,</span> <span class="s2">&quot;Bin 5&quot;</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span>
+
+<span class="c1"># Plot expected counts as blue bars</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">expected_counts</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Expected&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+<span class="c1"># Plot observed counts as black points with error bars</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">observed_counts</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Observed&quot;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Formatting</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Counts&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Multinomial Distribution&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Expected: &quot;</span><span class="p">,</span> <span class="n">expected_counts</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Observed: &quot;</span><span class="p">,</span> <span class="n">observed_counts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/12980efa5ae33bf71218faa05f354eff5596dbd1f97ac5fc1c7f22d6969805e5.png" src="_images/12980efa5ae33bf71218faa05f354eff5596dbd1f97ac5fc1c7f22d6969805e5.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Expected:  [10. 20. 50. 10. 10.]
+Observed:  [12 19 53  6 10]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="poisson-distribution">
+<h3>Poisson Distribution<a class="headerlink" href="#poisson-distribution" title="Link to this heading">#</a></h3>
+<p>The Poisson p.d.f. applies to the situations where we detect events, but
+do not know the total number of trials. An example is a radioactive
+source where we detect the decays but do not detect the non-decays.<br />
+The distribution can be obtained as a limit of the binomial: let
+<span class="math notranslate nohighlight">\(\lambda\)</span> be the probability to observe a radioactive decay in a period
+<span class="math notranslate nohighlight">\(T\)</span> of time. Now divide the period <span class="math notranslate nohighlight">\(T\)</span> in <span class="math notranslate nohighlight">\(n\)</span> time intervals
+<span class="math notranslate nohighlight">\(\Delta T  = T/n\)</span> small enough that the probability to observe two
+decays in an interval is negligible. The probability to observe a decay
+in <span class="math notranslate nohighlight">\(\Delta T\)</span> is then <span class="math notranslate nohighlight">\(\lambda / n\)</span>, while the probability to observe
+<span class="math notranslate nohighlight">\(r\)</span> decays in the period <span class="math notranslate nohighlight">\(T\)</span> is given by the binomial probability to
+observe <span class="math notranslate nohighlight">\(r\)</span> events in <span class="math notranslate nohighlight">\(n\)</span> trials each of which has a probability
+<span class="math notranslate nohighlight">\(\lambda / n\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[P\left(r; n,\frac{\lambda}{n} \right) = \frac{n!}{(n-r)!}\frac{1}{r!} \left( \frac{\lambda}{n}\right)^r \left( 1- \frac{\lambda}{n}  \right) ^{n-r} \label{eq:bin}\]</div>
+<p>Under the assumption that <span class="math notranslate nohighlight">\(n &gt;&gt; r\)</span> then:</p>
+<div class="math notranslate nohighlight">
+\[\frac{n!}{(n-r)!} = n(n-1)(n-2)\dots(n-r+1) \sim n^r\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\left( 1- \frac{\lambda}{n}  \right) ^{n-r} \sim \left( 1- \frac{\lambda}{n}  \right) ^{n} \to e^{-\lambda} \qquad \textrm{for} \qquad n \to \infty\]</div>
+<p>we obtain the Poisson p.d.f:</p>
+<div class="math notranslate nohighlight">
+\[P(r;\lambda) = \frac{\lambda^r e^{-\lambda}}{r!}.\]</div>
+<p>The Poisson distribution can so be seen as the limit of the binomial
+distribution when the number <span class="math notranslate nohighlight">\(n\)</span> of trials becomes very large and the
+probability <span class="math notranslate nohighlight">\(p\)</span> for a single event becomes very small, while the product
+<span class="math notranslate nohighlight">\(pn = \lambda\)</span> remains a (finite) constant. It gives the probability of
+getting <span class="math notranslate nohighlight">\(r\)</span> events if the expected number (mean) is <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+<p>Properties of the Poisson distribution:</p>
+<ul class="simple">
+<li><p>it is normalized to 1:
+<span class="math notranslate nohighlight">\(\sum_{r=0}^{\infty}P(r)=e^{-\lambda}\sum_{r=0}^{\infty}\frac{\lambda^r}{r!}=e^{-\lambda}e^{+\lambda}=1\)</span></p></li>
+<li><p>the mean <span class="math notranslate nohighlight">\(&lt;r&gt;\)</span> is <span class="math notranslate nohighlight">\(\lambda\)</span>:
+<span class="math notranslate nohighlight">\(&lt;r&gt;=\sum_{r=0}^{\infty}r\cdot \frac{e^{-\lambda}\lambda^r}{r!}=\lambda\)</span></p></li>
+<li><p>the variance is <span class="math notranslate nohighlight">\(V(r)=\lambda\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(r+s;\lambda_r, \lambda_s) = \frac{(\lambda_r+\lambda_s)^{(r+s)} e^{-(\lambda_r+\lambda_s)}}{(r+s)!}\)</span>:
+the p.d.f. of the sum of two Poisson distributed random variables is
+also Poisson with <span class="math notranslate nohighlight">\(\lambda\)</span> equal to the sum of the <span class="math notranslate nohighlight">\(\lambda\)</span>’s of
+the individual Poissons</p></li>
+</ul>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>This example is mentioned for the first time in the book from L.
+von Bortkiewicz in the year 1898: “Das Gesetz der kleinen Zahlen.”</p>
+</aside>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>An historical example is the number of deadly horse
+accidents in the Prussian army. The fatal incidents were registered over
+twenty years in ten different cavalry corps. There was a total of 122
+fatal incidents, and therefore the expectation value per corps per year
+is given by <span class="math notranslate nohighlight">\(\lambda = 122/200 =0.61\)</span>. The probability that no soldier
+is killed per year and corps is
+<span class="math notranslate nohighlight">\(P(0;0.61) = e^{-0.61} \cdot 0.61^{0} / 0! = 0.5434\)</span>. To get the total
+events (of no incidents) in one year and per corps, we have to multiply
+with the number of observed cases (here 200), which yields
+<span class="math notranslate nohighlight">\(200 \cdot 0.5434 = 108.7\)</span>. The total statistics of the Prussian cavalry
+is summarized in the following table in agreement with the Poisson expectation:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Fatal incidents per corps and year</p></th>
+<th class="head"><p>Reported incidents</p></th>
+<th class="head"><p>Poisson distribution</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>109</p></td>
+<td><p>108.7</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>65</p></td>
+<td><p>66.3</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>22</p></td>
+<td><p>20.2</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>3</p></td>
+<td><p>4.1</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>1</p></td>
+<td><p>0.6</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The Poisson distribution is very often used in counting experiments:</p>
+<ul class="simple">
+<li><p>number of particles which are registered by a detector in the time
+interval <span class="math notranslate nohighlight">\(t\)</span>, if the flux <span class="math notranslate nohighlight">\(\Phi\)</span> and the efficiency of the detector
+are independent of time and the dead time of the detector <span class="math notranslate nohighlight">\(\tau\)</span> is
+sufficiently small, such that <span class="math notranslate nohighlight">\(\phi \tau \ll 1\)</span></p></li>
+<li><p>number of interactions caused by an intense beam of particles which
+travel through a thin foil</p></li>
+<li><p>number of entries in a histogram, if the data are taken during a
+fixed time interval</p></li>
+<li><p>number of flat tires when traveling a certain distance, if the
+expectation value flats / distance is constant</p></li>
+</ul>
+<p>Some counter-examples, in which the Poisson distribution <em>cannot</em> be
+used:</p>
+<ul class="simple">
+<li><p>the decay of a small amount of radioactive material in a certain
+time interval, if this interval is comparable to the lifetime</p></li>
+<li><p>the number of interactions of a beam of only a few particles which
+pass through a thick foil</p></li>
+</ul>
+<p>In both cases the event rate is not constant (in the first it
+decreases with time, in the second with distance) and therefore the
+Poisson distribution cannot be applied.</p>
+<p>The Poisson p.d.f. requires that the events be independent. Consider the
+case of a counter with a dead time of 1 <span class="math notranslate nohighlight">\(\mu sec\)</span>. This means that if a
+second particle passes through the counter within 1 <span class="math notranslate nohighlight">\(\mu sec\)</span> after one
+which was recorded, the counter is incapable of recording the second
+particle. Thus the detection of a particle is not independent of the
+detection of other particles. If the particle flux is low, the chance of
+a second particle within the dead time is so small that it can be
+neglected. However, if the flux is high it cannot be. No matter how high
+the flux, the counter cannot count more than <span class="math notranslate nohighlight">\(10^6\)</span> particles per
+second. In high fluxes, the number of particles detected in some time
+interval will not be Poisson distributed.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># poisson distribution for different values of lambda</span>
+
+<span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">repetitions</span> <span class="o">=</span> <span class="mi">10000</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">l_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="n">l_</span><span class="p">,</span> <span class="n">repetitions</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">samples</span><span class="p">))</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;$\lambda$ = </span><span class="si">{</span><span class="n">l_</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;P(x=r)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/14371ea62d3c5a5d8021a79d780d035761befc5481a085adba1c785e09e5971a.png" src="_images/14371ea62d3c5a5d8021a79d780d035761befc5481a085adba1c785e09e5971a.png" />
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>Example of Higgs boson production at the LHC (proton proton collisions):</p>
+<p>Remeber the number of expected events is given by the product of the production cross section times the integrated lumiosity: <span class="math notranslate nohighlight">\(N = \sigma \cdot L\)</span>.</p>
+<p>The probability to produce a Higgs boson following the frequentist definition is:
+<span class="math notranslate nohighlight">\(p(pp\to H) = \frac{L\sigma(pp\to Higgs)A\epsilon}{L\sigma(pp)}\)</span></p>
+<p>where A and <span class="math notranslate nohighlight">\(\epsilon\)</span> are respectively the acceptance and the efficiency of the analysis.</p>
+<p>The Binomial probability to observe <span class="math notranslate nohighlight">\(n_H^{obs}\)</span> events given N collisions and the probability to produce one Higgs boson given above is:
+<span class="math notranslate nohighlight">\(P(n_H^{obs}) = \binom{N}{n_H^{obs}} p^{n_H^{obs}} (1-p)^{N-n_H^{obs}}\)</span></p>
+<p>Because N is large and p is small we define:
+<span class="math notranslate nohighlight">\(\lambda = N\cdot p = \sigma(pp) \cdot L \cdot \frac{L\sigma(pp\to Higgs)A\epsilon}{L\sigma(pp)} = n_H^{exp}\)</span></p>
+<p>and approximate the Binomial with a Poisson:
+<span class="math notranslate nohighlight">\(Poisson(n_H^{obs}, \lambda) = \frac{e^{-\lambda}\lambda^{n_H^{obs}}}{n_H^{obs}!} \)</span></p>
+</div>
+</section>
+</section>
+<section id="continuous-distributions">
+<h2>Continuous Distributions<a class="headerlink" href="#continuous-distributions" title="Link to this heading">#</a></h2>
+<section id="uniform-distribution">
+<h3>Uniform Distribution<a class="headerlink" href="#uniform-distribution" title="Link to this heading">#</a></h3>
+<p>The probability density function of the uniform distribution in the
+interval <span class="math notranslate nohighlight">\([a,b]\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(x)= 
+\begin{cases} 
+\frac{1}{b-a} \quad &amp;\text{if } a \le x \le b \\
+                                0 &amp;\text{else}.
+\end{cases}
+\end{split}\]</div>
+<p>The expectation value and the variance are given by</p>
+<p><span class="math notranslate nohighlight">\( &lt;x&gt; = \int_a^b\frac{x}{b-a}dx=\frac{1}{2}(a+b) \)</span></p>
+<p><span class="math notranslate nohighlight">\( \mbox{Var}(x) = \frac{1}{12}(b-a)^2 \)</span></p>
+<p>(This is the source of the <span class="math notranslate nohighlight">\(\sqrt{12}\)</span> when reporting the resolution of a binary detector as the standard deviation of a flat distribution.)</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>Consider a detector built as a single strip of silicon with
+a width of 1mm. If a charged particle hits it, the detector reads 1
+otherwise zero (binary readout). What is the spacial resolution of the
+detector? Estimating the resolution as the root square of the variance of the corresponding
+uniform distribution, we get <span class="math notranslate nohighlight">\(\sim 290\mu m\)</span>.</p>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">uniform</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">)]</span>
+<span class="n">size</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">limits</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">axf</span><span class="p">,</span> <span class="n">axF</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">12</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ab</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">ab</span>
+    <span class="n">frozen</span> <span class="o">=</span> <span class="n">uniform</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">fx</span> <span class="o">=</span> <span class="n">frozen</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">Fx</span> <span class="o">=</span> <span class="n">frozen</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;a=</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">, b=</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Fx</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;a=</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">, b=</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;F(x)&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/ae721618c4a0297bd04fae13bb8029ff7c18b291777ee2044efd355b71794c97.png" src="_images/ae721618c4a0297bd04fae13bb8029ff7c18b291777ee2044efd355b71794c97.png" />
+</div>
+</div>
+</section>
+<section id="gaussian-or-normal-distribution">
+<h3>Gaussian or Normal Distribution<a class="headerlink" href="#gaussian-or-normal-distribution" title="Link to this heading">#</a></h3>
+<p>The Gaussian or normal distribution is probably the most important and useful distribution we know.
+For example it is used to describe your measurements when they are affected by a large number of additive ‘noise’ sources (see CLT later).</p>
+<p>The probability density function is</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>C.F. Gauss did not discovery it all alone. Independently, Laplace
+and de Moivre knew about this distribution.</p>
+</aside>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>A legend says that Gauss did describe the size of bread loaves in
+the city of Königsberg with the normal distribution.</p>
+</aside>
+<div class="math notranslate nohighlight">
+\[
+f(x;\mu,\sigma)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}.
+\]</div>
+<p>The Gaussian distribution is described by two parameters: the mean value
+<span class="math notranslate nohighlight">\(\mu\)</span> and the variance <span class="math notranslate nohighlight">\(\sigma^{2}\)</span> or the standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>.
+By substituting <span class="math notranslate nohighlight">\(z = (x-\mu) / \sigma\)</span> we obtain the so-called normal or
+standardized Gaussian distribution:</p>
+<div class="math notranslate nohighlight">
+\[
+N(0,1)=\frac{1}{\sqrt{2\pi}}e^{-z^2/2}.
+\]</div>
+<p>It has an mean of zero and standard deviation 1.</p>
+<p>Properties of the normal distribution are:</p>
+<ul class="simple">
+<li><p>it is normalized to 1: <span class="math notranslate nohighlight">\(\int_{-\infty}^{+\infty}P(x;\mu,\sigma)dx=1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span> is the first moment of the distribution:
+<span class="math notranslate nohighlight">\(\int_{-\infty}^{+\infty}xP(x;\mu,\sigma)dx=\mu\)</span></p></li>
+<li><p>being a symmetric distribution, <span class="math notranslate nohighlight">\(\mu\)</span> is also its mode and median</p></li>
+<li><p>its second central moment is <span class="math notranslate nohighlight">\(\sigma^2\)</span>:
+<span class="math notranslate nohighlight">\(\int_{-\infty}^{+\infty}(x-\mu)^2P(x;\mu,\sigma)dx=\sigma^2\)</span></p></li>
+</ul>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are two independent r.v.’s distributed as
+<span class="math notranslate nohighlight">\(f(x;\mu_x,\sigma_x)\)</span> and <span class="math notranslate nohighlight">\(f(y;\mu_y,\sigma_y)\)</span> then Z = X + Y is
+distributed as <span class="math notranslate nohighlight">\(f(z;\mu_z,\sigma_z)\)</span> with <span class="math notranslate nohighlight">\(\mu_z = \mu_x+\mu_y\)</span> and
+<span class="math notranslate nohighlight">\(\sigma_z^2 = \sigma_x^2 + \sigma_y^2\)</span>.</p>
+<p>If the two r.v. are not independent you need to add to the sum of variances the term <span class="math notranslate nohighlight">\(\sigma_z^2 = \sigma_x^2 + \sigma_y^2 + cov(X,Y)\)</span>.</p>
+<p>Careful: here you are summing two random variables ! This means that you are summing one sample from one gaussian to one sample from the second gaussian. You are not summing two gaussian pdfs ! <span class="math notranslate nohighlight">\(f(x) = f_1 G(x | \mu_1, \sigma_1) + (1-f_1)G(x | \mu_2, \sigma_2)\)</span>. This is known as a “gaussian mixture model” and in general it is not a gaussian.</p>
+<p>Some useful integrals, which are often used when working with the
+Gaussian function:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\int_{-\infty}^{+\infty}e^{-ax^2}dx &amp; = &amp; \sqrt{\pi/a}\\
+\int_{0}^{+\infty}xe^{-ax^2}dx &amp; = &amp; \frac{1}{2a}\\
+\int_{-\infty}^{+\infty}x^2e^{-ax^2}dx &amp; = &amp; \frac{1}{2a}\sqrt{\pi/a}\\
+\int_{0}^{+\infty}x^{2n+1}e^{-ax^2}dx &amp; = &amp; \frac{n!}{2a^{n+1}}\\
+\int_{-\infty}^{+\infty}x^{2n+1}e^{-ax^2}dx &amp; = &amp;0, \, \mbox{for all odd values of $n$} \\
+\end{aligned}
+\end{split}\]</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)]</span>
+<span class="n">size</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">limits</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">axf</span><span class="p">,</span> <span class="n">axF</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">12</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">musigma</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+    <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">musigma</span>
+    <span class="n">frozen</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">fx</span> <span class="o">=</span> <span class="n">frozen</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">Fx</span> <span class="o">=</span> <span class="n">frozen</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$\mu$=</span><span class="si">{</span><span class="n">mu</span><span class="si">}</span><span class="s2">, $\sigma$=</span><span class="si">{</span><span class="n">sigma</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Fx</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$\mu$=</span><span class="si">{</span><span class="n">mu</span><span class="si">}</span><span class="s2">, $\sigma$=</span><span class="si">{</span><span class="n">sigma</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;F(x)&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/4d3454bb9bf5e4decba27f372a1e2a5621d9b46f3df984fc028280b6652a42ec.png" src="_images/4d3454bb9bf5e4decba27f372a1e2a5621d9b46f3df984fc028280b6652a42ec.png" />
+</div>
+</div>
+<p>Here are some numbers for the integrated Gaussian distribution:</p>
+<ul class="simple">
+<li><p>68.27% of the area lies within <span class="math notranslate nohighlight">\(\pm\sigma\)</span> around the mean <span class="math notranslate nohighlight">\(\mu\)</span></p></li>
+<li><p>95.45% lies within <span class="math notranslate nohighlight">\(\pm 2\sigma\)</span> around the mean <span class="math notranslate nohighlight">\(\mu\)</span></p></li>
+<li><p>99.73% lies within <span class="math notranslate nohighlight">\(\pm 3 \sigma\)</span> around the mean <span class="math notranslate nohighlight">\(\mu\)</span></p></li>
+<li><p>90% of the area lies within <span class="math notranslate nohighlight">\(\pm 1.645\sigma\)</span> around the mean <span class="math notranslate nohighlight">\(\mu\)</span></p></li>
+<li><p>95% lies within <span class="math notranslate nohighlight">\(\pm 1.960\sigma\)</span> around the mean <span class="math notranslate nohighlight">\(\mu\)</span></p></li>
+<li><p>99% lies within <span class="math notranslate nohighlight">\(\pm 2.576\sigma\)</span> around the mean <span class="math notranslate nohighlight">\(\mu\)</span></p></li>
+<li><p>99.9% lies within <span class="math notranslate nohighlight">\(\pm 3.290\sigma\)</span> around the mean <span class="math notranslate nohighlight">\(\mu\)</span></p></li>
+</ul>
+<p>The integrated Gaussian function <span class="math notranslate nohighlight">\(\Phi(x)\)</span> can also be expressed by the
+so-called error function <span class="math notranslate nohighlight">\(erf(x)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\Phi(x)&amp;=&amp;\frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^{x}e^{-(t-\mu)^2/2\sigma^2}dt \\
+erf(x)&amp;=&amp;\frac{2}{\sqrt{\pi}}\int_0^xe^{-t^2}dt \\
+=&gt;\Phi(x)&amp;=&amp;\frac{1}{2}\left(1+erf(\frac{x-\mu}{\sqrt{2}\sigma})\right)\\
+\end{aligned}
+\end{split}\]</div>
+<p>The <em>Full Width Half Maximum</em> (FWHM) is very useful to get a quick
+estimate for the width of a distribution and for the specific case of
+the Gaussian we have: <span class="math notranslate nohighlight">\(FWHM=2\sigma\sqrt{2\ln 2}=2.355\sigma.\)</span></p>
+<p>The Gaussian distribution is the limiting case for several other p.d.f.’s we
+will encounter later (see (see <a class="reference internal" href="#fig-limits"><span class="std std-numref">Fig. 3</span></a>)).
+This is a consequence of the central limit theorem (CLT) (discussed in
+<a class="reference internal" href="#./probabilityDistributions.html#the-central-limit-theorem"><span class="xref myst">CLT</span></a>)</p>
+<figure class="align-center" id="fig-limits">
+<a class="reference internal image-reference" href="_images/limits.png"><img alt="_images/limits.png" src="_images/limits.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Limiting cases. <span id="id1">[<a class="reference internal" href="bibliography.html#id3" title="Wes Metzger. Statistical Methods in Data Analysis. Katholieke Universiteit Nijmegen, Nijmegen, The Netherlands, 2002. URL: https://www.hef.ru.nl/~wes/stat_course/statist_2002.pdf.">Met02</a>]</span></span><a class="headerlink" href="#fig-limits" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The N-dimensional Gaussian distribution is defined by</p>
+<div class="math notranslate nohighlight">
+\[
+f({\bf x};{\bf \mu}, V)=\frac{1}{(2\pi)^{N/2}|V|^{1/2}}\exp\left(-\frac{1}{2}({\bf x}-{\bf \mu})^TV^{-1}({\bf x}-{\bf \mu})\right).
+\]</div>
+<p>Here, <span class="math notranslate nohighlight">\({\bf x}\)</span> and <span class="math notranslate nohighlight">\({\bf \mu}\)</span> are column vectors with the components
+<span class="math notranslate nohighlight">\(x_1,\ldots ,x_N\)</span> and <span class="math notranslate nohighlight">\(\mu_1,\ldots ,\mu_N\)</span>, respectively. The
+transposed vectors <span class="math notranslate nohighlight">\({\bf x}^T\)</span> and <span class="math notranslate nohighlight">\({\bf \mu}^T\)</span> are the corresponding
+row vectors and <span class="math notranslate nohighlight">\(|V|\)</span> is the determinant of the symmetric <span class="math notranslate nohighlight">\(N \times N\)</span>
+covariance matrix <span class="math notranslate nohighlight">\(V\)</span>. The expectation values and the covariances are
+given by:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\langle x_i \rangle=\mu_i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mbox{V}(x_i)=\mbox{V}_{ii}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mbox{cov}(x_i,x_j)=\mbox{V}_{ij}\)</span></p></li>
+</ul>
+<p>In the simplified case of a two-dimensional Gaussian distribution we can
+write</p>
+<p><span class="math notranslate nohighlight">\(
+\mathbf{x}=
+\left[
+\begin{array}{l}
+x_1 \\
+x_2
+\end{array}
+\right]
+\)</span>
+<span class="math notranslate nohighlight">\(
+\mathbf{\mu
+}=
+\left[
+\begin{array}{l}
+\mu_1 \\
+\mu_2
+\end{array}
+\right]
+\)</span>
+<span class="math notranslate nohighlight">\(
+V=
+\left[
+\begin{array}{cc}
+\sigma_1^2 &amp; \rho \sigma_1 \sigma_2 \\
+\rho \sigma_1 \sigma_2 &amp; \sigma_2^2
+\end{array}
+\right]
+\)</span></p>
+<p>where the determinant of V is <span class="math notranslate nohighlight">\(|\boldsymbol{V}|=\sigma_1^2 \sigma_2^2\left(1-\rho^2\right)\)</span>.</p>
+<p>The inverse of the covariance matrix is:
+<span class="math notranslate nohighlight">\( 
+V^{-1}=\frac{1}{\sigma_1^2 \sigma_2^2\left(1-\rho^2\right)}
+\left[
+\begin{array}{cc}
+\sigma_2^2 &amp; -\rho \sigma_1 \sigma_2 \\
+-\rho \sigma_1 \sigma_2 &amp; \sigma_1^2
+\end{array}
+\right]
+\)</span></p>
+<p>So the exponent becomes:</p>
+<p><span class="math notranslate nohighlight">\( ({\bf x}-{\bf \mu})^TV^{-1}({\bf x}-{\bf \mu})= 
+\frac{1}{1-\rho^2}\left[\left(\frac{\left(x_1-\mu_1\right)^2}{\sigma_1^2}\right)-2 \rho\left(\frac{\left(x_1-\mu_1\right)\left(x_2-\mu_2\right)}{\sigma_1 \sigma_2}\right)+\left(\frac{\left(x_2-\mu_2\right)^2}{\sigma_2^2}\right)\right]
+\)</span></p>
+<p>and putting it all together we have:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x_1,x_2;\mu_1\,\mu_2,\sigma_1,\sigma_2,\rho) = 
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+ \frac{1}{2\pi\sigma_1\sigma_2\sqrt{1-\rho^2}} \cdot \exp \left( -\frac{1}{2(1-\rho^2)}\right)
+\cdot \left[\left(\frac{x_1-\mu_1}{\sigma_1}\right)^2 + 
+\left(\frac{x_2-\mu_2}{\sigma_2}\right)^2
+-2\rho\left(\frac{x_1-\mu_1}{\sigma_1}\right)
+\left(\frac{x_2-\mu_2}{\sigma_2}\right)\right].
+\]</div>
+<p>We will come back to the specific case of the gaussian distribution in multiple
+dimensions in the chapter <a class="reference internal" href="#./errors.html#a-closer-look-at-the-error-matrix-sec-errormatrix"><span class="xref myst">Measurement Uncertainties</span></a> when talking about the error matrix.</p>
+</section>
+<section id="chi-2-distribution">
+<h3><span class="math notranslate nohighlight">\(\chi^2\)</span> Distribution<a class="headerlink" href="#chi-2-distribution" title="Link to this heading">#</a></h3>
+<p>Suppose that <span class="math notranslate nohighlight">\(x_{1}, x_{2}, \cdots, x_{n}\)</span> are independent random variables Normally distributed as N(0,1), then the sum of squares</p>
+<p><span class="math notranslate nohighlight">\( \chi_{(n)}^2=\sum_{i=1}^n x_i^2 \)</span></p>
+<p>is distributed as as a chi-square distribution <span class="math notranslate nohighlight">\(\chi^2(n)\)</span>, with n degrees of freedom.</p>
+<p>This is generally written as:</p>
+<div class="math notranslate nohighlight">
+\[
+\chi^2(n)=\sum_{i=1}^{n}\left(\frac{x_i-\mu_i}{\sigma_i}\right)^2.
+\]</div>
+<p>You can see why writing the joint p.d.f. of n independent gaussian distributed variables:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+f({\bf x}; {\bf \mu}, {\bf \sigma}) &amp;=&amp; \prod_{i=1}^{n} \frac{1}{\sqrt{2\pi} \sigma_i}\exp\left[-\frac{1}{2} \left( \frac{x_i - \mu_i}{\sigma_i}\right)^2 \right]\\
+&amp;=&amp; \exp \left[ -\frac{1}{2} \sum_{i=1}^{n} \left( \frac{x_i - \mu_i}{\sigma_i}\right)^2 \right]  \prod_{i=1}^{n} \frac{1}{\sqrt{2\pi} \sigma_i}
+\end{aligned}
+\end{split}\]</div>
+<p>and looking at the exponent.</p>
+<p>The probability density is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+\chi^2(n) = f(\chi^2;n) = \frac{(\chi^2)^{n/2-1}e^{-\chi^2/2}}{\Gamma(n/2)2^{n/2}}.
+\]</div>
+<p>The <span class="math notranslate nohighlight">\(\chi^2(n)\)</span> p.d.f. has the properties:</p>
+<ul class="simple">
+<li><p>mean = <span class="math notranslate nohighlight">\(n\)</span></p></li>
+<li><p>variance = <span class="math notranslate nohighlight">\(2n\)</span></p></li>
+<li><p>mode = n-2 for <span class="math notranslate nohighlight">\(n\ge2\)</span> and 0 for <span class="math notranslate nohighlight">\(n\le2\)</span></p></li>
+<li><p>reproductive property:
+<span class="math notranslate nohighlight">\(\chi^2_{n_1+n_2} = \chi^2_{n_1} + \chi^2_{n_2} = \chi^2(n_1+n_2)\)</span></p></li>
+</ul>
+<p>Since the expectation of <span class="math notranslate nohighlight">\(\chi^2(n)\)</span> is <span class="math notranslate nohighlight">\(n\)</span>, the expectation of
+<span class="math notranslate nohighlight">\(\chi^2(n)/n\)</span> is 1. The quantity <span class="math notranslate nohighlight">\(\chi^2(n)/n\)</span> is called “reduced
+<span class="math notranslate nohighlight">\(\chi^2\)</span>”.</p>
+<p>For <span class="math notranslate nohighlight">\(n \to \infty\)</span>, <span class="math notranslate nohighlight">\(\chi^{2}(n)\to N(\chi^2;n,2n)\)</span> becomes a normal
+distribution. In practice, the
+approximation by a normal distribution is already good enough for
+<span class="math notranslate nohighlight">\(n \ge 30\)</span>.</p>
+<!-- 
+To understand the notation take the particular case of the $\chi^2$ for
+1 degree of freedom. Let $z = (x-\mu)/\sigma$ so that the p.d.f. for $z$
+is $N(z; 0, 1)$ and the probability that $z \le Z \le z + dz$ is:
+
+$$
+f(z)dz = \frac{1}{\sqrt2\pi} e^{-\frac{1}{2} z^2 }dz.
+$$
+
+Let $Q = Z^2.$ (We use Q here instead of $\chi^2$ to emphasize that this is the
+variable.) This is not a one-to-one transformation because both $+Z$ and
+$-Z$ go into $+Q$.
+
+The probability that $Q$ is between $q$ and $q + dq$ is the sum of the
+probability that $Z$ is between $z$ and $z + dz$ around $z = \sqrt{q}$,
+and the probability that $Z$ is between $z$ and $z -dz$ around
+$z = -\sqrt{q}$. The Jacobian is:
+
+$$
+J_{\pm} = \frac{d(\pm z)}{dq} = \pm \frac{1}{2\sqrt{q}}
+$$ 
+
+so
+
+$$
+f(q)dq=  \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}q}(|J_+| + |J_-|) dq  =  \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}q}(\frac{dq}{2\sqrt{q}} + \frac{dq}{2\sqrt{q}}) dq = \frac{1}{\sqrt{2\pi q}} e^{-\frac{1}{2}q} dq
+$$
+
+Replacing $\chi^2$ for $Q$ we have:
+
+$$
+\chi^2(1) = \frac{1}{\sqrt{2\pi\chi^2}}e^{-\frac{1}{2} \chi^2}
+$$
+
+(careful! the same symbol is used for the random variable and the p.d.f.).
+--><div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">chi2</span>
+
+<span class="n">dofs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="n">size</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">limits</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">axf</span><span class="p">,</span> <span class="n">axF</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">12</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">dof</span> <span class="ow">in</span> <span class="n">dofs</span><span class="p">:</span>
+    <span class="n">frozen</span> <span class="o">=</span> <span class="n">chi2</span><span class="p">(</span><span class="n">dof</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">fx</span> <span class="o">=</span> <span class="n">frozen</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">Fx</span> <span class="o">=</span> <span class="n">frozen</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;n=</span><span class="si">{</span><span class="n">dof</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Fx</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;n=</span><span class="si">{</span><span class="n">dof</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;F(x)&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/778d60bc432efd8db2733f82b59334741c6d4c4d2025e898468e4a33a1e763f7.png" src="_images/778d60bc432efd8db2733f82b59334741c6d4c4d2025e898468e4a33a1e763f7.png" />
+</div>
+</div>
+</section>
+<section id="log-normal-distribution">
+<h3>Log-Normal Distribution<a class="headerlink" href="#log-normal-distribution" title="Link to this heading">#</a></h3>
+<p>The log-normal distribution is defined as the distribution of a random variable whose logarithm is normally distributed; i.e. if <span class="math notranslate nohighlight">\(y\)</span> obeys a normal distribution with mean <span class="math notranslate nohighlight">\(\mu\)</span> and standard
+deviation <span class="math notranslate nohighlight">\(\sigma\)</span>, then the <span class="math notranslate nohighlight">\(x=e^{y}\)</span> obeys a log-normal
+distribution:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x; \mu, \sigma)=\frac{1}{\sqrt{2\pi\sigma^2}}\frac{1}{x}e^{-(\ln x-\mu)^2/2\sigma^2}.
+\]</div>
+<p>The expectation value and the variance are given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&lt;x&gt;&amp;=&amp;e^{(\mu+\frac{1}{2}\sigma^2)} \\
+\mbox{Var}(x)&amp;=&amp;e^{(2\mu+\sigma^2)}(e^{\sigma^2}-1)
+\end{aligned}
+\end{split}\]</div>
+<p>The log-normal distribution is typically used when the resolution of a
+measurement apparatus is the result of the effect of different sources, each
+contributing a multiplicative amount. As the
+<em>sum</em> of many small contributions of any random distribution converges
+by the central limit theorem to a Gaussian distribution, so the
+<em>product</em> of many small contributions is distributed according to a
+log-normal distribution.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>Consider the signal of a photomultiplier (PMT), which
+converts light signals into electric signals. Each photon hitting the
+photo-cathode emits an electron, which gets accelerated by an electric
+field generated by an electrode (dynode) behind. The electron hits the
+dynode and emits other secondary electrons which gets accelerated to the
+next dynode. This process if repeated several times (as many as the
+number of dynodes in the PMT). At every stage the number of secondary
+electrons emitted depends on the voltage applied. If the amplification
+per step is <span class="math notranslate nohighlight">\(a_{i}\)</span>, then the number of electrons after the <span class="math notranslate nohighlight">\(k^{th}\)</span>
+step, <span class="math notranslate nohighlight">\(n_{k} = \Pi_{i=0}^{k} a_{i}\)</span>, is approximately log-normal
+distributed.</p>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">lognorm</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="n">size</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">limits</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">axf</span><span class="p">,</span> <span class="n">axF</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">12</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">musigma</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+    <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">musigma</span>
+    <span class="n">frozen</span> <span class="o">=</span> <span class="n">lognorm</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">mu</span><span class="p">))</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">fx</span> <span class="o">=</span> <span class="n">frozen</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">Fx</span> <span class="o">=</span> <span class="n">frozen</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$\mu$=</span><span class="si">{</span><span class="n">mu</span><span class="si">}</span><span class="s2">, $\sigma$=</span><span class="si">{</span><span class="n">sigma</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Fx</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$\mu$=</span><span class="si">{</span><span class="n">mu</span><span class="si">}</span><span class="s2">, $\sigma$=</span><span class="si">{</span><span class="n">sigma</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;F(x)&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/fa4830ff560d9871ab073c9c4f06b47a9a408618a786d080dc931d3286c53b5d.png" src="_images/fa4830ff560d9871ab073c9c4f06b47a9a408618a786d080dc931d3286c53b5d.png" />
+</div>
+</div>
+</section>
+<section id="exponential-distribution">
+<h3>Exponential Distribution<a class="headerlink" href="#exponential-distribution" title="Link to this heading">#</a></h3>
+<p>The exponential distribution is defined for a continuous variable <span class="math notranslate nohighlight">\(t\)</span> (<span class="math notranslate nohighlight">\(0 \le t \le \infty\)</span>) by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(t,\tau)=\frac{1}{\tau}e^{-t/\tau}.
+\]</div>
+<p>The probability density is characterized by one single parameter <span class="math notranslate nohighlight">\(\tau\)</span>.</p>
+<ul class="simple">
+<li><p>The expectation value is
+<span class="math notranslate nohighlight">\(\langle t \rangle=\frac{1}{\tau}\int_0^{\infty}te^{-t/\tau}dt=\tau.\)</span></p></li>
+<li><p>The variance is <span class="math notranslate nohighlight">\(\mbox{Var}(t)=\tau^2\)</span>.</p></li>
+</ul>
+<p>An example for the application of the exponential distribution is the
+description of the proper-decay-time decay <span class="math notranslate nohighlight">\((t)\)</span> of an unstable
+particles. The parameter <span class="math notranslate nohighlight">\(\tau\)</span> corresponds in this case to the mean
+lifetime of the particle.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># PDF, PDF log scale and CDF</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">expon</span>
+
+<span class="n">taus</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]</span>
+<span class="n">size</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">limits</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">axf</span><span class="p">,</span> <span class="n">axf_log</span><span class="p">,</span> <span class="n">axF</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">18</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">tau</span> <span class="ow">in</span> <span class="n">taus</span><span class="p">:</span>
+    <span class="n">frozen</span> <span class="o">=</span> <span class="n">expon</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="n">tau</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">fx</span> <span class="o">=</span> <span class="n">frozen</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">Fx</span> <span class="o">=</span> <span class="n">frozen</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">tau$=</span><span class="si">{</span><span class="n">tau</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axf_log</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">tau$=</span><span class="si">{</span><span class="n">tau</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Fx</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">tau$=</span><span class="si">{</span><span class="n">tau</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">axf_log</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+    <span class="n">axf_log</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;F(x)&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">)</span>
+    <span class="n">axf_log</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">)</span>
+    <span class="n">axf_log</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/dd1ba21a0f531d00d300a5e5425bb538c31ba4c53ced2ff13fb789376f6e4cd7.png" src="_images/dd1ba21a0f531d00d300a5e5425bb538c31ba4c53ced2ff13fb789376f6e4cd7.png" />
+</div>
+</div>
+</section>
+<section id="gamma-distribution">
+<h3>Gamma Distribution<a class="headerlink" href="#gamma-distribution" title="Link to this heading">#</a></h3>
+<p>The gamma distribution is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x;k,\lambda)=\lambda^{k}\frac{x^{k-1}e^{-\lambda x}}{\Gamma(k)}.
+\]</div>
+<ul class="simple">
+<li><p>The expectation value is <span class="math notranslate nohighlight">\(&lt;x&gt; = k / \lambda\)</span>.</p></li>
+<li><p>The variance is <span class="math notranslate nohighlight">\(\sigma ^{2} = k / \lambda^{2}\)</span>.</p></li>
+</ul>
+<p>Special cases:</p>
+<ul class="simple">
+<li><p>for <span class="math notranslate nohighlight">\(\lambda = 1/2\)</span> and <span class="math notranslate nohighlight">\(k=n/2\)</span> the gamma distribution has the form
+of a <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution with n degrees of freedom.</p></li>
+</ul>
+<p>The Gamma distribution describes the distribution of the time <span class="math notranslate nohighlight">\(t=x\)</span>
+between the first and the <span class="math notranslate nohighlight">\(k^{th}\)</span> event in a Poisson process with mean
+<span class="math notranslate nohighlight">\(\lambda\)</span>. The parameter <span class="math notranslate nohighlight">\(k\)</span> influences the shape of the distribution,
+whereas <span class="math notranslate nohighlight">\(\lambda\)</span> is just a scale parameter.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">gamma</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="n">size</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">limits</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">axf</span><span class="p">,</span> <span class="n">axF</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">12</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">kl</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+    <span class="n">k</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="n">kl</span>
+    <span class="n">frozen</span> <span class="o">=</span> <span class="n">gamma</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">l</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">fx</span> <span class="o">=</span> <span class="n">frozen</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">Fx</span> <span class="o">=</span> <span class="n">frozen</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$k$=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">, $\lambda$=</span><span class="si">{</span><span class="n">l</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Fx</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$k$=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">, $\lambda$=</span><span class="si">{</span><span class="n">l</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>    
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;F(x)&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/a3c5f1b597d6a38017414321388f3dfd50750f192dbbffadb5b1bc4132302a0e.png" src="_images/a3c5f1b597d6a38017414321388f3dfd50750f192dbbffadb5b1bc4132302a0e.png" />
+</div>
+</div>
+</section>
+<section id="student-s-t-distribution">
+<h3>Student’s <span class="math notranslate nohighlight">\(t\)</span>-distribution<a class="headerlink" href="#student-s-t-distribution" title="Link to this heading">#</a></h3>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The story behind the “Student”:</p>
+<p>William Sealy Gosset was a statistician and chemist at Guinness Brewery in Dublin. Guinness had strict policies against employees publishing to prevent trade secrets from leaking. So Gosset published under the pseudonym “Student”, and the distribution became known as the Student’s t-distribution.</p>
+<p>Gosset was trying to improve the quality of beer production by testing small samples (5 - 10) of ingredients like barley and hops and their effect on properties (like alcohol content, yield, etc.). He needed to draw reliable conclusions despite not knowing the population variance <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
+<p>He discovered that when <span class="math notranslate nohighlight">\(\sigma\)</span> is unknown and replaced by sample standard deviation s, the standardized statistic no longer follows a normal distribution, but a wider-tailed distribution — the t-distribution.</p>
+<p>This correctly adjusts for uncertainty in small samples and prevents overconfidence in results.
+<a class="reference external" href="http://www.york.ac.uk/depts/maths/histstat/student.pdf">paper</a></p>
+</aside>
+<p>The Student’s <span class="math notranslate nohighlight">\(t\)</span> distribution is used when the standard deviation
+<span class="math notranslate nohighlight">\(\sigma\)</span> of the parent distribution is unknown and instead we use <span class="math notranslate nohighlight">\(s\)</span> evaluated
+from the sample. Suppose that <span class="math notranslate nohighlight">\(x\)</span> is a random variable
+distributed normally (mean <span class="math notranslate nohighlight">\(\mu\)</span>, variance <span class="math notranslate nohighlight">\(\sigma^{2}\)</span>), and a
+measurement of <span class="math notranslate nohighlight">\(x\)</span> yields the sample mean <span class="math notranslate nohighlight">\(\bar{x}\)</span> and the sample
+variance <span class="math notranslate nohighlight">\(s^{2}\)</span>. Then the variable <span class="math notranslate nohighlight">\(t\)</span> is defined as</p>
+<div class="math notranslate nohighlight" id="equation-definingequationvariablet">
+<span class="eqno">(3)<a class="headerlink" href="#equation-definingequationvariablet" title="Link to this equation">#</a></span>\[t  = \frac{\bar{x} - \mu}{s/\sqrt{n}}.\]</div>
+<p>We have repaced the unknown standard deviation of the parent distribution with estimated one.</p>
+<p>The Student’s <span class="math notranslate nohighlight">\(t\)</span> distribution can be obtained from the ratio of two independent random variables: z at the numerator following a Normal distribution N(0,1) and v at the denominator following a <span class="math notranslate nohighlight">\(\chi^2(n)\)</span> with n degrees of freedom (sample size). The ratio</p>
+<p><span class="math notranslate nohighlight">\(t = \frac{z}{\sqrt{V/n}} \)</span></p>
+<p>follows a Student’s <span class="math notranslate nohighlight">\(t\)</span> distribution with n degrees of freedom (sample size).</p>
+<p>To see this take n independent identically distributed samples from a Normal distribution <span class="math notranslate nohighlight">\(N(\mu,\sigma^2)\)</span>. The sample mean <span class="math notranslate nohighlight">\(\bar{x}\)</span> follows a normal distribution <span class="math notranslate nohighlight">\(N(\mu, \sigma^2/n)\)</span>, which can be standardized to N(0,1) by taking <span class="math notranslate nohighlight">\(z = \frac{\bar{x} - \mu}{\sigma/\sqrt{n}}\)</span>.</p>
+<p>The scaled sample variance <span class="math notranslate nohighlight">\(V = \frac{(n-1)s^2}{\sigma^2}\)</span>  is distributed as a <span class="math notranslate nohighlight">\(\chi^2_{n-1}\)</span> (from the definition of Variance and from the fact that the <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution is the distribution of the sum of the square of normally distributed random variables).</p>
+<p>Now substitute them in <span class="math notranslate nohighlight">\(t = \frac{Z}{\sqrt{V/\nu}}\)</span>:</p>
+<p><span class="math notranslate nohighlight">\( t = \frac{\frac{\bar{x}-\mu}{\sigma / \sqrt{n}}}{\sqrt{\left(\frac{(n-1) s^2}{\sigma^2}\right) /(n-1)}} \)</span></p>
+<p>Simplify the denominator to:
+<span class="math notranslate nohighlight">\( \sqrt{\left(\frac{(n-1) s^2}{\sigma^2}\right) /(n-1)} = \frac{s}{\sigma}\)</span></p>
+<p>and you get:
+<span class="math notranslate nohighlight">\( t = \frac{\frac{\bar{x}-\mu}{\sigma/\sqrt{n}}}{s/\sigma} = \frac{\bar{x}-\mu}{s/\sqrt{n}} \)</span></p>
+<p>The typical application of the Student’s t is in hypotesis testing to test the compatibility of the mean of a distribution with unknown standard deviation against a reference value <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
+<p>The p.d.f. of the Student’s t <span class="math notranslate nohighlight">\(f_n(t)\)</span> with <span class="math notranslate nohighlight">\(n\)</span> degrees of freedom is:</p>
+<div class="math notranslate nohighlight">
+\[
+f_n(t)=\frac{1}{\sqrt{n\pi}}\frac{\Gamma((n+1)/2)}{\Gamma(n/2)}\left(1+\frac{t^2}{n}\right)^{-(n+1)/2}
+\]</div>
+<p>In the plot below note the larger tails compared with a gaussian. Intuitively one expects them because the true mean <span class="math notranslate nohighlight">\(\sigma\)</span> is replaced with the sample mean <span class="math notranslate nohighlight">\(s\)</span>.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">t</span>
+
+<span class="n">dofs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">size</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">limits</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">axf</span><span class="p">,</span> <span class="n">axF</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">12</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">dof</span> <span class="ow">in</span> <span class="n">dofs</span><span class="p">:</span>
+    <span class="n">frozen</span> <span class="o">=</span> <span class="n">t</span><span class="p">(</span><span class="n">dof</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">fx</span> <span class="o">=</span> <span class="n">frozen</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">Fx</span> <span class="o">=</span> <span class="n">frozen</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;n=</span><span class="si">{</span><span class="n">dof</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Fx</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;n=</span><span class="si">{</span><span class="n">dof</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;F(x)&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/fa0e9ce9c4eb9f411af8406a349c2793379c550f6f37a3b28eaf2bd38bb77362.png" src="_images/fa0e9ce9c4eb9f411af8406a349c2793379c550f6f37a3b28eaf2bd38bb77362.png" />
+</div>
+</div>
+</section>
+<section id="f-distribution">
+<h3><span class="math notranslate nohighlight">\(F\)</span>-distribution<a class="headerlink" href="#f-distribution" title="Link to this heading">#</a></h3>
+<p>Consider two random variables, <span class="math notranslate nohighlight">\(\chi_1^2\)</span> and <span class="math notranslate nohighlight">\(\chi_2^2\)</span>, distributed as
+<span class="math notranslate nohighlight">\(\chi^2\)</span> with <span class="math notranslate nohighlight">\(\nu_1\)</span> and <span class="math notranslate nohighlight">\(\nu_2\)</span> degrees of freedom, respectively. We
+define a new random variable <span class="math notranslate nohighlight">\(F\)</span> as:</p>
+<div class="math notranslate nohighlight">
+\[
+F = \frac{\chi_1^2/\nu_1}{\chi_2^2/\nu_2}
+\]</div>
+<p>The random variable <span class="math notranslate nohighlight">\(F\)</span> follows the distribution:</p>
+<div class="math notranslate nohighlight">
+\[
+f(F)=\left(\frac{n_1}{n_2}\right)^{n_1/2}\cdot \frac{\Gamma((n_1+n_2)/2)}{\Gamma(n_1/2)\Gamma(n_2/2)}\cdot F^{(n_1-2)/2}\left(1+\frac{n_1}{n_2}F\right)^{-(n_1+n_2)/2}.
+\]</div>
+<p>This distribution is known by many names: Fisher-Snedecor distribution,
+Fisher distribution, Snedecor distribution, variance ratio distribution,
+and <span class="math notranslate nohighlight">\(F\)</span>-distribution. By convention, one usually puts the larger value
+on top so that <span class="math notranslate nohighlight">\(F \ge 1\)</span>.<br />
+The <span class="math notranslate nohighlight">\(F\)</span> distribution is used to test the statistical compatibility
+between the variances of two different samples, which are obtained form
+the same underlying distribution (more in <a class="reference internal" href="#./hypothesisTesting.html#f-test"><span class="xref myst">Hypothesis testing</span></a>).</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">f</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">)]</span>
+<span class="n">size</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">limits</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">axf</span><span class="p">,</span> <span class="n">axF</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">12</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">fnfd</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+    <span class="n">fn</span><span class="p">,</span> <span class="n">fd</span> <span class="o">=</span> <span class="n">fnfd</span>
+    <span class="n">frozen</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">dfn</span><span class="o">=</span><span class="n">fn</span><span class="p">,</span> <span class="n">dfd</span><span class="o">=</span><span class="n">fd</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">fx</span> <span class="o">=</span> <span class="n">frozen</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">Fx</span> <span class="o">=</span> <span class="n">frozen</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$n_</span><span class="si">{</span><span class="mi">1</span><span class="si">}</span><span class="s2">$=</span><span class="si">{</span><span class="n">fn</span><span class="si">}</span><span class="s2">, $n_</span><span class="si">{</span><span class="mi">2</span><span class="si">}</span><span class="s2">$=</span><span class="si">{</span><span class="n">fd</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Fx</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;F(x)&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/f34ba41402400aeda689c5cbc11176a0e34957b55b08f3715b2f012a0acd4238.png" src="_images/f34ba41402400aeda689c5cbc11176a0e34957b55b08f3715b2f012a0acd4238.png" />
+</div>
+</div>
+</section>
+<section id="weibull-distribution">
+<h3>Weibull Distribution<a class="headerlink" href="#weibull-distribution" title="Link to this heading">#</a></h3>
+<p>The Weibull distribution was originally invented to describe the rate of failures of light bulbs:</p>
+<div class="math notranslate nohighlight">
+\[
+P(x;\alpha,\lambda)=\alpha\lambda(\lambda x)^{\alpha-1}e^{-(\lambda x)^{\alpha}}.
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(x\ge 0\)</span> and <span class="math notranslate nohighlight">\(\alpha, \lambda &gt; 0\)</span>. The parameter <span class="math notranslate nohighlight">\(\alpha\)</span> is just
+a scale factor and <span class="math notranslate nohighlight">\(\lambda\)</span> describes the width of the maximum. The
+exponential distribution is a special case <span class="math notranslate nohighlight">\((\alpha = 1)\)</span>, when the
+probability of failure at time t is independent of t. The Weibull
+distribution is very useful to describe the reliability and to predict
+failure rates. The expectation value of the Weibull distribution is
+<span class="math notranslate nohighlight">\(\Gamma(\frac{1}{\alpha}+1) \frac{1}{\lambda}\)</span> and the variance is
+<span class="math notranslate nohighlight">\(\frac{1}{\lambda^2} \left( \Gamma\left(\frac{2}{\alpha} +1\right) - \Gamma^2\left(\frac{1}{\alpha} +1\right) \right)\)</span>.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">weibull_min</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="n">size</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">limits</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">axf</span><span class="p">,</span> <span class="n">axF</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">12</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">al</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="n">al</span>
+    <span class="n">frozen</span> <span class="o">=</span> <span class="n">weibull_min</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">l</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">fx</span> <span class="o">=</span> <span class="n">frozen</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">Fx</span> <span class="o">=</span> <span class="n">frozen</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">alpha$=</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">, $\lambda$=</span><span class="si">{</span><span class="n">l</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Fx</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;F(x)&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/ab09bb3f935fab017e1a49852163fa0832e9fbe5d6b001446216a1f0c4cd2dc7.png" src="_images/ab09bb3f935fab017e1a49852163fa0832e9fbe5d6b001446216a1f0c4cd2dc7.png" />
+</div>
+</div>
+</section>
+<section id="cauchy-breit-wigner-distribution">
+<h3>Cauchy (Breit-Wigner) Distribution<a class="headerlink" href="#cauchy-breit-wigner-distribution" title="Link to this heading">#</a></h3>
+<p>The Cauchy probability density function is:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x)=\frac{1}{\pi}\frac{1}{1+x^2}.
+\]</div>
+<p>For large values of <span class="math notranslate nohighlight">\(x\)</span> it decreases only slowly. Neither the mean nor the variance are defined,
+because the corresponding integrals are divergent. The particular Cauchy
+distribution of the form</p>
+<div class="math notranslate nohighlight">
+\[
+f(m;M,\Gamma)=\frac{1}{2\pi}\frac{\Gamma}{(m-M)^2+(\Gamma/2)^2}
+\]</div>
+<p>is also called Breit-Wigner function (see below), and is
+used in particle physics to describe cross sections near a resonance
+with mass <span class="math notranslate nohighlight">\(M\)</span> and width <span class="math notranslate nohighlight">\(\Gamma\)</span>. The Breit-Wigner comes as the
+Fourier transformation of the wave function of an unstable particle:</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Even if the mean does not exist, noting that the distribution is
+symmetric, we can define it to be <span class="math notranslate nohighlight">\(M\)</span>; <span class="math notranslate nohighlight">\(\Gamma\)</span> is the FWHM. In
+actual physical problems the distribution is truncated, e.g., by
+energy conservation, and the resulting distribution is well-behaved.</p>
+</aside>
+<div class="math notranslate nohighlight">
+\[
+\psi(t) \propto e^{-i E_i t /\hbar} e^{-\Gamma t /2}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\phi(\omega)\propto \int_0^\infty \psi(t) e^{i \omega t} dt = \frac{i}{(\omega - \omega_0 + i \frac{\Gamma}{2}) }
+\]</div>
+<p>which squared gives:</p>
+<div class="math notranslate nohighlight">
+\[
+|\phi(\omega)|^2 = \frac{1}{(\omega-\omega_0)^2 + \frac{\Gamma^2}{4}}.
+\]</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">rv_continuous</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">quad</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">BreitWigner</span><span class="p">(</span><span class="n">rv_continuous</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">G</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">bw</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">G</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">G</span> <span class="o">/</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">M</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">G</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="n">norm</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">bw</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">G</span><span class="p">),</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">bw</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">G</span><span class="p">)</span> <span class="o">/</span> <span class="n">norm</span>
+
+
+<span class="n">breit_wigner</span> <span class="o">=</span> <span class="n">BreitWigner</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;breit_wigner&quot;</span><span class="p">)</span>
+
+<span class="n">M</span> <span class="o">=</span> <span class="mi">91</span>
+<span class="n">gammas</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">size</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">limits</span> <span class="o">=</span> <span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">110</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">gamma</span> <span class="ow">in</span> <span class="n">gammas</span><span class="p">:</span>
+    <span class="n">frozen</span> <span class="o">=</span> <span class="n">breit_wigner</span><span class="p">(</span><span class="n">M</span><span class="o">=</span><span class="n">M</span><span class="p">,</span> <span class="n">G</span><span class="o">=</span><span class="n">gamma</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">fx</span> <span class="o">=</span> <span class="n">frozen</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$m=m_{Z_</span><span class="si">{0}</span><span class="s2">}$,&quot;</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot; $\Gamma$=</span><span class="si">{</span><span class="n">gamma</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;m&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;B-W(x)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/023f8f03ded60f6a25ea7348a491a44003ba2ff4e359fb8743aec6e79f425444.png" src="_images/023f8f03ded60f6a25ea7348a491a44003ba2ff4e359fb8743aec6e79f425444.png" />
+</div>
+</div>
+</section>
+<section id="landau-distribution">
+<h3>Landau Distribution<a class="headerlink" href="#landau-distribution" title="Link to this heading">#</a></h3>
+<p>The Landau distribution (see <a class="reference internal" href="#fig-landau"><span class="std std-numref">Fig. 4</span></a>)
+is used to describe the distribution of the energy loss <span class="math notranslate nohighlight">\(x\)</span>
+(dimensionless quantity proportional to <span class="math notranslate nohighlight">\(dE\)</span>) of a charged particle (by
+ionisation) passing through a thin layer of matter:</p>
+<div class="math notranslate nohighlight">
+\[
+p(x) = \frac{1}{2\pi i} \int_{c-i\infty}^{c+i\infty} \exp(s\log s + xs)ds \qquad  (c &gt; 0).
+\]</div>
+<p>The long tail towards large energies models the large energy loss
+fluctuations in thin layers. The mean and the variance of the
+distribution are not defined.<br />
+Often it can be found approximated as:</p>
+<div class="math notranslate nohighlight">
+\[
+p(x) = \frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2} \left( x+ e^{-x} \right) }
+\]</div>
+<figure class="align-center" id="fig-landau">
+<a class="reference internal image-reference" href="_images/landau.png"><img alt="_images/landau.png" src="_images/landau.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Straggling functions in silicon for 500 MeV pions, normalized to unity at the most probable value <span class="math notranslate nohighlight">\(\delta p/x\)</span>. The width <span class="math notranslate nohighlight">\(w\)</span> is the full width at half maximum. <span id="id2">[<a class="reference internal" href="bibliography.html#id6" title="Particle Data Group. Passage of Particle Through Matter. Lawrence Berkeley National Laboratory, 2022. URL: https://pdg.lbl.gov/2022/reviews/rpp2022-rev-passage-particles-matter.pdf.">Gro22a</a>]</span></span><a class="headerlink" href="#fig-landau" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="crystal-ball">
+<h3>Crystal Ball<a class="headerlink" href="#crystal-ball" title="Link to this heading">#</a></h3>
+<p>The Crystal Ball is typically used to describe the invariant mass
+distribution of a resonance in which the decay products are affected by
+energy losses. An example could be a <span class="math notranslate nohighlight">\(Z\to e^+ e^-\)</span> where the electrons
+in the final state lose energy by brehmstralung. The distribution is
+characterized by a Gaussian core with a power law tail</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(x) = N \cdot
+\begin{cases}
+    e^{-\frac{(x-\mu)^2}{2\sigma^2}} ,                    &amp; \text{if } \frac{x-\mu}{\sigma} &gt; -\alpha \\
+    A \cdot \left( B - \frac{x-\mu}{\sigma}\right)^{-n},  &amp;  \text{if } \frac{x-\mu}{\sigma} \leq -\alpha
+\end{cases}
+\end{split}\]</div>
+<p>where:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+ A &amp;=&amp; \left( \frac{n}{|\alpha|} \right)^n \cdot \exp\left( -\frac{|\alpha|^2}{2}\right)     \\
+ B &amp;=&amp; \frac{n}{|\alpha|} - |\alpha|\end{aligned}
+\end{split}\]</div>
+<p>A trivial extension is given by the “Double Crystal Ball” where a second exponential tail is
+added on the high side.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(x) = N \cdot
+\begin{cases}
+    e^{-\frac{(x-\mu)^2}{2\sigma^2}} ,                      &amp;  \text{if } \alpha_1 &lt; \frac{x-\mu}{\sigma} &lt; \alpha_2 \\
+    A \cdot \left( B - \frac{x-\mu}{\sigma}\right)^{-n_1},  &amp;  \text{if } \frac{x-\mu}{\sigma} \leq \alpha_1\\
+    C \cdot \left( D - \frac{x-\mu}{\sigma}\right)^{-n_2},  &amp;  \text{if } \frac{x-\mu}{\sigma} \geq \alpha_2
+\end{cases}
+\end{split}\]</div>
+<p>where:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+ A &amp;=&amp; \left( \frac{n_1}{|\alpha_1|} \right)^{n_1} \cdot \exp\left( -\frac{|\alpha_1|^2}{2}\right)     \\
+ B &amp;=&amp; \frac{n_1}{|\alpha_1|} - |\alpha_1| \\
+ C &amp;=&amp; \left( \frac{n_2}{|\alpha_2|} \right)^{n_2} \cdot \exp\left( -\frac{|\alpha_2|^2}{2}\right)     \\
+ D &amp;=&amp; \frac{n_2}{|\alpha_2|} - |\alpha_2|\end{aligned}
+\end{split}\]</div>
+<p>In case you are wondering, the name comes from the collaboration that first used
+this function to describe a signal distribution. [&#64;crystalBall].</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">crystalball</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="n">size</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">limits</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">axf</span><span class="p">,</span> <span class="n">axF</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">12</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+    <span class="n">alpha</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">group</span>
+    <span class="n">frozen</span> <span class="o">=</span> <span class="n">crystalball</span><span class="p">(</span><span class="n">beta</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">fx</span> <span class="o">=</span> <span class="n">frozen</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">Fx</span> <span class="o">=</span> <span class="n">frozen</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">x</span><span class="p">,</span>
+        <span class="n">fx</span><span class="p">,</span>
+        <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">alpha$=</span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">, $n$=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">, $m$=</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">, $</span><span class="se">\\</span><span class="s2">sigma$=</span><span class="si">{</span><span class="n">sigma</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Fx</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;F(x)&quot;</span><span class="p">)</span>
+    <span class="n">axf</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">)</span>
+    <span class="n">axF</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/4b0d27bd4104e10b8c3b93b6dd299833d6056a024522e83babca8682b85d9711.png" src="_images/4b0d27bd4104e10b8c3b93b6dd299833d6056a024522e83babca8682b85d9711.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="the-central-limit-theorem">
+<h2>The Central Limit Theorem<a class="headerlink" href="#the-central-limit-theorem" title="Link to this heading">#</a></h2>
+<p>The “Central Limit Theorem” (CLT) is probably the most important theorem
+in statistics and it is the reason why the Gaussian distribution is so
+important.<br />
+Take <span class="math notranslate nohighlight">\(n\)</span> independent variables <span class="math notranslate nohighlight">\(x_i\)</span>, distributed according to p.d.f.’s
+<span class="math notranslate nohighlight">\(f_i\)</span> having mean <span class="math notranslate nohighlight">\(\mu_i\)</span> and variance <span class="math notranslate nohighlight">\(\sigma_i^2\)</span>, then the p.d.f. of
+the sum of the <span class="math notranslate nohighlight">\(x_i\)</span>, <span class="math notranslate nohighlight">\(S=\sum x_i\)</span>, has mean <span class="math notranslate nohighlight">\(\sum \mu_i\)</span> and variance
+<span class="math notranslate nohighlight">\(\sum\sigma_i^2\)</span> and it approaches the normal p.d.f.
+<span class="math notranslate nohighlight">\(N(S; \sum \mu_i, \sum \sigma_i^2)\)</span> as <span class="math notranslate nohighlight">\(n\to \infty\)</span>.<br />
+The CLT holds under pretty general conditions:</p>
+<ul>
+<li><p>both mean and variance have to exist for each of the random
+variables in the sum</p></li>
+<li><p>Lindeberg criteria:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{aligned}
+    y_k &amp;=&amp;  x_k,\quad {\rm if}\, |x_k-\mu_k|\le \epsilon_k\sigma_k \\
+    y_k &amp;=&amp;   0,\quad {\rm if}\, |x_k-\mu_k|&gt; \epsilon_k\sigma_k.
+    \end{aligned}
+    \end{split}\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(\epsilon_{k}\)</span> is an arbitrary number.
+If the variance <span class="math notranslate nohighlight">\((y_{1}+y_{2}+\cdots y_{n})/ \sigma_{y}^{2} \to 1\)</span> for
+<span class="math notranslate nohighlight">\(n \to \infty\)</span>, then this condition is fulfilled for the CLT. In
+plain English: The Lindeberg criteria ensures that fluctuations of a
+single variable does not dominate its sum.</p>
+</li>
+</ul>
+<p>An example of convergence for the CLT is given below where a
+uniform distribution is used for 4 iterations.</p>
+<p>When performing measurements the value obtained is usually affected by a
+large number of (hopefully) small uncertainties. If this number of small
+contributions is large the C.L.T. tells us that their total sum is
+Gaussian distributed. This is often the case and is the reason
+resolution functions are usually Gaussian. But if there are only a few
+contributions, or if a few of the contributions are much larger than the
+rest, the C.L.T. is not applicable, and the sum is not necessarily
+Gaussian.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>The inverse transverse momentum <span class="math notranslate nohighlight">\(q/p_T\)</span>, with q the charge of
+the particle, can be deduced from the measured sagitta. <span class="math notranslate nohighlight">\(Q/p_T\)</span> has
+Gaussian errors, not <span class="math notranslate nohighlight">\(p_T\)</span> !</p>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evts</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="n">limits</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">Ns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">,</span> <span class="p">(</span><span class="n">evts</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">Ns</span><span class="p">)))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">Ns</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">N</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">Ns</span><span class="p">):</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sample</span><span class="p">[:,</span> <span class="p">:</span><span class="n">N</span><span class="p">],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;N=</span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Number of Events&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/06471f5b0a015a865f5415961cf8de60863b573ae84c806706e70a2d8ae322f6.png" src="_images/06471f5b0a015a865f5415961cf8de60863b573ae84c806706e70a2d8ae322f6.png" />
+</div>
+</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>Pretty much every book about statistics/probability will cover the
+material of this chapter. Here are a few examples:</p>
+<ul class="simple">
+<li><p>E. Robinson, <span id="id3">[]</span>, “Data Analysis for Scientists and Engineers”: Ch.2 and 4</p></li>
+<li><p>W. Metzger, <span id="id4">[<a class="reference internal" href="bibliography.html#id3" title="Wes Metzger. Statistical Methods in Data Analysis. Katholieke Universiteit Nijmegen, Nijmegen, The Netherlands, 2002. URL: https://www.hef.ru.nl/~wes/stat_course/statist_2002.pdf.">Met02</a>]</span>, “Statistical Methods in Data Analysis”: Ch.2</p></li>
+<li><p>L. Lyons, <span id="id5">[<a class="reference internal" href="bibliography.html#id4" title="Lyons Louis. Statistics for Nuclear and Particle Physicists. Cambridge University Press, 1986. URL: https://www.cambridge.org/highereducation/books/statistics-for-nuclear-and-particle-physicists/9544B39F3244D9457BEC324CD34F1571#overview.">Lou86</a>]</span>, “Statistics for Nuclear and Particle Physicist”: Ch. 3</p></li>
+<li><p>PDG, <span id="id6">[<a class="reference internal" href="bibliography.html#id5" title="Particle Data Group. Probability. Lawrence Berkeley National Laboratory, 2022. URL: https://pdg.lbl.gov/2022/web/viewer.html?file=../reviews/rpp2022-rev-probability.pdf.">Gro22c</a>]</span>, Probability</p></li>
+<li><p>PDG, <span id="id7">[<a class="reference internal" href="bibliography.html#id6" title="Particle Data Group. Passage of Particle Through Matter. Lawrence Berkeley National Laboratory, 2022. URL: https://pdg.lbl.gov/2022/reviews/rpp2022-rev-passage-particles-matter.pdf.">Gro22a</a>]</span>, Passage of particles through matter</p></li>
+</ul>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="interactive-nbs/covarianceCorrelation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Covariance and correlation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="interactive-nbs/randomWalk.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Random Walk</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-combinatorics">Basic combinatorics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factorial">Factorial</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permutations-with-repetitions">Permutations with repetitions:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permutations-without-repetitions">Permutations without repetitions:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combinations-without-repetitions">Combinations without repetitions:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combinations-with-repetitions">Combinations with repetitions:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-distributions">Discrete Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bernoulli-trials">Bernoulli trials</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial">Binomial</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-distribution">Multinomial Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poisson-distribution">Poisson Distribution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-distributions">Continuous Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-distribution">Uniform Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-or-normal-distribution">Gaussian or Normal Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-2-distribution"><span class="math notranslate nohighlight">\(\chi^2\)</span> Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-normal-distribution">Log-Normal Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exponential-distribution">Exponential Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gamma-distribution">Gamma Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#student-s-t-distribution">Student’s <span class="math notranslate nohighlight">\(t\)</span>-distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-distribution"><span class="math notranslate nohighlight">\(F\)</span>-distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weibull-distribution">Weibull Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cauchy-breit-wigner-distribution">Cauchy (Breit-Wigner) Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#landau-distribution">Landau Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crystal-ball">Crystal Ball</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-central-limit-theorem">The Central Limit Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mauro Donega
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

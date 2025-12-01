@@ -1,0 +1,784 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Feldman-Cousins confidence cnterval construction for a single Poisson, with known background and unknown signal &#8212; Statistical Methods and Data Analysis Techniques</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'interactive-nbs/FC_PoissonMeanWithKnownBackground';</script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Interactive Example - Upper Limit" href="UpperLimit.html" />
+    <link rel="prev" title="Compute the bayesian upper limit for a Poisson near the physical boundary" href="LimitNearBoundariesBayesianApproachPoisson.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../preface.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Statistical Methods and Data Analysis Techniques - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Statistical Methods and Data Analysis Techniques - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../preface.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../probability.html">Probability</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ConditionalProbability.html">Conditional Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BayesTheorem.html">Bayes Theorem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exponentialGrowth.html">Example of exponential growth</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="harmonicMean.html">Harmonic mean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="covarianceCorrelation.html">Covariance and correlation</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../probabilityDistributions.html">Probability Distributions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="randomWalk.html">Random Walk</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../errors.html">Measurements uncertainties</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ErrorMatrix.html">Interactive Example - Error Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slidingMean.html">Sliding Mean</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../monteCarlo.html">Monte Carlo methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="randomNumbers.html">Random numbers generators with “numpy”</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../inference.html">Statistical inference</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../likelihood.html">Parameter Estimation - Likelihood</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="StraighLineFit_LSM_vs_MLM.html">From LSM to MLM (…a.k.a. from Physics 1 laboratory to the Likelihood)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MLMethod.html">Interactive Example - ML Method: Mean of a Gaussian</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../leastSquares.html">Parameter Estimation - Least Squares</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../hypothesisTesting.html">Hypotheses Testing</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../confidenceIntervals.html">Confidence Intervals</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Poisson_CI.html">Poisson Confidence Intervals</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="Gaussian_CI.html">Gaussian Confidence Intervals</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="LimitNearBoundariesBayesianApproach.html">Compute the bayesian upper limit for a gaussian near the physical boundary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LimitNearBoundariesBayesianApproachPoisson.html">Compute the bayesian upper limit for a Poisson near the physical boundary</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Feldman-Cousins confidence cnterval construction for a single Poisson, with known background and unknown signal</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="UpperLimit.html">Interactive Example - Upper Limit</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../mva.html">Multivariate Analysis Methods</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix.html">Appendices</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/Histograms.html">Histograms</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../exercises.html">Exercises</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/Ex_Histograms.html">Exercises on Histograms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/Ex_Probability.html">Exercises on Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/Ex_ProbabilityDensityFunctions.html">Exercises on Probability Density Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../exercises/Ex_Covariance.html">Exercises on Covariance and Correlation</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/mdonega/hep-datanalysis-jb/main?urlpath=tree/book/interactive-nbs/FC_PoissonMeanWithKnownBackground.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/interactive-nbs/FC_PoissonMeanWithKnownBackground.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Feldman-Cousins confidence cnterval construction for a single Poisson, with known background and unknown signal</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Feldman-Cousins confidence cnterval construction for a single Poisson, with known background and unknown signal</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example-python-code-for-feldman-cousins-construction-for-a-single-poisson-with-an-unknown-signal-and-known-background">Example python code for Feldman-Cousins construction for a single Poisson with an unknown signal and known background</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="feldman-cousins-confidence-cnterval-construction-for-a-single-poisson-with-known-background-and-unknown-signal">
+<h1>Feldman-Cousins confidence cnterval construction for a single Poisson, with known background and unknown signal<a class="headerlink" href="#feldman-cousins-confidence-cnterval-construction-for-a-single-poisson-with-known-background-and-unknown-signal" title="Link to this heading">#</a></h1>
+<p>Experiments searching for small signal often face the problem of detecting zero events, while having a known background expectation. For a single counting experiment this means using a Poisson pdf:</p>
+<p>\begin{equation}
+P(n|\mu) = \frac{(\mu + b)^{n}}{n!}\exp[-(\mu+b)]
+\end{equation}</p>
+<p>where <span class="math notranslate nohighlight">\(\mu\)</span> is the unknown signal, <span class="math notranslate nohighlight">\(b\)</span> is the known background and <span class="math notranslate nohighlight">\(n\)</span> is the observed number of events.</p>
+<p>As is well known, for a given <span class="math notranslate nohighlight">\(\mu\)</span> parameter, this Poisson pdf will give a probability of observing different amount of events, <span class="math notranslate nohighlight">\(n\)</span>. It looks like the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">poisson</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1"># the Poisson PDF, to be vectorized later</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">PoissonPDFS</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">mu</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">poisson</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+
+<span class="n">Signal</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">Background</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">Nobs</span> <span class="o">=</span> <span class="n">poisson</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">Signal</span><span class="o">+</span><span class="n">Background</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">Nobs</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;N observed events&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/57086dbf7b32e7c4152da50359034943143be5081f71d3cced20b22669c814c7.png" src="../_images/57086dbf7b32e7c4152da50359034943143be5081f71d3cced20b22669c814c7.png" />
+</div>
+</div>
+<p>Having observed <span class="math notranslate nohighlight">\(N\)</span> events, what can we say about the unknown <span class="math notranslate nohighlight">\(\mu\)</span> signal parameter? Feldman and Cousins (Phys.Rev.D57:3873-3889 (1998)) proposed to make a full model inversion, following Neyman. The procedure requires that for a range of physically allowed <span class="math notranslate nohighlight">\(\mu\)</span> values one calculates the distribution of observables, and determines an “acceptence region” for each <span class="math notranslate nohighlight">\(\mu\)</span>, where <span class="math notranslate nohighlight">\(\alpha\)</span> fraction of the observations fall. Therefore we have:</p>
+<p>\begin{equation}
+P(N \in [N_{1},N_{2}]|\mu) = \alpha
+\end{equation}</p>
+<p><span class="math notranslate nohighlight">\(\alpha\)</span> is called the confidence level (C.L.). The obtained acceptence intervals can be used to arrive at the confidence interval for the parameter of interest:</p>
+<p>\begin{equation}
+P(\mu \in [\mu_{1},\mu_{2}]) = \alpha
+\end{equation}</p>
+<p>The way to do it is by plotting for each studied <span class="math notranslate nohighlight">\(\mu\)</span> value the corresponding range <span class="math notranslate nohighlight">\([N_{1}, N_{2}]\)</span>, with the property mentioned above. Such a plot is called the confidence belt and is illustrated below:</p>
+<img src="ConfidenceBelt.png" width="400"><p>On the vertical axis is the parameter of interest, <span class="math notranslate nohighlight">\(\mu\)</span>, and on the horizontal axis is the observable <span class="math notranslate nohighlight">\(x\)</span>. For each values of <span class="math notranslate nohighlight">\(\mu\)</span> one obtains a range of observed values for <span class="math notranslate nohighlight">\(x\)</span> from the pdf, such that they cover <span class="math notranslate nohighlight">\(\alpha\)</span> percentage of the random draws from the underlying distribution (in our example case, Poisson).</p>
+<p>However, note that there is a lot freedom how to determine that area that corresponds to the <span class="math notranslate nohighlight">\(\alpha\)</span> fraction. Feldman and Cousins proposed to use the likelihood ratio to determine the <span class="math notranslate nohighlight">\(\alpha\)</span> fractional area:</p>
+<p>\begin{equation}
+R = P(N |\mu)/P(N| \mu_{best})
+\end{equation}</p>
+<p>where values from the observations are added to the acceptence region in order of their “rank” from the R-value. <span class="math notranslate nohighlight">\(R\)</span> is a ratio of two likelihoods: the likelihood of obtaining <span class="math notranslate nohighlight">\(N\)</span> given the actual tested <span class="math notranslate nohighlight">\(\mu\)</span>, and the likelihood of obtaining <span class="math notranslate nohighlight">\(N\)</span> given the best-fit physically allowed mean. Values of <span class="math notranslate nohighlight">\(N\)</span> (or in the figure above, <span class="math notranslate nohighlight">\(x\)</span>) are added to the acceptance region for a given <span class="math notranslate nohighlight">\(\mu\)</span> in decreasing order of <span class="math notranslate nohighlight">\(R\)</span>, until the sum of <span class="math notranslate nohighlight">\(P(N|\mu\)</span>) meets or exceeds the desired confidence level, <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="example-python-code-for-feldman-cousins-construction-for-a-single-poisson-with-an-unknown-signal-and-known-background">
+<h1>Example python code for Feldman-Cousins construction for a single Poisson with an unknown signal and known background<a class="headerlink" href="#example-python-code-for-feldman-cousins-construction-for-a-single-poisson-with-an-unknown-signal-and-known-background" title="Link to this heading">#</a></h1>
+<p>Below we put a possible python solution to construct confidence intervals for the unknown signal parameter of a Poisson single counting experiment, with known background. Note that we get a range of confidence intervals for various discrete number of observed events.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">poisson</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># this scalar function is vectorized below</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">PoissonPDFS</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">mu</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">poisson</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+
+<span class="c1"># parameters</span>
+<span class="n">dsignal</span> <span class="o">=</span> <span class="mf">5e-03</span> <span class="c1"># precision in the scan of the signal parameter</span>
+<span class="n">bkg</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="c1"># known background level</span>
+<span class="n">CL</span> <span class="o">=</span> <span class="mf">0.9</span> <span class="c1"># Confidence Level</span>
+<span class="n">smax</span> <span class="o">=</span> <span class="mi">30</span> <span class="c1"># maximum value of signal parameter for scanning</span>
+<span class="n">nmax</span> <span class="o">=</span> <span class="mi">50</span> <span class="c1"># maximum value used to evaluate the PDF</span>
+
+<span class="c1"># vectors of size of signal parameter scan</span>
+<span class="n">signal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">smax</span><span class="p">,</span> <span class="n">dsignal</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">bkga</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">bkg</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">bkgn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nmax</span><span class="p">,</span> <span class="n">bkg</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">bkg</span> <span class="o">+</span> <span class="n">signal</span>
+<span class="n">muonly</span> <span class="o">=</span> <span class="n">signal</span>
+<span class="n">myzeros</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nmax</span><span class="p">)</span>
+<span class="n">nmax_ar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nmax</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="n">naccmin_a</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">naccmax_a</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">vecPoissonPDF</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">PoissonPDFS</span><span class="p">)</span>
+
+<span class="c1"># scanning with the Signal parameter</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">mu</span><span class="p">):</span>
+    <span class="c1"># vectors of size nmax</span>
+
+    <span class="n">p</span> <span class="o">=</span> <span class="n">vecPoissonPDF</span><span class="p">(</span><span class="n">nmax_ar</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="c1"># get the best signal parameter value</span>
+    <span class="n">n_b</span> <span class="o">=</span> <span class="n">nmax_ar</span> <span class="o">-</span> <span class="n">bkgn</span>
+    <span class="c1"># this is to all elements be &gt;= 0</span>
+    <span class="n">sbest</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">myzeros</span><span class="p">,</span> <span class="n">n_b</span><span class="p">)</span>
+    <span class="n">b_p_sb</span> <span class="o">=</span> <span class="n">bkgn</span> <span class="o">+</span> <span class="n">sbest</span>
+    <span class="c1"># the best guess for the mu parameter - a vector</span>
+    <span class="n">mubest</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">myzeros</span><span class="p">,</span> <span class="n">b_p_sb</span><span class="p">)</span>
+    <span class="n">pbest</span> <span class="o">=</span> <span class="n">vecPoissonPDF</span><span class="p">(</span><span class="n">nmax_ar</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">mubest</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+    <span class="c1"># save the likelihood ratios</span>
+    <span class="n">p_o_pbest</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">pbest</span><span class="p">)</span>
+
+    <span class="c1"># merge two arrays</span>
+    <span class="n">p_w_ratio</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">p</span><span class="p">,</span> <span class="n">p_o_pbest</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">n_w_ratio</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">nmax_ar</span><span class="p">,</span> <span class="n">p_o_pbest</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="c1"># remove nan</span>
+    <span class="n">p_w_ratio</span> <span class="o">=</span> <span class="n">p_w_ratio</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">p_w_ratio</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="n">n_w_ratio</span> <span class="o">=</span> <span class="n">n_w_ratio</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">n_w_ratio</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+
+    <span class="c1"># sort, descending order, with index list</span>
+    <span class="n">ratio_col</span> <span class="o">=</span> <span class="n">p_w_ratio</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">p_col</span> <span class="o">=</span> <span class="n">p_w_ratio</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">n_col</span> <span class="o">=</span> <span class="n">n_w_ratio</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="n">arr1inds</span> <span class="o">=</span> <span class="n">ratio_col</span><span class="o">.</span><span class="n">argsort</span><span class="p">()</span>
+    <span class="n">ratio_col_sort</span> <span class="o">=</span> <span class="n">ratio_col</span><span class="p">[</span><span class="n">arr1inds</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> 
+    <span class="n">p_col_sort</span> <span class="o">=</span> <span class="n">p_col</span><span class="p">[</span><span class="n">arr1inds</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="n">n_col_sort</span> <span class="o">=</span> <span class="n">n_col</span><span class="p">[</span><span class="n">arr1inds</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+    
+    <span class="n">sump</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">prevp</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">acc_n</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="c1"># sum up probabilities until the CL is reached</span>
+    <span class="k">for</span> <span class="n">prob</span><span class="p">,</span><span class="n">numb</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">([</span><span class="n">p_col_sort</span><span class="p">,</span> <span class="n">n_col_sort</span><span class="p">]):</span>
+        <span class="n">prevp</span> <span class="o">=</span> <span class="n">sump</span>
+        <span class="n">sump</span> <span class="o">=</span> <span class="n">sump</span> <span class="o">+</span> <span class="n">prob</span>
+        <span class="k">if</span> <span class="n">sump</span> <span class="o">&lt;=</span> <span class="n">CL</span><span class="p">:</span>
+            <span class="n">acc_n</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numb</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">prevp</span> <span class="o">&lt;=</span> <span class="n">CL</span> <span class="ow">and</span> <span class="n">sump</span> <span class="o">&gt;</span> <span class="n">CL</span><span class="p">:</span>
+            <span class="n">acc_n</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numb</span><span class="p">)</span>
+    
+    <span class="c1"># save the minimum and maximum in acceptance regions</span>
+    <span class="n">acc_narr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">acc_n</span><span class="p">)</span>
+    <span class="n">naccmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">acc_narr</span><span class="p">)</span>
+    <span class="n">naccmin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">acc_narr</span><span class="p">)</span>
+    <span class="n">naccmax_a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">naccmax</span><span class="p">)</span>
+    <span class="n">naccmin_a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">naccmin</span><span class="p">)</span>
+    
+<span class="c1"># collect limits</span>
+<span class="n">naccmax_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">naccmax_a</span><span class="p">)</span>
+<span class="n">naccmin_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">naccmin_a</span><span class="p">)</span>
+
+<span class="c1"># create 3D array: (Signal parameter, acc min, acc max)</span>
+<span class="n">maparr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">muonly</span><span class="p">,</span> <span class="n">naccmin_np</span><span class="p">,</span> <span class="n">naccmax_np</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+
+
+<span class="c1"># Now loop over observable nobs and check</span>
+<span class="c1"># which value falls inside the acceptance region</span>
+<span class="c1"># The mask checks column 1 and 2 for the value to</span>
+<span class="c1"># be inside nobs, then prints all rows that remain</span>
+<span class="n">nobs</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="n">ulimit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">llimit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">nob</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">nobs</span><span class="p">):</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">maparr</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">nob</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">maparr</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">nob</span><span class="p">)</span>
+    <span class="n">masked</span> <span class="o">=</span> <span class="n">maparr</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+    <span class="n">llimit</span><span class="p">[</span><span class="n">nob</span><span class="p">]</span> <span class="o">=</span> <span class="n">masked</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">ulimit</span><span class="p">[</span><span class="n">nob</span><span class="p">]</span> <span class="o">=</span> <span class="n">masked</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">nob</span><span class="p">,</span> <span class="s2">&quot;:&quot;</span> <span class="p">,</span> <span class="n">masked</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;-&quot;</span> <span class="p">,</span> <span class="n">masked</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+
+
+
+<span class="c1"># plot lower and upper limits</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of observed events&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;90% C.L. conf. interval on the unknown mean&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">nobs</span><span class="p">,</span> <span class="n">llimit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">nobs</span><span class="p">,</span> <span class="n">ulimit</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="n">llimit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 : 0.0 - 0.949999988079071
+1 : 0.0 - 1.875
+2 : 0.0 - 3.0349998474121094
+3 : 0.0 - 4.420000076293945
+4 : 0.0 - 5.59499979019165
+5 : 0.0 - 6.984999656677246
+6 : 0.1550000011920929 - 8.46500015258789
+7 : 0.8949999809265137 - 9.529999732971191
+8 : 1.5099999904632568 - 10.989999771118164
+9 : 1.8799999952316284 - 12.295000076293945
+10 : 2.634999990463257 - 13.5
+11 : 3.0399999618530273 - 14.809999465942383
+12 : 4.009999752044678 - 16.0
+13 : 4.424999713897705 - 17.049999237060547
+14 : 5.505000114440918 - 18.5
+15 : 6.484999656677246 - 19.520000457763672
+16 : 6.989999771118164 - 20.989999771118164
+17 : 8.039999961853027 - 22.014999389648438
+18 : 8.470000267028809 - 23.154998779296875
+19 : 9.514999389648438 - 24.5049991607666
+</pre></div>
+</div>
+<img alt="../_images/08a37075162d5dde5380dc501dd56f36d5a39fb7e93c3d3559e956a219f45f9d.png" src="../_images/08a37075162d5dde5380dc501dd56f36d5a39fb7e93c3d3559e956a219f45f9d.png" />
+</div>
+</div>
+<p>In the output above, the confidence interval is either an upper limit, or a central confidence region, depending on the number of observed events. The boundaries automatically “bend” to zero for the lower limit, not allowing unphysically (e.g. negative) boundaries in the confidence intervals for <span class="math notranslate nohighlight">\(\mu\)</span> when 0 events are observed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of observed events&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;90% C.L. conf. interval on the unknown mean&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">nobs</span><span class="p">,</span> <span class="n">llimit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">nobs</span><span class="p">,</span> <span class="n">ulimit</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="n">llimit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="c1">#ax.set_ylim(0, 15)</span>
+<span class="c1">#ax.set_xlim(0, 15)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a99a0ff602df0c5db826b77c3061e2151333c14251a00168043167d2c0730b2a.png" src="../_images/a99a0ff602df0c5db826b77c3061e2151333c14251a00168043167d2c0730b2a.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./interactive-nbs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="LimitNearBoundariesBayesianApproachPoisson.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Compute the bayesian upper limit for a Poisson near the physical boundary</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="UpperLimit.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Interactive Example - Upper Limit</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Feldman-Cousins confidence cnterval construction for a single Poisson, with known background and unknown signal</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example-python-code-for-feldman-cousins-construction-for-a-single-poisson-with-an-unknown-signal-and-known-background">Example python code for Feldman-Cousins construction for a single Poisson with an unknown signal and known background</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mauro Donega
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

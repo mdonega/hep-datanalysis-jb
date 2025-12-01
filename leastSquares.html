@@ -1,0 +1,1173 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Parameter Estimation - Least Squares &#8212; Statistical Methods and Data Analysis Techniques</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'leastSquares';</script>
+    <link rel="icon" href="_static/favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="interactive-nbs/LSM_errorBand.html" />
+    <link rel="prev" title="Interactive Example - ML Method: Mean of a Gaussian" href="interactive-nbs/MLMethod.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="preface.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Statistical Methods and Data Analysis Techniques - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Statistical Methods and Data Analysis Techniques - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="preface.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="probability.html">Probability</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/ConditionalProbability.html">Conditional Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/BayesTheorem.html">Bayes Theorem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/exponentialGrowth.html">Example of exponential growth</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/harmonicMean.html">Harmonic mean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/covarianceCorrelation.html">Covariance and correlation</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="probabilityDistributions.html">Probability Distributions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/randomWalk.html">Random Walk</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="errors.html">Measurements uncertainties</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/ErrorMatrix.html">Interactive Example - Error Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/slidingMean.html">Sliding Mean</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="monteCarlo.html">Monte Carlo methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/randomNumbers.html">Random numbers generators with “numpy”</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="inference.html">Statistical inference</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="likelihood.html">Parameter Estimation - Likelihood</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/StraighLineFit_LSM_vs_MLM.html">From LSM to MLM (…a.k.a. from Physics 1 laboratory to the Likelihood)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/MLMethod.html">Interactive Example - ML Method: Mean of a Gaussian</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Parameter Estimation - Least Squares</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="hypothesisTesting.html">Hypotheses Testing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="confidenceIntervals.html">Confidence Intervals</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/Poisson_CI.html">Poisson Confidence Intervals</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/Gaussian_CI.html">Gaussian Confidence Intervals</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/LimitNearBoundariesBayesianApproach.html">Compute the bayesian upper limit for a gaussian near the physical boundary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/LimitNearBoundariesBayesianApproachPoisson.html">Compute the bayesian upper limit for a Poisson near the physical boundary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/FC_PoissonMeanWithKnownBackground.html">Feldman-Cousins confidence cnterval construction for a single Poisson, with known background and unknown signal</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="interactive-nbs/UpperLimit.html">Interactive Example - Upper Limit</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="mva.html">Multivariate Analysis Methods</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="appendix.html">Appendices</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="appendices/Histograms.html">Histograms</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="exercises.html">Exercises</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises/Ex_Histograms.html">Exercises on Histograms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises/Ex_Probability.html">Exercises on Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises/Ex_ProbabilityDensityFunctions.html">Exercises on Probability Density Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises/Ex_Covariance.html">Exercises on Covariance and Correlation</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/mdonega/hep-datanalysis-jb/main?urlpath=tree/book/leastSquares.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/leastSquares.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Parameter Estimation - Least Squares</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-least-squares-method">The Least Squares Method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-the-likelihood-function">Connection to the Likelihood Function</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-straight-line">Fitting a Straight Line</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#considering-the-systematic-errors">Considering the systematic Errors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#straight-line-fit-with-errors-on-both-variables">Straight Line Fit with Errors on both Variables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-notation-and-the-uncertainty-on-the-fitted-parameters">Matrix Notation and the uncertainty on the fitted parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binned-chi-2-fit">Binned <span class="math notranslate nohighlight">\(\chi^{2}\)</span> fit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-of-the-chi-2-to-test-the-goodness-of-fit">Use of the <span class="math notranslate nohighlight">\(\chi^2\)</span> to test the goodness of fit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="parameter-estimation-least-squares">
+<h1>Parameter Estimation - Least Squares<a class="headerlink" href="#parameter-estimation-least-squares" title="Link to this heading">#</a></h1>
+<p>Together with the maximum likelihood method, the method of least squares
+(LS or LSQ) is very often used in parameters estimation. In this chapter
+we will give a description of the method together with a few examples
+and show its relation with the ML method.</p>
+<section id="the-least-squares-method">
+<h2>The Least Squares Method<a class="headerlink" href="#the-least-squares-method" title="Link to this heading">#</a></h2>
+<p>Let’s take a set of independent Gaussian random variables <span class="math notranslate nohighlight">\(y_i\)</span>, with
+<span class="math notranslate nohighlight">\(i=1,\ldots,N\)</span> and let’s assume that each <span class="math notranslate nohighlight">\(y_i\)</span> is distributed around an
+unknown mean <span class="math notranslate nohighlight">\(\mu_i\)</span> with variance <span class="math notranslate nohighlight">\(\sigma^2_i\)</span>, where the mean is
+predicted by a function <span class="math notranslate nohighlight">\(f(x_i;a)\)</span> <a class="reference internal" href="#fig-chi2sketch"><span class="std std-numref">Fig. 16</span></a>.
+In the typical application the <span class="math notranslate nohighlight">\(y_i\)</span> are
+the (independent) measurements with uncertainty <span class="math notranslate nohighlight">\(\sigma_i\)</span> and
+<span class="math notranslate nohighlight">\(f(x_i;a)\)</span> is the functional form of the “model” for which you are
+interested in estimating the value of some parameters (in this case
+<span class="math notranslate nohighlight">\(a\)</span>).</p>
+<figure class="align-center" id="fig-chi2sketch">
+<a class="reference internal image-reference" href="_images/chi2Sketch.png"><img alt="_images/chi2Sketch.png" src="_images/chi2Sketch.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 16 </span><span class="caption-text">FIXME: Sketch to illustrate the notation.</span><a class="headerlink" href="#fig-chi2sketch" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>If the data <span class="math notranslate nohighlight">\(\{y_i\}\)</span> are Gaussian distributed around the mean
+<span class="math notranslate nohighlight">\(f(x_i;a)\)</span> then the sum:</p>
+<div class="math notranslate nohighlight" id="equation-eq-chisquareequation">
+<span class="eqno">(8)<a class="headerlink" href="#equation-eq-chisquareequation" title="Link to this equation">#</a></span>\[\chi^{2} = \sum_{i=1}^{N}\left(\frac{y_{i} -f(x_{i};a)}{\sigma_{i}} \right)^{2}\]</div>
+<p>obeys a <span class="math notranslate nohighlight">\(\chi^{2}\)</span>-distribution with <span class="math notranslate nohighlight">\((N-1)\)</span> degrees of freedom (the
+number of measurements, minus the number of fitted parameters). In the
+general case of <span class="math notranslate nohighlight">\(p\)</span>-parameters to be fitted
+(<span class="math notranslate nohighlight">\(f(x_i;a)\to f(x_i;\vec{a})\)</span> ) the number of degrees of freedom will be
+<span class="math notranslate nohighlight">\(N-p\)</span>.</p>
+<p>To find the best estimate for the parameter <span class="math notranslate nohighlight">\(a\)</span> we proceed in a way
+similar to what we have done in the ML-method: we look for the value of
+the parameter <span class="math notranslate nohighlight">\(a\)</span> which minimize the <span class="math notranslate nohighlight">\(\chi^2\)</span>. If you interpret the
+<span class="math notranslate nohighlight">\(\chi^2\)</span> as a distance, the LS method corresponds to minimize the
+distance between the measured data and the considered model. This boils
+down to calculating the minimum of the <span class="math notranslate nohighlight">\(\chi^2\)</span> as:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d\chi^2}{da} = 2 \sum_{i=1}^N \frac{d}{da}f(x_i;a) \cdot \frac{y_i - f(x_i ; a)}{\sigma_i^2} = 0.
+\]</div>
+<p>In case of <span class="math notranslate nohighlight">\(p\)</span> parameters <span class="math notranslate nohighlight">\(a_1,\ldots,a_p\)</span> and <span class="math notranslate nohighlight">\(f(x;\vec{a})\)</span>, the idea
+is the same, just the minimization will have to be performed
+simultaneously in <span class="math notranslate nohighlight">\(p\)</span> dimensions.</p>
+<section id="connection-to-the-likelihood-function">
+<h3>Connection to the Likelihood Function<a class="headerlink" href="#connection-to-the-likelihood-function" title="Link to this heading">#</a></h3>
+<p>The simplest way to see the relation between the LS and the ML methods
+is to take a set of data <span class="math notranslate nohighlight">\((x_{i},y_{i})\)</span> for which the <span class="math notranslate nohighlight">\(x_{i}\)</span> are known
+precisely and the <span class="math notranslate nohighlight">\(y_{i}\)</span> are known with uncertainties <span class="math notranslate nohighlight">\(\sigma_{i}\)</span>.
+Under the assumption that the <span class="math notranslate nohighlight">\(y_{i}\)</span> are Gaussian distributed (for
+instance when coming from the CLT), the probability to observe <span class="math notranslate nohighlight">\(y_i\)</span>
+given the prediction <span class="math notranslate nohighlight">\(f(x_i;a)\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[
+p(y_i|a)=\frac{1}{\sigma_i\sqrt{2\pi}}e^{-(y_i-f(x_i|a))^2/2\sigma_i^2}
+\]</div>
+<p>From this we can build the likelihood function for the complete data set
+as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+L(a,\vec{y})&amp;=&amp;\prod_ip(y_i|a) \\
+\ln L(a,\vec{y})&amp;=&amp;-\frac{1}{2}\sum_{i} \left(\frac{y_i-f(x_i|a)}{\sigma_i}\right)^2
+-\sum_{i} \ln\sigma_i\sqrt{2\pi},\end{aligned}
+\end{split}\]</div>
+<p>where only the first
+term depends on <span class="math notranslate nohighlight">\(a\)</span>. To minimize the negative log-likelihood as a
+function of the parameter <span class="math notranslate nohighlight">\(a\)</span> we will have to minimize:</p>
+<div class="math notranslate nohighlight">
+\[
+\chi^2=\sum_{i} \left(\frac{y_i-f(x_i|a)}{\sigma_i}\right)^2
+\]</div>
+<p>which corresponds to the <span class="math notranslate nohighlight">\(\chi^2\)</span> procedure shown in the previous section.</p>
+</section>
+</section>
+<section id="fitting-a-straight-line">
+<h2>Fitting a Straight Line<a class="headerlink" href="#fitting-a-straight-line" title="Link to this heading">#</a></h2>
+<p>As a first example of the application of the LS method, we take a set of
+<span class="math notranslate nohighlight">\(N\)</span> independent measurements <span class="math notranslate nohighlight">\((x_i,y_i)\)</span> where we assume that the model
+is linear, and in particular that <span class="math notranslate nohighlight">\(f(x) = mx\)</span> (i.e. a straight line
+passing through the origin). The quantity which has to be minimized is
+then:</p>
+<div class="math notranslate nohighlight">
+\[
+\label{}
+\chi^2=\sum_i\left(\frac{y_i-mx_i}{\sigma_i}\right)^2
+\]</div>
+<p>We furthermore
+assume that all the uncertainties are the same:
+<span class="math notranslate nohighlight">\(\sigma_{i} = \sigma \, \, \forall i\)</span>. Differentiating with respect to
+<span class="math notranslate nohighlight">\(m\)</span> and equating to zero to obtain the best estimator <span class="math notranslate nohighlight">\(\hat{m}\)</span>, we
+have:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\frac{\partial \chi^2}{\partial m}&amp;=&amp;-\frac{2}{\sigma^2}\sum_i(x_iy_i-mx_i^2)\\
+\sum_i(x_iy_i-mx_i^2) &amp;=&amp;0 \\
+\sum_i x_iy_i&amp;=&amp;m\sum_i x_i^2 \\
+\hat{m}&amp;=&amp;\sum_i\frac{x_i y_i}{N\overline{x^2}}=\frac{\overline{xy}}{\overline{x^2}} \qquad \left(\sum x_i^2 = N \overline{x^2}\right)\end{aligned}
+\end{split}\]</div>
+<p>The variance of <span class="math notranslate nohighlight">\(\hat{m}\)</span> can be determined by error propagation to be:</p>
+<div class="math notranslate nohighlight">
+\[
+V(\hat{m})=\sum_i\left(\frac{x_i}{N\overline{x^2}}\right)^2\sigma^2=\frac{\sigma^2}{N\overline{x^2}}.
+\]</div>
+<p>When the straight line does not pass through the origin,
+<span class="math notranslate nohighlight">\(f(x_{i};m,b) = mx_{i} + b\)</span> the solution of the LS method is:</p>
+<div class="math notranslate nohighlight" id="equation-eq-ls-slope-intercept">
+<span class="eqno">(9)<a class="headerlink" href="#equation-eq-ls-slope-intercept" title="Link to this equation">#</a></span>\[\begin{split}\begin{aligned}
+\hat{m} &amp;=&amp; \frac{\overline{xy}-\bar{x}\bar{y}}{\overline{x^2}-\bar{x}^2} \\
+\hat{b} &amp;=&amp; \bar{y}-\hat{m}\bar{x} 
+\end{aligned}\end{split}\]</div>
+<p>The variances are given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\sigma_m^2 &amp;=&amp; V(\hat{m})=\frac{\sigma^2}{N(\overline{x^2}-\bar{x}^2)} \\
+\sigma_b^2 &amp;=&amp; V(\hat{b})=\frac{\sigma^2\overline{x^2}}{N(\overline{x^2}-\bar{x}^2)} \\
+cov(\hat{m},\hat{b}) &amp;=&amp; -\frac{\sigma^2\bar{x}}{N(\overline{x^2}-\bar{x}^2)} \\\end{aligned}
+\end{split}\]</div>
+<p>The <span class="math notranslate nohighlight">\(\chi^{2}\)</span> for the best fit is:</p>
+<div class="math notranslate nohighlight">
+\[
+\chi^2 =\frac{V(y)}{\sigma^2}(1-\rho^2(x,y))
+\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(V(y)\)</span> is not the same as <span class="math notranslate nohighlight">\(\sigma^{2}\)</span>!</p>
+<p><span class="math notranslate nohighlight">\(V(y) = \bar{y^{2}} - \bar{y}^{2}\)</span> is the
+variance of the whole data sample, whereas <span class="math notranslate nohighlight">\(\sigma\)</span> describes the
+standard deviation of a single measurement around its true value (here
+we assumed <span class="math notranslate nohighlight">\(\sigma_i = \sigma \; \forall i\)</span>).</p>
+<p>If the errors <span class="math notranslate nohighlight">\(\sigma_{i}\)</span> are not all the same, we have to minimize the
+following expression:</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_i\frac{(y_i-mx_i-b)^2}{\sigma_i^2}.
+\]</div>
+<p>The solution of this minimization can again be obtained by the equations
+given above, if the two means <span class="math notranslate nohighlight">\(\bar{x}\)</span> and <span class="math notranslate nohighlight">\(\bar{y}\)</span> are replaced by
+the weighted means. Furthermore the normalization is no longer given
+simply given by <span class="math notranslate nohighlight">\(N\)</span> but it is given by <span class="math notranslate nohighlight">\(\sum_{i} 1/\sigma_{i}^{2}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\sum_i y_i}{N}\to \frac{\sum_iy_i/\sigma_i^2}{\sum_i 1/\sigma_i^2}
+\]</div>
+<p>And the quantity <span class="math notranslate nohighlight">\(\sigma^{2}\)</span> has to be replaced in the expressions for
+the variance by</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma^2\to \frac{N}{\sum_i 1/\sigma_i^2}.
+\]</div>
+<p>For the sake of completeness we give here the full solution in a form
+which is particularly useful when plugged into a program. We define:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+S_1&amp;=&amp;\sum_i w_i=\sum_i 1/\sigma_i^2 \\
+S_x &amp;=&amp;\sum w_i x_i \quad S_y=\sum_i w_iy_i \\
+S_{xx}&amp;=&amp;\sum_iw_ix_i^2 \quad S_{xy}=\sum_iw_ix_iy_i \quad S_{yy}=\sum_iw_iy_i^2\end{aligned}
+\end{split}\]</div>
+<p>With this notation we can rewrite the linear system of equation as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left(\begin{array}{cc}
+ S_1  &amp; S_x \\
+S_x &amp; S_{xx} \\
+\end{array}\right)\cdot {b \choose m} ={S_y \choose S_{xy}}.
+\end{split}\]</div>
+<p>With the expression of the determinant <span class="math notranslate nohighlight">\(D\)</span>:
+$<span class="math notranslate nohighlight">\(
+\begin{aligned}
+D&amp;=&amp;S_1S_{xx}-S_x^2 \\\end{aligned}
+\)</span>$</p>
+<p>we can compute:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\hat{b}&amp;=&amp;(S_{xx}S_y-S_xS_{xy})/D \\
+\hat{m}&amp;=&amp;(-S_{x}S_y+S_1S_{xy})/D\end{aligned}
+\end{split}\]</div>
+<p>Once the slope <span class="math notranslate nohighlight">\(\hat{m}\)</span> and the intercept <span class="math notranslate nohighlight">\(\hat{b}\)</span> are obtained, we
+can compute the uncertainty for an arbitrary interpolated (or
+extrapolated) point <span class="math notranslate nohighlight">\(y\)</span> for a given <span class="math notranslate nohighlight">\(x\)</span>. For such a given <span class="math notranslate nohighlight">\(x\)</span> the
+predicted value for <span class="math notranslate nohighlight">\(y\)</span> is just <span class="math notranslate nohighlight">\(y = \hat{m} x + \hat{b}\)</span> and the error
+for the interpolated value <span class="math notranslate nohighlight">\(y\)</span> is then:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+V(y)&amp;=&amp;V(\hat{m}x+\hat{b})=V(\hat{m}x)+V(\hat{b})+2\cdot cov(\hat{m}x,\hat{b})\\
+V(y)&amp;=&amp;x^2V(\hat{m})+V(\hat{b})+2x\cdot cov(\hat{m},\hat{b}) \\
+V(y)&amp;=&amp;\frac{\sigma^2(x-\bar{x})^2}{N(\overline{x^2}-\bar{x}^2)}+\sigma^2/N\end{aligned}
+\end{split}\]</div>
+<p>You can play with uncertainty bands with this notebook: <a class="reference internal" href="interactive-nbs/LSM_errorBand.html"><span class="doc std std-doc">interactive-nb</span></a>.</p>
+<section id="considering-the-systematic-errors">
+<h3>Considering the systematic Errors<a class="headerlink" href="#considering-the-systematic-errors" title="Link to this heading">#</a></h3>
+<p>As an example we consider a straight line fit where all the measurements
+<span class="math notranslate nohighlight">\(y_{i}\)</span> have a common statistic error <span class="math notranslate nohighlight">\(\sigma\)</span> and a common systematic
+error <span class="math notranslate nohighlight">\(S\)</span>. We know from the discussion about systematic errors in
+Ch. <a class="reference internal" href="#errors.html#statistical-vs-systematic-uncertainties"><span class="xref myst">Uncertainties</span></a>
+that the covariance matrix <span class="math notranslate nohighlight">\(cov(y_{i},y_{j})\)</span> can
+be written as <span class="math notranslate nohighlight">\(cov(y_{i},y_{j}) = \delta_{ij}\sigma^{2} +S^{2}\)</span>. The
+estimators for the slope and the intercept, <span class="math notranslate nohighlight">\(\hat{m}\)</span> and <span class="math notranslate nohighlight">\(\hat{b}\)</span>,
+respectively, are again given by <a class="reference internal" href="#equation-eq-ls-slope-intercept">(9)</a>.</p>
+<p>The complete formula for the variances reads therefore as follows:</p>
+<div class="math notranslate nohighlight" id="equation-eq-summand">
+<span class="eqno">(10)<a class="headerlink" href="#equation-eq-summand" title="Link to this equation">#</a></span>\[\begin{split}\begin{aligned}
+V(\hat{m})&amp;=&amp;\frac{1}{N^2(\overline{x^2}-\bar{x}^2)^2}\sum_{i,j}(x_i-\bar{x})(x_j-\bar{x})\cdot cov(y_i,y_j) \\
+&amp;=&amp;\frac{1}{N^2(\overline{x^2}-\bar{x}^2)^2}\left(\sum_i(x_i-\bar{x})^2\sigma^2+
+\sum_{i,j}(x_i-\bar{x})(x_j-\bar{x})S^2\right)\\
+&amp;=&amp;\frac{1}{N^2(\overline{x^2}-\bar{x}^2)^2}\left(\sum_i(x_i-\bar{x})^2\sigma^2\right)
+\end{aligned}\end{split}\]</div>
+<p>The second summand in Eq. <a class="reference internal" href="#equation-eq-summand">(10)</a> vanishes, because <span class="math notranslate nohighlight">\(1/N \sum x_{i} = \bar{x}\)</span>.</p>
+<p>The variance for <span class="math notranslate nohighlight">\(\hat{b}\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[
+V(\hat{b})=\frac{1}{N^2(\overline{x^2}-\bar{x}^2)^2}\sum_{i,j}(\overline{x^2}-\bar{x}x_i)
+(\overline{x^2}-\bar{x}x_j)\cdot cov(y_i,y_j)
+\]</div>
+<p>The sum <span class="math notranslate nohighlight">\(\sum_i (\overline{x^2}-\bar{x}x_i)=N(\overline{x^2}-\bar{x}^2)\)</span> does
+not vanish in this equation, thus an additional term appears which is
+just <span class="math notranslate nohighlight">\(S^{2}\)</span>; a common systematic error only influences the variance of
+the intercept, but it does not change the variance of the slope, as we
+would have naively expected.</p>
+</section>
+<section id="straight-line-fit-with-errors-on-both-variables">
+<h3>Straight Line Fit with Errors on both Variables<a class="headerlink" href="#straight-line-fit-with-errors-on-both-variables" title="Link to this heading">#</a></h3>
+<p>Now we allow for both variables <span class="math notranslate nohighlight">\(x_{i}\)</span> and <span class="math notranslate nohighlight">\(y_{i}\)</span> to have errors
+<span class="math notranslate nohighlight">\(\sigma_{x_{i}}\)</span> and <span class="math notranslate nohighlight">\(\sigma_{y_{i}}\)</span> (see <a class="reference internal" href="#fig-chi2uncertaintyy"><span class="std std-numref">Fig. 17</span></a> and <a class="reference internal" href="#fig-chi2uncertaintyxy"><span class="std std-numref">Fig. 18</span></a>).
+This means that the sum of the squared residuals of the error ellipsis of the
+straight line has to be minimized, i.e.:</p>
+<div class="math notranslate nohighlight">
+\[
+S(m,b)=\sum_i\frac{(y_i-mx_i-b)^2}{\sigma^2_{y_i}+m^2\sigma^2_{x_i}}
+\]</div>
+<figure class="align-center" id="fig-chi2uncertaintyy">
+<a class="reference internal image-reference" href="_images/chi2UncertaintyY.png"><img alt="_images/chi2UncertaintyY.png" src="_images/chi2UncertaintyY.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 17 </span><span class="caption-text">LS fit with uncertainty only on “y”</span><a class="headerlink" href="#fig-chi2uncertaintyy" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="fig-chi2uncertaintyxy">
+<a class="reference internal image-reference" href="_images/chi2UncertaintyXY.png"><img alt="_images/chi2UncertaintyXY.png" src="_images/chi2UncertaintyXY.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 18 </span><span class="caption-text">LS fit with uncertainty on both “x” and “y”.</span><a class="headerlink" href="#fig-chi2uncertaintyxy" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>As usual, the two equations <span class="math notranslate nohighlight">\(\partial S / \partial m = 0\)</span> and
+<span class="math notranslate nohighlight">\(\partial S / \partial b = 0\)</span> have to be solved.<br />
+The condition <span class="math notranslate nohighlight">\(\partial S / \partial b = 0\)</span> leads to</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{b}=\frac{\sum y_i/\kappa_i-\hat{m}\sum x_i/\kappa_i}{\sum 1/\kappa_i}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\kappa_i=\sigma^2_{y_i}+m^2\sigma^2_{x_i}\)</span>. For <span class="math notranslate nohighlight">\(\hat{m}\)</span>, if the
+errors are all the same on <span class="math notranslate nohighlight">\(x\)</span> (i.e. <span class="math notranslate nohighlight">\(\sigma_{x_{i}} = \sigma_{x}\)</span>) and
+on <span class="math notranslate nohighlight">\(y\)</span> (i.e. <span class="math notranslate nohighlight">\(\sigma_{y_{i}} = \sigma_{y}\)</span>), then the solution for the
+straight line fit is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\hat{m}&amp;=&amp;\frac{\sigma_x}{\sigma_y}(A\pm\sqrt{A^2+1}) \\
+A&amp;=&amp;\frac{\sigma_x^2V(y)-\sigma_y^2V(x)}{2\sigma_x\sigma_y\cdot cov(x,y)} \\
+\bar{y}&amp;=&amp;\hat{m}\bar{x}+\hat{b}
+\end{aligned}
+\end{split}\]</div>
+<p>Other particular cases can be found making assumption on the uncertainties, but to solve the
+generic problem numerical techniques are typically used.</p>
+</section>
+</section>
+<section id="matrix-notation-and-the-uncertainty-on-the-fitted-parameters">
+<h2>Matrix Notation and the uncertainty on the fitted parameters<a class="headerlink" href="#matrix-notation-and-the-uncertainty-on-the-fitted-parameters" title="Link to this heading">#</a></h2>
+<p>Let <span class="math notranslate nohighlight">\({\bf a}\)</span> be a vector of <span class="math notranslate nohighlight">\(n\)</span> parameters <span class="math notranslate nohighlight">\(\{a_{i}\}, i=1,\ldots,n\)</span>.
+The <span class="math notranslate nohighlight">\(N\)</span> measured data points can be represented by a vector
+<span class="math notranslate nohighlight">\({\bf y} = \{y_{i}\},~ i=1,\ldots,N\)</span> and the function to be fitted as
+<span class="math notranslate nohighlight">\(f(x_{i};{\bf a})\)</span>. The <span class="math notranslate nohighlight">\(\chi^2\)</span> expression in matrix form becomes:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\chi^2&amp;=&amp;\sum_i\sum_j[y_i-f(x_i;{\bf a})]V_{ij}^{-1}[y_j-f(x_j;{\bf a})]\\
+      &amp;=&amp;({\bf y}-{\bf f})^T{\bf V}^{-1}({\bf y}-{\bf f})={\bf r^T}{\bf V}^{-1}{\bf r}
+\end{aligned}
+\end{split}\]</div>
+<p>Here, <span class="math notranslate nohighlight">\({\bf r} = {\bf y} - {\bf f}\)</span> is the vector of residuals and
+<span class="math notranslate nohighlight">\(\bf{V}\)</span> is the covariance matrix. By differentiating <span class="math notranslate nohighlight">\(\chi^{2}\)</span> w.r.t
+each <span class="math notranslate nohighlight">\(a_{i}\)</span> and equating each of them to zero yields <span class="math notranslate nohighlight">\(n\)</span> equations,
+which have to be solved simultaneously in order to get the estimator
+<span class="math notranslate nohighlight">\({\bf \hat{a}}\)</span>. Many mathematical packages (e.g. MatLab, Octave,
+etc…) offer a way to solve matrix problems; in slang moving from the
+single components equations to the matrix form is called
+“vectorization”. Because they use highly optimized algorithms, it is
+always preferable to work with the vectorized version of the problem.</p>
+<p>Let <span class="math notranslate nohighlight">\(f(x;{\bf a})\)</span> be a linear function of the parameters <span class="math notranslate nohighlight">\({\bf a}\)</span>:
+<span class="math notranslate nohighlight">\(f(x;{\bf a})=\sum_r c_r(x) a_r\)</span>. Where the linearity is on the
+<span class="math notranslate nohighlight">\({\bf a}\)</span>, the <span class="math notranslate nohighlight">\(c_r(x)\)</span> can be any function of <span class="math notranslate nohighlight">\(x\)</span>. Written in matrix
+form, it reads:</p>
+<div class="math notranslate nohighlight">
+\[
+\chi^2=({\bf y}-{\bf Ca})^T{\bf V}^{-1}({\bf y}-{\bf Ca}).
+\]</div>
+<p>If we have <span class="math notranslate nohighlight">\(N\)</span> data points and <span class="math notranslate nohighlight">\(n\)</span> coefficients <span class="math notranslate nohighlight">\((n \le N)\)</span>, then <span class="math notranslate nohighlight">\({\bf y}\)</span>
+and <span class="math notranslate nohighlight">\({\bf a}\)</span> are column vectors with dimension <span class="math notranslate nohighlight">\(N\)</span> and <span class="math notranslate nohighlight">\(n\)</span>,
+respectively. The covariance matrix <span class="math notranslate nohighlight">\({\bf V}\)</span> has dimension <span class="math notranslate nohighlight">\(N \times N\)</span>
+and the matrix <span class="math notranslate nohighlight">\({\bf C}\)</span> has dimensions <span class="math notranslate nohighlight">\(N \times n\)</span>.</p>
+<p>Minimizing the <span class="math notranslate nohighlight">\(\chi^2\)</span>, the equations <span class="math notranslate nohighlight">\(\partial \chi^{2} / \partial {\bf a} = 0\)</span> are:</p>
+<div class="math notranslate nohighlight">
+\[
+\partial \chi^{2} / \partial {\bf a} = -2 ( \bf{C}^T \bf{V}^{-1} {\bf \bf{y}} - \bf{C}^T \bf{V}^{-1}\bf{C} {\bf a}) = 0 
+\]</div>
+<p>The solution for the estimator <span class="math notranslate nohighlight">\(\hat{ {\bf a}}\)</span> is then:</p>
+<div class="math notranslate nohighlight">
+\[
+{\bf \hat{a}}=({\bf C^T}{\bf V}^{-1}{\bf C})^{-1}{\bf C^T}{\bf V}^{-1}{\bf y} := \bf{B}{\bf y}
+\]</div>
+<p>which means that the solution <span class="math notranslate nohighlight">\({\bf a}\)</span> are linear functions of the
+measurements <span class="math notranslate nohighlight">\({\bf y}\)</span>.</p>
+<p>Using error propagation we can find the covariance matrix for the
+<span class="math notranslate nohighlight">\({\bf \hat{a}}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\bf{U} = \bf{B} \bf{V} \bf{B}^T = [{\bf C^TV}^{-1}{\bf C}]^{-1}
+\]</div>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>Let’s go back to the fit of a straight line of the form
+<span class="math notranslate nohighlight">\(f(x) = mx + b\)</span> to <span class="math notranslate nohighlight">\(N\)</span> data points, which have independent and common
+errors, such that <span class="math notranslate nohighlight">\({\bf V} = \sigma^{2} I\)</span>, i.e.
+<span class="math notranslate nohighlight">\(V_{ij} = \sigma^{2} \delta_{ij}\)</span>. In matrix notation we then get:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{cc}
+f_1 &amp; = b+ mx_1 \\
+f_2 &amp; = b+ mx_2 \\
+\vdots &amp; \vdots \\
+f_N &amp; = b+ mx_N  \\
+\end{array} 
+\qquad
+{\bf C} = \left( \begin{array}{cc}
+1 &amp; x_1 \\
+1 &amp; x_2 \\
+\vdots &amp; \vdots \\
+1 &amp; x_N \\
+\end{array} \right)
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+{\bf \hat{a}} = \sigma^2({\bf C^TC})^{-1}\frac{1}{\sigma^2}{\bf C^Ty}
+\]</div>
+<p>which can be explicitly written as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\label{matrix_ls}
+{\bf \hat{a}}=\left(\begin{array}{c}
+\hat{b} \\
+\hat{m}
+\end{array} \right)
+=
+\left(\begin{array}{cc}
+\sum_i 1 &amp; \sum_i x_i \\
+\sum_i x_i &amp; \sum_i x_i^2 \\
+\end{array} \right)^{-1}
+\left(\begin{array}{c}
+\sum_i y_i \\
+\sum_i x_iy_i
+\end{array} \right)
+\end{split}\]</div>
+<p>The inversion of the <span class="math notranslate nohighlight">\(2 \times 2\)</span>-matrix gives:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\frac{1}{N(\overline{x^2}-\bar{x}^2)}
+\left(\begin{array}{cc}
+\overline{x^2}&amp; -\bar{x} \\
+-\bar{x} &amp; 1 \\
+\end{array} \right)
+\end{split}\]</div>
+<p>which finally leads to:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+{\bf \hat{a}}=\left(\begin{array}{c}
+\hat{b} \\
+\hat{m}
+\end{array} \right)
+=
+\frac{1}{N(\overline{x^2}-\bar{x}^2)}
+\left(\begin{array}{cc}
+\overline{x^2}&amp; -\bar{x} \\
+-\bar{x} &amp; 1 \\
+\end{array} \right)
+\left(\begin{array}{c}
+\sum_i y_i \\
+\sum_i x_iy_i
+\end{array} \right).
+\end{split}\]</div>
+<p>Which corresponds to the expressions for
+<span class="math notranslate nohighlight">\(\hat{m}\)</span> and <span class="math notranslate nohighlight">\(\hat{b}\)</span> which we extracted
+in <a class="reference internal" href="#equation-eq-ls-slope-intercept">(9)</a>.</p>
+<p>The variance for the estimator
+<span class="math notranslate nohighlight">\(\hat{ {\bf a}}\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+{\bf V}({\bf\hat{a}})=\left(\begin{array}{cc}
+V(b)&amp; cov(b,m) \\
+cov(b,m) &amp; V(m) \\
+\end{array} \right)
+=
+\frac{\sigma^2}{N(\overline{x^2}-\bar{x}^2)}\left(\begin{array}{cc}
+\overline{x^2}&amp; -\bar{x} \\
+-\bar{x} &amp; 1 \\
+\end{array} \right)
+\end{split}\]</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Example:</p>
+<p>In a second example we fit the parabola
+<span class="math notranslate nohighlight">\(f(x) = a_{0} + a_{1} x + a_{2} x^{2}\)</span> to <span class="math notranslate nohighlight">\(N\)</span> data points. Again we
+assume the errors being independent and equal for all data points. The
+matrix <span class="math notranslate nohighlight">\({\bf C}\)</span> is now given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+{\bf C}=\left( \begin{array}{ccc}
+1 &amp; x_1 &amp; x_1^2\\
+1 &amp; x_2 &amp; x_2^2\\
+\vdots &amp; \vdots &amp; \vdots \\
+1 &amp; x_N &amp; x_N^2 \\
+\end{array} \right)
+\end{split}\]</div>
+<p>Going through the same steps as for the linear
+case we obtain:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+{\bf \hat{a}}=
+\left( \begin{array}{c}
+\hat{a_0} \\
+\hat{a_1} \\
+\hat{a_2}\\
+\end{array} \right)
+=\left( \begin{array}{ccc}
+\sum_i 1 &amp; \sum_i x_i &amp; \sum_i x_i^2 \\
+\sum_i x_i &amp; \sum x_i^2 &amp; \sum_i x_i^3 \\
+\sum_i x_i^2 &amp; \sum x_i^3 &amp; \sum_i x_i^4 \\
+\end{array} \right)^{-1}
+\left( \begin{array}{c}
+\sum_i y_i  \\
+\sum_i x_iy_i \\
+\sum x_i^2y_i\\
+\end{array} 
+\right)
+\end{split}\]</div>
+<p>The generalization of this method to higher-order
+polynomials follows the same pattern.</p>
+</div>
+<p>Another way to write the (inverse) of the covariance matrix is:</p>
+<div class="math notranslate nohighlight">
+\[
+(U^{-1})_{ij} = \frac{1}{2}\left[ \frac{\partial^2 \chi^2}{\partial a_i \partial a_j }  \right]_{\bf a = \hat{a}}
+\]</div>
+<p>which is the expression of the RCF bound in the case that the
+measurements <span class="math notranslate nohighlight">\({\bf y}\)</span> are Gaussian distributed, and where we use the
+relation with the log likelihood <span class="math notranslate nohighlight">\(- \ln L = \chi^2/2\)</span> (a part from an
+overall constant).</p>
+<p>Again in case of a function <span class="math notranslate nohighlight">\(f\)</span> linear in <span class="math notranslate nohighlight">\({\bf a}\)</span>, the <span class="math notranslate nohighlight">\(\chi^{2}\)</span>
+becomes quadratic in <span class="math notranslate nohighlight">\({\bf a}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\chi^2({\bf a})=\chi^2({\bf \hat{a}})+\frac{1}{2}\sum_{i,j=1}\left[\frac{\partial^2\chi^2}{\partial a_i\partial a_j}\right]_{a=\hat{a}}(a_i-\hat{a}_i)(a_j-\hat{a}_j)
+\]</div>
+<p>Using the expression of the variance we just found, the equation above
+corresponds to contours in the parameter space defined by
+<span class="math notranslate nohighlight">\(\hat{a}_i\pm \hat{\sigma_i}\)</span> and therefore giving the <span class="math notranslate nohighlight">\(\pm 1 \sigma\)</span>
+deviations from the estimators:</p>
+<div class="math notranslate nohighlight">
+\[
+\chi^2({\bf a}\pm \hat{\sigma})=\chi^2({\bf \hat{a}})+1=\chi^2_{min}+1.
+\]</div>
+<p>Hence the <span class="math notranslate nohighlight">\(\chi^{2}\)</span>-function is a parabola with a minimum at <span class="math notranslate nohighlight">\(\hat{a}\)</span>
+and the errors <span class="math notranslate nohighlight">\(\sigma\)</span> for the estimators are determined by
+<span class="math notranslate nohighlight">\(\chi^{2}_{min}+1\)</span>. In general, if the function <span class="math notranslate nohighlight">\(f\)</span> is not linear in the
+parameters, the contour will not be an ellipse, but it will still define
+a confidence region reflecting the statistical uncertainty on the fitted
+parameters. The precise construction of the confidence region will be
+developed in Sec. <a class="reference internal" href="#confidenceIntervals.html#confidence-belt-neyman-frequentist-construction-sec-neyman"><span class="xref myst">Confidence Limits</span></a>. It is important to notice that the
+confidence level of the region defined by the contour, depends on the
+number of parameters fitted: 6.83% for one parameter, 39.4% for two,
+19.9% for three, etc… Play with this notebook: <a class="reference internal" href="interactive-nbs/chi2-1sigma.html"><span class="doc std std-doc">interactive-nb</span></a>.</p>
+</section>
+<section id="binned-chi-2-fit">
+<h2>Binned <span class="math notranslate nohighlight">\(\chi^{2}\)</span> fit<a class="headerlink" href="#binned-chi-2-fit" title="Link to this heading">#</a></h2>
+<p>In this section we will apply the LS method to binned data. In the case
+of <span class="math notranslate nohighlight">\(f\)</span> being a probability distribution function (a p.d.f. instead of
+any generic function), we can interpret the value of <span class="math notranslate nohighlight">\(f\)</span> integrated over
+a given range (“bin”), as the expected number of events in that bin
+<span class="math notranslate nohighlight">\(f_i = E[y_i]\)</span>:
+$<span class="math notranslate nohighlight">\(
+\label{eq:LS}
+f_i({\bf a}) = n\int_{x_i^{min}}^{x_i^{max}} f(x;{\bf a}) dx = n p_i({\bf a})
+\)</span>$</p>
+<p>where <span class="math notranslate nohighlight">\(x_i^{min}\)</span> and <span class="math notranslate nohighlight">\(x_i^{max}\)</span> are the bin boundaries, the
+<span class="math notranslate nohighlight">\(p_i({\bf a})\)</span> is the probability to have an event in the bin <span class="math notranslate nohighlight">\(i\)</span>, given
+the parameters <span class="math notranslate nohighlight">\({\bf a}\)</span> and n is the overall normalization.<br />
+The fit proceeds as before minimizing the <span class="math notranslate nohighlight">\(\chi^2\)</span> w.r.t. the parameters
+<span class="math notranslate nohighlight">\({\bf a}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\chi^2(y_i|{\bf a})=\sum_i \frac{(y_i - f_i({\bf a}))^2}{\sigma_i^2}
+\]</div>
+<p>where here <span class="math notranslate nohighlight">\(\sigma_i\)</span> is the variance of the <em>expected</em> number of
+entries in bin <span class="math notranslate nohighlight">\(i\)</span>. If the number of entries in bin <span class="math notranslate nohighlight">\(i\)</span> is small
+compared to the total number of entries in the histogram then we can
+assume that they are Poisson distributed and the variance is equal to
+the mean <span class="math notranslate nohighlight">\(\sigma_i^2 = f_i({\bf a}) = n p_i({\bf a})\)</span>.<br />
+Often, instead of using the variance of the expected number of entries
+in bin <span class="math notranslate nohighlight">\(i\)</span>, the variance of the <em>observed</em> number of entries in bin <span class="math notranslate nohighlight">\(i\)</span>
+is used, leading to:</p>
+<div class="math notranslate nohighlight">
+\[
+\chi^2(y_i|{\bf a})=\sum_i \frac{(y_i - f_i({\bf a}))^2}{y_i}.
+\]</div>
+<p>This new expression is called the <strong>modified LS</strong> method. Even if
+computationally easier to implement (contraty to <span class="math notranslate nohighlight">\(\sigma_i^2\)</span> the
+observed <span class="math notranslate nohighlight">\(y_i\)</span>, obviously, does not depend on <span class="math notranslate nohighlight">\(\bf{a}\)</span>), it brings in
+the problem of the variance estimation for bins which are poorly
+populated or have no entries at all. As a rule of thumb, try to have at
+least 5 entries per bin. Two situations are rather typical: small
+statistics in the tails of a distribution, or the whole histogram is
+sparsely populated. In the first case, try to rebin, for the latter just
+move to an unbinned ML fit to use the full information you have in your
+data.</p>
+</section>
+<section id="use-of-the-chi-2-to-test-the-goodness-of-fit">
+<h2>Use of the <span class="math notranslate nohighlight">\(\chi^2\)</span> to test the goodness of fit<a class="headerlink" href="#use-of-the-chi-2-to-test-the-goodness-of-fit" title="Link to this heading">#</a></h2>
+<p>If the <span class="math notranslate nohighlight">\(\chi^{2}\)</span> is large after minimization, then the function is
+probably badly chosen (i.e. not correctly describing the data);
+intuitively, the <span class="math notranslate nohighlight">\(\chi^{2}\)</span> should be small if the function describes
+the data. On the other hand, the <span class="math notranslate nohighlight">\(\chi^{2}\)</span> can be small if you have too
+many degrees of freedom (fit n-points with a polynomial of degree n) or,
+even with a bad model, when the uncertainties are overestimated
+(<span class="math notranslate nohighlight">\(\sigma_i^2\)</span> sits at the denominator). You can always get very small
+<span class="math notranslate nohighlight">\(\chi^{2}\)</span> if you assume large enough uncertainties! If the errors are
+too large the whole method loses its predictive power.</p>
+<p>We have already encountered in <a class="reference internal" href="#probabilityDistributions.html#chi-2-distribution"><span class="xref myst">Chi2 distribution</span></a>
+the <span class="math notranslate nohighlight">\(\chi^{2}\)</span>-distribution:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\chi^2;n)=\frac{2^{-n/2}}{\Gamma(n/2)}\chi^{n-2}e^{-\chi^2/2}.
+\]</div>
+<p>The distribution depends on <span class="math notranslate nohighlight">\(n\)</span>, the number of degrees of freedom, which is
+the number of data points minus the number of parameters of the model.
+Because the <span class="math notranslate nohighlight">\(\chi^{2}\)</span> distribution has expectation value <span class="math notranslate nohighlight">\(n\)</span> and
+variance <span class="math notranslate nohighlight">\(2n\)</span>, we expect the <span class="math notranslate nohighlight">\(\chi^{2}\)</span> divided by the number of degrees
+of freedom to be approximately one: <span class="math notranslate nohighlight">\(\chi^{2} / n \approx 1\)</span>. If the
+<span class="math notranslate nohighlight">\(\chi^{2} / n\)</span> is much larger than one, the data are not properly
+described by the model. Let’s introduce the definition of <span class="math notranslate nohighlight">\(p-\)</span>value to
+quantify the level of agreement of the model with data:</p>
+<div class="math notranslate nohighlight" id="equation-eq-pvalue">
+<span class="eqno">(11)<a class="headerlink" href="#equation-eq-pvalue" title="Link to this equation">#</a></span>\[p=\int_{\chi^2}^\infty f(x';n) dx' \]</div>
+<p>where <span class="math notranslate nohighlight">\(f(x';n)\)</span>
+is the <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution for <span class="math notranslate nohighlight">\(n\)</span> degrees of freedom. Values can be
+computed in FIXME ROOT using TMath::ChisquareQuantile(Double_t p, Double_t ndf).</p>
+<p>The <span class="math notranslate nohighlight">\(p-\)</span>value for a given <span class="math notranslate nohighlight">\((\chi^2; n)\)</span> is a measurement of the
+“goodness of fit”; when repeating the experiment several times it gives
+the probability, under the hypothesis <span class="math notranslate nohighlight">\(f\)</span>, of obtaining a result as
+incompatible with <span class="math notranslate nohighlight">\(f\)</span> or worse (i.e. <span class="math notranslate nohighlight">\(\chi^2\)</span> equal or larger) than the
+one actually observed. The threshold on the <span class="math notranslate nohighlight">\(p-\)</span>value used to reject the
+model is subjective; typical values used are of a few percent.
+<a class="reference internal" href="#fig-chi2pdg"><span class="std std-numref">Fig. 19</span></a>.
+maps the relation between the <span class="math notranslate nohighlight">\(\chi^2\)</span>, the number of degrees of freedom
+and the <span class="math notranslate nohighlight">\(p-\)</span>value. In particular is shown the example where, for <span class="math notranslate nohighlight">\(n=4\)</span>,
+a <span class="math notranslate nohighlight">\(\chi^2&gt;6\)</span> will be observed in 20% of the cases.</p>
+<figure class="align-center" id="fig-chi2pdg">
+<a class="reference internal image-reference" href="_images/chi2pdg.png"><img alt="_images/chi2pdg.png" src="_images/chi2pdg.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 19 </span><span class="caption-text">One minus the <span class="math notranslate nohighlight">\(\chi^2\)</span> cumulative distribution, <span class="math notranslate nohighlight">\(1 - F (\chi^2; n)\)</span>, for n degrees of
+freedom. This gives the <span class="math notranslate nohighlight">\(p-\)</span>value for the <span class="math notranslate nohighlight">\(\chi^2\)</span> goodness-of-fit
+test.</span><a class="headerlink" href="#fig-chi2pdg" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>We will come back in <a class="reference internal" href="#hypothesisTesting.html#hypotheses-and-tests-statistics"><span class="xref myst">Hypothesis Testing</span></a> to different quantitative ways to
+evaluate the compatibility of the data with a model</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>Most of the material of this section is taken from:</p>
+<ul class="simple">
+<li><p>G. Cowan, <span id="id1">[<a class="reference internal" href="bibliography.html#id12" title="Glen Cowan. Statistical Data Analysis. Oxford Science Publications, 1998. URL: https://global.oup.com/academic/product/statistical-data-analysis-9780198501558?cc=ch&amp;lang=en&amp;.">Cow98</a>]</span>, “Statistical Data Analysis”,Ch. 7</p></li>
+</ul>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="interactive-nbs/MLMethod.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Interactive Example - ML Method: Mean of a Gaussian</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="interactive-nbs/LSM_errorBand.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">&lt;no title&gt;</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-least-squares-method">The Least Squares Method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-the-likelihood-function">Connection to the Likelihood Function</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-straight-line">Fitting a Straight Line</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#considering-the-systematic-errors">Considering the systematic Errors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#straight-line-fit-with-errors-on-both-variables">Straight Line Fit with Errors on both Variables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-notation-and-the-uncertainty-on-the-fitted-parameters">Matrix Notation and the uncertainty on the fitted parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binned-chi-2-fit">Binned <span class="math notranslate nohighlight">\(\chi^{2}\)</span> fit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-of-the-chi-2-to-test-the-goodness-of-fit">Use of the <span class="math notranslate nohighlight">\(\chi^2\)</span> to test the goodness of fit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mauro Donega
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
